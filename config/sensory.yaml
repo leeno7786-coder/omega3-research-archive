@@ -1,0 +1,20 @@
+# =============================================================================
+# Sensory — operator presence latch (HUD / audit only)
+# =============================================================================
+#
+# Consumed by: sensory/operator_presence.py
+# Policy: policy/sensory.policy.yaml
+# Does NOT gate pressure ignition or proactive speech.
+#
+# =============================================================================
+
+sensory:
+  presence:
+    acquire_threshold: 0.82
+    release_threshold: 0.65
+    acquire_frames: 6
+    release_seconds: 20
+    degraded_holds_last_state: true
+    heartbeat_max_age_seconds: 90
+    recognition_threshold: 0.4
+    assume_operator_present: false

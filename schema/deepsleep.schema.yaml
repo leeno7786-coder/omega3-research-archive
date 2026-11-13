@@ -1,0 +1,143 @@
+# JSON Schema (YAML) — deepsleep_loop canonical types
+# Authority: deepsleep_loop/_deepsleep_state.py
+
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "omega://schema/deepsleep/v1"
+title: DeepSleepLoopTypes
+description: |
+  DeepSleep consolidates episode effects, closes the episode, and reseeds pressure.
+
+definitions:
+  mastery_status:
+    type: string
+    enum: [learning, operational, mastered]
+
+  DeepSleepInput:
+    type: object
+    required:
+      - window_id
+      - window_reflection
+      - episode_window
+      - trajectory_snapshot
+    properties:
+      window_id: { type: string }
+      window_reflection: { type: object }
+      episode_window: { type: array }
+      trajectory_snapshot: { type: object }
+      omega_reasoning: { type: object }
+
+  MasteryRecord:
+    type: object
+    properties:
+      domain_id: { type: string }
+      domain_name: { type: string }
+      knowledge_mastery: { type: number }
+      application_mastery: { type: number }
+      evidence_count: { type: integer }
+      status:
+        $ref: "#/definitions/mastery_status"
+
+  Trait:
+    type: object
+    properties:
+      name: { type: string }
+      strength: { type: number }
+      evidence_count: { type: integer }
+
+  SemanticEntry:
+    type: object
+    properties:
+      domain: { type: string }
+      statement: { type: string }
+      reinforcement_count: { type: integer }
+      promoted_episode: { type: string }
+
+  TrajectoryRecord:
+    type: object
+    properties:
+      target_domain: { type: string }
+      target_capability: { type: string }
+      confidence: { type: number }
+      status: { type: string }
+
+  FailurePattern:
+    type: object
+    properties:
+      kind: { type: string }
+      context: { type: string }
+      frequency: { type: integer }
+
+  OpenQuery:
+    type: object
+    properties:
+      query_id: { type: string }
+      status: { type: string }
+      question: { type: string }
+
+  JournalEntry:
+    type: object
+    required: [episode_id, timestamp]
+    properties:
+      episode_id: { type: string }
+      timestamp: { type: string }
+      intent: { type: ["string", "null"] }
+      action: { type: ["string", "null"] }
+      outcome: { type: ["object", "null"] }
+      mastery_effects: { type: object }
+      identity_effects: { type: object }
+      semantic_effects: { type: object }
+      trajectory_effects: { type: object }
+      failure_effects: { type: object }
+      query_effects: { type: array }
+
+  DeepSleepOutcomePack:
+    type: object
+    required:
+      - episode_id
+      - journal_entry
+      - updated_memory
+      - updated_identity
+      - updated_mastery
+      - updated_open_queries
+      - updated_trajectory
+      - pressure_seed
+      - projection_state
+      - episode_closed
+      - pressure_reset
+    properties:
+      episode_id: { type: string }
+      journal_entry: { type: object }
+      updated_memory: { type: object }
+      updated_mastery: { type: object }
+      updated_identity: { type: object }
+      updated_open_queries: { type: object }
+      updated_trajectory: { type: object }
+      pressure_seed:
+        type: array
+        items: { type: object }
+      projection_state: { type: object }
+      episode_closed: { type: boolean }
+      pressure_reset: { type: boolean }
+      temporal: { type: [object, "null"] }
+      learning_state: { type: [object, "null"] }
+
+  DeepSleepConfig:
+    type: object
+    required: [deepsleep]
+    properties:
+      deepsleep:
+        type: object
+        required: [module, phases, stores]
+        properties:
+          models: { type: string }
+          module: { type: string }
+          phases: { type: array, items: { type: string } }
+          stores: { type: object, additionalProperties: { type: string } }
+          laws: { type: object, additionalProperties: { type: string } }
+          mastery: { type: object }
+          identity: { type: object }
+          semantic: { type: object }
+          trajectory: { type: object }
+          knowledge_integration: { type: object }
+          memory_consolidation: { type: object }
+          reseed: { type: object }

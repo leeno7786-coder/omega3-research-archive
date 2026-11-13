@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Structural release shape for signed MCP packages. Cross-field authority, traversal, secret-argument, and digest checks are enforced by mcp_platform.package_contracts.",
+  "type": "object",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {"properties": {"network_class": {"const": "local_only"}}},
+      "then": {
+        "properties": {
+          "oauth_providers": {"maxItems": 0},
+          "allowed_network_destinations": {"maxItems": 0}
+        }
+      }
+    }
+  ],
+  "required": ["manifest_version", "server_id", "publisher_id", "server_version", "minimum_omega_version", "supported_mcp_protocol_versions", "network_class", "platform", "entrypoint", "artifact_sha256", "tool_catalog_sha256", "resource_catalog_sha256", "capability_tags", "risk_declarations", "oauth_providers", "allowed_network_destinations", "signing_key_id", "signature"],
+  "properties": {
+    "manifest_version": {"const": 1},
+    "server_id": {"type": "string", "minLength": 1},
+    "publisher_id": {"type": "string", "minLength": 1},
+    "server_version": {"type": "string", "minLength": 1},
+    "minimum_omega_version": {"type": "string", "minLength": 1},
+    "supported_mcp_protocol_versions": {"type": "array", "items": {"const": "2026-07-28"}, "minItems": 1, "uniqueItems": true},
+    "network_class": {"enum": ["local_only", "external"]},
+    "platform": {"type": "string", "minLength": 1},
+     "entrypoint": {"type": "object", "additionalProperties": false, "required": ["artifact", "arguments"], "properties": {"artifact": {"type": "string", "minLength": 1, "pattern": "^(?![\\\\/])(?!.*:)(?!.*(?:^|[\\\\/])\\.\\.(?:[\\\\/]|$))[^\\u0000-\\u001f\\u007f]+$"}, "arguments": {"type": "array", "items": {"type": "string", "minLength": 1}}}},
+    "artifact_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "tool_catalog_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "resource_catalog_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "capability_tags": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+    "risk_declarations": {"type": "array", "items": {"enum": ["read_only", "additive_write", "mutating_write", "destructive", "send_publish", "cross_provider_transfer"]}, "minItems": 1, "uniqueItems": true},
+    "oauth_providers": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+    "allowed_network_destinations": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+    "mcp_apps_metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tools", "resources", "resource_templates"],
+      "maxProperties": 3,
+      "properties": {
+        "tools": {"$ref": "#/$defs/appsMetadataGroup"},
+        "resources": {"$ref": "#/$defs/appsMetadataGroup"},
+        "resource_templates": {"$ref": "#/$defs/appsMetadataGroup"}
+      }
+    },
+    "signing_key_id": {"type": "string", "minLength": 1},
+    "signature": {"type": "string", "minLength": 1}
+  },
+  "$defs": {
+    "appsMetadataGroup": {
+      "type": "object",
+      "maxProperties": 128,
+      "propertyNames": {"type": "string", "minLength": 1, "maxLength": 128},
+      "additionalProperties": {"$ref": "#/$defs/appsMetadataObject"}
+    },
+    "appsMetadataObject": {
+      "type": "object",
+      "maxProperties": 128,
+      "propertyNames": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 128,
+        "not": {
+          "pattern": "^(?:[Oo][_-]*[Nn].*|[Cc][_-]*[Aa][_-]*[Ll][_-]*[Ll][_-]*[Bb][_-]*[Aa][_-]*[Cc][_-]*[Kk]|[Cc][_-]*[Oo][_-]*[Dd][_-]*[Ee]|[Ee][_-]*[Xx][_-]*[Ee][_-]*[Cc][_-]*[Uu][_-]*[Tt][_-]*[Ee]|[Hh][_-]*[Aa][_-]*[Nn][_-]*[Dd][_-]*[Ll][_-]*[Ee][_-]*[Rr]|[Hh][_-]*[Tt][_-]*[Mm][_-]*[Ll]|[Mm][_-]*[Ee][_-]*[Ss][_-]*[Ss][_-]*[Aa][_-]*[Gg][_-]*[Ee]|[Rr][_-]*[Ee][_-]*[Nn][_-]*[Dd][_-]*[Ee][_-]*[Rr]|[Ss][_-]*[Cc][_-]*[Rr][_-]*[Ii][_-]*[Pp][_-]*[Tt]|[Ss][_-]*[Rr][_-]*[Cc][_-]*[Dd][_-]*[Oo][_-]*[Cc])$"
+        }
+      },
+      "additionalProperties": {"$ref": "#/$defs/appsMetadataValue"}
+    },
+    "appsMetadataArray": {
+      "type": "array",
+      "maxItems": 128,
+      "items": {"$ref": "#/$defs/appsMetadataValue"}
+    },
+    "appsMetadataValue": {
+      "anyOf": [
+        {"$ref": "#/$defs/appsMetadataObject"},
+        {"$ref": "#/$defs/appsMetadataArray"},
+        {"type": "string", "maxLength": 4096},
+        {"type": "number"},
+        {"type": "boolean"},
+        {"type": "null"}
+      ]
+    }
+  }
+}

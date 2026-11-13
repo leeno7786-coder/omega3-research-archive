@@ -1,0 +1,98 @@
+# Meta loop — operational policy (behavioral contract)
+# Code: meta_loop/
+# Config: config/meta.yaml
+#
+# NOTE (v2 — no goal / goal_state / ActionGoal): Global A emits an
+# IntentDecision on episode.global_["intent_decision"] (parsed intent — no goal,
+# no target). There is NO `pressure_loop.contributors.ActionGoal` class. Meta A
+# reads that intent_decision (via the `intent_decision or action_goal` compat
+# dual-read that keeps legacy fixtures parsing) and turns it into an
+# ExecutionActionPack. The names `action_goal` / `source_action_goal` survive
+# only as internal variable names + the compat alias, NOT as a live type or
+# episode slot.
+#
+# This file is a narrative behavioral contract. It is loaded opaquely by
+# config.loader.load_policy_contract("meta") (presence + valid-YAML only); no
+# key below is consumed as a value by pressure_loop/policy.py — the live tunables
+# are read from config/meta.yaml (sections action/tool/memory/pack/meta_b...).
+
+version: 1
+
+enabled: true
+deterministic: true
+models: none
+planning_only: true
+
+role:
+  description: |
+    Meta is a pure sequencer: Meta A turns the IntentDecision into an
+    ExecutionActionPack (tool/memory planning only, no inference). Meta B
+    reflects the AUTO outcome into a MetaReflectionPack (execution only-if-
+    executed) and hands off to Global B.
+  upstream: episode.global_.intent_decision  # compat dual-read also accepts legacy episode.global_.action_goal
+  downstream_auto: auto_loop.auto.run_auto_front
+  downstream_global: global_loop.loop.run_global_b
+
+meta_a:
+  sequence:
+    - module: meta_loop.intake.run
+      output: MetaAInput
+      skip_when: no_intent_decision  # intake returns None when no intent_decision/action_goal present → aborts chain
+    - module: meta_loop.action.run
+      maps: global_intent_to_meta_action
+    - module: meta_loop.tool.run
+      rule: capability_selection_no_execution
+    - module: meta_loop.memory.run
+      rule: memory_required_heuristics_only
+    - module: meta_loop.pack.run
+      output: ExecutionActionPack
+      validates: banned_model_keys
+    - module: meta_loop.skill.run._maybe_recall_context
+      when: action == USE_SKILL and OMEGA_MEMORY_TAXONOMY
+      output: episode.meta.skill_recall_context
+      rule: deterministic_taxonomy_recall_informs_selection_only
+    - module: meta_loop.skill.run.attach_skill_execution_pack
+      when: action == USE_SKILL
+      output: SkillExecutionPack
+      rule: select_execution_skill_no_execution
+  writes:
+    path: episode.meta.execution_action_pack
+  failure_mode:
+    on_phase_error: raise
+    intake_none_aborts_chain: true
+
+meta_b:
+  sequence:
+    - module: meta_loop.consistency.run
+      builds: MetaBInput
+      checks: intent_pack_alignment  # stable-field cross-check across intent_decision, execution_pack, auto_outcome
+    - module: meta_loop.disposition.run
+      input: auto_cycle_kind
+    - module: meta_loop.reflect.run
+      output: MetaReflectionPack
+  writes:
+    path: episode.meta.reflection
+  then:
+    module: global_loop.loop.run_global_b
+
+constraints:
+  never_emit_in_pack:
+    - model
+    - llm
+    - prompt
+    - temperature
+    - max_tokens
+  execution_constraints_required:
+    planning_only: true
+    no_inference_in_meta: true
+    no_execution_in_meta: true
+    no_model_fields: true
+
+alignment:
+  policy_loader: config.loader.load_policy_contract  # opaque presence load; values not consumed
+  config_reader: pressure_loop.policy.load_policy     # reads config/meta.yaml tunables
+  schema: schema/meta.schema.yaml
+  # intent source: Global A IntentDecision on episode.global_["intent_decision"]
+  # (global_loop/intent/run.py). No ActionGoal type exists; the deleted
+  # pressure_loop.contributors.ActionGoal reference was removed.
+  intent_decision_source: global_loop.intent.run

@@ -1,0 +1,130 @@
+# JSON Schema (YAML) — tool registry + capability routing
+# Authority: config/tools.yaml, config/meta.yaml tool.capability_map
+
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "omega://schema/tools/v1"
+title: ToolRegistryTypes
+
+definitions:
+  tool_name:
+    type: string
+    enum:
+      - web_fetch
+      - file_reader
+      - desktop_tool
+      - ocr_tool
+      - vision_reasoning_tool
+      - image_tool
+      - face_tool
+      - knowledge_extractor
+
+  capability_key:
+    type: string
+    enum:
+      - external_information
+      - ocr
+      - desktop
+      - file_read
+      - image
+      - image_understanding
+      - video_understanding
+      - object_localization
+      - scene_analysis
+      - spatial_reasoning
+      - temporal_reasoning
+      - robotics_planning
+      - face_recognition
+      - face_similarity
+      - age_gender
+      - gender_estimation
+      - age_estimation
+      - head_pose
+      - landmark_detection
+
+  face_operation:
+    type: string
+    enum:
+      - detect_faces
+      - identify_faces
+      - face_similarity
+      - age_gender
+      - age_estimation
+      - gender_estimation
+      - landmark_detection
+      - head_pose_estimation
+
+  SimpleToolEntry:
+    type: object
+    additionalProperties: false
+
+  SingleModelToolEntry:
+    type: object
+    required: [model]
+    properties:
+      model:
+        type: string
+      capabilities:
+        type: array
+        items: { type: string }
+
+  MultiModelToolEntry:
+    type: object
+    required: [models, capabilities]
+    properties:
+      models:
+        type: object
+        required:
+          - detector
+          - landmarks_2d
+          - landmarks_3d
+          - embedding
+          - age_gender
+        properties:
+          detector: { type: string }
+          landmarks_2d: { type: string }
+          landmarks_3d: { type: string }
+          embedding: { type: string }
+          age_gender: { type: string }
+      capabilities:
+        type: array
+        items: { type: string }
+
+  ToolRegistry:
+    type: object
+    additionalProperties:
+      oneOf:
+        - $ref: "#/definitions/SimpleToolEntry"
+        - $ref: "#/definitions/SingleModelToolEntry"
+        - $ref: "#/definitions/MultiModelToolEntry"
+
+  CapabilityToolMap:
+    type: object
+    additionalProperties:
+      $ref: "#/definitions/tool_name"
+
+  VisionReasoningInputs:
+    type: object
+    required: [image_ref, question]
+    properties:
+      image_ref: { type: string }
+      question: { type: string }
+
+  FaceToolInputs:
+    type: object
+    required: [image_ref, operation]
+    properties:
+      image_ref: { type: string }
+      operation:
+        $ref: "#/definitions/face_operation"
+
+  ToolsConfig:
+    type: object
+    required: [tools]
+    properties:
+      tools:
+        type: object
+        additionalProperties:
+          type: object
+          properties:
+            runtime: { type: boolean }
+            capabilities: { type: array, items: { type: string } }

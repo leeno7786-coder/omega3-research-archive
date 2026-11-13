@@ -1,0 +1,28 @@
+# Memory cortex — operational policy (behavioral contract)
+# Code: memory/api.py, memory/gates/, memory/engine/walker.py
+# Config: config/memory.yaml
+# Permission: policy/memory.policy.yaml (this file; core/policy/ dissolved 2026-07-04)
+
+version: 1
+
+enabled: true
+
+role:
+  description: |
+    Dewey 3D gate-routed cortex. Guardian screens external human-authored
+    ingress; DeepSleep is the sole canonical memory persistence boundary.
+
+gates:
+  authority: memory.gates.base.MemoryGate
+  note: per-lobe READABLE_LOBES / WRITABLE_LOBES in code are authoritative
+
+recall_pipeline:
+  order: [recall_plan, taxonomy_recall, evidence_arbitration, pack]
+  memory_outranks_inference: true
+  note: SetFit classify retired — lobe/subdomain from route_memory_tool + subdomain_for
+
+alignment:
+  config: config/memory.yaml
+  schema: schema/memory.schema.yaml
+  json_schema: schema/memory_schema.json
+  permission_policy: policy/memory.policy.yaml

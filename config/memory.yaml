@@ -1,0 +1,88 @@
+# =============================================================================
+# Memory — Cortex Behavior
+# =============================================================================
+#
+# Governed tunables for the gate-routed Dewey 3D memory cortex. Structural
+# permissions and recall routing are code-owned contracts, not YAML mirrors.
+#
+# Consumed by:
+#   - core.memory_config          (enabled, promotion, demotion, decay,
+#     contradiction — the ONLY sections actually read at runtime)
+#   - memory/{promotion,demotion,confidence_decay,contradiction_resolution,
+#     memory_contradiction,symphony_strength}.py via core.memory_config
+#
+# The authoritative source for gate/lobe permissions is the
+# `memory.gates.base.MemoryGate` subclasses' class attributes
+# `READABLE_LOBES` / `WRITABLE_LOBES`. Adversarial limits are enforced by
+# Guardian (`memory_purity`, `write_guard`, and `decision`).
+#
+# =============================================================================
+
+memory:
+  enabled: true
+
+  # Lifecycle promotion thresholds — what's required to move a memory
+  # from one stage to the next. Per the contract: every promotion
+  # requires evidence, every decay requires reason.
+  promotion:
+    # observation → episodic — single validation passes
+    observation_to_episodic:
+      min_confidence: 0.50
+      requires_validation_status: validated
+      requires_provenance: true
+
+    # episodic → semantic — multiple validated episodes generalize
+    episodic_to_semantic:
+      min_supporting_episodes: 3
+      min_confidence: 0.65
+      min_age_hours: 1.0   # don't promote freshly written records
+
+    # semantic → procedural — generalized fact becomes a callable skill
+    semantic_to_procedural:
+      requires_tool_spec: true
+      min_confidence: 0.75
+      requires_verification: true
+
+    # procedural → self_model — only via Omega-layer commit
+    procedural_to_self_model:
+      requires_omega_commit: true
+      requires_canonical_flag: true
+
+  # Demotion — a memory loses lifecycle stage when evidence weakens.
+  demotion:
+    # contradicted N times in a row → drop one stage
+    contradiction_threshold: 2
+    # confidence below this for sustained period → drop one stage
+    confidence_floor: 0.20
+    sustained_floor_cycles: 5
+
+  # Decay — exponential aging applied at recall, not eagerly.
+  decay:
+    # Per-cycle decay factor on confidence for unaccessed memories.
+    # Multiplied with confidence on each cycle the record isn't touched.
+    confidence_decay_per_cycle: 0.005
+    # Floor — confidence cannot decay below this
+    confidence_floor_no_recall: 0.10
+    # Canonical memories are immune to decay
+    canonical_immune: true
+
+  # Contradiction resolution — what happens when two memories conflict
+  contradiction:
+    # When two memories conflict, the one with higher confidence wins.
+    # If equal: the one with more evidence_refs wins.
+    # If still equal: the more recent prevails.
+    resolution: "confidence_then_evidence_then_recency"
+    # The losing memory is marked contradicted=true and confidence
+    # is dropped by this factor (not deleted — kept as an audit trail).
+    loser_confidence_penalty: 0.30
+    # If the losing memory's confidence drops below this, it's
+    # eligible for demotion on the next promotion cycle.
+    demotion_eligible_below: 0.25
+
+  # Dynamic Y-level subdomain allocation (feature-flag gated).
+  # When a lobe ID appears here, the write path allocates Y from content
+  # (via memory.subdomain_allocator) instead of the SetFit subdomain
+  # prediction.  Default [] keeps the static path byte-for-byte unchanged
+  # until the full chain (allocator -> validate_write -> day_zero) is
+  # verified end-to-end.
+  dynamic_y_lobes: []

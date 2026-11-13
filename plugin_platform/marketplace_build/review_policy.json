@@ -1,0 +1,73 @@
+{
+  "promotions": [
+    {
+      "plugin_id": "cloudflare.official",
+      "provenance_sha256": "23a99307bda4e4cdbb8078774efde7817322adb4ebda834eb93e4e07b1bd9b73"
+    },
+    {
+      "plugin_id": "github.official",
+      "provenance_sha256": "ee1d4f4592771e0f3d1331310be4dff19f2a724729fb9d9cf0f566055a3e70f4"
+    },
+    {
+      "plugin_id": "google.workspace.calendar",
+      "provenance_sha256": "b908cdaa4d1296a319f019982ea8b730d1811e12bf7b6a08ea9d9208ed6e807c"
+    },
+    {
+      "plugin_id": "google.workspace.drive",
+      "provenance_sha256": "bd940209527c039dbbd5c1c1f18813123a288038ed2933b31062778703d01229"
+    },
+    {
+      "plugin_id": "google.workspace.gmail",
+      "provenance_sha256": "2254b2aa241e58e44c464b95f07f854980ac4a3b04f5bb180bccd67cf67e8047"
+    },
+    {
+      "plugin_id": "huggingface.official",
+      "provenance_sha256": "5e5660ed1c11264037249a1845cfd8483d2b14e4edf670531735d5a2ff54a20e"
+    },
+    {
+      "plugin_id": "linear.official",
+      "provenance_sha256": "8e01ae2c48b91538de7fc9910cbc3ca6d5dae445d3e309b441a68d456f024d0f"
+    },
+    {
+      "plugin_id": "miro.official",
+      "provenance_sha256": "cf1cc0f3729f627cc2695aa720016de95dcf89be341b68a1de4e527b17d498d6"
+    },
+    {
+      "plugin_id": "neon.official",
+      "provenance_sha256": "b93d09faa4fe1fd4b2df2eff4fbc9d5e37c73ca979a3472e4422a73019ed2405"
+    },
+    {
+      "plugin_id": "netlify.official",
+      "provenance_sha256": "8247813fc137c2474546530e52fcca31ea81f572228fae15e97c4e72e928c6ae"
+    },
+    {
+      "plugin_id": "notion.official",
+      "provenance_sha256": "b350f36f8df37eaac94b619342585c427f098532e87902ad915264d788907969"
+    },
+    {
+      "plugin_id": "sentry.official",
+      "provenance_sha256": "bdcd4eda23836b321d4e3e83017c62f0768bf9b4fa23c1b71ef3056da8446afc"
+    },
+    {
+      "plugin_id": "slack.official",
+      "provenance_sha256": "9fb343bd551c52d48d0b1a6a17fd8968140163d63ecf7d1633efe8a2c0221461"
+    },
+    {
+      "plugin_id": "stripe.official",
+      "provenance_sha256": "dc4ddfd675e3310f454150d5c459732ab7e40ae37400a2b77af8a43e3a5bb96d"
+    },
+    {
+      "plugin_id": "supabase.official",
+      "provenance_sha256": "2800faa7d22d2a48e23bf1b7e2671738e022956e9f27cae3993bb12c192a08ca"
+    },
+    {
+      "plugin_id": "wix.official",
+      "provenance_sha256": "ce36cf666cc6e88d010d1510fc256e2a1d3b7668daec3f9bcb10e04017858bff"
+    },
+    {
+      "plugin_id": "zapier.official",
+      "provenance_sha256": "3782421e980462fba53956a751c10dfb2362ed38c41c918df39e6a38316de50d"
+    }
+  ],
+  "schema_version": 1
+}

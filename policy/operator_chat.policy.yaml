@@ -1,0 +1,30 @@
+# Operator chat — operational policy (behavioral contract)
+# Code: pressure_loop/operator_chat.py
+
+version: 1
+
+enabled: true
+
+role:
+  description: |
+    User-facing chat adapter for the pressure-led path. Places the operator's
+    turn in the durable line — the single gate into the mind (AGENTS.md §4.0).
+
+ingress:
+  # First come, first serve, in the order it arrived. Transport is not
+  # ignition: nothing but the queue feeds pressure.
+  authority: pressure_loop.operator_queue.enqueue_operator_input
+  allowed_intents_ref: pressure_loop.contributors.ALLOWED_INTENTS
+  directive_intents:
+    - IMAGE_CREATE
+    - DOCUMENT_CREATE
+    - PLUGIN_OPERATION
+
+response:
+  thinking_trace: memory_enriched_when_recall_present
+  never_bypass_pressure: true
+
+alignment:
+  config: config/operator_chat.yaml
+  schema: schema/operator_chat.schema.yaml
+  global_intent: config/global_intent.yaml

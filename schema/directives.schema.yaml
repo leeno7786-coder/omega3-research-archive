@@ -1,0 +1,21 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "omega://schema/directives/v1"
+title: DirectiveTypes
+
+definitions:
+  DirectiveIntent:
+    type: string
+    enum: [IMAGE_CREATE, DOCUMENT_CREATE, PLUGIN_OPERATION]
+
+  DirectiveConfig:
+    type: object
+    required: [directives]
+    properties:
+      directives:
+        type: object
+        additionalProperties:
+          type: object
+          properties:
+            intent: { $ref: "#/definitions/DirectiveIntent" }
+            route: { type: string }
+            runtime_capability: { type: string }

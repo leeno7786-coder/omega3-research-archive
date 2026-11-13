@@ -1,0 +1,26 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "omega://schema/runtime/v1"
+title: RuntimeTypes
+
+definitions:
+  RuntimeSocket:
+    type: object
+    properties:
+      endpoint: { type: string }
+      capability: { type: string }
+      method: { type: string }
+      slot: { type: string }
+      slots: { type: object }
+
+  RuntimeConfig:
+    type: object
+    required: [runtime]
+    properties:
+      runtime:
+        type: object
+        required: [endpoint]
+        properties:
+          endpoint: { type: string }
+          failure_soft: { type: boolean }
+          services: { type: object }
+          tools: { type: object }

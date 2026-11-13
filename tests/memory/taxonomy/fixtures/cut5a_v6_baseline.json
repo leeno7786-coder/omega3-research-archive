@@ -1,0 +1,625 @@
+{
+ "artifact": "Cut 5A Gate-D1 ACTUAL v6 baseline for tests/memory/taxonomy/fixtures/cut5a_corpus (plan Task 1b)",
+ "generated_in": "detached read-only worktree at 468c5771 (/home/noah/omega-workspace/memory-organ-precut-468c5771); fixture compiled from a tmp COPY",
+ "base_sha": "468c577176290d008dfac11cbab5ab3f64be5c07",
+ "fixture_commit_sha": "9bc6415b",
+ "compiler_version": "omega.memory_compiler.v6",
+ "effective_config_hash": "default|fanout=8;mintags=2;simthr=0.6;simk=8;mrl=256",
+ "config_hash_recorded_in_snapshot": "default|fanout=8;mintags=2;simthr=0.6;simk=8;mrl=256",
+ "sim_params": {
+  "SIM_THRESHOLD": 0.6,
+  "SIM_TOPK": 8,
+  "MRL_DIM": 256,
+  "CO_EDGE_FANOUT": 8,
+  "MIN_SHARED_TAGS": 2
+ },
+ "memory_edge_schema_version": "omega.memory_edge.v1",
+ "snapshot_hash": "5574ead5446c71f7fb15630e3221bb27f78f5413cd48161765892288fea25d84",
+ "node_count": 49,
+ "edge_count": 65,
+ "edge_counts_by_type": {
+  "CONTRADICTS": 1,
+  "CO_LOCATED": 6,
+  "FAMILY_OF": 1,
+  "LIVES_IN": 1,
+  "MENTIONS": 37,
+  "OWNS": 1,
+  "SAME_AS": 2,
+  "SEMANTIC_SIMILARITY": 6,
+  "SHARES_DOMAIN": 6,
+  "SHARES_TAG": 2,
+  "SUPERSEDES": 1,
+  "WORKS_AS": 1
+ },
+ "semantic_similarity": {
+  "count": 6,
+  "confidence_histogram": {
+   "0.8": 3,
+   "1.0": 3
+  },
+  "pairs": [
+   [
+    "2.01.s6",
+    "4.02.s2",
+    0.8
+   ],
+   [
+    "2.00.s1",
+    "9.01.s3",
+    1.0
+   ],
+   [
+    "2.00.s1",
+    "2.01.s6",
+    0.8
+   ],
+   [
+    "4.02.s2",
+    "9.01.s3",
+    1.0
+   ],
+   [
+    "2.00.s1",
+    "4.02.s2",
+    1.0
+   ],
+   [
+    "2.01.s6",
+    "9.01.s3",
+    0.8
+   ]
+  ]
+ },
+ "edge_tuple_fields": [
+  "edge_id",
+  "source_id",
+  "target_id",
+  "edge_type",
+  "evidence_event_id",
+  "confidence"
+ ],
+ "edges_sorted_by_edge_id": [
+  [
+   "edg_04f43ac10d981ad71b44a996768f4451694630ab5b3b3114561fb6221ad7826d",
+   "2.01.s6",
+   "4.02.s2",
+   "SEMANTIC_SIMILARITY",
+   "similarity:2.01.s6:4.02.s2",
+   0.8
+  ],
+  [
+   "edg_0698dedfe7e26da5460835e4fdeb24a272b62d030be00d8a5193c965a3161d8b",
+   "2.05.k2",
+   "ent_ba26f835825446c4bb08a9f65dedae39608239aebf381829c9d59180e52fc4bc",
+   "MENTIONS",
+   "dewey:2.05.k2",
+   1.0
+  ],
+  [
+   "edg_07e2ee8082b9506cdac5e1b4b16c81a0a9593b55e071424b3224a3d0dbe08071",
+   "4.00.n3",
+   "4.00.n4",
+   "SHARES_DOMAIN",
+   "dewey:4.00.n3",
+   1.0
+  ],
+  [
+   "edg_09d3f4b7421247aeff782b8cf32a0ef53902a5cffd10dc67203b27470bc1236c",
+   "2.00.s1",
+   "4.00.n3",
+   "SHARES_DOMAIN",
+   "dewey:2.00.s1",
+   1.0
+  ],
+  [
+   "edg_0bac47d0cbd6d956b208c3fb9bada3d047e63ebad733b2aa38450addc97ccb2e",
+   "2.00.s1",
+   "9.01.s3",
+   "SEMANTIC_SIMILARITY",
+   "similarity:2.00.s1:9.01.s3",
+   1.0
+  ],
+  [
+   "edg_0f06149c76e43e3616c1edae19b34495be811020befd81d3550a50a99c12ec27",
+   "4.00.n3",
+   "ent_a6c37e58e464f02d41912690a03b92b935357df193e5f15dbc3a614d0066d2f8",
+   "MENTIONS",
+   "dewey:4.00.n3",
+   1.0
+  ],
+  [
+   "edg_14316ffaaf48d79bf7a7218c9f20fbac805efcb3f1ca99b2dfc772b780024330",
+   "2.02.s4",
+   "ent_2a21dd2a06fb338692bf0813606b0d05a39002e01626e0b10ba0d54ea3d07a6c",
+   "MENTIONS",
+   "dewey:2.02.s4",
+   1.0
+  ],
+  [
+   "edg_1acf4293ee3df9a58ab196b158646c4da24e10957d358a3b7103a2a8c6a468eb",
+   "2.05.k2",
+   "2.05.k1",
+   "SUPERSEDES",
+   "dewey:2.05.k2",
+   1.0
+  ],
+  [
+   "edg_345ca235a77f318fe780a8948f2c074423fa01a637434382da21a64ebae9b932",
+   "1.00.p1",
+   "ent_0e45557c5024f5d151b86fe806c8cfd53ac46129400a6bcfc193108cb5fed89f",
+   "MENTIONS",
+   "dewey:1.00.p1",
+   1.0
+  ],
+  [
+   "edg_3467d0a886458e232834750710c1294748ea02d71200b4b789fdaf2672a3b29d",
+   "1.00.p1",
+   "ent_6b27947bad837df82e5a613874d4a1f55bb8cb282c99ff85c790d6547a130763",
+   "MENTIONS",
+   "dewey:1.00.p1",
+   1.0
+  ],
+  [
+   "edg_34b174a60cf93ac4ef7a3430a8c27039dc3010cd30058be6a8b516d842dec2d1",
+   "ent_bd95ed3e7f33972746adcac7295997c3d8fabba3c8e0d4e8e8fc33c5299f9fa2",
+   "ent_c89b151957af0771dddbb42dddb6dd1dcee9c4364b2b3d1576a21386ff291911",
+   "SAME_AS",
+   "dewey:1.00.p1",
+   1.0
+  ],
+  [
+   "edg_38b9d4bba783b656ac6befab4979c5b139943bf4b685a87bf92cfcc22df60772",
+   "4.00.n3",
+   "ent_d2ad65c96a2156d53f1c0dbdacb776a2298b0168b1c15802c3c0a16db348821d",
+   "MENTIONS",
+   "dewey:4.00.n3",
+   1.0
+  ],
+  [
+   "edg_3c395fb08cf0d5e33bc145e5171a6494e28ffa86c8dae097540ba7e41053973c",
+   "2.01.s6",
+   "ent_368155c888f433a4002df4713d4df846baf5538f6d71051bbd83e0b16f45b556",
+   "MENTIONS",
+   "dewey:2.01.s6",
+   1.0
+  ],
+  [
+   "edg_44a4a71caa3d745510a959e254637e262bb22d811626263c95ed7f78493c9c53",
+   "4.00.n3",
+   "ent_ce8ff249106802b63fc3e818907f6ec12216c573a68ffc694c4cc67c8c78c600",
+   "MENTIONS",
+   "dewey:4.00.n3",
+   1.0
+  ],
+  [
+   "edg_45defad218228e615791ff8d8a2f03927d723d189776104062c13129e289fda5",
+   "2.06.k3",
+   "2.06.k4",
+   "CONTRADICTS",
+   "dewey:2.06.k3",
+   1.0
+  ],
+  [
+   "edg_473a8178141ec85cec6ee6cedaff09c725f5a5aac1f61fb0c6641f0ee06e5703",
+   "2.06.k3",
+   "2.06.k4",
+   "CO_LOCATED",
+   "dewey:2.06.k3",
+   1.0
+  ],
+  [
+   "edg_48d87b56c95409698a0f00eb1fe0ff7ec861fe954f1b3f5211d4ed87b8c21b6b",
+   "2.00.s1",
+   "2.01.s6",
+   "SEMANTIC_SIMILARITY",
+   "similarity:2.00.s1:2.01.s6",
+   0.8
+  ],
+  [
+   "edg_50a60d2c8f6d8dbe57d50766cee47558de2d7fb9f3da7ab8c7e6536e2498a2c0",
+   "9.01.s3",
+   "ent_f5a3bf4d2e26e68ae8b71457ca031141e1633da9f8354da46a8793814cf167b5",
+   "MENTIONS",
+   "dewey:9.01.s3",
+   1.0
+  ],
+  [
+   "edg_5175afb4dbb9f00f8ace3024c6c596ff3bafe5fdf65cc676e905a4d6e3916052",
+   "4.00.n4",
+   "ent_02508b4c777420af4bc2632e65efb5db8a92389d3809c2aa3405d06301934efc",
+   "MENTIONS",
+   "dewey:4.00.n4",
+   1.0
+  ],
+  [
+   "edg_52c975722fe94a6755c06ec3f1f0754d24a5cf030ad6467a7937e46a4e8073a7",
+   "2.05.k2",
+   "ent_c411e346bf1941128d506b9664196e4830914ab701a6e266b6f2d368f6046163",
+   "MENTIONS",
+   "dewey:2.05.k2",
+   1.0
+  ],
+  [
+   "edg_54ddf3f4e7bd90a92e5db10120ef559c7e042c15e263a5587cb39e2f94ef4ae6",
+   "2.06.k4",
+   "2.06.k3",
+   "CO_LOCATED",
+   "dewey:2.06.k4",
+   1.0
+  ],
+  [
+   "edg_55a1bef9d774b00aa0e6b7b29b7b85f4d3eb47637cc90bcb45a7e75de973bed2",
+   "4.02.s2",
+   "9.01.s3",
+   "SEMANTIC_SIMILARITY",
+   "similarity:4.02.s2:9.01.s3",
+   1.0
+  ],
+  [
+   "edg_5e0aa99a80c07d6f8c3eb496b38931c13284a4bbc6d3464c853b35a0df4da61e",
+   "4.00.n3",
+   "ent_7870cc66d11ced49119505358984eef119572d93247f2dcd5dc1d606f41191ce",
+   "MENTIONS",
+   "dewey:4.00.n3",
+   1.0
+  ],
+  [
+   "edg_61d6be7365fab8af7d7bc0859329c859aeb2ed2633a9ca40ec4b7767c7b7f386",
+   "4.00.n4",
+   "4.00.n3",
+   "SHARES_TAG",
+   "dewey:4.00.n4",
+   1.0
+  ],
+  [
+   "edg_63032c9315e5bbcd42331488c6ddac4dc5bd8391ebf8a554d2d44fea88c126be",
+   "2.01.s6",
+   "ent_5425c418602151426f8b8c03ebe93630d646658575c04410cb640b6e6d80e537",
+   "MENTIONS",
+   "dewey:2.01.s6",
+   1.0
+  ],
+  [
+   "edg_658b445042f7be7b6838709d70ffd22e0a53433fc8570078d518121eaefba9be",
+   "ent_c89b151957af0771dddbb42dddb6dd1dcee9c4364b2b3d1576a21386ff291911",
+   "ent_b09cc37b3def7da9ecc561264649e93e75cee8231ee635e6130fa64a86341d6f",
+   "WORKS_AS",
+   "dewey:1.00.p1",
+   1.0
+  ],
+  [
+   "edg_686fbf4d0fae68f7dfe23dd643f410a4fbabab44abb8b0b02f4d0d53791d4eff",
+   "2.03.n1",
+   "ent_b0bde69892763e849b9efddb7c747b4c5a57cc63bc704ae44b8ddef6a632becb",
+   "MENTIONS",
+   "dewey:2.03.n1",
+   1.0
+  ],
+  [
+   "edg_6877a422f194b812f06c673965ab25820e5ffb0507333c9e4063d996b7f6c9a2",
+   "2.05.k2",
+   "2.05.k1",
+   "CO_LOCATED",
+   "dewey:2.05.k2",
+   1.0
+  ],
+  [
+   "edg_6b6063bcb3fa4b75a8634e4af7d2bf463ec5656d64090a379d89b613718f5c6a",
+   "2.05.k1",
+   "ent_c411e346bf1941128d506b9664196e4830914ab701a6e266b6f2d368f6046163",
+   "MENTIONS",
+   "dewey:2.05.k1",
+   1.0
+  ],
+  [
+   "edg_6c6e529928acdc2e4e9f1b4e921c5f0f0bf057a515607803ef003384da09ef63",
+   "4.00.n3",
+   "4.00.n4",
+   "CO_LOCATED",
+   "dewey:4.00.n3",
+   1.0
+  ],
+  [
+   "edg_6f1268b47e9988b581c148c172034ed591b5e94b5a5a08c99966e4c15f6970d6",
+   "4.00.n3",
+   "2.00.s1",
+   "SHARES_DOMAIN",
+   "dewey:4.00.n3",
+   1.0
+  ],
+  [
+   "edg_72605cba3f8e1d44efc77ff0918a016ab80e8fae8e8c424eb8c800bd22880525",
+   "2.00.s1",
+   "4.00.n4",
+   "SHARES_DOMAIN",
+   "dewey:2.00.s1",
+   1.0
+  ],
+  [
+   "edg_76c9f82995c1871329010d350703da06e792ae493d50ae3ff064c361f1484845",
+   "4.00.n4",
+   "ent_6e9537aa0f0947fae5bfe7087767cca0842b7a2618bf885ecfead05ec695ad05",
+   "MENTIONS",
+   "dewey:4.00.n4",
+   1.0
+  ],
+  [
+   "edg_7ab6becda18b0fb74f6d4c9140d88403b311239966d28e96ebfb0d4ed22ef30b",
+   "4.00.n3",
+   "ent_af99907fbc99b1ad022c02fe005bc1239407ec0031bb82a50ae21e2fcbce1587",
+   "MENTIONS",
+   "dewey:4.00.n3",
+   1.0
+  ],
+  [
+   "edg_7c1839a2e388babbbf13efc2ebaf14f3f70006ee10bfffcea3806a0464f96f9a",
+   "4.02.s2",
+   "ent_bad5f728c611a48c459529ca1810dbc1ffc9e55dbf88d1dcfb222576cd4b0c9d",
+   "MENTIONS",
+   "dewey:4.02.s2",
+   1.0
+  ],
+  [
+   "edg_7c76ec02dec5b9da48ee0c1ee6b1c8394de3ea9535e72a02a7627d29de86bc1d",
+   "4.02.s2",
+   "ent_6ee4bbc1aef063164c82664096b990b6f7e710e69825445324acd4535a63b274",
+   "MENTIONS",
+   "dewey:4.02.s2",
+   1.0
+  ],
+  [
+   "edg_887feab9849bc4bd0938bf9c4ae2dcdfa820b3491f5d898cbd83386fcb9c9641",
+   "1.00.p1",
+   "ent_dc1903075ca4fa358b2e9e73fb628501ea3cab44b12cfa222ce5eef81c07cf76",
+   "MENTIONS",
+   "dewey:1.00.p1",
+   1.0
+  ],
+  [
+   "edg_8bda36df74362a92a05f121ec93bbc35f22bb3d81c0d31533ca6020f52fc8d99",
+   "ent_c89b151957af0771dddbb42dddb6dd1dcee9c4364b2b3d1576a21386ff291911",
+   "ent_bd95ed3e7f33972746adcac7295997c3d8fabba3c8e0d4e8e8fc33c5299f9fa2",
+   "SAME_AS",
+   "dewey:1.00.p1",
+   1.0
+  ],
+  [
+   "edg_8ec49fed782a08a2e98fd9c965f69daba22be1b63c23d60c273af5518013792a",
+   "2.04.n2",
+   "ent_354064e55e9bfb46164ea6557e8170e870243fb745ef7e623bd8e451ac3cdffa",
+   "MENTIONS",
+   "dewey:2.04.n2",
+   1.0
+  ],
+  [
+   "edg_985c0c40acb6964fabd33ee335b633ccdeffa9e505e16e88eec26f3bc5b8307b",
+   "4.00.n3",
+   "ent_ada2dd3c139e7914efcfd38b03ac43dbaf19438ce4d02b5a347f3b2e70594301",
+   "MENTIONS",
+   "dewey:4.00.n3",
+   1.0
+  ],
+  [
+   "edg_993b170782bc54d7e26a8553890a5f3cbc322f810faa7ae80c4866568df6f7c0",
+   "ent_c89b151957af0771dddbb42dddb6dd1dcee9c4364b2b3d1576a21386ff291911",
+   "ent_850e5c69081f86d932a98920e34563c8e6f9c025bfe90fbf10ee0b9252d6eea1",
+   "FAMILY_OF",
+   "dewey:1.00.p1",
+   1.0
+  ],
+  [
+   "edg_9ec1430a0ab28d169795687b6712a1dfdd924ccaec9ecef01baabcef4e679c11",
+   "4.00.n4",
+   "2.00.s1",
+   "SHARES_DOMAIN",
+   "dewey:4.00.n4",
+   1.0
+  ],
+  [
+   "edg_aba661a90dc2431c458fa7fb2b462e5c975ef6b8f58ef4f087423c87645845c4",
+   "2.00.s1",
+   "ent_25ffd2036ae7ffd19938cafa163a3778c1b7d2cd22a146d90b517f9298b96964",
+   "MENTIONS",
+   "dewey:2.00.s1",
+   1.0
+  ],
+  [
+   "edg_ac4ffdedfbebc46f7af7c9056a9beccedf1054bafacff98d69f2e1b19aadf1d4",
+   "2.03.n1",
+   "ent_354064e55e9bfb46164ea6557e8170e870243fb745ef7e623bd8e451ac3cdffa",
+   "MENTIONS",
+   "dewey:2.03.n1",
+   1.0
+  ],
+  [
+   "edg_ad5a6684e1aa545a34ed8f8834409f82fc7368157be1df6948e7038cba3f5d4e",
+   "1.00.p1",
+   "ent_bd95ed3e7f33972746adcac7295997c3d8fabba3c8e0d4e8e8fc33c5299f9fa2",
+   "MENTIONS",
+   "dewey:1.00.p1",
+   1.0
+  ],
+  [
+   "edg_af6d46eaafd2ade1fdca4c82d66903b28bca10314e1d2cd22753c08114088ad8",
+   "4.00.n3",
+   "ent_cf0c8109397409fb817619c50cbe5da14a711957571389f24835fed80150e9cf",
+   "MENTIONS",
+   "dewey:4.00.n3",
+   1.0
+  ],
+  [
+   "edg_b13f2c7477358e2e4974ae3eb2fe07fdd50da252afe92be2e8622fd3939bcb91",
+   "4.00.n4",
+   "ent_d2ad65c96a2156d53f1c0dbdacb776a2298b0168b1c15802c3c0a16db348821d",
+   "MENTIONS",
+   "dewey:4.00.n4",
+   1.0
+  ],
+  [
+   "edg_b43cd58034b33e4915b042d95afba657bf0a3ee6e72c21bd3a13f4b5ec136974",
+   "1.00.p1",
+   "ent_c89b151957af0771dddbb42dddb6dd1dcee9c4364b2b3d1576a21386ff291911",
+   "MENTIONS",
+   "dewey:1.00.p1",
+   1.0
+  ],
+  [
+   "edg_b80e046e289e7c370bb4392ab6ecd116e91fbdf3ce73851d39a4c2426cbe7fcb",
+   "ent_c89b151957af0771dddbb42dddb6dd1dcee9c4364b2b3d1576a21386ff291911",
+   "ent_687b681bbee6c771dba0823c4e8cce3bb4c325d831aef23e862d8ee239d02889",
+   "LIVES_IN",
+   "dewey:1.00.p1",
+   1.0
+  ],
+  [
+   "edg_bb09157a55eb2be3b5a062538529e6e8baade77512c9eb9d334881b9022af9f7",
+   "4.00.n4",
+   "ent_cf0c8109397409fb817619c50cbe5da14a711957571389f24835fed80150e9cf",
+   "MENTIONS",
+   "dewey:4.00.n4",
+   1.0
+  ],
+  [
+   "edg_be007269ff274451625a6a79af0f975c18f27ca1a86c9700b0773bd940891d3c",
+   "9.01.s3",
+   "ent_a4b1327b9953c6458f44352cb0880b11ba17aa99ba8cd92ea2c99fa5972490b6",
+   "MENTIONS",
+   "dewey:9.01.s3",
+   1.0
+  ],
+  [
+   "edg_beb807074bef1773841c2e6f64dc18c48be204fd4a391202518f523c4ac3bf5b",
+   "4.00.n4",
+   "4.00.n3",
+   "MENTIONS",
+   "dewey:4.00.n4",
+   1.0
+  ],
+  [
+   "edg_c1db72842144d00010a9127045fbd800224aafa0882a10025f48e1fac8e0b70a",
+   "2.05.k1",
+   "ent_fda81d7a847f4b36a17b3f226fa5715efc5bc00f1c77a40f32515c1bb7ef0a6f",
+   "MENTIONS",
+   "dewey:2.05.k1",
+   1.0
+  ],
+  [
+   "edg_c296d7792edcd63b76523824d4fef8b117d08c236963f8e7e8bb061cecbc9619",
+   "ent_c89b151957af0771dddbb42dddb6dd1dcee9c4364b2b3d1576a21386ff291911",
+   "ent_ce8ff249106802b63fc3e818907f6ec12216c573a68ffc694c4cc67c8c78c600",
+   "OWNS",
+   "dewey:1.00.p1",
+   1.0
+  ],
+  [
+   "edg_c819d7a943c3c328d2beef3a6e0cbf8245436480523a06317070822ebe975101",
+   "2.05.k1",
+   "2.05.k2",
+   "CO_LOCATED",
+   "dewey:2.05.k1",
+   1.0
+  ],
+  [
+   "edg_c945e2cb12dc78a7d14bf3e0daf64041ad5f2e84d97d7fd1ff5957706b57c298",
+   "4.00.n4",
+   "ent_ff9b70f1414f13629285cbd8fbab992345ec0ff213a8d4bf1740e2313c067897",
+   "MENTIONS",
+   "dewey:4.00.n4",
+   1.0
+  ],
+  [
+   "edg_ca293c1b0cebfd1cf1dd8dadf1e97c74674fd8be7773c3b60d7c5884bf9c4f7c",
+   "2.00.s1",
+   "4.02.s2",
+   "SEMANTIC_SIMILARITY",
+   "similarity:2.00.s1:4.02.s2",
+   1.0
+  ],
+  [
+   "edg_d0ed86bcea2b1295d1fc14aeaa941a2ebbd427e5153ba20467efd6d4baeb85a4",
+   "2.00.s1",
+   "ent_4fd5eac3d3c71b83d5f2e97af9f25d3ece0e132d27917128c5021d9154db7685",
+   "MENTIONS",
+   "dewey:2.00.s1",
+   1.0
+  ],
+  [
+   "edg_d1245bfe4ae0ee9a47ea85551155282b999d2dd84b8beab3da0b7c2902db9b97",
+   "2.01.s6",
+   "9.01.s3",
+   "SEMANTIC_SIMILARITY",
+   "similarity:2.01.s6:9.01.s3",
+   0.8
+  ],
+  [
+   "edg_d3e16d8ad818f6031d40ea1fff02c031d23484417ffaf555c27957d4be23fedf",
+   "2.04.n2",
+   "ent_98a288eb0dae0dfc406ea7cf8b010edc7934eff72bd66cf4ac29e931d9c6a702",
+   "MENTIONS",
+   "dewey:2.04.n2",
+   1.0
+  ],
+  [
+   "edg_d5331faf20da9ac28775a8f142a5c0b0a08fcf169c060c3a2ad31c5a3fffc74b",
+   "2.00.s1",
+   "ent_e5b3999289593962d56e0a935ffb433f22d4a195c4297852c9f41d485ad896ad",
+   "MENTIONS",
+   "dewey:2.00.s1",
+   1.0
+  ],
+  [
+   "edg_db5a39ee213f837b583fde1e0349ec698c03de49b87bce28b49e9de30ac23284",
+   "4.00.n3",
+   "4.00.n4",
+   "SHARES_TAG",
+   "dewey:4.00.n3",
+   1.0
+  ],
+  [
+   "edg_efb22168958340f5ef260963fb03c56724fb946653612a28f638dff9acc5afa6",
+   "4.00.n4",
+   "4.00.n3",
+   "CO_LOCATED",
+   "dewey:4.00.n4",
+   1.0
+  ],
+  [
+   "edg_f0b8d82e379f51f8b89be05e266bb0566f5d83170df8fef5e5ec7e2f6852ca10",
+   "2.02.s4",
+   "ent_a8a8947ed16bdf78e3fb4cf1d5764be6f3ee2b39344c0befd3ba0c4bc87ccde0",
+   "MENTIONS",
+   "dewey:2.02.s4",
+   1.0
+  ],
+  [
+   "edg_f7a313a8e20807a072aa615815b1cc45bc4be90775efd59b7b536180d00ab215",
+   "4.00.n4",
+   "4.00.n3",
+   "SHARES_DOMAIN",
+   "dewey:4.00.n4",
+   1.0
+  ]
+ ],
+ "edge_tuples_sha256": "48473aa7b7f03de24bff90e0b958a8a042a84c27d9d624ab9439ba496de09cb7",
+ "edge_tuples_sha256_rule": "sha256(json.dumps(edges_sorted_by_edge_id, sort_keys=True).encode('utf-8')) — Python json defaults",
+ "fixture_file_sha256": {
+  "root/memory/100_personas/1.00.p1.json": "d0408bfd098b7b4cf5a7b1eaa10f0badc03031f9830fa63b9ae34919eb0f936f",
+  "root/memory/200_knowledge/2.00.s1.json": "08c869570da3f7cd8a660e317ab5dd9650984b806b601dcb20cbde06f8d1e75c",
+  "root/memory/200_knowledge/2.01.s6.json": "3f71a8a052546274e5ddd356742a15bc215e0f2694d962caed7062200097b07b",
+  "root/memory/200_knowledge/2.02.s4.json": "e553136f8778056882265c6bb2cf98b7db7c24270b4c27ad343bdb84b3a3faa0",
+  "root/memory/200_knowledge/2.03.n1.json": "5f7318b5698c4d33c67f87f5329d4363668dec13fc2683f7a4e480bd467bdbfd",
+  "root/memory/200_knowledge/2.04.n2.json": "1b92043fc78fdd620aa28af3090812e0628e46558ba5e4c0f8493fa057d10e2b",
+  "root/memory/200_knowledge/2.05.k1.json": "ac359b11f1e73cb5f3fb324d65799735b0b50d4a75393c67ba3f6f1c132d2be3",
+  "root/memory/200_knowledge/2.05.k2.json": "3463c662389f0f413876a108befd59bc3faf2a1e750c7dcc8263effe21d3e490",
+  "root/memory/200_knowledge/2.06.k3.json": "a15166e50eb4ca91d954f3b8270352bb90c9b3a631fe70143e2cb8ab97dcf95d",
+  "root/memory/200_knowledge/2.06.k4.json": "693678d98969b19d0acde63ed8bd460d4d9d668f0f7558cd0aebb049e8b3f24b",
+  "root/memory/400_situational/4.00.n3.json": "0c2f73a9420fb620457eb6158dac2aca892dcdb899c39c4d222183df1fe3ceb7",
+  "root/memory/400_situational/4.00.n4.json": "d1d0842820ce83421ca4324709c73e62de4a14c8c256281ddd4c968e707a96a4",
+  "root/memory/400_situational/4.02.s2.json": "c90b6f5f09c7fc11cdb01e857d7e9a4ec4d6b0954c5055d8290bd9e4aea40f28",
+  "root/memory/600_journal/6.00.j1.json": "e2e6ff881b94149a4cd4ac5f65996b0d256e6b4082315c15b55e2f527cb08135",
+  "root/memory/900_temporal/9.01.s3.json": "d478aa2ad05fbba40d98e75b917bb3f78817e042296c2a3c04c45788af025b35",
+  "root/memory/indexes/coord_index.json": "0a37f33a28096673ce05faa722a0f573e684f09e8368af7979613cd0e5effe93"
+ },
+ "determinism": "second compile of the same copy reproduced snapshot_hash",
+ "embedding_inference": "entry points monkeypatched to raise during the compile; v6 reads STORED text_768 only"
+}

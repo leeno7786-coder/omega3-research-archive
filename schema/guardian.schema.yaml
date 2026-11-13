@@ -1,0 +1,31 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "omega://schema/guardian/v1"
+title: GuardianTypes
+
+definitions:
+  ResponseClass:
+    type: object
+    required: [subtype, decision_state]
+    properties:
+      subtype: { type: string }
+      decision_state:
+        type: string
+        enum: [ALLOW, FLAG, QUARANTINE, REJECT]
+      response_mode: { type: string }
+      persistence_policy: { type: string }
+      escalation: { type: boolean }
+      goal: { type: string }
+      must: { type: array, items: { type: string } }
+      must_never: { type: array, items: { type: string } }
+      example_posture: { type: string }
+      triggers: { type: array, items: { type: string } }
+
+  GuardianConfig:
+    type: object
+    required: [response_classes]
+    properties:
+      response_classes:
+        type: object
+        minProperties: 1
+        additionalProperties:
+          $ref: "#/definitions/ResponseClass"

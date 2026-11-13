@@ -1,0 +1,16 @@
+{
+  "coord": [
+    2,
+    5,
+    0
+  ],
+  "id": "2.05.k1",
+  "summary": "Measured cold boot at 40 s.",
+  "superseded_by": "2.05.k2",
+  "tags": [
+    "boot"
+  ],
+  "title": "Boot takes 40 seconds",
+  "type": "concept",
+  "version": 1
+}

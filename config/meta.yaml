@@ -1,0 +1,180 @@
+# =============================================================================
+# Meta loop — Meta A / Meta B deterministic sequencer (no models)
+# =============================================================================
+#
+# Authority: meta_loop/*.py phase subpackages (each exports run).
+# Slice flags: policy/symphony.policy.yaml → pressure.slice2/3/4_*_front
+#
+# =============================================================================
+
+meta:
+  enabled: true
+  models: none
+  planning_only: true
+  no_inference_in_meta: true
+  no_execution_in_meta: true
+
+  meta_a:
+    module: meta_loop.loop.run_meta_a
+    phases:
+      - intake
+      - action
+      - tool
+      - memory
+      - pack
+      - skill_recall_context
+      - skill_selection
+    episode_write:
+      slot: execution_action_pack
+      path: episode.meta.execution_action_pack
+    skill_recall:
+      module: meta_loop.skill.run._maybe_recall_context
+      flag_env: OMEGA_MEMORY_TAXONOMY
+      writes: episode.meta.skill_recall_context
+      rule: deterministic_recall_informs_selection_only
+    requires:
+      - episode.global_.intent_decision
+
+  meta_b:
+    module: meta_loop.loop.run_meta_b
+    phases:
+      - consistency
+      - disposition
+      - reflect
+    episode_write:
+      slot: reflection
+      path: episode.meta.reflection
+    handoff:
+      global_b: global_loop.loop.run_global_b
+    requires:
+      - episode.auto
+
+  action:
+    meta_actions:
+      - USE_TOOL
+      - USE_SKILL
+      - EXECUTE_MOTOR_PROGRAM
+      - RESPONSE
+      - PROACTIVE_RESPONSE
+      - IMAGE_CREATION
+      - DOCUMENT_CREATION
+      - IDLE
+    intent_to_action:
+      RESPOND: RESPONSE
+      RESOLVE_QUERY: RESPONSE
+      PROACTIVE_RESPONSE: PROACTIVE_RESPONSE
+      LEARN: USE_TOOL
+      USE_TOOL: USE_TOOL
+      USE_SKILL: USE_SKILL
+      PURSUE_OUTCOME: EXECUTE_MOTOR_PROGRAM
+      IMAGE_CREATE: IMAGE_CREATION
+      DOCUMENT_CREATE: DOCUMENT_CREATION
+      IDLE: IDLE
+      APPLY: USE_SKILL
+    default_action: IDLE
+    execution_constraints:
+      planning_only: true
+      no_inference_in_meta: true
+      no_execution_in_meta: true
+      no_model_fields: true
+
+  tool:
+    capability_map:
+      external_information: web_fetch
+      ocr: ocr_tool
+      desktop: desktop_tool
+      file_read: file_reader
+      image: image_tool
+      image_understanding: vision_reasoning_tool
+      video_understanding: vision_reasoning_tool
+      object_localization: vision_reasoning_tool
+      scene_analysis: vision_reasoning_tool
+      spatial_reasoning: vision_reasoning_tool
+      temporal_reasoning: vision_reasoning_tool
+      robotics_planning: vision_reasoning_tool
+      face_recognition: face_tool
+      face_similarity: face_tool
+      age_gender: face_tool
+      gender_estimation: face_tool
+      age_estimation: face_tool
+      head_pose: face_tool
+      landmark_detection: face_tool
+    learn_default_tool: web_fetch
+    image_create_tool: image_tool
+    use_tool_keywords:
+      file_reader:
+        - ".txt"
+        - ".pdf"
+        - ".csv"
+        - file
+        - read file
+      vision_reasoning_tool:
+        - understand image
+        - "what's in this image"
+        - describe the scene
+        - locate object
+        - where is the object
+        - analyze video
+        - spatial
+        - temporal
+        - scene analysis
+        - object localization
+        - video understanding
+      face_tool:
+        - whose face
+        - recognize this person
+        - face match
+        - how old
+        - age/gender
+        - head pose
+        - facial landmarks
+        - face recognition
+        - identify face
+      ocr_tool:
+        - ocr
+        - image-to-text
+        - scan text
+      desktop_tool:
+        - desktop
+        - ui automation
+        - click
+        - window
+        - automate ui
+
+  memory:
+    respond_prior_pattern: "\\b(what did i tell|remember|previously)\\b"
+    learn_prior_pattern: "\\b(remember|my earlier|previously|what did i tell)\\b"
+    scopes:
+      - operator_history
+      - conversation
+      - topic
+
+  pack:
+    banned_keys:
+      - model
+      - llm
+      - engine
+      - prompt
+      - system_prompt
+      - temperature
+      - max_tokens
+      - tokens
+      - sampling
+      - top_p
+      - top_k
+    require_tool_reason_when_tool_set: true
+
+  meta_b_disposition:
+    dispositions: [completed, degraded, failed, skipped, idle, invalid]
+    meta_statuses: [success, partial, failed, skipped, idle, invalid]
+    cycle_kind_map:
+      success: [completed, success]
+      partial: [degraded, partial]
+      fail: [failed, failed]
+      failed: [failed, failed]
+      skipped: [skipped, skipped]
+      idle: [idle, idle]
+    default: [invalid, invalid]
+
+  consistency:
+    pack_stable_fields: [episode_id, action, tool, execution_intent]

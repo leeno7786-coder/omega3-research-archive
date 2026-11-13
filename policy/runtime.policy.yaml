@@ -1,0 +1,24 @@
+# Runtime — operational policy (behavioral contract)
+# Code: runtime/client.py, runtime/runtime_capability_broker.py
+# Config: config/runtime.yaml
+
+version: 1
+
+enabled: true
+
+role:
+  description: |
+    Mind binds actions to omega-portable-lite sockets. Preflight required
+    for every runtime operation per capability broker doctrine.
+
+preflight:
+  required: true
+  module: runtime.runtime_capability_broker.preflight_runtime_operation
+
+failure_mode:
+  failure_soft: config/runtime.yaml runtime.failure_soft
+  degraded: alternate_capability_or_hold
+
+alignment:
+  config: config/runtime.yaml
+  schema: schema/runtime.schema.yaml

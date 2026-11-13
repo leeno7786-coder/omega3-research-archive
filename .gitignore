@@ -1,0 +1,316 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.internal/**/pytest-cache/
+.internal/**/probe-cache/
+.mypy_cache/
+.ruff_cache/
+.venv*/
+venv/
+env/
+python-3.13-embed/
+python-3.13-linux/
+python-3.12-embed/
+.vitis-lane-staging-*/
+
+# Transient agent/tooling artifacts (bus post bodies, ad-hoc test dumps)
+.agent_bus_body.txt
+_pytest_failures.txt
+_tmp_*
+mem_test.txt
+tests/_full_run_junit.xml
+tests/_full_run_output.txt
+tests/_matrix_run_output.txt
+tests/.coverage
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Secrets and local config
+.env
+.env.*
+!.env.example
+.vscode/
+.idea/
+
+# Runtime data and local agent/tool state
+.agents/
+# Local agent coordination memory (operator-specific; canonical spec is AGENTS.md)
+$null
+.omega_data/
+.omega/
+.claude/
+.qwen-agent/
+.fallow/
+.serena/
+memory/.omega_data/
+memory/tmp_writes/
+memory/000_identity/
+memory/100_personal/
+memory/100_personas/
+memory/1100_dev/
+memory/200_knowledge/
+memory/300_reasoning/
+memory/400_context/
+memory/400_situational/
+memory/500_skills/
+memory/600_journal/
+memory/700_vision/
+memory/800_coding/
+memory/900_temporal/
+memory/1000_workflows/
+memory/indexes/*
+!memory/indexes/README.md
+memory/500_tools/
+
+# Pressure loop state scratch (Slice 5a episode journal buffer)
+pressure_loop/state/
+
+# DeepSleep loop state scratch (Slice 6a journal buffer)
+deepsleep_loop/state/
+
+# Guardian runtime state (load-bearing live state — never source-of-truth in repo)
+guardian/state/
+guardian/release-secrets/
+guardian/lifecycle.lock
+
+# Phase 7 deterministic memory taxonomy substrate (local truth ledger + compiled graph)
+memory/taxonomy_store/
+data/memory_taxonomy/
+
+# Phase 0c mind-state checkpoints (full snapshots of the gitignored live mind)
+guardian/checkpoints/
+
+# Kimi swarm working directory
+.kimi/
+
+# Accidental large binaries (operator reference docs etc.)
+*.pdf
+
+# Stray diagnostic dumps with mojibake-encoded path filenames
+*diag.txt
+
+# Windows reserved device names accidentally created as files
+nul
+
+# Local runtime/model artifacts. Keep source/docs, skip downloaded models,
+# caches, binaries, compiled graphs, and bundled vendor payloads.
+/models/
+/runtimes/*
+!/runtimes/browser/
+!/runtimes/browser/edgedriver/
+!/runtimes/browser/edgedriver/manifest.json
+!/runtimes/browser/edgedriver/*.zip
+runtime/**/*
+!runtime/**/
+!runtime/**/*.py
+!runtime/README.md
+!runtime/face/README.md
+
+# Runtime logs and local audit trails
+guardian/logs/
+logs/
+*.jsonl
+# Intent router training and evaluation data is versioned (scripts/intent_router/LABELS.md).
+!scripts/intent_router/data/**/*.jsonl
+
+# Logs, databases, and temporary files
+*.log
+# Saved validation evidence linked by the reconciliation report.
+!docs/validation/skipped-tests-20260927/windows-full.log
+*.live.err
+*.tmp
+*.sqlite
+*.sqlite3
+*.db
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.code-graph/
+
+# Agent working directories
+.serena/
+.qwen-agent/
+
+# Node (if ever added at root)
+node_modules/
+
+# Boot logs — runtime per-boot artifacts (.log + .log.err pairs).
+# `*.log` already covers the .log files; add the dir to also exclude
+# .log.err siblings + any other per-boot scratch.
+_boot_logs/
+# Session boot tails captured under checkpoints/ during HUD-less live
+# boots (`python boot.py > checkpoints/boot_*.log`). The checkpoint-NNN/
+# ML-training subdirs stay untracked by default; only filter per-boot
+# log scratch here.
+checkpoints/boot_*.log
+checkpoints/boot_*.log.err
+
+# Local-only agent scratch (never production)
+.context/
+checkpoints/
+# Cursor hook local state (machine-specific)
+.cursor/hooks/state/
+
+# Local worktrees and operator audit scratch
+.worktrees/
+audit_fresh*.txt
+audit_out.txt
+fail_degraded_lines.txt
+
+# Playwright
+/test-results/
+/playwright-report/
+# Browser binaries Playwright auto-downloads — 1.4GB of Chromium per
+# install. Machine-specific; never commit.
+/browser_agent/playwright-browsers/
+
+# Generated e2e proof artifact — _dev_pill_e2e.py now writes it under
+# guardian/logs/ (gitignored); guard the legacy root name too so an old
+# script run can't reintroduce tracked root clutter.
+/DEV_PILL_PROOF.md
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
+.coverage
+
+# Playwright test artifacts
+/playwright-show-report/
+*.trace.zip
+*.png
+*.jpg
+*.jpeg
+*.webp
+
+# Playwright video recordings
+/playwright-videos/
+
+# Operator/tooling artifacts (not substrate source)
+.opencode/
+graphify-out/
+# Root project-instruction file (the tracked docs/research/CLAUDE.md is
+# unaffected — git keeps already-tracked files; anchor to root only).
+/CLAUDE.md
+browser_agent_extension/.cursor/hooks/state/continual-learning.json
+
+# HUD local unpack / layout reverse-engineering scratch
+Omega 3.0 HUD.zip
+_hud_zip_extract/
+_ctx_*.txt
+_hero_ctx.txt
+
+# Ad-hoc probe/extract scratch under scratchpad/. The tracked helper scripts
+# live at scratchpad/*.py; every SUBDIRECTORY is throwaway machine-local payload
+# (ONNX runtime downloads, NPU probes, extracted archives — ~53M so far).
+scratchpad/*/
+_vte_full.txt
+_spa*_out.txt
+
+# Memory Engine v2 rebuildable runtime projections and local ledger data.
+/memory/dme/coordinate_registry.json
+/memory/dme/hop_plane*.bin
+/memory/dme/manifest.json
+/memory/dme/sram.bin
+/memory/dme/sram_index.json
+/memory/dme/sram_meta.json
+/memory/integrity/last_audit.json
+/memory/source_ledger/artifacts/
+# Runtime data, exactly like artifacts/ above. 528 of these were tracked by
+# accident because this line was missing; day_zero_reset wipes the directory
+# (scripts/day_zero_reset.py), so git saw 528 deletions on every reset.
+/memory/source_ledger/projection_receipts/
+.kilo/
+
+# Local isolated agent worktrees
+/.worktrees/
+
+# scripts/build_marketplace_catalog.py's default build OUTPUT directory
+# (never the shipped, signed plugin_platform/marketplace/ snapshot itself).
+/build/
+
+# Browser agent extension — build artifacts (generated output, not source; source is tracked)
+browser_agent_extension/build/
+browser_agent_extension/dist/
+browser_agent_extension/docs-site/
+
+# codebase-memory-mcp whole-repo index — DERIVED data, regenerated from source by
+# `index_repository`. The repo-root graph is ~17 MB of incompressible zstd (31.5k nodes /
+# 138.7k edges) and is rewritten on every re-index, so tracking it would add ~17 MB of
+# undeltifiable blob to history per index run. The tool's own .gitattributes (merge=ours)
+# solves conflicts, not bloat. The much smaller browser_agent_extension/ index stays
+# tracked. To version this one instead, delete these two lines and `git add -f`.
+/.codebase-memory/
+
+# Cursor IDE configuration (no longer active)
+.cursor/
+
+# GitHub Copilot instructions (no longer active)
+.github/copilot-instructions.md
+
+# GitHub Extensions (Copilot SDK - no longer active)
+.github/extensions/
+package-lock.json
+node_modules/
+/dist/
+/tools/bun/
+docs/research/package-lock.json
+docs/research/node_modules/
+onnxruntime_profile__*.json
+
+# Generated qwen memory-graph artifacts (258MB of derived state, rebuilt on demand)
+.qwen-graph/
+
+# Program-I local-only corpus/source text (may contain private Omega research material)
+/benchmarks/memory_organ/program1_private/
+
+# Pytest subprocess fixtures and rebuildable semantic projection/runtime state.
+/hashseed-*/
+/.cache/
+/.launcher-build*/
+/memory/dme/retina_codes.bin
+/memory/dme/retina_index.json
+/memory/projection/*.lock
+/memory/projection/gen-*/
+/memory/projection/leases/
+/memory/projection/registry_authority/
+/memory/projection/outbox_epoch.json
+/memory/quarantine/
+
+# The brain-resident Ettin retina weights (memory/ettin_encoder.py pins them by hash);
+# fetched once, not versioned here.
+memory/models/
+# NanoAgent history (sessions, worktree, snapshots) — not project source
+.nanoagent/
+
+# Release-preparation reports/diagnostics are not part of the public archive.
+release-prep/
+release-candidate-audit/
+*.coverage
+.coverage
+.pytest_cache/
+.omega-pytest-tmp/
+*.sqlite
+*.db
+*.bak
+*.log
+*.pfx
+*.pem
+*.key
+*.gguf
+*.onnx
+*.safetensors
+*.ggml
+*.pt
+*.pth
+*.ckpt
+
+# Source-only model metadata, no model weights
+!models/
+models/*
+!models/manifest.json

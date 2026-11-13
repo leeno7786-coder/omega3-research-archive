@@ -1,0 +1,35 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "omega://schema/operator_chat/v1"
+title: OperatorChatTypes
+
+definitions:
+  OperatorChatConfig:
+    type: object
+    required: [operator_chat]
+    properties:
+      operator_chat:
+        type: object
+        required: [thinking_preview]
+        properties:
+          thinking_preview:
+            type: object
+            required: [memory_snippet_limit, text_compact_limit]
+            properties:
+              memory_snippet_limit: { type: integer, minimum: 0 }
+              text_compact_limit: { type: integer, minimum: 0 }
+
+  OperatorIngress:
+    type: object
+    required: [message]
+    properties:
+      message: { type: string }
+      ingress_class: { type: string }
+      directive_intent: { type: string }
+      cycle_id: { type: string }
+
+  ThinkingTrace:
+    type: object
+    properties:
+      status: { type: string }
+      steps: { type: array }
+      memory: { type: object }

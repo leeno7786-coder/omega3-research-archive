@@ -1,0 +1,506 @@
+Omega 3.0 — Terminal Agent Execution Contract
+1. System Overview
+
+Omega’s Terminal Agent is a deterministic execution layer that converts structured task contracts into real-world actions (code generation, file operations, tool execution), while learning from outcomes and updating system capability.
+
+The system is composed of:
+
+BrainLoop (L1) — Translates user intent into structured task contracts
+AutoLoop (Internal Cognition) — Plans execution and decides learn vs execute
+Terminal Agent (Execution Core) — Performs tool calls and validates outputs
+Guardian System — Governs all memory writes and sensitive actions
+Memory System — Stores knowledge, workflows, and execution results
+Neuromodulation System — Influences execution behavior (not control flow directly)
+2. Canonical Task Contract Schema
+
+All user input MUST be transformed into this schema before execution.
+
+{
+  "task_id": "uuid",
+  "objective": "string",
+
+  "intent": {
+    "type": "string",
+    "domain": "string",
+    "complexity": "single_step | multi_step"
+  },
+
+  "constraints": {
+    "language": "string | null",
+    "framework": "string | null",
+    "environment": "local | cloud | hybrid",
+    "style": "string | null"
+  },
+
+  "context": {
+    "user_preferences": {},
+    "existing_project": "path | null",
+    "prior_memory_refs": []
+  },
+
+  "deliverables": [
+    "string"
+  ],
+
+  "verification": [
+    {
+      "type": "compile_check | runtime_check | endpoint_check | file_exists | custom",
+      "params": {}
+    }
+  ],
+
+  "execution": {
+    "mode": "auto_execute_with_guardian | restricted | read_only",
+    "max_retries": 3,
+    "timeout_seconds": 300,
+    "parallelism": false
+  },
+
+  "learning": {
+    "allow_research": true,
+    "allow_memory_write": true,
+    "capture_workflow": true
+  },
+
+  "output_contract": {
+    "artifacts": [],
+    "report_required": true
+  }
+}
+3. BrainLoop Responsibilities
+Input
+Natural language (voice or text)
+Output
+Fully populated Task Contract
+Rules
+Extract explicit constraints when present
+Infer missing constraints from:
+Memory
+Prior successful workflows
+Ask user ONLY if ambiguity blocks execution
+Never pass raw user input to execution layer
+4. AutoLoop Planning Contract
+
+AutoLoop converts Task Contract into a DAG of steps.
+
+Step Schema
+{
+  "step_id": "string",
+  "type": "research | design | scaffold | implement | test | refine",
+  "inputs": [],
+  "outputs": [],
+  "tools": [],
+  "status": "pending | running | complete | failed",
+  "retry_count": 0
+}
+Planning Rules
+Always produce a DAG (not linear chain)
+Respect dependencies between steps
+Insert research phase if knowledge gap detected
+Reuse prior workflows if similarity > threshold
+5. Learn vs Execute Decision
+IF memory_recall(domain) == empty OR strength_index < threshold:
+    mode = "learn"
+ELSE:
+    mode = "execute"
+Learn Mode
+Use web_fetch
+Extract structured knowledge
+Submit memory writes through Guardian
+Execute Mode
+Use existing memory
+Perform tool-based actions
+6. Terminal Agent Execution Cycle
+
+For each step:
+
+1. Retrieve relevant memory
+2. Rerank candidates (embedding + reranker)
+3. Generate tool calls
+4. Execute tool(s)
+5. Validate results
+6. Emit telemetry
+7. Submit memory write → Guardian
+7. Tool Interface Contract
+
+All tools MUST follow strict JSON schema.
+
+Example: write_file
+{
+  "tool": "write_file",
+  "path": "string",
+  "content": "string"
+}
+Example: web_fetch
+{
+  "tool": "web_fetch",
+  "query": "string",
+  "extract": ["key points", "code examples"]
+}
+Requirements
+Deterministic outputs
+No hidden side effects
+Full logging
+8. Validation System
+
+Validation is mandatory for all steps.
+
+Types
+compile_check
+runtime_check
+endpoint_check
+file_exists
+Rule
+IF validation fails:
+    increase stress
+    retry OR replan
+9. Learning & Memory Integration
+
+After each step:
+
+Extract
+Successful patterns
+Failures
+Tool usage
+Write Memory
+{
+  "type": "skill | knowledge | workflow",
+  "domain": "string",
+  "content": "string",
+  "confidence": 0.0-1.0,
+  "source": "execution"
+}
+Update Strength Index
+Success → increase
+Failure → decrease
+10. Workflow Persistence
+
+Store DAG + outcomes:
+
+{
+  "workflow_id": "uuid",
+  "steps": [],
+  "success_rate": 0.0
+}
+Reuse Rule
+IF similarity(new_task, stored_workflow) > threshold:
+    reuse workflow
+11. Guardian Integration
+
+All writes go through Guardian:
+
+decision = guardian.decide_request(request)
+
+IF decision == ALLOW:
+    commit
+ELSE IF decision == FLAG:
+    commit_with_flag
+ELSE:
+    reject
+12. Failure Handling Policy
+IF step fails:
+    retry_count += 1
+
+IF retry_count > max_retries:
+    IF learning allowed:
+        switch to learn mode
+    ELSE:
+        escalate to user
+13. Neuromodulation Integration
+
+Signals influence execution behavior.
+
+Stress
+Increase validation strictness
+Reduce parallelism
+Increase retries
+Arousal
+Increase exploration
+Allow alternative solutions
+Plasticity
+High → allow learning
+Low → suppress memory writes
+14. Output Contract
+
+All tasks must produce:
+
+{
+  "status": "success | partial | failed",
+  "artifacts": ["file paths"],
+  "summary": "string",
+  "validation_results": []
+}
+15. Execution Guarantees
+
+The system MUST:
+
+Follow task contract strictly
+Never skip validation
+Never write memory without Guardian approval
+Log all actions
+Remain deterministic at execution layer
+16. Implementation Order
+Phase 1
+Task contract parsing
+DAG planner
+Tool execution
+Validation
+Phase 2
+Memory integration
+Strength index updates
+Phase 3
+Learn vs execute logic
+Workflow reuse
+Phase 4
+Curiosity integration
+Autonomous improvement
+Final Directive
+
+This system is NOT a chatbot.
+
+It is:
+
+A deterministic execution engine that learns, adapts, and improves through structured interaction with real-world tasks.
+
+All components must adhere strictly to this contract.
+
+🔧 Omega 3.0 — Voice Model Tool Invocation Contract (Gemma E2B)
+1. Core Principle
+
+The voice model is NOT an agent.
+It is a structured emitter of tool intents under strict schema.
+
+No freeform tool calls
+No implicit execution
+No side effects
+Only declarative intent → execution layer acts
+2. Gemma-Compatible Tool Call Format
+
+Gemma models typically perform best with explicit JSON blocks embedded in text, not hidden function-call APIs.
+
+Canonical Output Format
+{
+  "type": "tool_call",
+  "tool_name": "string",
+  "arguments": {},
+  "call_id": "uuid",
+  "reasoning": "short justification"
+}
+Rules
+MUST be valid JSON
+MUST be top-level (no nesting in prose)
+MUST contain all fields
+reasoning is short and controlled (not chain-of-thought)
+3. Multi-Tool Calls (Batch Execution)
+
+Gemma can emit multiple calls in sequence:
+
+{
+  "type": "tool_batch",
+  "calls": [
+    {
+      "tool_name": "web_fetch",
+      "arguments": { "query": "FastAPI tutorial" },
+      "call_id": "call_1"
+    },
+    {
+      "tool_name": "write_file",
+      "arguments": {
+        "path": "app.py",
+        "content": "..."
+      },
+      "call_id": "call_2"
+    }
+  ]
+}
+4. Tool Registry Contract
+
+The model MUST only call tools defined in registry.
+
+Example Registry
+{
+  "tools": [
+    {
+      "name": "web_fetch",
+      "description": "Fetch and extract structured data from the web",
+      "arguments_schema": {
+        "query": "string",
+        "extract": ["string"]
+      }
+    },
+    {
+      "name": "write_file",
+      "description": "Write content to file",
+      "arguments_schema": {
+        "path": "string",
+        "content": "string"
+      }
+    },
+    {
+      "name": "run_command",
+      "description": "Execute terminal command",
+      "arguments_schema": {
+        "command": "string"
+      }
+    }
+  ]
+}
+5. Voice Model Prompt Contract
+
+Gemma must be instructed with strict output rules.
+
+System Instruction (critical)
+You are Omega's Voice Execution Interface.
+
+You do NOT execute tasks.
+You ONLY emit structured tool calls in valid JSON.
+
+Rules:
+- Output ONLY valid JSON when calling tools
+- Do NOT include explanations outside JSON
+- Use only tools from the registry
+- Arguments must match schema exactly
+- If no tool is needed, respond normally
+
+Never hallucinate tools.
+Never skip required fields.
+6. Output Modes
+A) Tool Call Mode
+
+When action is required:
+
+{
+  "type": "tool_call",
+  "tool_name": "write_file",
+  "arguments": {
+    "path": "main.py",
+    "content": "print('Hello World')"
+  },
+  "call_id": "abc123",
+  "reasoning": "Creating initial file"
+}
+B) Response Mode (no tool)
+{
+  "type": "response",
+  "content": "Backend scaffold complete and validated."
+}
+7. Execution Boundary (CRITICAL)
+
+The model:
+
+❌ DOES NOT:
+
+execute commands
+write files
+access system
+
+✅ ONLY:
+
+emits structured intent
+8. Terminal Agent Responsibility
+
+The Terminal Agent:
+
+Validates JSON
+Verifies tool exists
+Validates arguments
+Executes tool
+Returns result
+9. Tool Result Feedback Loop
+
+After execution, results are returned to model:
+
+{
+  "type": "tool_result",
+  "call_id": "abc123",
+  "status": "success",
+  "output": "File written successfully"
+}
+
+Model then decides next step.
+
+10. Error Handling Contract
+
+If tool fails:
+
+{
+  "type": "tool_result",
+  "call_id": "abc123",
+  "status": "error",
+  "error": "File path invalid"
+}
+
+Model must:
+
+retry OR
+choose alternative tool OR
+escalate
+11. Determinism Constraints
+
+To prevent drift:
+
+Temperature: LOW (≤ 0.3)
+Max tokens: bounded
+JSON schema validation enforced
+Reject malformed outputs
+12. Safety + Guardian Hook
+
+Before execution:
+
+IF tool affects filesystem OR memory:
+    route through Guardian
+13. Integration with Your Architecture
+User Voice
+   ↓
+STT
+   ↓
+BrainLoop (intent → task contract)
+   ↓
+Gemma Voice Model (tool intent)
+   ↓
+Terminal Agent (execution)
+   ↓
+Validation + Guardian
+   ↓
+Memory + Learning
+14. Key Design Decision (why this works)
+
+You are NOT letting the model:
+
+“figure out how to act”
+
+You are forcing it to:
+
+emit structured, verifiable intent
+
+That’s why this will stay stable at scale.
+
+15. Optional (Advanced Control Layer)
+
+Add:
+
+"confidence": 0.0-1.0
+
+Use it to:
+
+gate risky actions
+trigger validation depth
+Final Directive
+
+The Gemma voice model is:
+
+A deterministic intent generator constrained by schema
+
+NOT:
+
+an executor
+not a planner
+not a memory writer
+
+If you want next, we should define:
+
+tool chaining policies (when to batch vs sequential)
+or
+command sandboxing + filesystem virtualization (critical for safety)
+
+Those are the next two pressure points once this goes live.

@@ -1,0 +1,102 @@
+# Pressure system — operational policy (behavioral contract)
+# Code: pressure_loop/ (policy loaders in pressure_loop/policy.py)
+# Config tunables: config/pressure.yaml, config/pressure_contributors.yaml
+
+version: 1
+
+enabled: true
+
+conductor:
+  description: |
+    The product clock is one pressure tick loop (pressure_loop.loop). On
+    ignition the loop hands off to cognition_chain.ignite_episode and pauses
+    until the episode completes; it does not run parallel timer conductors.
+  tick_owner: pressure_loop.loop
+  cognition_handoff: cognition_chain.ignite_episode
+  failure_mode: attributable_reader_failure
+  notes:
+    - Required pressure-loop failures remain attributable to the caller
+    - Optional contributor readers may emit no signal when their source is unavailable
+
+taxonomy_advisory_seam:
+  description: |
+    Phase 7M — read-only attention evidence from the compiled memory taxonomy graph.
+    Contributes ONE bounded Contributor (source=memory_taxonomy, weight <= 0.60) when
+    analyze_memory_pressure() recommends pressure. Never opens episodes, never parses
+    intent, never compiles or writes. Operator + higher-weight contributors still win.
+  module: pressure_loop.taxonomy_pressure.taxonomy_pressure_contributor
+  gather_hook: pressure_loop.pressure.gather_contributors
+  flag_env: OMEGA_MEMORY_TAXONOMY_PRESSURE
+  default: off
+  independent_of: taxonomy_capture_and_recall
+  authority_boundary: docs/architecture/MEMORY_AUTHORITY_BOUNDARY.md
+
+gather:
+  module: pressure_loop.pressure.gather_contributors
+  registry: pressure_loop.pressure_field.build_registry
+  removed_from_slice1_gather:
+    - guardian
+    - tool_creation_need
+    - evidence_terminal
+  rationale_removed:
+    guardian: Retired from pressure gather; safety remains Guardian boundary
+    tool_creation_need: Not wired through live front gather
+    evidence_terminal: Within-episode signal; not an ignition contributor in slice-1
+
+within_episode_observations:
+  description: |
+    Produced during cognition (AUTO/META/OMEGA). Folded on the episode record;
+    they do not re-enter pressure while the loop is halted.
+  examples:
+    - tool_failure
+    - novel_observation
+    - evidence_terminal
+
+operator_queue:
+  description: |
+    While an episode is active, only operator-class contributors may enqueue.
+    Autonomous drives are re-derived on the next between-episode tick.
+  operator_types:
+    - operator_command
+    - operator_query
+    - operator_response
+  dedupe:
+    key: [type, message_or_text_or_domain_or_id]
+    min_weight: 0.001
+
+evaluation:
+  module: pressure_loop.pressure.evaluate
+  opens_episode_when:
+    - dominant_contributor_weight >= winner_ceiling
+    - top_minus_runner_up >= winner_margin
+    - active_episode is false
+    - at least one contributor after gather
+  neuromod:
+    modulates_weights: true
+    modulates_threshold: false
+    never_fabricates_contributors: true
+  dominant_contributor:
+    rule: max_weight_unique_margin
+  suppress_reasons:
+    - below_ceiling
+    - ambiguous_winner
+  trajectory:
+    source: LAST_OMEGA_TRAJECTORY
+    on_ignition: snapshot_copied_to_episode
+
+evaluation_gates:
+  description: |
+    pressure_loop.pressure.evaluate is the live ignition path. The pressure
+    field owns contributor readers and pressure evaluation owns the ignition
+    boundary.
+  presence:
+    key: PRESENCE_STATE
+    fail_closed: true
+  autonomy_pause:
+    orchestrator_flag: pressure_loop_paused
+
+alignment:
+  episode_authority: pressure_loop/episode.py
+  policy_loader: pressure_loop.policy.load_policy
+  config_base: config/pressure.yaml
+  runtime_overlay: policy/symphony.policy.yaml

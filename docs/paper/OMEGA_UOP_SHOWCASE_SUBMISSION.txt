@@ -1,0 +1,36 @@
+===== UNIVERSITY OF PHOENIX AI INNOVATION SHOWCASE SUBMISSION =====
+
+FIELD 1: THE PROBLEM YOU WANT TO ADDRESS AND WHO IT BENEFITS
+---
+
+Most AI today is rented, not owned. You don't control where it runs, you don't own how it remembers you, and the moment you lose connection or the subscription ends, your relationship with that intelligence vanishes. For people handling health decisions, financial planning, legal matters, or personal crises, this matters — you need an AI that belongs to *you*, remembers *you*, and works when you need it most.
+
+Who it benefits: anyone who wants AI that is theirs. Students managing their education. Patients tracking their health. Creators protecting their ideas. Individuals in regions with unreliable internet. Anyone who's ever felt that an AI tool knows too much about them and they know nothing about where that knowledge lives.
+
+
+FIELD 2: YOUR PROPOSED AI SOLUTION, INCLUDING ANY ETHICAL CONSIDERATIONS
+---
+
+Omega is a personal AI that runs entirely on your own device — no cloud, no servers, no corporate database holding your memories. It's a complete cognitive architecture designed from first principles around one idea: **intelligence emerges from how you think, not how big the model is.**
+
+Three ethical anchors anchor the design:
+
+**Sovereignty.** Your AI is yours. Code, weights, memory — all live on your device. No cloud extraction. No black-box training data collection. No hypothetical "what if they get hacked" — because they can't access what they don't hold.
+
+**Memory ownership.** When Omega learns about you, it writes to files you physically own, in a schema you can read. Not a distant vector database. Not a model checkpoint on someone else's GPU. You can migrate it, back it up, or delete it — it's your property.
+
+**Accessibility.** Intelligence shouldn't require a cloud subscription or a gaming rig. Omega runs on consumer hardware — a laptop with modest GPU, offline, at full capability. That's not a limitation. That's the point.
+
+The ethical thesis is baked into the architecture itself, not bolted on as a compliance checkbox.
+
+
+FIELD 3: THE OUTCOMES YOU EXPECT TO SEE
+---
+
+**Immediate:** A working system proving that personal AI is viable. Omega boots on a single AMD iGPU, boots a mind that thinks on its own, learns from interaction, and remembers across sessions — no cloud, no phone-home, no dependency on external services.
+
+**Broader:** A model for AI ownership. Right now the only options are "rent from OpenAI" or "run an open model and hope." Omega shows a third path: a system that's *yours*, where the privacy and ethics aren't a restriction on capability — they're the source of it.
+
+**The ask:** Prove this to your institution. Show judges that the next wave of AI doesn't have to be centralized, doesn't have to surveil you, and doesn't have to choose between privacy and power. Intelligence can live on your device, remember you truly, and belong to you.
+
+===== END SUBMISSION =====

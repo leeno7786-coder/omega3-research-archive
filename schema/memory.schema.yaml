@@ -1,0 +1,47 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "omega://schema/memory/v1"
+title: MemoryCortexTypes
+description: |
+  YAML config contract layer; canonical persisted record shape is defined in
+  schema/memory_schema.json.
+
+definitions:
+  MemoryObject:
+    description: See schema/memory_schema.json
+    type: object
+    properties:
+      workspace_source:
+        $ref: "#/definitions/WorkspaceSource"
+
+  WorkspaceSource:
+    type: object
+    required:
+      - connection_id
+      - capability
+      - object_id
+      - revision_id
+      - content_digest
+      - source_ledger_receipt
+      - observed_at
+      - availability_state
+    additionalProperties: false
+    properties:
+      connection_id: { type: string, minLength: 1 }
+      capability: { type: string, minLength: 1 }
+      object_id: { type: string, minLength: 1 }
+      revision_id: { type: string, minLength: 1 }
+      content_digest: { type: string, pattern: "^[0-9a-f]{64}$" }
+      source_ledger_receipt: { type: string, minLength: 1 }
+      observed_at: { type: string, format: date-time }
+      availability_state: { type: string, minLength: 1 }
+
+  MemoryConfig:
+    type: object
+    required: [memory]
+    properties:
+      memory:
+        type: object
+        properties:
+          enabled: { type: boolean }
+          promotion: { type: object }
+          decay: { type: object }

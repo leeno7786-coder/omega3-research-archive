@@ -1,0 +1,43 @@
+# Cognition chain — operational policy (behavioral contract)
+# Code: cognition_chain.py
+
+version: 1
+
+role:
+  description: |
+    Handoff from pressure ignition to executive cascade. Episode is the carrier;
+    no central orchestrator. Fail-hard when episode open fails.
+
+sequence:
+  - module: cognition_chain.ignite_episode
+    opens: episode
+  - module: global_loop.loop.run_global_a
+  - module: meta_loop.loop.run_meta_a
+  - module: omega_loop.motor.run.plan_motor_program
+  - module: auto_loop.loop.run_auto
+  - module: meta_loop.loop.run_meta_b
+  - module: global_loop.loop.run_global_b
+  - module: omega_loop.episode.run.run_omega_for_episode
+    every_episode: true
+  - module: deepsleep_loop.loop.run_deepsleep_for_episode
+    every_episode: true
+    closes_episode: true
+
+constraints:
+  no_ignition_route_fork: true
+  no_response_hold_short_circuit: true
+  operator_ingress_receipts: true
+
+memory_taxonomy_capture:
+  description: |
+    DeepSleep drains episode SRAM into canonical memory, reindexes synchronously
+    from the filesystem, runs maintenance, and only then closes the episode.
+  module: deepsleep_loop.loop.run_deepsleep_for_episode
+  when: every_episode_before_close
+  compile: memory.engine.reindex.reindex_and_compile
+  episode_meta: episode.meta.taxonomy_compile
+  authority_boundary: docs/architecture/MEMORY_AUTHORITY_BOUNDARY.md
+
+alignment:
+  config: config/cognition_chain.yaml
+  schema: schema/cognition_chain.schema.yaml

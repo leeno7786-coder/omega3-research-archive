@@ -1,0 +1,150 @@
+# JSON Schema (YAML) — Episode journal wire shapes
+# Authority: pressure_loop/episode_journal.py, config/journal.yaml
+#
+# PriorEpisode had been stale since Phase 3 cut 3 (risk 11, brought current
+# 2026-08-11). It described seven fields while ``archive_episode`` wrote twelve:
+# ``lane`` and ``timekeeper`` since cut 3, and ``memory_epoch_start`` /
+# ``memory_epoch_commit`` / ``causal_parent_episode_ids`` /
+# ``causal_parents_complete`` since Phase 4 cuts 12-13. A schema that omits the
+# fields the ordering authority is READ for is worse than no schema: it reads as
+# a licence to drop them.
+#
+# The dataclass is the authority and this file follows it, field for field.
+# ``PriorEpisode.to_dict`` is ``asdict``, so the row is exactly the dataclass —
+# no additional properties, hence ``additionalProperties: false``.
+
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "omega://schema/journal/v1"
+title: EpisodeJournalTypes
+description: |
+  Slice 5a episode journal — config envelope + PriorEpisode JSONL line.
+
+definitions:
+  FinishLineStamp:
+    # core.timekeeper.finish_line_stamp, taken as the FIRST statement inside the
+    # serialized commit region (Phase 4 cut 13). Journal rows are the ordering
+    # authority for episode sequence: sort stamped rows by commit_seq
+    # (core.timekeeper.finish_line_key). Their FILE order is NOT that authority
+    # — archive_episode runs outside the commit region, so rows can and do land
+    # out of stamp order by design.
+    type: object
+    required: [commit_seq, commit_ms, committed_at, event_date, pipeline_id, work_kind]
+    additionalProperties: false
+    properties:
+      commit_seq:
+        type: integer
+        minimum: 1
+      commit_ms:
+        type: integer
+      committed_at:
+        type: string
+      event_date:
+        type: string
+      pipeline_id:
+        type: integer
+        enum: [0, 1, 2, 3]
+      work_kind:
+        type: string
+
+  PriorEpisode:
+    type: object
+    additionalProperties: false
+    required:
+      - episode_id
+      - ignition_reason
+      - cascade_status
+    properties:
+      episode_id:
+        type: string
+      ignition_reason:
+        type: string
+      intent:
+        type: ["string", "null"]
+      action:
+        type: ["string", "null"]
+      outcome:
+        type: ["object", "null"]
+      trajectory_update:
+        type: ["object", "null"]
+      cascade_status:
+        type: string
+        default: completed
+      # ── Cross-lane integration spec section 1 (T2): the cognitive thread this
+      # episode belonged to, so a thread can be rebuilt from the durable rows
+      # after a restart. Host-generated, immutable for the thread's life, and the
+      # episode id of the thread's FIRST episode. Empty on rows written before
+      # T2 — truthfully "no thread was recorded", never a thread named "".
+      thread_id:
+        type: string
+        default: ""
+      # ── Phase 3 cut 3: which pipeline this episode rode, and where it
+      # crossed the finish line.
+      pipeline_id:
+        # -1 means no physical owner was recorded on a historical row.
+        type: integer
+        enum: [-1, 0, 1, 2, 3]
+        default: -1
+      work_kind:
+        type: string
+        default: autonomous
+      timekeeper:
+        # null when the episode never reached the commit region (legacy rows,
+        # and any episode whose terminus raised before the stamp).
+        oneOf:
+          - $ref: "#/definitions/FinishLineStamp"
+          - type: "null"
+        default: null
+      # ── Phase 4 cut 12: the memory epoch this episode read at, the epoch it
+      # committed at, and the episodes that committed in between — whose writes
+      # its own reads could not have contained.
+      memory_epoch_start:
+        # 0 on legacy rows and under OMEGA_MEMORY_EPOCHS=0. Distinct from a real
+        # epoch 0, which only the first episode after a day-zero reset can hold.
+        type: integer
+        minimum: 0
+        default: 0
+      memory_epoch_commit:
+        # == timekeeper.commit_seq when sealed; the epoch has no second counter.
+        # 0 is the "was this row sealed at all" flag every reader below uses.
+        type: integer
+        minimum: 0
+        default: 0
+      causal_parent_episode_ids:
+        # null rather than [] for an empty set, to keep the row lean —
+        # memory_epoch_commit already answers "was this sealed", so null is
+        # never ambiguous.
+        type: ["array", "null"]
+        items:
+          type: string
+        default: null
+      causal_parents_complete:
+        # Phase 4 cut 13 review. The stamp is taken inside the commit region and
+        # archive_episode runs OUTSIDE it, so a lower-seq row can still be in
+        # flight when a later episode seals: a SHORT parent set is the ordinary
+        # reading for overlapping lanes, not a defect report. null is "no epoch
+        # was sealed on this row", which is distinct from a sealed false.
+        type: ["boolean", "null"]
+        default: null
+      outcome_axes:
+        # WO-06. The five independent outcome axes (schema/episode_record.py
+        # EpisodeOutcome.to_dict), sealed when the row is built. Every success
+        # count reads this, never cascade_status. null on rows written before
+        # WO-06, which count as unknown, never as a success.
+        type: ["object", "null"]
+        default: null
+
+  EpisodeJournalConfig:
+    type: object
+    required: [episode_journal]
+    properties:
+      episode_journal:
+        type: object
+        required:
+          - path
+          - window_default
+        properties:
+          path:
+            type: string
+          window_default:
+            type: integer
+            minimum: 1

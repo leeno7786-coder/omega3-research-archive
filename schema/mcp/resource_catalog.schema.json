@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Structural MCP resource catalog shape. Duplicate URI/template identity is enforced by mcp_platform.package_contracts.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["catalog_version", "server_id", "server_version", "resources", "resource_templates"],
+  "properties": {
+    "catalog_version": {"const": 1},
+    "server_id": {"type": "string", "minLength": 1},
+    "server_version": {"type": "string", "minLength": 1},
+    "resources": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["uri", "name", "mime_type", "max_bytes", "capability_tags"], "properties": {"uri": {"type": "string", "pattern": "^omega://"}, "name": {"type": "string", "minLength": 1}, "mime_type": {"type": "string", "minLength": 1}, "max_bytes": {"type": "integer", "minimum": 1}, "capability_tags": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true}}}},
+    "resource_templates": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["uri_template", "name", "mime_type", "max_bytes", "capability_tags"], "properties": {"uri_template": {"type": "string", "pattern": "^omega://"}, "name": {"type": "string", "minLength": 1}, "mime_type": {"type": "string", "minLength": 1}, "max_bytes": {"type": "integer", "minimum": 1}, "capability_tags": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true}}}}
+  }
+}

@@ -1,0 +1,325 @@
+# =============================================================================
+# Web Sources — Curated Knowledge URL Catalog
+# =============================================================================
+#
+# Single source of truth for the URLs Omega's web_fetch tool will consult,
+# both for autonomous knowledge acquisition and for UI-driven research
+# requests routed through brain → singular-mind → autonomous Phase 4.
+#
+# CURATION RULE
+# -------------
+# Every URL in this file was live-verified by `scripts/verify_web_sources.py`
+# (HEAD/GET, status check, cross-origin redirect detection, title sanity
+# check). When adding a new source, run the verifier against it FIRST and
+# only commit on a clean pass. The verifier is the credit-check.
+#
+# WIKIPEDIA POLICY
+# ----------------
+# Wikipedia is kept but lives in the `defer` tier per the operator's
+# directive: "wiki is good, but a lot of people write to and from it,
+# so it's easy for bs to slide in. keep it but don't lean on it."
+# web_fetch's dispatcher consults `primary` and `academic` sources
+# first; `defer` is consulted only when higher tiers return nothing.
+#
+# TRUST TIERS
+# -----------
+#   primary    — official / canonical source (vendor docs, lab publications)
+#   academic   — peer-reviewed or institutionally curated literature
+#   community  — high-signal community surfaces (verify against primary)
+#   reference  — editor-curated reference works (encyclopedias, handbooks)
+#   defer      — useful but lower trust; verify before relying on
+#
+# DOMAIN KEY
+# ----------
+# Each entry's `domain` value is the routing handle. web_fetch uses it
+# to filter sources by topic match. New domains should match
+# memory.dewey_map.KNOWLEDGE_DOMAINS / CODING_DOMAINS where possible
+# so memory and web_fetch share vocabulary.
+#
+# Verified: 2026-05-07 (35/37 candidates passed; rejected: paperswithcode
+# [acquired by HF, redirects offsite] + science.org [403 on bot UA]).
+# Re-verified: 2026-06-08 — all 35 catalog URLs PASS (200, no cross-origin
+# redirect, valid title) against the OmegaWebFetch UA.
+# =============================================================================
+
+schema_version: 1
+
+sources:
+
+  # ---------------------------------------------------------------
+  # AI / ML research — primary + academic
+  # ---------------------------------------------------------------
+  - url: "https://arxiv.org/"
+    name: "arXiv"
+    tier: primary
+    domain: ai_research
+    note: "Open-access preprint server (math/CS/physics) — Cornell-hosted"
+
+  - url: "https://huggingface.co/papers"
+    name: "Hugging Face Papers"
+    tier: primary
+    domain: ai_research
+    note: "Curated daily ML papers + author commentary. Absorbed paperswithcode.com in late 2025"
+
+  - url: "https://research.google/"
+    name: "Google Research"
+    tier: primary
+    domain: ai_research
+    note: "Google's official research index"
+
+  - url: "https://blog.research.google/"
+    name: "Google Research Blog"
+    tier: primary
+    domain: ai_research
+    note: "Long-form research posts from Google Research"
+
+  - url: "https://openai.com/research/"
+    name: "OpenAI Research"
+    tier: primary
+    domain: ai_research
+    note: "OpenAI research index"
+
+  - url: "https://www.anthropic.com/research"
+    name: "Anthropic Research"
+    tier: primary
+    domain: ai_research
+    note: "Anthropic research publications"
+
+  - url: "https://deepmind.google/research/"
+    name: "Google DeepMind Research"
+    tier: primary
+    domain: ai_research
+    note: "DeepMind research publications"
+
+  - url: "https://ai.meta.com/research/"
+    name: "Meta AI Research"
+    tier: primary
+    domain: ai_research
+    note: "Meta's FAIR research publications"
+
+  - url: "https://transformer-circuits.pub/"
+    name: "Transformer Circuits Thread"
+    tier: primary
+    domain: ai_research
+    note: "Anthropic interpretability publications (mech interp gold standard)"
+
+  - url: "https://distill.pub/"
+    name: "Distill.pub"
+    tier: academic
+    domain: ai_research
+    note: "Peer-reviewed ML interpretability journal — paused, but archive is still essential reading"
+
+  # ---------------------------------------------------------------
+  # Programming language official docs — primary
+  # ---------------------------------------------------------------
+  - url: "https://docs.python.org/3/"
+    name: "Python Docs"
+    tier: primary
+    domain: python
+    note: "CPython official documentation"
+
+  - url: "https://peps.python.org/"
+    name: "Python Enhancement Proposals"
+    tier: primary
+    domain: python
+    note: "Authoritative language design + governance docs"
+
+  - url: "https://developer.mozilla.org/en-US/"
+    name: "MDN Web Docs"
+    tier: primary
+    domain: web
+    note: "Mozilla's reference for HTML / CSS / JavaScript — gold standard for web platform"
+
+  - url: "https://doc.rust-lang.org/"
+    name: "Rust Documentation"
+    tier: primary
+    domain: rust
+    note: "Official Rust language docs + The Rust Programming Language book"
+
+  - url: "https://go.dev/doc/"
+    name: "Go Docs"
+    tier: primary
+    domain: go
+    note: "Official Go language documentation"
+
+  - url: "https://pkg.go.dev/"
+    name: "Go Package Index"
+    tier: primary
+    domain: go
+    note: "Official Go module + package documentation"
+
+  - url: "https://www.typescriptlang.org/docs/"
+    name: "TypeScript Docs"
+    tier: primary
+    domain: typescript
+    note: "TypeScript handbook + reference"
+
+  - url: "https://nodejs.org/en/docs/"
+    name: "Node.js Docs"
+    tier: primary
+    domain: nodejs
+    note: "Node.js official API docs"
+
+  # ---------------------------------------------------------------
+  # Coding community — community tier (verify against primary)
+  # ---------------------------------------------------------------
+  - url: "https://stackoverflow.com/"
+    name: "Stack Overflow"
+    tier: community
+    domain: coding
+    note: "Q&A community — high signal but verify accepted answers against primary docs"
+
+  - url: "https://github.com/"
+    name: "GitHub"
+    tier: community
+    domain: coding
+    note: "Repos + READMEs (use raw.githubusercontent.com URLs or REST API for direct content)"
+
+  # ---------------------------------------------------------------
+  # ML frameworks + scientific Python — primary
+  # ---------------------------------------------------------------
+  - url: "https://pytorch.org/docs/stable/"
+    name: "PyTorch Docs"
+    tier: primary
+    domain: ml_frameworks
+    note: "Official PyTorch documentation"
+
+  - url: "https://www.tensorflow.org/api_docs"
+    name: "TensorFlow API"
+    tier: primary
+    domain: ml_frameworks
+    note: "Official TensorFlow API reference"
+
+  - url: "https://numpy.org/doc/stable/"
+    name: "NumPy Docs"
+    tier: primary
+    domain: ml_frameworks
+    note: "NumPy reference manual"
+
+  - url: "https://scikit-learn.org/stable/"
+    name: "scikit-learn"
+    tier: primary
+    domain: ml_frameworks
+    note: "scikit-learn user guide + API reference"
+
+  # ---------------------------------------------------------------
+  # Infrastructure — primary
+  # ---------------------------------------------------------------
+  - url: "https://docs.docker.com/"
+    name: "Docker Docs"
+    tier: primary
+    domain: devops
+    note: "Official Docker documentation"
+
+  - url: "https://kubernetes.io/docs/"
+    name: "Kubernetes Docs"
+    tier: primary
+    domain: devops
+    note: "Official Kubernetes documentation"
+
+  # ---------------------------------------------------------------
+  # Reference works — reference tier (curated/editorial)
+  # ---------------------------------------------------------------
+  - url: "https://plato.stanford.edu/"
+    name: "Stanford Encyclopedia of Philosophy"
+    tier: reference
+    domain: philosophy
+    note: "Peer-reviewed philosophy reference — gold standard"
+
+  - url: "https://www.britannica.com/"
+    name: "Encyclopedia Britannica"
+    tier: reference
+    domain: general
+    note: "Editor-curated encyclopedia"
+
+  - url: "https://mathworld.wolfram.com/"
+    name: "Wolfram MathWorld"
+    tier: reference
+    domain: mathematics
+    note: "Wolfram-curated mathematics reference"
+
+  - url: "https://ncatlab.org/nlab/show/HomePage"
+    name: "nLab"
+    tier: academic
+    domain: mathematics
+    note: "Category theory + higher mathematics wiki maintained by working mathematicians"
+
+  # ---------------------------------------------------------------
+  # Sciences — academic
+  # ---------------------------------------------------------------
+  - url: "https://pubmed.ncbi.nlm.nih.gov/"
+    name: "PubMed"
+    tier: academic
+    domain: medicine
+    note: "NIH/NLM-curated biomedical literature"
+
+  - url: "https://www.nature.com/"
+    name: "Nature"
+    tier: academic
+    domain: science
+    note: "Nature journal index"
+
+  # ---------------------------------------------------------------
+  # Tech journalism — community (well-credited reporting)
+  # ---------------------------------------------------------------
+  - url: "https://arstechnica.com/"
+    name: "Ars Technica"
+    tier: community
+    domain: tech_news
+    note: "Tech journalism with deep technical bench"
+
+  - url: "https://spectrum.ieee.org/"
+    name: "IEEE Spectrum"
+    tier: community
+    domain: tech_news
+    note: "IEEE-published tech journalism"
+
+  # ---------------------------------------------------------------
+  # Wikipedia — DEFER tier per operator policy
+  # ---------------------------------------------------------------
+  - url: "https://en.wikipedia.org/wiki/"
+    name: "Wikipedia"
+    tier: defer
+    domain: general
+    note: |
+      Crowdsourced encyclopedia. Useful starting point for orientation,
+      but DO NOT treat citations as authoritative without verifying
+      against a primary or academic source. Many editors, low barrier
+      to revert wars + subtle bias. Kept available; consulted only
+      after higher-tier sources have been exhausted.
+
+
+# =============================================================================
+# Tier ordering — web_fetch consults sources in this order. Lower-tier
+# sources are only consulted when higher-tier sources returned nothing
+# usable (or when the operator explicitly requests broader search).
+# =============================================================================
+tier_order:
+  - primary
+  - academic
+  - reference
+  - community
+  - defer
+
+
+# =============================================================================
+# Per-domain default tier ceiling — when a query is routed to a domain,
+# this is the lowest tier consulted by default. Override at call time.
+# =============================================================================
+domain_defaults:
+  ai_research:    academic     # primary + academic
+  python:         primary      # docs.python.org only
+  web:            primary      # MDN only
+  rust:           primary
+  go:             primary
+  typescript:     primary
+  nodejs:         primary
+  coding:         community    # cast wider for general coding queries
+  ml_frameworks:  primary
+  devops:         primary
+  philosophy:     reference
+  mathematics:    reference
+  medicine:       academic
+  science:        academic
+  tech_news:      community
+  general:        reference    # Britannica before Wikipedia

@@ -1,0 +1,140 @@
+{
+  "schema_version": "omega.projection_manifest.v1",
+  "generation_id": "18a7048a27c2372d49ae7835e5422c7778c549db87785a081db47d107f399262",
+  "generation_dir": "gen-18a7048a27c2372d49ae7835e5422c7778c549db87785a081db47d107f399262",
+  "lineage_seq": 4,
+  "parent_generation_id": "0b1e3a8e9b389563b5642fd2b264948b180745a34a6399ff324039981ca02998",
+  "snapshot_closure": "proved",
+  "page0_capacity_by_lobe": {
+    "0": 21824,
+    "1": 21824,
+    "10": 21824,
+    "11": 21824,
+    "2": 21824,
+    "3": 21824,
+    "4": 21824,
+    "5": 21824,
+    "6": 21824,
+    "7": 21824,
+    "8": 21824,
+    "9": 21824
+  },
+  "page0_used_by_lobe": {
+    "0": 93,
+    "1": 0,
+    "10": 0,
+    "11": 0,
+    "2": 0,
+    "3": 0,
+    "4": 21,
+    "5": 225,
+    "6": 11,
+    "7": 0,
+    "8": 0,
+    "9": 44
+  },
+  "page0_utilization_by_lobe": {
+    "0": 0.004261363636363636,
+    "1": 0.0,
+    "10": 0.0,
+    "11": 0.0,
+    "2": 0.0,
+    "3": 0.0,
+    "4": 0.0009622434017595308,
+    "5": 0.01030975073313783,
+    "6": 0.0005040322580645161,
+    "7": 0.0,
+    "8": 0.0,
+    "9": 0.0020161290322580645
+  },
+  "page0_overflow_attempts": 0,
+  "unscorable_coordinate_count": 0,
+  "source_input_origins": {
+    "canonical_corpus": "legacy:memory",
+    "coordinate_registry": "authority:d09eefa6f5cf8f0e5895683b9c29fbf000972b49a1a6e1c3bf95530eeb39165c",
+    "source_ledger": "legacy:memory/source_ledger"
+  },
+  "sequenced_consumed": 0,
+  "unsequenced_consumed": 0,
+  "unsequenced_posture": "covered_by_full_rebuild",
+  "pending_delta_count": 0,
+  "oldest_pending_commit_seq": null,
+  "oldest_pending_queued_at": "",
+  "builder": "cut13",
+  "reason": "deepsleep",
+  "published_at": "2026-09-29T20:05:53.859317+00:00",
+  "dir_sync": "windows_flushfilebuffers",
+  "backend_at_publish": "not_recorded",
+  "content": {
+    "schema_version": "omega.projection_generation.v1",
+    "canonical_corpus_hash": "d1fbbfd39c52bc63bfae913c872eb46427f5573221518933dad6ddec081a6ae0",
+    "canonical_files": 55,
+    "coord_index_sha256": "7e31855da85bbdbb0e10202e622b11ef20de7bb911bcc87bfcf320a52678897b",
+    "registry_sha256": "4e69f340afaf2eabaa8b7624b8dfb8d4725aebd218d2f9bfee4f4d1acbc76a93",
+    "graph_sqlite_sha256": "3a8d1ffd855870002dfaa40499e5bd23b132a3c53b0bee5b581981cb0c1173d1",
+    "graph_snapshot_sha256": "d20beb16fdb72313852346f0a532e81cf43c1cdfa028e2734150ca8b7cea92c7",
+    "graph_snapshot_hash": "94512f13892b67c2c118b5b6a4bc1a56e0434a3aba583fa952fbca1532aa185c",
+    "compiler_version": "omega.memory_compiler.v7",
+    "dme_schema_version": "omega.dme_sram.v7",
+    "sram_sha256": "c5730e9693d0aa6ad321bc2c13d7ab13a8dcf2743c453fe6fe5a942cf0814078",
+    "sram_meta_sha256": "def2b8bd46e5ea840cab03160d537f818018b557a0342088ce40b85ed18c8fcf",
+    "sram_index_sha256": "49d6db090724a2c8b43d6e3bfbd6565d503a2804cc09b675cd6f066d6722c96d",
+    "dme_manifest_sha256": "1983f8479c2a6d73ebcb9a74093012564345ba0cd0eefd579421606db7da7dc8",
+    "planes": [
+      {
+        "plane_id": "hop_plane_strong",
+        "path": "planes/hop_plane_strong.bin",
+        "sha256": "0e18af5613a7147f4dbd72a61b05f4e9125a25b7e4ebfd686c878e1bb455ba07",
+        "rows": 49,
+        "width_bits": 262144,
+        "scorer": "hop",
+        "geometry": {
+          "kind": "hop",
+          "edge_class": "strong"
+        }
+      },
+      {
+        "plane_id": "hop_plane_weak",
+        "path": "planes/hop_plane_weak.bin",
+        "sha256": "a1e67af49176c1a67176fb85c66c23368525e2295a8156aa04c6a5918975f2f8",
+        "rows": 49,
+        "width_bits": 262144,
+        "scorer": "hop",
+        "geometry": {
+          "kind": "hop",
+          "edge_class": "weak"
+        }
+      }
+    ],
+    "source_inputs": [
+      {
+        "kind": "canonical_corpus",
+        "sha256": "d1fbbfd39c52bc63bfae913c872eb46427f5573221518933dad6ddec081a6ae0",
+        "schema_version": "omega.canonical_corpus.v1"
+      },
+      {
+        "kind": "source_ledger",
+        "sha256": "2785645443db04fc54e02ab1d2acecc2e09cb6a7a4814d9eeb6f0a47a3fa4efc",
+        "schema_version": "omega.source_ledger.v1"
+      }
+    ],
+    "components": {
+      "semantic_retina": {
+        "codes_sha256": "70281e887ecefee292c282f283bfebcb550434050b706a42e429d058e88d8328",
+        "contract_sha256": "a3bffe7020dbb2aa1b60fa9ce2ce9042fd319effc2c81e0de0f739a1021437a8",
+        "index_sha256": "ff4dc2b1994e630ae77fda837f9015f3e589f820a88e40d07ee459a69a7f815c",
+        "records": 49,
+        "schema": "organ.retina.v1",
+        "status": "built"
+      }
+    },
+    "association_generation": "dda8056db52c331ee05afbb5dba831726f405434807aac3f61bcb03a5d341481",
+    "semantic_representation": "unfrozen"
+  },
+  "coverage_clock": {
+    "clock_epoch_id": "7139ac9381e63502cb94350035e8bd72",
+    "commit_seq": 3
+  },
+  "canonical_watermark_commit_seq": 3,
+  "latest_canonical_commit_seq_at_capture": 3
+}

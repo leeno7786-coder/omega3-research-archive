@@ -1,0 +1,51 @@
+{
+  "mcpServers": {
+    "omega3/serena": {
+      "type": "stdio",
+      "command": "serena",
+      "args": [
+        "start-mcp-server",
+        "--project-from-cwd",
+        "--enable-web-dashboard",
+        "false",
+        "--open-web-dashboard",
+        "false",
+        "--log-level",
+        "ERROR"
+      ],
+      "cwd": "F:\\Omega3.0"
+    },
+    "omega3/filesystem": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "F:\\Omega3.0"
+      ],
+      "cwd": "F:\\Omega3.0"
+    },
+    "omega3/git": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": [
+        "--from",
+        "mcp-server-git",
+        "mcp-server-git",
+        "--repository",
+        "F:\\Omega3.0"
+      ],
+      "cwd": "F:\\Omega3.0"
+    },
+    "omega3/code-graph": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@sdsrs/code-graph",
+        "serve"
+      ],
+      "cwd": "F:\\Omega3.0"
+    }
+  }
+}

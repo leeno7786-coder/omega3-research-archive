@@ -1,0 +1,54 @@
+# =============================================================================
+# Skill-mediated brain execution (USE_SKILL path)
+# =============================================================================
+#
+# Consumed by: core/skill_execution_config.py, global_loop/intent/run.py,
+# meta_loop/skill/run.py, runtime/user_execution_skills.py, auto_loop/skill/run.py
+# Policy: policy/skill_execution.policy.yaml
+# Schema: schema/skill_execution.schema.yaml
+#
+# Env overrides (deployment flip without code change):
+#   OMEGA_USE_SKILL_ROUTING       — 1/true/yes/on forces USE_SKILL routing ON
+#   OMEGA_TRUST_USER_SKILLS       — comma-separated trusted user skill names
+#   OMEGA_TRUST_ALL_USER_SKILLS   — 1/true/yes/on trusts all user skills
+#   OMEGA_OPERATOR_WORKSPACE      — jail root for write-capable skill dispatch
+#
+# =============================================================================
+
+skill_execution:
+  enabled: true
+
+  routing:
+    use_skill_default: true
+
+  bundled_skill_roots:
+    - skills
+
+  user_skill_roots:
+    - guardian/state/live-chat/skills
+
+  user_skills:
+    disabled_by_default: true
+    trust_all_default: false
+
+  selection:
+    scoring:
+      intent_match: 0.30
+      execution_kind_match: 0.20
+      target_domain_match: 0.15
+      tool_requirement_match: 0.15
+      safety_compatibility: 0.10
+      capability_strength: 0.10
+
+  guard:
+    fail_closed_on_missing_done: true
+    workspace_required_for_writes: true
+
+  executor:
+    # The chat brain owns planning, tool calls, and the final operator report.
+    # No second model or pressure lane is introduced for operator work.
+    transport: native_tool_calls
+    lane: chat
+    model_source: runtime.generate
+
+  global_forbidden_tools: []

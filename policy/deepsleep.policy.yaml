@@ -1,0 +1,56 @@
+# DeepSleep loop — operational policy (behavioral contract)
+# Code: deepsleep_loop/
+# Config: config/deepsleep.yaml
+
+version: 1
+
+mandatory_every_episode: true
+deterministic: true
+models: none
+
+role:
+  description: |
+    DeepSleep is the final loop: consolidates mastery, identity, semantic,
+    trajectory, failures, and open queries; builds journal + projection;
+    reseeds pressure contributors; closes the episode and resets pressure.
+  upstream: episode.omega
+  does_not_ignite: true
+  cognition_handoff:
+    module: cognition_chain._start_deepsleep
+    mandatory: true
+
+sequence:
+  - module: deepsleep_loop.intake.run
+    output: DeepSleepInput
+  - module: deepsleep_loop.mastery.run
+    law: application_credit
+  - module: deepsleep_loop.identity.run
+    law: identity_safety
+  - module: deepsleep_loop.semantic.run
+    input: mastery_records
+  - module: deepsleep_loop.trajectory.run
+  - module: deepsleep_loop.failure.run
+  - module: deepsleep_loop.query_lifecycle.run
+  - module: deepsleep_loop.consolidate.run
+    after: all_effect_phases
+  - module: deepsleep_loop.projection.run
+  - module: deepsleep_loop.reseed.run
+  - module: deepsleep_loop.closure.run
+    closes_episode: true
+    resets_pressure: true
+
+writes:
+  stores: config/deepsleep.yaml stores.*
+  outcome: DeepSleepOutcomePack
+  never_mutate_during_phases:
+    - episode.global_.intent_decision
+
+failure_mode:
+  fail_hard: true
+  retain_sram_for_retry: true
+
+alignment:
+  policy_loader: pressure_loop.policy.load_policy
+  schema: schema/deepsleep.schema.yaml
+  knowledge_artifacts: config/knowledge.yaml
+  integration_doc: docs/architecture/SLICE_6_BUILT_MAP.md

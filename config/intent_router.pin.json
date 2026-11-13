@@ -1,0 +1,61 @@
+{
+  "schema": 1,
+  "model": "answerdotai/ModernBERT-base",
+  "base_revision": "8949b909ec900327062f0ebf497f51aef5e6f0c8",
+  "run": "router-modernbert-base-20260914-204245",
+  "dataset_digest": "d74415b337984b4fef520afebc6342e9c4d5b7d3e78356972a2a1501e6c2072a",
+  "promoted_at": "2026-09-14T21:42:31-0500",
+  "files": {
+    "router.onnx": "eb1726d8c2d56f40675d6cc6d5e0616c41a7a927f538f1fc8f5610bd2c678341",
+    "router.json": "63e0c61dd330b9c05e3117732d007f85c746a2a9ce96d08a800c9cb4a02ff9d6",
+    "tokenizer.json": "218484396a9d08293b108b0e5ea31e0a1b7c801dcbed35a821deb392d2fe9bb4",
+    "tokenizer_config.json": "e7cb600a544347011cd31309043438c57b4fe30d53bbd18d1ad337a044a02bd3",
+    "special_tokens_map.json": "e386620cb5e9f6570fe98481fde86167b4236cdebdcc42308652574122561619"
+  },
+  "parity_max_abs_diff": {
+    "primary_logits": 2.7418136596679688e-05,
+    "intent_logits": 3.361701965332031e-05,
+    "certainty_logits": 2.8371810913085938e-05
+  },
+  "decision": {
+    "thresholds": {
+      "FREEFORM_CHAT": 0.5,
+      "CODING_AGENT": 0.875,
+      "BROWSER_AGENT": 0.86,
+      "DOCUMENT_CREATION": 0.73
+    },
+    "margin": 0.3,
+    "known_threshold": 0.95,
+    "validation_mean_cost": 0.12209,
+    "validation_objective_cost": 0.12209,
+    "validation_escalation_rate": 0.1793
+  },
+  "gate": {
+    "n": 498,
+    "mean_cost": 0.0743,
+    "escalation_rate": 0.1627,
+    "costly_misroutes": 4,
+    "confident_costly_misroutes": 2,
+    "misroutes_by_type": {
+      "AMBIGUOUS->FREEFORM_CHAT": 2,
+      "DOCUMENT_CREATION->FREEFORM_CHAT": 1,
+      "CODING_AGENT->FREEFORM_CHAT": 1
+    },
+    "route_recall": {
+      "FREEFORM_CHAT": 0.9535,
+      "CODING_AGENT": 0.9027,
+      "BROWSER_AGENT": 0.9694,
+      "DOCUMENT_CREATION": 0.9688
+    },
+    "known_argmax_accuracy": 0.9885,
+    "mixed_intent_exact_match": 0.7867
+  },
+  "promotion": {
+    "allowed_costly_misroutes": 4,
+    "forbid_agent_misroutes": true,
+    "max_confident_misroutes": 2,
+    "min_route_recall": {},
+    "note": "Safety baseline (operator 2026-09-14): 0 blind-gate coding/browser misroutes; the 4 allowed costly misroutes are cost-4 fallbacks to chat; coding recall 0.903 regressed from r4 0.947 via escalations; weight-1 decision rule kept, no threshold masking. Replace only with a run that has coding recall >= 0.947, zero coding/browser misroutes and no more than 2 confident costly misroutes."
+  },
+  "eval": null
+}

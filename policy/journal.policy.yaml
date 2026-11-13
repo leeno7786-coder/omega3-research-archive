@@ -1,0 +1,37 @@
+# Episode journal — operational policy (behavioral contract)
+# Code: pressure_loop/episode_journal.py, omega_loop/intake
+# Config: config/journal.yaml
+
+version: 1
+
+enabled: true
+deterministic: true
+models: none
+
+role:
+  description: |
+    Slice 5a rolling JSONL buffer of PriorEpisode records for Omega prior-window
+    reasoning. Append-on-close; read failure-soft.
+
+consumers:
+  - pressure_loop.episode_journal.archive_episode
+  - pressure_loop.episode_journal.journal_window
+  - omega_loop.intake
+
+config:
+  path_key: episode_journal.path
+  window_default_key: episode_journal.window_default
+
+writes:
+  append_only: true
+  record_type: PriorEpisode
+  never_persist:
+    - omega.reflection
+
+failure_mode:
+  read: failure_soft_returns_empty_list
+  write: fail_hard_on_archive
+
+alignment:
+  schema: schema/journal.schema.yaml
+  config_loader: pressure_loop.policy._load_journal_config_yaml

@@ -1,0 +1,14 @@
+# Omega sampling for the mandatory per-episode metacognition pass.
+# Structural behavior and action-specific contracts live in omega_loop/episode/.
+
+omega:
+  reason:
+    max_tokens: 2048
+    temperature: 0.8
+    top_p: 0.95
+    stop:
+      - "<end_of_turn>"
+      - "<|im_end|>"
+    timeout_s: 1200
+    chat_reflection_max_tokens: 512
+    chat_reflection_timeout_s: 30

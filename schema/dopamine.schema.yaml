@@ -1,0 +1,14 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "omega://schema/dopamine/v1"
+title: DopamineSignal
+
+definitions:
+  DopamineConfig:
+    type: object
+    required: [dopamine]
+    properties:
+      dopamine:
+        type: object
+        properties:
+          weights: { type: object }
+          baseline: { type: number }

@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Structural MCP tool catalog shape. Duplicate names and schema-digest equality are enforced by mcp_platform.package_contracts.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["catalog_version", "server_id", "server_version", "tools"],
+  "properties": {
+    "catalog_version": {"const": 1},
+    "server_id": {"type": "string", "minLength": 1},
+    "server_version": {"type": "string", "minLength": 1},
+    "tools": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["name", "title", "input_schema", "output_schema", "input_schema_sha256", "output_schema_sha256", "capability_tags", "provider_extension_tags", "risk_class", "effect", "requires_revision", "max_result_bytes", "allowed_mime_types"], "properties": {"name": {"type": "string", "minLength": 1}, "title": {"type": "string", "minLength": 1}, "input_schema": {"type": "object"}, "output_schema": {"type": "object"}, "input_schema_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}, "output_schema_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}, "capability_tags": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true}, "provider_extension_tags": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true}, "risk_class": {"enum": ["read_only", "additive_write", "mutating_write", "destructive", "send_publish", "cross_provider_transfer"]}, "effect": {"type": "string", "minLength": 1}, "requires_revision": {"type": "boolean"}, "max_result_bytes": {"type": "integer", "minimum": 1}, "allowed_mime_types": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true}}}}
+  }
+}

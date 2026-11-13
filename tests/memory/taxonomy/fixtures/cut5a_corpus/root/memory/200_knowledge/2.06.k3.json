@@ -1,0 +1,19 @@
+{
+  "coord": [
+    2,
+    6,
+    0
+  ],
+  "enrichment": {
+    "canonical": true,
+    "closed_at": "2026-06-29T10:02:00Z",
+    "contradiction_state": "2.06.k4"
+  },
+  "id": "2.06.k3",
+  "summary": "X holds.",
+  "tags": [
+    "claims"
+  ],
+  "title": "claim X is true",
+  "type": "concept"
+}

@@ -1,0 +1,98 @@
+# =============================================================================
+# Dopamine — Reward Prediction Error (RPE)
+# =============================================================================
+#
+# Biology:
+#   Dopamine in the VTA encodes prediction error — the difference between
+#   received outcome and expected outcome. Phasic spike when outcome exceeds
+#   prediction; phasic dip when outcome falls short. Tonic baseline modulates
+#   learning rate. (Schultz 1998; Gershman et al. 2025)
+#
+# In Omega:
+#   Dopamine fires per cycle, scoring the outcome relative to the system's
+#   recent expectation for that domain. First success on a new domain produces
+#   a strong positive RPE; repeated success on the same domain produces a
+#   smaller RPE (the system already expected it). Failure when success was
+#   expected produces strong negative RPE; failure when failure was expected
+#   produces weak negative RPE.
+#
+# What dopamine rewards (the outcome term):
+#   - Goal/task completion (cycle_kind == success)
+#   - Successful tool calls that produced usable output
+#   - Novel-looking inference content. Durable persistence feedback is
+#     handled later by Phase 4 and is not available inside this scorer.
+#
+# What dopamine punishes (negative outcome):
+#   - cycle_kind == inference_error / tool_error / meta_silence
+#   - Tools that returned errors or empty results
+#   - Cycles that produced no encodable content
+#
+# =============================================================================
+
+dopamine:
+  enabled: true
+
+  # Hard bounds for the final score (post-clamp).
+  # Range matches biology: phasic excursions can be negative (dip) or positive
+  # (spike), centered on a tonic baseline of 0.
+  limits:
+    min: -1.0
+    max:  1.0
+
+  # Bucket classification thresholds — used by Global to coarsen trends.
+  # Set narrower than the score limits because mid-range scores are common
+  # and bucketing them as "neutral" is informative.
+  thresholds:
+    positive:  0.20   # any clearly rewarding event
+    negative: -0.20   # any clearly punished event
+    # Anything between -0.20 and +0.20 is "neutral" (no strong RPE)
+
+  # Credit assignment back to memory (Phase 1: dopamine -> engram reinforce).
+  # On a clearly-rewarding cycle (dopamine >= thresholds.positive) every memory the
+  # recall surfaced has its write_strength nudged UP; on a clearly-punished cycle
+  # (dopamine <= thresholds.negative) it is nudged DOWN. The nudge is
+  #   delta = dopamine * recall_relevance * strength_delta_scale
+  # so a maximal RPE on a fully-relevant engram moves write_strength by the scale,
+  # and the memories that mattered most to the outcome move most. Below the
+  # thresholds the outcome was "predicted" and engrams are left untouched.
+  reinforce:
+    strength_delta_scale: 0.10
+
+  # Component contribution weights for the absolute outcome score.
+  # The RPE is then computed as (weighted_outcome - expectation).
+  weights:
+    task_success:    0.40   # cycle_kind == success with content produced
+    tool_success:    0.25   # tools called returned usable results
+    novelty:         0.20   # content was new / unexplored domain
+    error_penalty:   0.15   # negative weight applied when error_severity > 0
+
+  # Window for computing the per-domain expectation baseline.
+  # Biology: tonic dopamine integrates over seconds-to-minutes; for a system
+  # cycling every ~7min, a window of 20 cycles captures roughly the last 2.5
+  # hours of activity per domain (which is enough to form an expectation
+  # without overweighting ancient history).
+  expectation:
+    window_cycles:        20    # how many recent cycles to read per domain
+    min_samples_for_baseline: 3 # below this count, treat domain as "novel"
+    novel_domain_baseline: 0.0  # assumed expectation for unseen domains
+
+  # Tonic baseline drift — slow background that nudges expectation.
+  # Biology: tonic dopamine is the slowly-changing background level.
+  tonic:
+    decay_per_cycle: 0.02       # how fast the baseline returns to 0 if no new data
+
+  # Recording policy. Phase 3.5 gates telemetry/narrative; Phase 4
+  # honors write_to_memory when stamping dopamine into the cycle record.
+  recording:
+    write_to_memory:  true   # if false, omit dopamine block from lobe-9 cycle memory
+    emit_telemetry:   true
+    write_narrative:  true   # store the human-readable explanation
+
+  # Narrative tags — descriptive labels attached to records based on score
+  # and RPE direction. Helps downstream layers reason qualitatively.
+  narrative_tags:
+    strong_positive_rpe:  0.50   # "unexpected reward"
+    weak_positive_rpe:    0.10   # "mild positive surprise"
+    matched_expectation:  0.05   # within ±value of expectation = "predicted"
+    weak_negative_rpe:   -0.10   # "mild disappointment"
+    strong_negative_rpe: -0.50   # "unexpected failure"

@@ -1,0 +1,66 @@
+# =============================================================================
+# Meta B — reflection sequencer (AUTO outcome → MetaReflectionPack)
+# =============================================================================
+#
+# Consumed by: pressure_loop.policy (meta_b_* helpers)
+# Authority: meta_loop.consistency, disposition, reflect phase subpackages
+#
+# =============================================================================
+
+meta_b:
+  enabled: true
+  models: none
+
+  module: meta_loop.loop.run_meta_b
+  phases:
+    - consistency
+    - disposition
+    - reflect
+  episode_write:
+    slot: reflection
+    path: episode.meta.reflection
+  requires:
+    - episode.auto
+  handoff:
+    global_b: global_loop.loop.run_global_b
+
+  consistency:
+    pack_stable_fields:
+      - episode_id
+      - action
+      - tool
+      - execution_intent
+      - action_mismatch
+      - tool_mismatch
+
+  disposition:
+    dispositions:
+      - completed
+      - degraded
+      - failed
+      - skipped
+      - idle
+      - invalid
+    meta_statuses:
+      - success
+      - partial
+      - failed
+      - skipped
+      - idle
+      - invalid
+    cycle_kind_map:
+      success: [completed, success]
+      partial: [degraded, partial]
+      fail: [failed, failed]
+      failed: [failed, failed]
+      skipped: [skipped, skipped]
+      idle: [idle, idle]
+    critical_forces: [invalid, invalid]
+    unknown_cycle_kind: [invalid, invalid]
+
+  reflect:
+    trace_summary_fields:
+      - has_response_text
+      - has_tool_result
+      - has_image_artifact
+      - runtime_ms

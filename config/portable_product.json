@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "product_name": "Omega 3.0",
+  "tagline": "Sovereign Intelligence",
+  "description": "A local-first cognitive runtime with a shared cognition cycle, durable memory, and operator-controlled model seats.",
+  "hero_image": "config/portable_hero.png",
+  "publisher": "Omega",
+  "website": "https://www.omega2ai.com/",
+  "support_url": "https://www.omega2ai.com/",
+  "contacts": [
+    "noahlee@omega2ai.com",
+    "mitchellray@omega2ai.com"
+  ],
+  "privacy_policy": {
+    "url": "https://www.omega2ai.com/privacy",
+    "file": "config/portable_privacy.md",
+    "summary": "Omega keeps its runtime, memory, credentials, and local voice services on the product drive. Cloud model traffic is sent only to the provider you choose."
+  },
+  "intellectual_property": {
+    "patent_title": "Pressure-Driven Metacognitive Cognition System with Episode-Carrier Executive Cascade and Windowed Trajectory Setpoint Steering",
+    "patent_status": "Provisional patent application filed",
+    "application_number": "63/965,475",
+    "filed_date": "2026-01-22",
+    "reference": "config/portable_ip.md"
+  },
+  "help_guide": "config/portable_help.md"
+}

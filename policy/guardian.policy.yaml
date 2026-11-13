@@ -1,0 +1,29 @@
+# Guardian — operational policy (behavioral contract)
+# Code: guardian/decision.py, guardian/response_classes.py
+# Config: config/guardian_response_classes.yaml
+
+version: 1
+
+enabled: true
+
+role:
+  description: |
+    Identity charter + decision authority. Four states ALLOW/FLAG/QUARANTINE/REJECT.
+    Response classes bound voice_box postures.
+
+decision_states:
+  - ALLOW
+  - FLAG
+  - QUARANTINE
+  - REJECT
+
+response_classes:
+  config: config/guardian_response_classes.yaml
+  module: guardian.response_classes
+
+persistence:
+  shared_state: guardian/state_persistence.py
+  policy: policy/shared_state.policy.yaml
+
+alignment:
+  schema: schema/guardian.schema.yaml

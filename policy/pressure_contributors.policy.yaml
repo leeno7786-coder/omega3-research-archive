@@ -1,0 +1,34 @@
+# Pressure contributors — operational policy (governance registry contract)
+# Code: pressure_loop/pressure_field.py readers, pressure_loop/contributors.py
+# Config: config/pressure_contributors.yaml
+
+version: 1
+
+enabled: true
+deterministic: true
+models: none
+
+role:
+  description: |
+    Governance registry of the default pressure-field contributor set: reader
+    identities, provenance, and retired contributors. The registry documents
+    the field; readers own their module-level defaults.
+
+consumers:
+  - tests/config/test_retired_config_governance.py   # the retirement gate
+
+retirement:
+  rule: retired_contributors_must_not_be_reactivated
+  enforced_by: tests/config/test_retired_config_governance.py
+  reactivation: requires_operator_review
+
+change_control:
+  new_contributor: must declare source and reader in config
+  schema: schema/pressure_contributors.schema.yaml validates the registry shape
+
+failure_mode:
+  registry_load: n/a   # governance surface — consumed by tests, not the live loop
+
+alignment:
+  config: config/pressure_contributors.yaml
+  schema: schema/pressure_contributors.schema.yaml

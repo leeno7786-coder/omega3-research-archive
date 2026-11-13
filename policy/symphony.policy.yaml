@@ -1,0 +1,68 @@
+# Symphony product policy — pressure-first boot (symphony/v2-integration rebuild)
+# Numeric tunables also live in config/pressure.yaml (merged by pressure_loop.policy).
+
+conductor_mode: symphony
+
+canonical_movements:
+  - GLOBAL_A
+  - META_A
+  - AUTO
+  - META_B
+  - GLOBAL_B
+  - OMEGA
+  - DEEPSLEEP
+
+pressure:
+  conductor_wired: true
+  enabled: true
+  # Hybrid ignition (dominant-at-ceiling); see config/pressure.yaml for full block.
+  # 0.10 = the deepsleep mastery knowledge_increment, so autonomous learning
+  # drives (mastery_gap weight = target-knowledge) can ignite and continue to
+  # target without a dead band. Operator inputs ride ~1.0 and clear regardless.
+  # (7c mastery<->pressure, 2026-06-05). Authoritative value (overrides config/pressure.yaml).
+  open_threshold: 0.10
+  winner_margin: 0.05
+  tick_interval_seconds: 5
+  neuromod:
+    tonic_decay:
+      enabled: true
+      decay_rate: 0.4
+      baseline: 0.0
+
+global:
+  enabled: true
+  global_a:
+    phases: [ignition, intent]
+  global_b:
+    phases: [assemble, ground, summarize, followups, package]
+
+meta:
+  enabled: true
+  planning_only: true
+
+auto:
+  enabled: true
+
+meta_b:
+  enabled: true
+
+global_b:
+  enabled: true
+
+knowledge:
+  enabled: true
+
+omega:
+  enabled: true
+
+deepsleep:
+  enabled: true
+
+cognition:
+  topic_resolution:
+    critical_open_question:
+      persistence_threshold: 3
+      relevance_threshold: 0.6
+      blockage_threshold: 0.8
+      blockage_recency_decay: 0.85
+      blockage_recency_window: 20

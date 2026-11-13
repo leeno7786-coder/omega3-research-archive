@@ -1,0 +1,26 @@
+# Sensory — operational policy (behavioral contract)
+# Code: sensory/operator_presence.py
+
+version: 1
+
+enabled: true
+
+role:
+  description: |
+    Two-stage operator presence latch for HUD and audit. Recognition uses
+    runtime.face.anchor_store; presence is PRESENT|ABSENT|UNKNOWN. Does not
+    gate Symphony/pressure ignition.
+
+presence:
+  states: [PRESENT, ABSENT, UNKNOWN]
+  closed_world: enrolled_operator_only
+  degraded_contract: hold_last_state_no_decay
+  never_gates:
+    - pressure_ignition
+    - proactive_speech
+
+config_authority: config/sensory.yaml
+
+alignment:
+  schema: schema/sensory.schema.yaml
+  recognition_floor: 0.4

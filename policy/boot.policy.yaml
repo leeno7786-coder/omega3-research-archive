@@ -1,0 +1,38 @@
+# Boot lifecycle — operational policy (behavioral contract)
+# Code: core/boot_lifecycle.py, boot.py
+
+version: 1
+
+enabled: true
+
+role:
+  description: |
+    Ordered substrate boot and reverse teardown. Pressure loop is the product
+    clock; boot does not schedule legacy epoch loops.
+
+boot_order:
+  - boot_lock
+  - runtime_process
+  - substrate
+  - mcp_host
+  - cognition_runtime
+  - hud
+  - pressure_loop
+
+shutdown_order:
+  rule: exact_reverse_of_boot
+  persist_before_exit:
+    - reflection_window
+    - strength_index
+    - shared_state
+    - substrate_snapshot
+
+failure_mode:
+  teardown: idempotent
+  manifest_write: failure_soft
+  restore: failure_soft_with_cold_start
+
+alignment:
+  config: config/boot.yaml
+  schema: schema/boot.schema.yaml
+  shared_state_policy: policy/shared_state.policy.yaml

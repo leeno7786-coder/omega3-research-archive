@@ -1,0 +1,48 @@
+# Byte-exact fixtures. These trees are hashed by tests (cut5a_v6_baseline.json,
+# MANIFEST.json / canonical_files.sha256, the Program I seal), so Git must never
+# rewrite their line endings on checkout. Git for Windows ships core.autocrlf=true
+# at the system level, which otherwise smudges every text file to CRLF.
+benchmarks/memory_organ/**            -text
+tests/memory/taxonomy/fixtures/**     -text
+schema/mcp/extensions/io.modelcontextprotocol.tasks.schema.json -text
+tests/fixtures/provider_refresh_20260912/** -text
+
+# Signed marketplace bytes. Every one of these is verified byte-for-byte against
+# an Ed25519 signature (canonical_bytes, LF, no smudging), so a checkout that
+# rewrote a line ending would invalidate the catalog, the provenance record, the
+# OAuth profile catalog and all 21 package manifests at once. Nothing here has
+# broken yet only because these files were written in place and never
+# re-checked-out; a fresh clone on Windows is where it would have surfaced.
+plugin_platform/marketplace/**            -text
+plugin_platform/marketplace_provenance.json -text
+plugin_platform/oauth_profiles.json       -text
+
+# Work-order packet and its hash records. PACKAGE_MANIFEST.json declares a sha256 for
+# every packet file, and each WO-NN.json records one for every file that order wrote
+# (plus a source_manifest_sha256 over the mapped product files), so a checkout that
+# rewrote a line ending would invalidate the packet's own integrity check and every
+# recorded fingerprint at once — the same trap the marketplace bytes above document.
+docs/superpowers/plans/episode-continuity/**              -text
+docs/superpowers/reports/episode-continuity/**            -text
+docs/superpowers/evidence/2026-09-20-episode-continuity/** -text
+docs/superpowers/specs/2026-09-20-episode-continuity-v2.md -text
+
+# WO-02 contract fixtures and the signature lock. Generated with canonical bytes and
+# recorded by sha256 in WO-02.json, for the same reason as the stanzas above.
+tests/continuity/fixtures/contracts/**        -text
+schema/episode_continuity/**                  -text
+
+# Supplied independent-review test files. Their sha256 is recorded in the correction reports as
+# proof they were installed byte-identically, and they arrive LF, so core.autocrlf=true would
+# smudge them to CRLF on the next checkout and invalidate that evidence — the same trap the
+# stanzas above document.
+tests/continuity/test_wo02_review_regressions.py -text
+tests/continuity/test_wo03_review_regressions.py -text
+tests/continuity/test_wo03a_closure_regressions.py -text
+tests/continuity/test_wo04_review_regressions.py -text
+tests/continuity/test_wo04a_closure_regressions.py -text
+tests/continuity/test_wo04a_r2_identity_and_causes.py -text
+docs/superpowers/evidence/2026-09-21-early-v01/** -text
+
+# Reconciliation records contain SHA-256 hashes of these exact evidence bytes.
+docs/validation/skipped-tests-20260927/** -text

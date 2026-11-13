@@ -1,0 +1,48 @@
+# =============================================================================
+# Global loop — Global A sequencer (v2 live)
+# =============================================================================
+#
+# Global B tunables: config/global_b.yaml
+# Intent routing: config/global_intent.yaml (governed mirror; live code in global_loop/intent/run.py)
+#
+# Code anchors:
+#   - global_loop.loop.run_global_a / run_global_b
+#   - global_loop.{ignition,intent,assemble,ground,summarize,followups,package}.run
+#   - global_loop.intent.route.resolve_operator_route (the route phase; operator turns only)
+#
+# RETIRED (do not re-add): extract, goal, goal_state phases; episode.global_.action_goal slot;
+# duplicate global_b blocks in this file (use global_b.yaml).
+#
+# =============================================================================
+
+global:
+  enabled: true
+  models: none
+
+  global_a:
+    module: global_loop.loop.run_global_a
+    phases:
+      - ignition
+      - route
+      - intent
+    episode_write:
+      slot: intent_decision
+      path: episode.global_.intent_decision
+    ignition:
+      pass_through: true
+      required_fields:
+        - opened_by
+        - dominant_contributor
+      never_rebuild_ignition: true
+
+  intents:
+    authority: config/global_intent.yaml
+    note: |
+      Intent routing is live in global_loop/intent/run.py. config/global_intent.yaml
+      is the governed mirror — this block is NOT read at runtime. Edit global_intent.yaml.
+
+  intent_decision:
+    confidence_source: dominant_contributor.weight
+    confidence_fallback: aggregate_pressure
+    confidence_clamp: [0.0, 1.0]
+    reason_template: "opened_by={opened_by} aggregate={aggregate_pressure:.3f}"

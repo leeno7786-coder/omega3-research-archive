@@ -1,0 +1,14 @@
+# Strength index neuromod — operational policy
+# Code: memory/strength_index.py
+# Config: config/strength_index.yaml
+
+version: 1
+signal: strength_index
+biology: engram_robustness
+
+role:
+  description: Code-owned memory robustness snapshot with governed recency windows.
+
+alignment:
+  config: config/strength_index.yaml
+  schema: schema/strength_index.schema.yaml

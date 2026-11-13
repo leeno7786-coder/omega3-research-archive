@@ -1,0 +1,122 @@
+# JSON Schema (YAML) — Global A intent routing
+# Authority: global_loop/intent/run.py, config/global_intent.yaml
+
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "omega://schema/global_intent/v1"
+title: GlobalIntentRouting
+description: |
+  Global A intent routing. Operator chat turns with no explicit selection are routed
+  by the pinned intent router (escalating abstentions to Global A's reasoning model);
+  every other ignition maps deterministically from ignition.opened_by and explicit
+  ingress metadata to one of the allowed intents. Machine-minted execution pressure
+  defaults to USE_SKILL (kill-switch USE_TOOL via skill_execution config).
+
+definitions:
+  allowed_intent:
+    type: string
+    enum:
+      - RESPOND
+      - PROACTIVE_RESPONSE
+      - RESOLVE_QUERY
+      - ASK_OPERATOR
+      - LEARN
+      - USE_TOOL
+      - USE_SKILL
+      - PURSUE_OUTCOME
+      - PLUGIN_OPERATION
+      - IMAGE_CREATE
+      - DOCUMENT_CREATE
+      - IDLE
+
+  opened_by_key:
+    type: string
+    description: Canonical contributor type at ignition (pressure_loop)
+    enum:
+      - operator_query
+      - operator_response
+      - proactive_update
+      - outstanding_question
+      - learning_debt
+      - curiosity_gap
+      - epistemic_emptiness
+      - identity_gap
+      - trajectory_gap
+      - operator_command
+      - idle_probe_aggregate
+      - mastery_gap
+      - execution_gap
+      - application_gap
+      - execution_continuation
+      - operator_priority
+      - capability_gap
+      - repair_needed
+      - tool_failure
+      - verification_needed
+      - incomplete_task
+      - confidence_reinforcement
+      - requires_operator_input
+      - clarification_gap
+      - memory_gap
+      - sense_resolution
+      - memory_reconciliation
+      - self_wake
+
+  IntentRoutingConfig:
+    type: object
+    required: [global_intent]
+    properties:
+      global_intent:
+        type: object
+        required: [allowed, opened_by_map, fallback]
+        properties:
+          allowed:
+            type: array
+            items:
+              $ref: "#/definitions/allowed_intent"
+          opened_by_map:
+            type: object
+            additionalProperties:
+              $ref: "#/definitions/allowed_intent"
+          operator_command:
+            type: object
+            properties:
+              default_intent:
+                $ref: "#/definitions/allowed_intent"
+              explicit_learning_intent:
+                $ref: "#/definitions/allowed_intent"
+              explicit_memory_intent:
+                $ref: "#/definitions/allowed_intent"
+              signed_plugin_match:
+                $ref: "#/definitions/allowed_intent"
+              bounded_tools_owner:
+                type: string
+          operator_route:
+            type: object
+            required: [router, escalation_operation, routes]
+            properties:
+              router:
+                type: string
+              escalation_operation:
+                type: string
+              previous_action_ttl_seconds:
+                type: integer
+                minimum: 0
+              routes:
+                type: object
+                required: [FREEFORM_CHAT, CODING_AGENT, BROWSER_AGENT, DOCUMENT_CREATION]
+                additionalProperties:
+                  type: object
+                  required: [intent, lane]
+                  properties:
+                    intent:
+                      type: string
+                      enum: [RESPOND, BROWSE, DOCUMENT_CREATE]
+                    lane:
+                      type: string
+                      enum: [chat, agent, browser]
+              never_routed:
+                type: array
+                items:
+                  type: string
+          fallback:
+            $ref: "#/definitions/allowed_intent"

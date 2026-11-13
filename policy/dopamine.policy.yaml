@@ -1,0 +1,19 @@
+# Dopamine neuromod — operational policy
+# Code: autonomic/cognitive_churn.py, autonomic/symphony_neuromod.py
+# Config: config/dopamine.yaml
+
+version: 1
+signal: dopamine
+biology: reward_prediction_error
+
+role:
+  description: |
+    Phasic RPE from outcome versus expectation. The signal is consumed by the
+    neuromod context and bounded engram reinforcement paths.
+
+constraints:
+  no_direct_memory_write: true
+
+alignment:
+  config: config/dopamine.yaml
+  schema: schema/dopamine.schema.yaml

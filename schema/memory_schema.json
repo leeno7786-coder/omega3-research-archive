@@ -1,0 +1,122 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Memory Object",
+  "type": "object",
+  "required": ["id","coord","type","title","summary","provenance","flags","audit"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {"type":"string"},
+    "coord": {"type":"array","minItems":3,"maxItems":3,"items":[{"type":"integer"},{"type":"integer"},{"type":"integer"}]},
+    "type": {"type":"string"},
+    "title": {"type":"string"},
+    "summary": {"type":"string"},
+    "text": {"type":"string"},
+    "speech_act": {
+      "type":"string",
+      "enum":["question","statement","command","unknown"],
+      "description":"Deterministic form of the stored utterance at ingress; independent of memory topic/lobe routing."
+    },
+    "source": {"type":"string"},
+    "created": {"type":"string"},
+    "modified": {"type":"string"},
+    "links": {"type":"array"},
+    "tags": {"type":"array","items":{"type":"string"}},
+    "tool_spec": {"type":"object"},
+    "temporal_epoch_us": {"type":"integer","minimum":0,"description":"Ingest timestamp represented as Unix epoch microseconds for deterministic temporal fallback ranking."},
+    "temporal_hash": {"type":"string","pattern":"^[0-9a-f]{16}-[0-9a-f]{16}$","description":"Lexically sortable ingest-time key: epoch microseconds plus a stable memory-id digest."},
+    "trait": {"type":"object","description":"Structured identity preference promoted only after repeated independent evidence."},
+    "trait_observation": {"type":"object","description":"Unpromoted, retry-safe identity-pattern evidence. Never treated as a system preference."},
+    "workspace_source": {
+      "type":"object",
+      "required":[
+        "connection_id",
+        "capability",
+        "object_id",
+        "revision_id",
+        "content_digest",
+        "source_ledger_receipt",
+        "observed_at",
+        "availability_state"
+      ],
+      "additionalProperties": false,
+      "properties":{
+        "connection_id":{"type":"string","minLength":1},
+        "capability":{"type":"string","minLength":1},
+        "object_id":{"type":"string","minLength":1},
+        "revision_id":{"type":"string","minLength":1},
+        "content_digest":{"type":"string","pattern":"^[0-9a-f]{64}$"},
+        "source_ledger_receipt":{"type":"string","minLength":1},
+        "observed_at":{"type":"string","format":"date-time"},
+        "availability_state":{"type":"string","minLength":1}
+      },
+      "description":"Strict Workspace observation lineage. Facts derived from Workspace keep this source object through projection and recall."
+    },
+    "embeddings": {"type":"object"},
+    "score": {"type":"object"},
+    "provenance": {
+      "type":"object",
+      "required":["origin_id","origin_type","author","ingested_at","confidence"],
+      "properties":{
+        "origin_id":{"type":"string"},
+        "origin_type":{"type":"string"},
+        "author":{"type":"string"},
+        "ingested_at":{"type":"string","format":"date-time"},
+        "ingested_at_authority":{"type":"string","enum":["observed","provided","invalid_content_hash"]},
+        "confidence":{"type":"number","minimum":0,"maximum":1}
+      }
+    },
+    "flags": {
+      "type":"object",
+      "properties":{
+        "canonical":{"type":"boolean"},
+        "private":{"type":"boolean"},
+        "tool_registered":{"type":"boolean"}
+      }
+    },
+    "audit": {
+      "type":"array",
+      "items":{
+        "type":"object",
+        "required":["when","what","by"],
+        "properties":{
+          "when":{"type":"string","format":"date-time"},
+          "when_authority":{"type":"string","enum":["observed","provided","invalid_content_hash"]},
+          "what":{"type":"string"},
+          "by":{"type":"string"},
+          "notes":{"type":"string"}
+        }
+      }
+    },
+    "enrichment": {
+      "type":"object",
+      "description":"Decomposer-produced 5W1H entities and metadata for this memory."
+    },
+    "domain": {
+      "type":"string",
+      "description":"Knowledge domain (e.g. neuroscience, topology). Used for three-tier routing."
+    },
+    "subtopic": {
+      "type":"string",
+      "description":"Specific subtopic within the domain (e.g. Neuron, Homology)."
+    },
+    "write_strength": {
+      "type":"number",
+      "minimum":0,
+      "maximum":1,
+      "description":"FU-1 encoding strength = base(cycle_kind) × plasticity.strength (PlasticitySignal.strength is bounded [0,1]; base max 0.85). Distinct top-level field the deep-sleep readers (mastery_tracker / consolidation / pruning) key on, separate from provenance.confidence to avoid double-counting in the mastery formula. Absent on pre-FU-1 records; readers default to 0.5."
+    },
+    "supersedes": {
+      "type":["string","null"],
+      "description":"Revision chain (memory.supersedes): id of the prior memory this one supersedes. null/absent = not a revision. Schema made honest 2026-05-18 — the chain writer (supersedes.py) legitimately stamps this; with additionalProperties:false its absence here silently erased every revised memory from coord_index on reindex and rolled back re-encodes (audit F2/F3)."
+    },
+    "superseded_by": {
+      "type":["string","null"],
+      "description":"Revision chain back-edge: id of the memory that supersedes this one. null = current head of the chain."
+    },
+    "version": {
+      "type":"integer",
+      "minimum":1,
+      "description":"Revision chain version (1-based, monotonic). Absent on un-chained records."
+    }
+  }
+}

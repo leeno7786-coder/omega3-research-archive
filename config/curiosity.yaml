@@ -1,0 +1,6 @@
+# Curiosity engine - live bounded store settings.
+# The store owns routing and status transitions; only the concurrency cap is
+# configurable here.
+
+limits:
+  max_parallel_curiosity_threads: 3

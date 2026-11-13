@@ -1,0 +1,45 @@
+# Skill-mediated native brain execution (operational policy)
+# Code: global_loop/intent/run.py, meta_loop/skill/run.py, auto_loop/skill/run.py
+# Config: config/skill_execution.yaml
+
+version: 1
+
+enabled: true
+
+role:
+  description: |
+    Agentic external work routes Global USE_SKILL -> Meta selected ExecutionSkill ->
+    Auto bounded brain dispatch -> native tools. Raw world-mutating tools are
+    INTERNAL to skills. The same runtime.generate model that speaks in chat is the
+    executor and is reachable ONLY from Auto after skill_execution_guard passes.
+
+doctrine:
+  global_may_emit: USE_SKILL
+  global_may_not: [select_skill, select_tool, call_executor, execute]
+  meta_may: [select_execution_skill, emit_skill_execution_pack]
+  meta_may_not: [execute, call_executor, write_executor_prompts]
+  auto_may: [load_skill_markdown, build_dispatch, invoke_brain_after_guard]
+  brain_may_not: [canonical_memory_write, new_top_level_goal, continuation_outside_dispatch]
+
+routing:
+  agentic_default_intent: USE_SKILL
+  kill_switch_intent: USE_TOOL
+  legacy_apply_canonicalizes_to: USE_SKILL
+
+user_skills:
+  disabled_by_default: true
+  require_schema_validation: true
+  require_explicit_trust: true
+  self_modification_denied_by_default: true
+
+guard:
+  authority: auto_loop.execute.skill_execution_guards
+  self_mod_denylist: auto_loop.execute.self_mod_denylist
+  routing_policy: schema.routing_policy
+
+alignment:
+  config_ref: config/skill_execution.yaml
+  schema: schema/skill_execution.schema.yaml
+  bridge_map: docs/architecture/PHASE_6_SKILL_EXECUTION_BRIDGE_MAP.md
+  audit: docs/architecture/PHASE_6_SKILL_EXECUTION_AUDIT.md
+  user_contract: docs/architecture/USER_EXECUTION_SKILLS_CONTRACT.md

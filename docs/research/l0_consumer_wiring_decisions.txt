@@ -1,0 +1,262 @@
+Final Decisions
+1. L0 Consumer Wiring (Absolute Priority)
+Decision: memory.api first, no exceptions
+
+Everything downstream depends on write-time cognitive encoding.
+
+Without this:
+
+contradiction detection is fake
+persistence scoring is fake
+self-vector drift is fake
+reflection becomes reconstruction instead of cognition
+curiosity becomes random exploration
+
+Rule:
+
+No consumer may operate on unembedded memory.
+
+Mandatory.
+
+Do this first.
+
+Not second.
+
+Not parallel.
+
+First.
+
+2. brain.retrieve / brain.verify Repoint
+Decision: immediate repoint to mxbai_relevance
+
+This should be hard cutover.
+
+Do not hybrid this.
+
+Old tiny cognitive path must die.
+
+Reason:
+
+Generative relevance scoring is weaker than deterministic relevance scoring.
+
+You already solved this.
+
+Do not regress.
+
+Rule:
+
+retrieval arbitration = reranker only
+
+Not model opinion.
+
+3. Omega Execution Lock + Output Validator
+Decision: mandatory, hard enforced
+
+This is one of the most important architectural protections.
+
+Without this, UI bleed corrupts executive cognition.
+
+Required:
+
+Orchestrator lock
+omega_active = true
+→ brain_loop paused
+→ UI enters waiting state
+→ no concurrent user inference
+Output validator
+
+Brain must reject:
+
+executive JSON
+self-modification directives
+governance outputs
+identity arbitration structures
+
+Omega must reject:
+
+casual conversational output
+user-facing prose
+open-ended dialogue
+
+This must be code enforcement.
+
+Not prompt enforcement.
+
+Absolute requirement.
+
+4. First-Contact Wiring
+Decision: mandatory during boot
+
+Not optional.
+
+System must know:
+
+Who am I?
+What state am I in?
+What is unresolved?
+What requires attention?
+
+before first user contact.
+
+Otherwise first interaction is stateless pretending.
+
+That breaks identity continuity.
+
+Boot must hydrate self-state first.
+
+Always.
+
+5. Cycle Initiation Cadence
+Decision: hybrid trigger system
+
+Never pure timer.
+
+Never pure event.
+
+Use both.
+
+Base sweep
+
+Light autonomous sweep every:
+
+90–180 seconds
+
+depending on system pressure.
+
+Immediate triggers
+
+Fire instantly on:
+
+contradiction spike
+Guardian intervention
+persistence threshold crossing
+failed repeated tool action
+unresolved tension escalation
+high-value curiosity event
+self-vector drift threshold
+
+This creates biological pressure-driven cognition.
+
+Far stronger.
+
+6. Intra-Layer Failure Handling
+Decision: cascade-skip, not hard-abort
+
+This is critical.
+
+Cognition must leave an audit trail even when failing.
+
+Correct pattern:
+
+{
+  "layer": "reflection",
+  "did_work": false,
+  "failure_reason": "no valid contradiction candidates",
+  "confidence": 0.0
+}
+
+Then downstream layers see:
+
+“upstream failed”
+
+and reason accordingly.
+
+Hard abort only for:
+
+Guardian failure
+memory.api failure
+corruption detection
+verification failure
+substrate integrity failure
+
+Truth failures abort.
+
+Cognition failures propagate.
+
+This is the right doctrine.
+
+7. Approval Queue Durability Audit
+Decision: must survive kill -9
+
+No debate.
+
+If operator approval disappears on crash,
+Guardian is fake.
+
+Approval queue must be:
+
+durable
+journaled
+replayable
+recoverable on boot
+
+I would treat failure here as production blocker.
+
+Not optional.
+
+Audit immediately.
+
+8. Legacy brain/phases/* Sweep
+Decision: aggressive retirement
+
+Dead cognition is dangerous cognition.
+
+Legacy code creates:
+
+conflicting authority paths
+silent bypasses
+policy violations
+debugging nightmares
+
+Rule:
+
+One authority path only.
+
+If old code bypasses new doctrine:
+
+kill it.
+
+No nostalgia architecture.
+
+My strongest warning
+
+The most dangerous thing now is:
+
+accidental parallel authority
+
+Old path + new path both alive.
+
+That destroys determinism.
+
+There must be:
+
+one path for truth
+one path for cognition
+one path for authority
+
+Anything else becomes corruption.
+
+Production Order
+
+This is the order I would force:
+
+1. memory.api L0 wiring
+2. omega execution lock
+3. approval queue durability
+4. retrieve/verify repoint
+5. first-contact boot hydration
+6. cycle cadence system
+7. intra-layer failure propagation
+8. legacy path purge
+
+That order protects architecture first.
+
+Not convenience first.
+
+That matters.
+
+You’re very close now.
+
+This is the stage where most systems either become real—
+
+or quietly become prompt wrappers pretending to be minds.

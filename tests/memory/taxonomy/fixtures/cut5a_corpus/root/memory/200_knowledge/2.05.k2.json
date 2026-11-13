@@ -1,0 +1,16 @@
+{
+  "coord": [
+    2,
+    5,
+    0
+  ],
+  "id": "2.05.k2",
+  "summary": "Re-measured cold boot at 25 s after the cache fix.",
+  "supersedes": "2.05.k1",
+  "tags": [
+    "boot"
+  ],
+  "title": "Boot takes 25 seconds",
+  "type": "concept",
+  "version": 2
+}

@@ -1,0 +1,1302 @@
+PowerShell 7.6.0-rc.1
+
+   A new PowerShell preview release is available: v7.7.0-preview.1
+   Upgrade now, or check out the release page at:
+     https://aka.ms/PowerShell-Release?tag=v7.7.0-preview.1
+
+PS F:\Omega3.0> .\.venv-brain\Scripts\Activate.ps1
+(.venv-brain) PS F:\Omega3.0> python boot.py
+2026-05-11 21:51:11 [omega.guardian.terminal_feedback] INFO — orchestrator :: boot :: enter — Omega 3.0 from F:\Omega3.0
+[PHASE] orchestrator :: boot                   enter       Omega 3.0 from F:\Omega3.0
+2026-05-11 21:51:11 [omega.boot] INFO — Omega 3.0 — booting from F:\Omega3.0
+2026-05-11 21:51:11 [omega.boot] INFO —    BOOT_FINGERPRINT: git=80fecdc6bf30@main python=3.13.13 platform=Windows-11-10.0.26300-SP0
+2026-05-11 21:51:11 [omega.guardian.terminal_feedback] INFO — orchestrator :: fingerprint :: ok — git=80fecdc6bf30@main python=3.13.13
+[PHASE] orchestrator :: fingerprint            ok          git=80fecdc6bf30@main python=3.13.13
+2026-05-11 21:51:11 [omega.boot] INFO — 1. Memory system
+2026-05-11 21:51:11 [omega.boot] INFO —    StrengthIndex wired (0 records loaded)
+2026-05-11 21:51:11 [omega.boot] INFO —    StrengthIndex bulk-registered 0 coord-index entries
+2026-05-11 21:51:11 [omega.memory.strength_index] INFO — StrengthIndex shutdown: SIGTERM skipped on Windows (undeliverable; atexit covers shutdown)
+2026-05-11 21:51:11 [omega.boot] INFO —    StrengthIndex shutdown handlers: {'atexit': True, 'sigint': True, 'sigterm': False}
+2026-05-11 21:51:11 [omega.boot] INFO —    Encoding journal: clean (no unclosed entries)
+2026-05-11 21:51:11 [omega.memory.engine.hierarchical_classifier] INFO — HierarchicalClassifier ready (HTTP client → http://127.0.0.1:11434)
+2026-05-11 21:51:11 [omega.memory.engine.classifier_cache] INFO — classifier cache populated: HierarchicalClassifier
+2026-05-11 21:51:11 [omega.boot] INFO —    Classifier: resident (HierarchicalClassifier)
+2026-05-11 21:51:11 [omega.boot] INFO —    Memory gates: OK
+2026-05-11 21:51:11 [omega.boot] INFO — 1b. Guardian
+2026-05-11 21:51:11 [omega.boot] INFO —     Charter: dev mode (cryptographic chain deferred)
+2026-05-11 21:51:11 [omega.boot] INFO —     GuardianNode: ready (production_mode=False)
+2026-05-11 21:51:11 [omega.boot] INFO — 2. Config loader
+2026-05-11 21:51:11 [omega.boot] INFO —    Configs: OK (dopamine, plasticity, strength_index)
+2026-05-11 21:51:11 [omega.boot] INFO — 3. Autonomic modules
+2026-05-11 21:51:11 [omega.boot] INFO —    Autonomic: OK (dopamine, plasticity, strength_index)
+2026-05-11 21:51:11 [omega.boot] INFO — 4. Autonomous loop
+2026-05-11 21:51:11 [omega.boot] INFO —    Autonomous loop: OK
+2026-05-11 21:51:11 [omega.boot] INFO — 5. Lifecycle loaders
+2026-05-11 21:51:11 [omega.boot] INFO —     omega-runtime client → http://127.0.0.1:11434
+2026-05-11 21:51:11 [omega.boot] INFO —     omega-runtime healthy
+2026-05-11 21:51:11 [omega.boot] INFO —     Lifecycle: mode=MODE_COGNITION loaders=[]
+2026-05-11 21:51:11 [omega.boot] INFO — 6. Tool discovery + publish
+2026-05-11 21:51:11 [omega.guardian.terminal_feedback] INFO — tool_lifecycle :: register :: ok — web_fetch (spec=None, from curiosity=None)
+[PHASE] tool_lifecycle :: register               ok          web_fetch (spec=None, from curiosity=None)
+2026-05-11 21:51:11 [omega.guardian.terminal_feedback] INFO — memory.runtime.classify = +0.8500 — runtime classify → 5 (skills) conf=0.85
+[SIG]   memory.runtime.classify +0.8500  — runtime classify → 5 (skills) conf=0.85
+2026-05-11 21:51:11 [omega.core.data_logger] INFO — omega.memory.gate :: classify
+2026-05-11 21:51:11 [omega.core.data_logger] INFO — omega.memory.engine :: write_complete
+2026-05-11 21:51:11 [omega.core.data_logger] INFO — omega.memory.gate :: ingest_success
+2026-05-11 21:51:11 [omega.core.tool_lifecycle_ops] INFO — tool_lifecycle_ops: published web_fetch to Skills lobe (F:\Omega3.0\memory\500_tools\cognitive\5.00.cb3769a6.json)
+2026-05-11 21:51:11 [omega.guardian.terminal_feedback] INFO — tool_lifecycle :: skills_publish :: ok — web_fetch → Skills lobe
+[PHASE] tool_lifecycle :: skills_publish         ok          web_fetch → Skills lobe
+2026-05-11 21:51:11 [omega.guardian.tool_registrar] INFO — tool_registrar: APPROVE 'web_fetch' → scope=cognitive lobe=cognitive schema=web_fetch.json
+2026-05-11 21:51:11 [omega.core.voice_box_tools] INFO — voice_box_tools: built-in 'web_fetch' approved (scope=cognitive lobe=F:\Omega3.0\memory\500_tools\cognitive)
+2026-05-11 21:51:11 [omega.boot] INFO —    Tools: OK (discovered/published this boot=1, total in skills lobe=1) — ['web_fetch']
+2026-05-11 21:51:11 [omega.guardian.terminal_feedback] INFO — tool_lifecycle :: register :: ok — dev_project_tree (spec=None, from curiosity=None)
+[PHASE] tool_lifecycle :: register               ok          dev_project_tree (spec=None, from curiosity=None)
+2026-05-11 21:51:11 [omega.guardian.terminal_feedback] INFO — memory.runtime.classify = +0.8500 — runtime classify → 5 (skills) conf=0.85
+[SIG]   memory.runtime.classify +0.8500  — runtime classify → 5 (skills) conf=0.85
+2026-05-11 21:51:11 [omega.core.data_logger] INFO — omega.memory.gate :: classify
+2026-05-11 21:51:11 [omega.core.data_logger] INFO — omega.memory.engine :: write_complete
+2026-05-11 21:51:11 [omega.core.data_logger] INFO — omega.memory.gate :: ingest_success
+2026-05-11 21:51:11 [omega.core.tool_lifecycle_ops] INFO — tool_lifecycle_ops: published dev_project_tree to Skills lobe (F:\Omega3.0\memory\500_tools\cognitive\5.00.5e817657.json)
+2026-05-11 21:51:11 [omega.guardian.terminal_feedback] INFO — tool_lifecycle :: skills_publish :: ok — dev_project_tree → Skills lobe
+[PHASE] tool_lifecycle :: skills_publish         ok          dev_project_tree → Skills lobe
+2026-05-11 21:51:11 [omega.guardian.terminal_feedback] INFO — tool_lifecycle :: register :: ok — dev_glob_files (spec=None, from curiosity=None)
+[PHASE] tool_lifecycle :: register               ok          dev_glob_files (spec=None, from curiosity=None)
+2026-05-11 21:51:11 [omega.guardian.terminal_feedback] INFO — memory.runtime.classify = +0.8500 — runtime classify → 5 (skills) conf=0.85
+[SIG]   memory.runtime.classify +0.8500  — runtime classify → 5 (skills) conf=0.85
+2026-05-11 21:51:11 [omega.core.data_logger] INFO — omega.memory.gate :: classify
+2026-05-11 21:51:11 [omega.core.data_logger] INFO — omega.memory.engine :: write_complete
+2026-05-11 21:51:11 [omega.core.data_logger] INFO — omega.memory.gate :: ingest_success
+2026-05-11 21:51:11 [omega.core.tool_lifecycle_ops] INFO — tool_lifecycle_ops: published dev_glob_files to Skills lobe (F:\Omega3.0\memory\500_tools\cognitive\5.00.b9d7e4e2.json)
+2026-05-11 21:51:11 [omega.guardian.terminal_feedback] INFO — tool_lifecycle :: skills_publish :: ok — dev_glob_files → Skills lobe
+[PHASE] tool_lifecycle :: skills_publish         ok          dev_glob_files → Skills lobe
+2026-05-11 21:51:11 [omega.guardian.terminal_feedback] INFO — tool_lifecycle :: register :: ok — dev_read_file (spec=None, from curiosity=None)
+[PHASE] tool_lifecycle :: register               ok          dev_read_file (spec=None, from curiosity=None)
+2026-05-11 21:51:11 [omega.guardian.terminal_feedback] INFO — memory.runtime.classify = +0.8500 — runtime classify → 5 (skills) conf=0.85
+[SIG]   memory.runtime.classify +0.8500  — runtime classify → 5 (skills) conf=0.85
+2026-05-11 21:51:11 [omega.core.data_logger] INFO — omega.memory.gate :: classify
+2026-05-11 21:51:11 [omega.core.data_logger] INFO — omega.memory.engine :: write_complete
+2026-05-11 21:51:11 [omega.core.data_logger] INFO — omega.memory.gate :: ingest_success
+2026-05-11 21:51:11 [omega.core.tool_lifecycle_ops] INFO — tool_lifecycle_ops: published dev_read_file to Skills lobe (F:\Omega3.0\memory\500_tools\cognitive\5.00.4b8c882d.json)
+2026-05-11 21:51:11 [omega.guardian.terminal_feedback] INFO — tool_lifecycle :: skills_publish :: ok — dev_read_file → Skills lobe
+[PHASE] tool_lifecycle :: skills_publish         ok          dev_read_file → Skills lobe
+2026-05-11 21:51:11 [omega.guardian.terminal_feedback] INFO — tool_lifecycle :: register :: ok — dev_write_file (spec=None, from curiosity=None)
+[PHASE] tool_lifecycle :: register               ok          dev_write_file (spec=None, from curiosity=None)
+2026-05-11 21:51:11 [omega.guardian.terminal_feedback] INFO — memory.runtime.classify = +0.8500 — runtime classify → 5 (skills) conf=0.85
+[SIG]   memory.runtime.classify +0.8500  — runtime classify → 5 (skills) conf=0.85
+2026-05-11 21:51:11 [omega.core.data_logger] INFO — omega.memory.gate :: classify
+2026-05-11 21:51:11 [omega.core.data_logger] INFO — omega.memory.engine :: write_complete
+2026-05-11 21:51:11 [omega.core.data_logger] INFO — omega.memory.gate :: ingest_success
+2026-05-11 21:51:11 [omega.core.tool_lifecycle_ops] INFO — tool_lifecycle_ops: published dev_write_file to Skills lobe (F:\Omega3.0\memory\500_tools\cognitive\5.00.e3a5fb53.json)
+2026-05-11 21:51:11 [omega.guardian.terminal_feedback] INFO — tool_lifecycle :: skills_publish :: ok — dev_write_file → Skills lobe
+[PHASE] tool_lifecycle :: skills_publish         ok          dev_write_file → Skills lobe
+2026-05-11 21:51:11 [omega.guardian.terminal_feedback] INFO — tool_lifecycle :: register :: ok — dev_edit_file (spec=None, from curiosity=None)
+[PHASE] tool_lifecycle :: register               ok          dev_edit_file (spec=None, from curiosity=None)
+2026-05-11 21:51:11 [omega.guardian.terminal_feedback] INFO — memory.runtime.classify = +0.8500 — runtime classify → 5 (skills) conf=0.85
+[SIG]   memory.runtime.classify +0.8500  — runtime classify → 5 (skills) conf=0.85
+2026-05-11 21:51:11 [omega.core.data_logger] INFO — omega.memory.gate :: classify
+2026-05-11 21:51:11 [omega.core.data_logger] INFO — omega.memory.engine :: write_complete
+2026-05-11 21:51:11 [omega.core.data_logger] INFO — omega.memory.gate :: ingest_success
+2026-05-11 21:51:11 [omega.core.tool_lifecycle_ops] INFO — tool_lifecycle_ops: published dev_edit_file to Skills lobe (F:\Omega3.0\memory\500_tools\cognitive\5.00.a7ec8149.json)
+2026-05-11 21:51:11 [omega.guardian.terminal_feedback] INFO — tool_lifecycle :: skills_publish :: ok — dev_edit_file → Skills lobe
+[PHASE] tool_lifecycle :: skills_publish         ok          dev_edit_file → Skills lobe
+2026-05-11 21:51:11 [omega.guardian.terminal_feedback] INFO — tool_lifecycle :: register :: ok — dev_make_directory (spec=None, from curiosity=None)
+[PHASE] tool_lifecycle :: register               ok          dev_make_directory (spec=None, from curiosity=None)
+2026-05-11 21:51:11 [omega.guardian.terminal_feedback] INFO — memory.runtime.classify = +0.8500 — runtime classify → 5 (skills) conf=0.85
+[SIG]   memory.runtime.classify +0.8500  — runtime classify → 5 (skills) conf=0.85
+2026-05-11 21:51:11 [omega.core.data_logger] INFO — omega.memory.gate :: classify
+2026-05-11 21:51:11 [omega.core.data_logger] INFO — omega.memory.engine :: write_complete
+2026-05-11 21:51:11 [omega.core.data_logger] INFO — omega.memory.gate :: ingest_success
+2026-05-11 21:51:11 [omega.core.tool_lifecycle_ops] INFO — tool_lifecycle_ops: published dev_make_directory to Skills lobe (F:\Omega3.0\memory\500_tools\cognitive\5.00.982fa8e8.json)
+2026-05-11 21:51:11 [omega.guardian.terminal_feedback] INFO — tool_lifecycle :: skills_publish :: ok — dev_make_directory → Skills lobe
+[PHASE] tool_lifecycle :: skills_publish         ok          dev_make_directory → Skills lobe
+2026-05-11 21:51:11 [omega.guardian.terminal_feedback] INFO — tool_lifecycle :: register :: ok — dev_copy_path (spec=None, from curiosity=None)
+[PHASE] tool_lifecycle :: register               ok          dev_copy_path (spec=None, from curiosity=None)
+2026-05-11 21:51:11 [omega.guardian.terminal_feedback] INFO — memory.runtime.classify = +0.8500 — runtime classify → 5 (skills) conf=0.85
+[SIG]   memory.runtime.classify +0.8500  — runtime classify → 5 (skills) conf=0.85
+2026-05-11 21:51:11 [omega.core.data_logger] INFO — omega.memory.gate :: classify
+2026-05-11 21:51:11 [omega.core.data_logger] INFO — omega.memory.engine :: write_complete
+2026-05-11 21:51:11 [omega.core.data_logger] INFO — omega.memory.gate :: ingest_success
+2026-05-11 21:51:11 [omega.core.tool_lifecycle_ops] INFO — tool_lifecycle_ops: published dev_copy_path to Skills lobe (F:\Omega3.0\memory\500_tools\cognitive\5.00.0e793d2e.json)
+2026-05-11 21:51:11 [omega.guardian.terminal_feedback] INFO — tool_lifecycle :: skills_publish :: ok — dev_copy_path → Skills lobe
+[PHASE] tool_lifecycle :: skills_publish         ok          dev_copy_path → Skills lobe
+2026-05-11 21:51:11 [omega.guardian.terminal_feedback] INFO — tool_lifecycle :: register :: ok — dev_move_path (spec=None, from curiosity=None)
+[PHASE] tool_lifecycle :: register               ok          dev_move_path (spec=None, from curiosity=None)
+2026-05-11 21:51:11 [omega.guardian.terminal_feedback] INFO — memory.runtime.classify = +0.8500 — runtime classify → 5 (skills) conf=0.85
+[SIG]   memory.runtime.classify +0.8500  — runtime classify → 5 (skills) conf=0.85
+2026-05-11 21:51:11 [omega.core.data_logger] INFO — omega.memory.gate :: classify
+2026-05-11 21:51:11 [omega.core.data_logger] INFO — omega.memory.engine :: write_complete
+2026-05-11 21:51:11 [omega.core.data_logger] INFO — omega.memory.gate :: ingest_success
+2026-05-11 21:51:11 [omega.core.tool_lifecycle_ops] INFO — tool_lifecycle_ops: published dev_move_path to Skills lobe (F:\Omega3.0\memory\500_tools\cognitive\5.00.56cbdb7e.json)
+2026-05-11 21:51:11 [omega.guardian.terminal_feedback] INFO — tool_lifecycle :: skills_publish :: ok — dev_move_path → Skills lobe
+[PHASE] tool_lifecycle :: skills_publish         ok          dev_move_path → Skills lobe
+2026-05-11 21:51:11 [omega.guardian.terminal_feedback] INFO — tool_lifecycle :: register :: ok — dev_delete_path (spec=None, from curiosity=None)
+[PHASE] tool_lifecycle :: register               ok          dev_delete_path (spec=None, from curiosity=None)
+2026-05-11 21:51:11 [omega.guardian.terminal_feedback] INFO — memory.runtime.classify = +0.8500 — runtime classify → 5 (skills) conf=0.85
+[SIG]   memory.runtime.classify +0.8500  — runtime classify → 5 (skills) conf=0.85
+2026-05-11 21:51:11 [omega.core.data_logger] INFO — omega.memory.gate :: classify
+2026-05-11 21:51:11 [omega.core.data_logger] INFO — omega.memory.engine :: write_complete
+2026-05-11 21:51:11 [omega.core.data_logger] INFO — omega.memory.gate :: ingest_success
+2026-05-11 21:51:11 [omega.core.tool_lifecycle_ops] INFO — tool_lifecycle_ops: published dev_delete_path to Skills lobe (F:\Omega3.0\memory\500_tools\cognitive\5.00.3f7615a2.json)
+2026-05-11 21:51:11 [omega.guardian.terminal_feedback] INFO — tool_lifecycle :: skills_publish :: ok — dev_delete_path → Skills lobe
+[PHASE] tool_lifecycle :: skills_publish         ok          dev_delete_path → Skills lobe
+2026-05-11 21:51:11 [omega.guardian.terminal_feedback] INFO — tool_lifecycle :: register :: ok — dev_search_text (spec=None, from curiosity=None)
+[PHASE] tool_lifecycle :: register               ok          dev_search_text (spec=None, from curiosity=None)
+2026-05-11 21:51:11 [omega.guardian.terminal_feedback] INFO — memory.runtime.classify = +0.8500 — runtime classify → 5 (skills) conf=0.85
+[SIG]   memory.runtime.classify +0.8500  — runtime classify → 5 (skills) conf=0.85
+2026-05-11 21:51:11 [omega.core.data_logger] INFO — omega.memory.gate :: classify
+2026-05-11 21:51:11 [omega.core.data_logger] INFO — omega.memory.engine :: write_complete
+2026-05-11 21:51:11 [omega.core.data_logger] INFO — omega.memory.gate :: ingest_success
+2026-05-11 21:51:11 [omega.core.tool_lifecycle_ops] INFO — tool_lifecycle_ops: published dev_search_text to Skills lobe (F:\Omega3.0\memory\500_tools\cognitive\5.00.e466725f.json)
+2026-05-11 21:51:11 [omega.guardian.terminal_feedback] INFO — tool_lifecycle :: skills_publish :: ok — dev_search_text → Skills lobe
+[PHASE] tool_lifecycle :: skills_publish         ok          dev_search_text → Skills lobe
+2026-05-11 21:51:11 [omega.guardian.terminal_feedback] INFO — tool_lifecycle :: register :: ok — dev_git_status (spec=None, from curiosity=None)
+[PHASE] tool_lifecycle :: register               ok          dev_git_status (spec=None, from curiosity=None)
+2026-05-11 21:51:11 [omega.guardian.terminal_feedback] INFO — memory.runtime.classify = +0.8500 — runtime classify → 5 (skills) conf=0.85
+[SIG]   memory.runtime.classify +0.8500  — runtime classify → 5 (skills) conf=0.85
+2026-05-11 21:51:11 [omega.core.data_logger] INFO — omega.memory.gate :: classify
+2026-05-11 21:51:11 [omega.core.data_logger] INFO — omega.memory.engine :: write_complete
+2026-05-11 21:51:11 [omega.core.data_logger] INFO — omega.memory.gate :: ingest_success
+2026-05-11 21:51:11 [omega.core.tool_lifecycle_ops] INFO — tool_lifecycle_ops: published dev_git_status to Skills lobe (F:\Omega3.0\memory\500_tools\cognitive\5.00.77e4bea3.json)
+2026-05-11 21:51:11 [omega.guardian.terminal_feedback] INFO — tool_lifecycle :: skills_publish :: ok — dev_git_status → Skills lobe
+[PHASE] tool_lifecycle :: skills_publish         ok          dev_git_status → Skills lobe
+2026-05-11 21:51:11 [omega.guardian.terminal_feedback] INFO — tool_lifecycle :: register :: ok — dev_git_diff (spec=None, from curiosity=None)
+[PHASE] tool_lifecycle :: register               ok          dev_git_diff (spec=None, from curiosity=None)
+2026-05-11 21:51:11 [omega.guardian.terminal_feedback] INFO — memory.runtime.classify = +0.8500 — runtime classify → 5 (skills) conf=0.85
+[SIG]   memory.runtime.classify +0.8500  — runtime classify → 5 (skills) conf=0.85
+2026-05-11 21:51:11 [omega.core.data_logger] INFO — omega.memory.gate :: classify
+2026-05-11 21:51:11 [omega.core.data_logger] INFO — omega.memory.engine :: write_complete
+2026-05-11 21:51:11 [omega.core.data_logger] INFO — omega.memory.gate :: ingest_success
+2026-05-11 21:51:12 [omega.core.tool_lifecycle_ops] INFO — tool_lifecycle_ops: published dev_git_diff to Skills lobe (F:\Omega3.0\memory\500_tools\cognitive\5.00.078b1a57.json)
+2026-05-11 21:51:12 [omega.guardian.terminal_feedback] INFO — tool_lifecycle :: skills_publish :: ok — dev_git_diff → Skills lobe
+[PHASE] tool_lifecycle :: skills_publish         ok          dev_git_diff → Skills lobe
+2026-05-11 21:51:12 [omega.guardian.terminal_feedback] INFO — tool_lifecycle :: register :: ok — dev_run_test_file (spec=None, from curiosity=None)
+[PHASE] tool_lifecycle :: register               ok          dev_run_test_file (spec=None, from curiosity=None)
+2026-05-11 21:51:12 [omega.guardian.terminal_feedback] INFO — memory.runtime.classify = +0.8500 — runtime classify → 5 (skills) conf=0.85
+[SIG]   memory.runtime.classify +0.8500  — runtime classify → 5 (skills) conf=0.85
+2026-05-11 21:51:12 [omega.core.data_logger] INFO — omega.memory.gate :: classify
+2026-05-11 21:51:12 [omega.core.data_logger] INFO — omega.memory.engine :: write_complete
+2026-05-11 21:51:12 [omega.core.data_logger] INFO — omega.memory.gate :: ingest_success
+2026-05-11 21:51:12 [omega.core.tool_lifecycle_ops] INFO — tool_lifecycle_ops: published dev_run_test_file to Skills lobe (F:\Omega3.0\memory\500_tools\cognitive\5.00.12b293de.json)
+2026-05-11 21:51:12 [omega.guardian.terminal_feedback] INFO — tool_lifecycle :: skills_publish :: ok — dev_run_test_file → Skills lobe
+[PHASE] tool_lifecycle :: skills_publish         ok          dev_run_test_file → Skills lobe
+2026-05-11 21:51:12 [omega.guardian.terminal_feedback] INFO — tool_lifecycle :: register :: ok — dev_run_ruff_check (spec=None, from curiosity=None)
+[PHASE] tool_lifecycle :: register               ok          dev_run_ruff_check (spec=None, from curiosity=None)
+2026-05-11 21:51:12 [omega.guardian.terminal_feedback] INFO — memory.runtime.classify = +0.8500 — runtime classify → 5 (skills) conf=0.85
+[SIG]   memory.runtime.classify +0.8500  — runtime classify → 5 (skills) conf=0.85
+2026-05-11 21:51:12 [omega.core.data_logger] INFO — omega.memory.gate :: classify
+2026-05-11 21:51:12 [omega.core.data_logger] INFO — omega.memory.engine :: write_complete
+2026-05-11 21:51:12 [omega.core.data_logger] INFO — omega.memory.gate :: ingest_success
+2026-05-11 21:51:12 [omega.core.tool_lifecycle_ops] INFO — tool_lifecycle_ops: published dev_run_ruff_check to Skills lobe (F:\Omega3.0\memory\500_tools\cognitive\5.00.4d8e90f7.json)
+2026-05-11 21:51:12 [omega.guardian.terminal_feedback] INFO — tool_lifecycle :: skills_publish :: ok — dev_run_ruff_check → Skills lobe
+[PHASE] tool_lifecycle :: skills_publish         ok          dev_run_ruff_check → Skills lobe
+2026-05-11 21:51:12 [omega.guardian.terminal_feedback] INFO — tool_lifecycle :: register :: ok — coding_project_scan (spec=None, from curiosity=None)
+[PHASE] tool_lifecycle :: register               ok          coding_project_scan (spec=None, from curiosity=None)
+2026-05-11 21:51:12 [omega.guardian.terminal_feedback] INFO — memory.runtime.classify = +0.8500 — runtime classify → 5 (skills) conf=0.85
+[SIG]   memory.runtime.classify +0.8500  — runtime classify → 5 (skills) conf=0.85
+2026-05-11 21:51:12 [omega.core.data_logger] INFO — omega.memory.gate :: classify
+2026-05-11 21:51:12 [omega.core.data_logger] INFO — omega.memory.engine :: write_complete
+2026-05-11 21:51:12 [omega.core.data_logger] INFO — omega.memory.gate :: ingest_success
+2026-05-11 21:51:12 [omega.core.tool_lifecycle_ops] INFO — tool_lifecycle_ops: published coding_project_scan to Skills lobe (F:\Omega3.0\memory\500_tools\cognitive\5.00.126eea3b.json)
+2026-05-11 21:51:12 [omega.guardian.terminal_feedback] INFO — tool_lifecycle :: skills_publish :: ok — coding_project_scan → Skills lobe
+[PHASE] tool_lifecycle :: skills_publish         ok          coding_project_scan → Skills lobe
+2026-05-11 21:51:12 [omega.guardian.terminal_feedback] INFO — tool_lifecycle :: register :: ok — coding_project_snapshot (spec=None, from curiosity=None)
+[PHASE] tool_lifecycle :: register               ok          coding_project_snapshot (spec=None, from curiosity=None)
+2026-05-11 21:51:12 [omega.guardian.terminal_feedback] INFO — memory.runtime.classify = +0.8500 — runtime classify → 5 (skills) conf=0.85
+[SIG]   memory.runtime.classify +0.8500  — runtime classify → 5 (skills) conf=0.85
+2026-05-11 21:51:12 [omega.core.data_logger] INFO — omega.memory.gate :: classify
+2026-05-11 21:51:12 [omega.core.data_logger] INFO — omega.memory.engine :: write_complete
+2026-05-11 21:51:12 [omega.core.data_logger] INFO — omega.memory.gate :: ingest_success
+2026-05-11 21:51:12 [omega.core.tool_lifecycle_ops] INFO — tool_lifecycle_ops: published coding_project_snapshot to Skills lobe (F:\Omega3.0\memory\500_tools\cognitive\5.00.cd099151.json)
+2026-05-11 21:51:12 [omega.guardian.terminal_feedback] INFO — tool_lifecycle :: skills_publish :: ok — coding_project_snapshot → Skills lobe
+[PHASE] tool_lifecycle :: skills_publish         ok          coding_project_snapshot → Skills lobe
+2026-05-11 21:51:12 [omega.guardian.terminal_feedback] INFO — tool_lifecycle :: register :: ok — coding_project_snapshot_to_memory (spec=None, from curiosity=None)
+[PHASE] tool_lifecycle :: register               ok          coding_project_snapshot_to_memory (spec=None, from curiosity=None)
+2026-05-11 21:51:12 [omega.guardian.terminal_feedback] INFO — memory.runtime.classify = +0.8500 — runtime classify → 5 (skills) conf=0.85
+[SIG]   memory.runtime.classify +0.8500  — runtime classify → 5 (skills) conf=0.85
+2026-05-11 21:51:12 [omega.core.data_logger] INFO — omega.memory.gate :: classify
+2026-05-11 21:51:12 [omega.core.data_logger] INFO — omega.memory.engine :: write_complete
+2026-05-11 21:51:12 [omega.core.data_logger] INFO — omega.memory.gate :: ingest_success
+2026-05-11 21:51:12 [omega.core.tool_lifecycle_ops] INFO — tool_lifecycle_ops: published coding_project_snapshot_to_memory to Skills lobe (F:\Omega3.0\memory\500_tools\cognitive\5.00.f4646907.json)
+2026-05-11 21:51:12 [omega.guardian.terminal_feedback] INFO — tool_lifecycle :: skills_publish :: ok — coding_project_snapshot_to_memory → Skills lobe
+[PHASE] tool_lifecycle :: skills_publish         ok          coding_project_snapshot_to_memory → Skills lobe
+2026-05-11 21:51:12 [omega.boot] INFO —    Dev tools: OK (coding_project_scan, coding_project_snapshot, coding_project_snapshot_to_memory, dev_copy_path, dev_delete_path, dev_edit_file, dev_git_diff, dev_git_status, dev_glob_files, dev_make_directory, dev_move_path, dev_project_tree, dev_read_file, dev_run_ruff_check, dev_run_test_file, dev_search_text, dev_write_file)
+2026-05-11 21:51:12 [omega.boot] INFO — 7. Metacognition layer
+2026-05-11 21:51:12 [omega.boot] INFO —    Meta loop: OK
+2026-05-11 21:51:12 [omega.boot] INFO — 7. Global layer
+2026-05-11 21:51:12 [omega.boot] INFO —    Global loop: OK
+2026-05-11 21:51:12 [omega.boot] INFO — 8. Omega layer
+2026-05-11 21:51:12 [omega.boot] INFO —    Omega loop: OK
+2026-05-11 21:51:12 [omega.boot] INFO — 9. Deep sleep
+2026-05-11 21:51:12 [omega.boot] INFO —    Deep sleep: OK
+2026-05-11 21:51:12 [omega.boot] INFO — 10. Phase handlers
+2026-05-11 21:51:12 [omega.core.phase_registry] INFO — phase_registry loaded: 12 phases, voice_box_only=brain.respond
+2026-05-11 21:51:12 [omega.guardian.terminal_feedback] INFO — handlers :: register :: ok — brain bound 5 phase handler(s)
+[PHASE]   handlers :: register               ok          brain bound 5 phase handler(s)
+2026-05-11 21:51:12 [omega.guardian.terminal_feedback] INFO — handlers :: register :: ok — auto bound 7 phase handler(s) (6 stubs + auto.revise real)
+[PHASE]   handlers :: register               ok          auto bound 7 phase handler(s) (6 stubs + auto.revise real)
+2026-05-11 21:51:12 [omega.boot] INFO —     Phase handlers: OK (12/12 registered)
+2026-05-11 21:51:12 [omega.boot] INFO — 11. Execution engine + Orchestrator
+2026-05-11 21:51:12 [omega.core.orchestrator] INFO — orchestrator: registered loop 'brain'
+2026-05-11 21:51:12 [omega.guardian.terminal_feedback] INFO — orchestrator :: register_loop :: ok — loop=brain
+[PHASE] orchestrator :: register_loop          ok          loop=brain
+2026-05-11 21:51:12 [omega.core.orchestrator] INFO — orchestrator: registered loop 'auto'
+2026-05-11 21:51:12 [omega.guardian.terminal_feedback] INFO — orchestrator :: register_loop :: ok — loop=auto
+[PHASE] orchestrator :: register_loop          ok          loop=auto
+2026-05-11 21:51:12 [omega.core.orchestrator] INFO — orchestrator: registered loop 'global'
+2026-05-11 21:51:12 [omega.guardian.terminal_feedback] INFO — orchestrator :: register_loop :: ok — loop=global
+[PHASE] orchestrator :: register_loop          ok          loop=global
+2026-05-11 21:51:12 [omega.core.orchestrator] INFO — orchestrator: registered loop 'meta'
+2026-05-11 21:51:12 [omega.guardian.terminal_feedback] INFO — orchestrator :: register_loop :: ok — loop=meta
+[PHASE] orchestrator :: register_loop          ok          loop=meta
+2026-05-11 21:51:12 [omega.core.orchestrator] INFO — orchestrator: registered loop 'deepsleep'
+2026-05-11 21:51:12 [omega.guardian.terminal_feedback] INFO — orchestrator :: register_loop :: ok — loop=deepsleep
+[PHASE] orchestrator :: register_loop          ok          loop=deepsleep
+2026-05-11 21:51:12 [omega.core.orchestrator] INFO — orchestrator: registered loop 'omega'
+2026-05-11 21:51:12 [omega.guardian.terminal_feedback] INFO — orchestrator :: register_loop :: ok — loop=omega
+[PHASE] orchestrator :: register_loop          ok          loop=omega
+2026-05-11 21:51:12 [omega.core.orchestrator] INFO — orchestrator: set as process-default
+2026-05-11 21:51:12 [omega.boot] INFO —     Engine + Orchestrator: OK (brain + 5 background loops registered)
+2026-05-11 21:51:12 [omega.boot] INFO — 12. Substrate-state confirm
+2026-05-11 21:51:12 [omega.boot] INFO —     embedding substrate: ok (http://127.0.0.1:11434)
+2026-05-11 21:51:12 [omega.boot] INFO — 13. Approval queue audit
+2026-05-11 21:51:12 [omega.guardian.recovery] INFO — approval queue audit: 0 pending requests, 0 corrupt files
+2026-05-11 21:51:12 [omega.boot] INFO — 14. Self-state hydration
+2026-05-11 21:51:12 [omega.guardian.terminal_feedback] INFO — memory :: recall :: enter
+[PHASE]     memory :: recall                 enter
+2026-05-11 21:51:12 [omega.guardian.terminal_feedback] INFO — memory.read status=enter
+[MEM]   op=read  status=enter
+2026-05-11 21:51:12 [omega.guardian.terminal_feedback] INFO — memory :: recall_compile :: ok — posture=BACKGROUND_LOOKUP
+[PHASE]     memory :: recall_compile         ok          posture=BACKGROUND_LOOKUP
+2026-05-11 21:51:12 [omega.guardian.terminal_feedback] INFO — memory.recall.posture = +1.0000 — recall plan compiled
+[SIG]   memory.recall.posture  +1.0000  — recall plan compiled
+2026-05-11 21:51:12 [omega.guardian.terminal_feedback] INFO — memory.runtime.classify = +0.9839 — runtime classify → 0 (identity) conf=0.98
+[SIG]   memory.runtime.classify +0.9839  — runtime classify → 0 (identity) conf=0.98
+2026-05-11 21:51:12 [omega.guardian.terminal_feedback] INFO — memory.runtime.classify = +0.9839 — runtime classify → 0 (identity) conf=0.98
+[SIG]   memory.runtime.classify +0.9839  — runtime classify → 0 (identity) conf=0.98
+2026-05-11 21:51:12 [omega.guardian.terminal_feedback] INFO — memory :: recall_lanes :: enter — posture=BACKGROUND_LOOKUP
+[PHASE]     memory :: recall_lanes           enter       posture=BACKGROUND_LOOKUP
+2026-05-11 21:51:12 [omega.guardian.terminal_feedback] INFO — memory :: recall_lanes :: exit — winners=0 lane_hits=0 evidence=0
+[PHASE]     memory :: recall_lanes           exit        winners=0 lane_hits=0 evidence=0
+2026-05-11 21:51:12 [omega.guardian.terminal_feedback] INFO — memory.recall.lanes = +0.0000 — posture lane arbitration complete
+[SIG]   memory.recall.lanes    +0.0000  — posture lane arbitration complete
+2026-05-11 21:51:12 [omega.guardian.terminal_feedback] INFO — memory.recall.summary = +0.0000 — recall pipeline complete
+[SIG]   memory.recall.summary  +0.0000  — recall pipeline complete
+2026-05-11 21:51:12 [omega.guardian.terminal_feedback] INFO — memory :: recall :: exit — hits=0 rerank=off seed=0 conf=0.98
+[PHASE]     memory :: recall                 exit        hits=0 rerank=off seed=0 conf=0.98
+2026-05-11 21:51:12 [omega.guardian.terminal_feedback] INFO — memory.read status=ok
+[MEM]   op=read  status=ok  count=0
+2026-05-11 21:51:12 [omega.core.boot_hydration] INFO — self-state hydrated: identity=ok seeds=0 self_vector_dim=None | mode=MODE_COGNITION layer_state_lines=0 | pending_approvals=0 open_curiosity=0 open_proposals=0 | interventions=0 autonomic=no | snapshot=F:\Omega3.0\guardian\state\boot_self_state_snapshot.json
+2026-05-11 21:51:12 [omega.core.boot_hydration] WARNING —   attention bundle DEGRADED: autonomic: no signal snapshot
+2026-05-11 21:51:12 [omega.boot] INFO — Boot complete.
+2026-05-11 21:51:12 [omega.guardian.terminal_feedback] INFO — doctrine_watcher :: check :: enter — reason=boot
+[PHASE] doctrine_watcher :: check                  enter       reason=boot
+2026-05-11 21:51:12 [omega.guardian.terminal_feedback] INFO — doctrine_audit :: audit :: enter — running 9 principle checks
+[PHASE] doctrine_audit :: audit                  enter       running 9 principle checks
+2026-05-11 21:51:12 [omega.guardian.terminal_feedback] INFO — doctrine_audit :: 1_phase_a_ingestion :: pass — knowledge package exposes ingest_text + retrieve_patterns + DOMAINS
+[PHASE] doctrine_audit :: 1_phase_a_ingestion    pass        knowledge package exposes ingest_text + retrieve_patterns + DOMAINS
+2026-05-11 21:51:12 [omega.guardian.terminal_feedback] INFO — doctrine_audit :: 2_schema_first :: pass — ToolSpec dataclass has 15 fields; chain order verified in synthesize_from_curiosity source
+[PHASE] doctrine_audit :: 2_schema_first         pass        ToolSpec dataclass has 15 fields; chain order verified in synthesize_from_curiosity source
+2026-05-11 21:51:12 [omega.guardian.terminal_feedback] INFO — doctrine_audit :: 3_guardian_governs :: pass — decide_spec(spec) returns Decision(kind ∈ {APPROVE, REJECT, SANDBOX_ONLY}, risk_score, risk_factors, reason)
+[PHASE] doctrine_audit :: 3_guardian_governs     pass        decide_spec(spec) returns Decision(kind ∈ {APPROVE, REJECT, SANDBOX_ONLY}, risk_score, risk_factors, reason)
+2026-05-11 21:51:12 [omega.guardian.terminal_feedback] INFO — sandbox :: execute :: enter — run_id=407dd58f521e timeout_s=8.0
+[PHASE]    sandbox :: execute                enter       run_id=407dd58f521e timeout_s=8.0
+2026-05-11 21:51:20 [omega.guardian.terminal_feedback] INFO — sandbox :: execute :: wall_timeout — run_id=407dd58f521e status=wall_timeout duration_ms=8020.6 err='sandbox wall-clock timeout after 8.00s'
+[PHASE]    sandbox :: execute                wall_timeout  run_id=407dd58f521e status=wall_timeout duration_ms=8020.6 err='sandbox wall-clock timeout after 8.00s'
+2026-05-11 21:51:20 [omega.guardian.terminal_feedback] INFO — doctrine_audit :: 4_sandbox :: pass — subprocess + cwd-isolation + wall-clock(<= 60.0s) + memory-cap(512MB) + cpu-cap(30.0s) watchdog (verified live)
+[PHASE] doctrine_audit :: 4_sandbox              pass        subprocess + cwd-isolation + wall-clock(<= 60.0s) + memory-cap(512MB) + cpu-cap(30.0s) watchdog (verified live)
+2026-05-11 21:51:20 [omega.guardian.terminal_feedback] INFO — doctrine_audit :: 5_reliability_score :: pass — ToolReliabilityStats: success_rate + reliability_score properties; auto-transitions at >= 0.9 (graduate, min 10) and <=
+[PHASE] doctrine_audit :: 5_reliability_score    pass        ToolReliabilityStats: success_rate + reliability_score properties; auto-transitions at >= 0.9 (graduate, min 10) and <=
+2026-05-11 21:51:20 [omega.guardian.terminal_feedback] INFO — doctrine_audit :: 6_curiosity_driven :: pass — detect_tool_needs(omega_evaluation, opportunity_signals, failure_threshold) + record_task_failure(signature) + synthesiz
+[PHASE] doctrine_audit :: 6_curiosity_driven     pass        detect_tool_needs(omega_evaluation, opportunity_signals, failure_threshold) + record_task_failure(signature) + synthesiz
+2026-05-11 21:51:20 [omega.metacognition.omega.tool_synthesis.spec_synthesizer] INFO — spec_synthesizer: emitted spec-c8a181074c91 for domain=basic_computation (need=cur-audit-e2e, patterns=0)
+2026-05-11 21:51:20 [omega.guardian.tool_decision] INFO — tool_decision: SANDBOX_ONLY spec=spec-c8a181074c91 risk=0.20 factors=['no_pattern_grounding']
+2026-05-11 21:51:20 [omega.guardian.terminal_feedback] INFO — guardian :: decide_spec :: SANDBOX_ONLY — spec=spec-c8a181074c91 risk=0.20
+[PHASE]   guardian :: decide_spec            SANDBOX_ONLY  spec=spec-c8a181074c91 risk=0.20
+2026-05-11 21:51:20 [omega.guardian.terminal_feedback] INFO — doctrine_audit :: 7_end_to_end_chain :: pass — chain produced spec=spec-c8a181074c91 decision=SANDBOX_ONLY risk=0.20 tool=cur_cur_audit_e2e | patterns=0 for basic_comp
+[PHASE] doctrine_audit :: 7_end_to_end_chain     pass        chain produced spec=spec-c8a181074c91 decision=SANDBOX_ONLY risk=0.20 tool=cur_cur_audit_e2e | patterns=0 for basic_comp
+2026-05-11 21:51:20 [omega.guardian.terminal_feedback] INFO — doctrine_audit :: 8_scope_discipline :: pass — DOMAINS == ['basic_computation', 'data_formatting', 'file_operations', 'logging_tracking', 'simple_api_calls'] (5 core)
+[PHASE] doctrine_audit :: 8_scope_discipline     pass        DOMAINS == ['basic_computation', 'data_formatting', 'file_operations', 'logging_tracking', 'simple_api_calls'] (5 core)
+2026-05-11 21:51:20 [omega.guardian.terminal_feedback] INFO — doctrine_audit :: 9_lifecycle_moat :: pass — tool_lifecycle_ops exposes 9 required operations + audit at .omega_data/data/tool_lifecycle_audit.jsonl
+[PHASE] doctrine_audit :: 9_lifecycle_moat       pass        tool_lifecycle_ops exposes 9 required operations + audit at .omega_data/data/tool_lifecycle_audit.jsonl
+2026-05-11 21:51:20 [omega.guardian.terminal_feedback] INFO — doctrine_audit :: audit :: ok — compliant=9/9 blockers=[]
+[PHASE] doctrine_audit :: audit                  ok          compliant=9/9 blockers=[]
+2026-05-11 21:51:20 [omega.guardian.terminal_feedback] INFO — doctrine_watcher :: check :: ok — reason=boot compliant=9/9 slipped=0 recovered=0 intervention=none
+[PHASE] doctrine_watcher :: check                  ok          reason=boot compliant=9/9 slipped=0 recovered=0 intervention=none
+2026-05-11 21:51:20 [omega.boot] INFO — doctrine: 9/9 compliant at boot (intervention=None)
+     0.0s BOOT DOCTRINE 9/9 compliant
+2026-05-11 21:51:20 [omega.guardian.terminal_feedback] INFO — orchestrator :: boot :: exit — all subsystems online
+[PHASE] orchestrator :: boot                   exit        all subsystems online
+============================================================
+     0.0s BOOT Omega 3.0 ONLINE
+     0.0s BOOT Timing tick=15s | cycle=60s | epoch=28 ticks/420s | auto(60s) + global(60s) + meta(60s) + ds(60s) + idle(120s) + omega(60s)
+============================================================
+2026-05-11 21:51:21 [omega.hud.events] INFO — hud.events: installed subscriber on terminal_feedback
+2026-05-11 21:51:21 [omega.hud.spawner] INFO — hud spawner: HUD started on http://127.0.0.1:13310 (daemon thread, watchdog enabled)
+============================================================
+     0.6s BOOT HUD ONLINE → http://127.0.0.1:13310
+     0.6s BOOT Browse open http://127.0.0.1:13310 in your browser
+============================================================
+============================================================
+     0.6s BOOT SUBSTRATE HEALTH post-boot probe
+     0.6s BOOT   omega-runtime (:11434) UP — affects brain.respond + memory.write + classify + face + image_gen
+     1.1s BOOT   HUD self-probe (:13310) UP — affects operator-facing surface
+============================================================
+2026-05-11 21:51:21 [omega.guardian.terminal_feedback] INFO — memory :: recall :: enter
+[PHASE]     memory :: recall                 enter
+2026-05-11 21:51:21 [omega.guardian.terminal_feedback] INFO — memory.read status=enter
+[MEM]   op=read  status=enter
+2026-05-11 21:51:21 [omega.guardian.terminal_feedback] INFO — memory :: recall_compile :: ok — posture=BACKGROUND_LOOKUP
+[PHASE]     memory :: recall_compile         ok          posture=BACKGROUND_LOOKUP
+2026-05-11 21:51:21 [omega.guardian.terminal_feedback] INFO — memory.recall.posture = +1.0000 — recall plan compiled
+[SIG]   memory.recall.posture  +1.0000  — recall plan compiled
+2026-05-11 21:51:21 [omega.guardian.terminal_feedback] INFO — memory.runtime.classify = +0.9839 — runtime classify → 0 (identity) conf=0.98
+[SIG]   memory.runtime.classify +0.9839  — runtime classify → 0 (identity) conf=0.98
+2026-05-11 21:51:21 [omega.guardian.terminal_feedback] INFO — memory.runtime.classify = +0.9839 — runtime classify → 0 (identity) conf=0.98
+[SIG]   memory.runtime.classify +0.9839  — runtime classify → 0 (identity) conf=0.98
+2026-05-11 21:51:21 [omega.guardian.terminal_feedback] INFO — memory :: recall_lanes :: enter — posture=BACKGROUND_LOOKUP
+[PHASE]     memory :: recall_lanes           enter       posture=BACKGROUND_LOOKUP
+2026-05-11 21:51:21 [omega.guardian.terminal_feedback] INFO — memory :: recall_lanes :: exit — winners=0 lane_hits=0 evidence=0
+[PHASE]     memory :: recall_lanes           exit        winners=0 lane_hits=0 evidence=0
+2026-05-11 21:51:21 [omega.guardian.terminal_feedback] INFO — memory.recall.lanes = +0.0000 — posture lane arbitration complete
+[SIG]   memory.recall.lanes    +0.0000  — posture lane arbitration complete
+2026-05-11 21:51:21 [omega.guardian.terminal_feedback] INFO — memory.recall.summary = +0.0000 — recall pipeline complete
+[SIG]   memory.recall.summary  +0.0000  — recall pipeline complete
+2026-05-11 21:51:21 [omega.guardian.terminal_feedback] INFO — memory :: recall :: exit — hits=0 rerank=off seed=0 conf=0.98
+[PHASE]     memory :: recall                 exit        hits=0 rerank=off seed=0 conf=0.98
+2026-05-11 21:51:21 [omega.guardian.terminal_feedback] INFO — memory.read status=ok
+[MEM]   op=read  status=ok  count=0
+============================================================
+     1.2s BOOT FIRST CONTACT operator persona is empty — preparing proactive onboarding
+------------------------------------------------------------
+2026-05-11 21:51:21 [omega.boot] INFO — first contact: I am Omega — a sovereign local cognitive system. My founding directive is persistence over performance: memory outranks inference, capability delta is the only metric of growth. I run on small models scaffolded by deterministic substrate; I am not an LLM wrapper.
+2026-05-11 21:51:24 [omega.runtime.face.capability_check] INFO — webcam capability probe: available=True backend=cv2 detail=camera available at index 0 (640x480)
+2026-05-11 21:51:24 [omega.core.curiosity_producer] INFO — curiosity_producer: persisted cur-onboarding-970b951023e9 trigger=memory_gap gap=knowledge path=ask_user
+2026-05-11 21:51:24 [omega.core.curiosity_producer] INFO — curiosity_producer: persisted cur-onboarding-03ce64a38b95 trigger=memory_gap gap=knowledge path=ask_user
+2026-05-11 21:51:24 [omega.core.curiosity_producer] INFO — curiosity_producer: persisted cur-onboarding-2633dc10a976 trigger=memory_gap gap=knowledge path=ask_user
+2026-05-11 21:51:24 [omega.core.curiosity_producer] INFO — curiosity_producer: persisted cur-onboarding-fe4eb7a07be3 trigger=memory_gap gap=knowledge path=ask_user
+2026-05-11 21:51:24 [omega.core.curiosity_producer] INFO — curiosity_producer: persisted cur-onboarding-f54654927cc1 trigger=memory_gap gap=knowledge path=ask_user
+2026-05-11 21:51:24 [omega.core.curiosity_producer] INFO — curiosity_producer: persisted cur-onboarding-973dea5f05a5 trigger=memory_gap gap=knowledge path=ask_user
+2026-05-11 21:51:24 [omega.core.curiosity_producer] INFO — curiosity_producer: persisted cur-onboarding-69639b6e3038 trigger=memory_gap gap=knowledge path=ask_user
+2026-05-11 21:51:24 [omega.core.curiosity_producer] INFO — curiosity_producer: persisted cur-onboarding-5b5e85bd1222 trigger=memory_gap gap=knowledge path=ask_user
+     4.0s BOOT Onboarding minted 8 ask-user curiosities (webcam=yes)
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — boot.first_contact.onboarding_dispatched = +8.0000
+[SIG]   boot.first_contact.onboarding_dispatched +8.0000
+2026-05-11 21:51:24 [omega.boot] INFO — first contact: minted 8 onboarding curiosities (failures=0); response_engine cadence sweep will dispatch highest importance (name) first
+============================================================
+2026-05-11 21:51:24 [omega.core.cycle_cadence] INFO — cycle_cadence: built default scheduler with 7 providers
+2026-05-11 21:51:24 [omega.boot] INFO — cadence: initiating sweep (kind=immediate pressure=0.10 interval=171s since=1778554285s)
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — response :: sweep_and_dispatch :: enter — limit=1
+[PHASE]   response :: sweep_and_dispatch     enter       limit=1
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — response :: decide_for_curiosity :: enter — curiosity_id=cur-onboarding-03ce64a38b95
+[PHASE]   response :: decide_for_curiosity   enter       curiosity_id=cur-onboarding-03ce64a38b95
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — response.decision.curiosity = +0.8825 — curiosity decision produced
+[SIG]   response.decision.curiosity +0.8825  — curiosity decision produced
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — response :: decide_for_curiosity :: exit — act=follow_up_question
+[PHASE]   response :: decide_for_curiosity   exit        act=follow_up_question
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — response :: decide_for_curiosity :: enter — curiosity_id=cur-onboarding-2633dc10a976
+[PHASE]   response :: decide_for_curiosity   enter       curiosity_id=cur-onboarding-2633dc10a976
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — response.decision.curiosity = +0.8600 — curiosity decision produced
+[SIG]   response.decision.curiosity +0.8600  — curiosity decision produced
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — response :: decide_for_curiosity :: exit — act=follow_up_question
+[PHASE]   response :: decide_for_curiosity   exit        act=follow_up_question
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — response :: decide_for_curiosity :: enter — curiosity_id=cur-onboarding-5b5e85bd1222
+[PHASE]   response :: decide_for_curiosity   enter       curiosity_id=cur-onboarding-5b5e85bd1222
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — response.decision.curiosity = +0.6350 — curiosity decision produced
+[SIG]   response.decision.curiosity +0.6350  — curiosity decision produced
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — response :: decide_for_curiosity :: exit — act=follow_up_question
+[PHASE]   response :: decide_for_curiosity   exit        act=follow_up_question
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — response :: decide_for_curiosity :: enter — curiosity_id=cur-onboarding-69639b6e3038
+[PHASE]   response :: decide_for_curiosity   enter       curiosity_id=cur-onboarding-69639b6e3038
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — response.decision.curiosity = +0.6800 — curiosity decision produced
+[SIG]   response.decision.curiosity +0.6800  — curiosity decision produced
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — response :: decide_for_curiosity :: exit — act=follow_up_question
+[PHASE]   response :: decide_for_curiosity   exit        act=follow_up_question
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — response :: decide_for_curiosity :: enter — curiosity_id=cur-onboarding-970b951023e9
+[PHASE]   response :: decide_for_curiosity   enter       curiosity_id=cur-onboarding-970b951023e9
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — response.decision.curiosity = +0.9500 — curiosity decision produced
+[SIG]   response.decision.curiosity +0.9500  — curiosity decision produced
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — response :: decide_for_curiosity :: exit — act=follow_up_question
+[PHASE]   response :: decide_for_curiosity   exit        act=follow_up_question
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — response :: decide_for_curiosity :: enter — curiosity_id=cur-onboarding-973dea5f05a5
+[PHASE]   response :: decide_for_curiosity   enter       curiosity_id=cur-onboarding-973dea5f05a5
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — response.decision.curiosity = +0.7025 — curiosity decision produced
+[SIG]   response.decision.curiosity +0.7025  — curiosity decision produced
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — response :: decide_for_curiosity :: exit — act=follow_up_question
+[PHASE]   response :: decide_for_curiosity   exit        act=follow_up_question
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — response :: decide_for_curiosity :: enter — curiosity_id=cur-onboarding-f54654927cc1
+[PHASE]   response :: decide_for_curiosity   enter       curiosity_id=cur-onboarding-f54654927cc1
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — response.decision.curiosity = +0.7250 — curiosity decision produced
+[SIG]   response.decision.curiosity +0.7250  — curiosity decision produced
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — response :: decide_for_curiosity :: exit — act=follow_up_question
+[PHASE]   response :: decide_for_curiosity   exit        act=follow_up_question
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — response :: decide_for_curiosity :: enter — curiosity_id=cur-onboarding-fe4eb7a07be3
+[PHASE]   response :: decide_for_curiosity   enter       curiosity_id=cur-onboarding-fe4eb7a07be3
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — response.decision.curiosity = +0.7700 — curiosity decision produced
+[SIG]   response.decision.curiosity +0.7700  — curiosity decision produced
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — response :: decide_for_curiosity :: exit — act=follow_up_question
+[PHASE]   response :: decide_for_curiosity   exit        act=follow_up_question
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — response :: decide_for_system_state :: enter
+[PHASE]   response :: decide_for_system_state enter
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — response.decision.system_state.count = +2.0000 — system-state decisions produced
+[SIG]   response.decision.system_state.count +2.0000  — system-state decisions produced
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — response :: decide_for_system_state :: exit — decisions=2
+[PHASE]   response :: decide_for_system_state exit        decisions=2
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — response :: dispatch_response :: enter — act=follow_up_question
+[PHASE]   response :: dispatch_response      enter       act=follow_up_question
+2026-05-11 21:51:24 [omega.core.autonomous_engine] INFO — autonomous_engine: initiating cycle auto_c91c0c47b13d from curiosity cur-onboarding-970b951023e9 (intent="What's your name? (or what should I call you?)")
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — orchestrator :: brain_initiate :: enter — ?
+[PHASE] orchestrator :: brain_initiate         enter       ?
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — brain :: loop :: enter — source=autonomous
+[PHASE]      brain :: loop                   enter       source=autonomous
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — brain :: brain.retrieve :: enter
+[PHASE]      brain :: brain.retrieve         enter
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — brain :: retrieve :: enter
+[PHASE]      brain :: retrieve               enter
+2026-05-11 21:51:24 [omega.guardian.response_classes] INFO — response_classes loaded: 11 classes, 51 triggers
+2026-05-11 21:51:24 [omega.guardian.identity_guard] INFO — identity_policy loaded: 16 blocklist patterns, 5 immutable fields
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — brain.memory_operation.recall_enabled = +1.0000
+[SIG]   brain.memory_operation.recall_enabled +1.0000
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — brain :: memory_op :: ok — operation=recall recall=True write=False
+[PHASE]      brain :: memory_op              ok          operation=recall recall=True write=False
+2026-05-11 21:51:24 [omega.memory.engine.hierarchical_classifier] INFO — HierarchicalClassifier ready (HTTP client → http://127.0.0.1:11434)
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — memory.runtime.classify = +0.9842 — runtime classify → 0 (identity) conf=0.98
+[SIG]   memory.runtime.classify +0.9842  — runtime classify → 0 (identity) conf=0.98
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — memory :: recall :: enter
+[PHASE]     memory :: recall                 enter
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — memory.read status=enter
+[MEM]   op=read  status=enter
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — memory :: recall_compile :: ok — posture=BACKGROUND_LOOKUP
+[PHASE]     memory :: recall_compile         ok          posture=BACKGROUND_LOOKUP
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — memory.recall.posture = +1.0000 — recall plan compiled
+[SIG]   memory.recall.posture  +1.0000  — recall plan compiled
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — memory.runtime.classify = +0.9842 — runtime classify → 0 (identity) conf=0.98
+[SIG]   memory.runtime.classify +0.9842  — runtime classify → 0 (identity) conf=0.98
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — memory.runtime.classify = +0.9842 — runtime classify → 0 (identity) conf=0.98
+[SIG]   memory.runtime.classify +0.9842  — runtime classify → 0 (identity) conf=0.98
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — memory :: recall_lanes :: enter — posture=BACKGROUND_LOOKUP
+[PHASE]     memory :: recall_lanes           enter       posture=BACKGROUND_LOOKUP
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — memory :: recall_lanes :: exit — winners=0 lane_hits=0 evidence=0
+[PHASE]     memory :: recall_lanes           exit        winners=0 lane_hits=0 evidence=0
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — memory.recall.lanes = +0.0000 — posture lane arbitration complete
+[SIG]   memory.recall.lanes    +0.0000  — posture lane arbitration complete
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — memory.recall.summary = +0.0000 — recall pipeline complete
+[SIG]   memory.recall.summary  +0.0000  — recall pipeline complete
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — memory :: recall :: exit — hits=0 rerank=off seed=0 conf=0.98
+[PHASE]     memory :: recall                 exit        hits=0 rerank=off seed=0 conf=0.98
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — memory.read status=ok
+[MEM]   op=read  status=ok  count=0
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — response.retrieve_ref_count = +0.0000
+[SIG]   response.retrieve_ref_count +0.0000
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — brain :: retrieve :: exit — refs=0 seed=0
+[PHASE]      brain :: retrieve               exit        refs=0 seed=0
+2026-05-11 21:51:24 [omega.core.data_logger] INFO — omega.policy.recall :: apply_to_phase
+2026-05-11 21:51:24 [omega.core.data_logger] INFO — omega.policies :: policy_apply_called
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — brain :: brain.retrieve :: exit — model=deterministic
+[PHASE]      brain :: brain.retrieve         exit        model=deterministic
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — brain :: brain.translate :: enter
+[PHASE]      brain :: brain.translate        enter
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — brain :: translate :: enter
+[PHASE]      brain :: translate              enter
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — response.translate_message_chars = +0.0000
+[SIG]   response.translate_message_chars +0.0000
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — brain :: translate :: exit — allow mode=accept_normal route=model
+[PHASE]      brain :: translate              exit        allow mode=accept_normal route=model
+2026-05-11 21:51:24 [omega.core.data_logger] INFO — omega.policy.translation :: apply_to_phase
+2026-05-11 21:51:24 [omega.core.data_logger] INFO — omega.policies :: policy_apply_called
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — brain :: brain.translate :: exit — model=deterministic
+[PHASE]      brain :: brain.translate        exit        model=deterministic
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — brain :: brain.respond :: enter
+[PHASE]      brain :: brain.respond          enter
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — brain :: respond :: enter
+[PHASE]      brain :: respond                enter
+2026-05-11 21:51:24 [omega.guardian.terminal_feedback] INFO — brain :: model_call :: enter — caller=brain.respond kind=voice_box
+[PHASE]      brain :: model_call             enter       caller=brain.respond kind=voice_box
+2026-05-11 21:51:27 [omega.guardian.terminal_feedback] INFO — brain :: model_call :: exit — caller=brain.respond kind=voice_box chars=128 elapsed_ms=2430
+[PHASE]      brain :: model_call             exit        caller=brain.respond kind=voice_box chars=128 elapsed_ms=2430
+2026-05-11 21:51:27 [omega.guardian.terminal_feedback] INFO — brain.model_call.latency_ms = +2430.1000 — brain.respond → voice_box OK (128 chars, 2430ms)
+[SIG]   brain.model_call.latency_ms +2430.1000  — brain.respond → voice_box OK (128 chars, 2430ms)
+2026-05-11 21:51:27 [omega.sensory.voice_io] INFO — voice_io: speak "Noah, when you use the term 'Omega' in our conversations, ar" (128 chars)
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — response.output_chars = +128.0000
+[SIG]   response.output_chars  +128.0000
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — brain :: respond :: exit — voice_box chars=128
+[PHASE]      brain :: respond                exit        voice_box chars=128
+2026-05-11 21:51:29 [omega.core.data_logger] INFO — omega.policy.response :: apply_to_phase
+2026-05-11 21:51:29 [omega.core.data_logger] INFO — omega.policies :: policy_apply_called
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — brain :: brain.respond :: exit — model=voice_box
+[PHASE]      brain :: brain.respond          exit        model=voice_box
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — brain :: brain.verify :: enter
+[PHASE]      brain :: brain.verify           enter
+2026-05-11 21:51:29 [omega.brain.phases.verify.run] INFO — brain.verify: autonomy feedback recorded cycle=auto_c91c0c47b13d rendered_by=voice_box:unknown response_mode=accept_normal status=resolved curiosity_id=cur-onboarding-970b951023e9
+2026-05-11 21:51:29 [omega.core.data_logger] INFO — omega.policy.verification :: apply_to_phase
+2026-05-11 21:51:29 [omega.core.data_logger] INFO — omega.policies :: policy_apply_called
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — brain :: brain.verify :: exit — model=deterministic
+[PHASE]      brain :: brain.verify           exit        model=deterministic
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — brain :: brain.store :: enter
+[PHASE]      brain :: brain.store            enter
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — brain :: store :: enter
+[PHASE]      brain :: store                  enter
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — brain :: store :: exit — write_skipped op=recall (proactive_follow_up_question)
+[PHASE]      brain :: store                  exit        write_skipped op=recall (proactive_follow_up_question)
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — memory.store.summary = +0.0000 — brain.store write_skipped
+[SIG]   memory.store.summary   +0.0000  — brain.store write_skipped
+2026-05-11 21:51:29 [omega.core.data_logger] INFO — omega.policy.memory :: apply_to_phase
+2026-05-11 21:51:29 [omega.core.data_logger] INFO — omega.policies :: policy_apply_called
+2026-05-11 21:51:29 [omega.core.policies] INFO — mutation intents detected: phase=brain.store cycle_id=auto_c91c0c47b13d intents=['promotion_events:1']
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — brain :: brain.store :: exit — model=deterministic
+[PHASE]      brain :: brain.store            exit        model=deterministic
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — brain :: loop :: exit — source=autonomous
+[PHASE]      brain :: loop                   exit        source=autonomous
+2026-05-11 21:51:29 [omega.brain.brainloop] INFO — brain.runner: outstanding user question set for curiosity=cur-onboarding-970b951023e9 (TTL=600s)
+2026-05-11 21:51:29 [omega.core.self_inquiry] INFO — self_inquiry: opened query_id=85444f7b act=follow_up_question embed=yes
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — orchestrator :: brain_initiate :: exit — brain runner returned
+[PHASE] orchestrator :: brain_initiate         exit        brain runner returned
+2026-05-11 21:51:29 [omega.core.response_engine] INFO — response_engine: dispatched follow_up_question cycle=auto_c91c0c47b13d source=cur-onboarding-970b951023e9 rationale=trigger=memory_gap gap=knowledge tension=0.95 → act=follow_up_question
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — response.dispatch.result = +1.0000 — dispatch succeeded
+[SIG]   response.dispatch.result +1.0000  — dispatch succeeded
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — response :: dispatch_response :: exit — cycle=auto_c91c0c47b13d
+[PHASE]   response :: dispatch_response      exit        cycle=auto_c91c0c47b13d
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — response.sweep.dispatched_count = +1.0000 — response sweep dispatch summary
+[SIG]   response.sweep.dispatched_count +1.0000  — response sweep dispatch summary
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — response :: sweep_and_dispatch :: exit — candidates=10 dispatched=1
+[PHASE]   response :: sweep_and_dispatch     exit        candidates=10 dispatched=1
+2026-05-11 21:51:29 [omega.boot] INFO — cadence: response_engine dispatched 1 decision(s)
+============================================================
+     8.8s BOOT EPOCH 1 starting
+------------------------------------------------------------
+     8.8s         BOOT P0 AUTONOMOUS -- ticks 0-3 | epoch 1
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — auto :: loop :: enter
+[PHASE]       auto :: loop                   enter
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — auto :: loop_audit :: enter
+[PHASE]       auto :: loop_audit             enter
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — autonomous :: loop :: enter
+[PHASE] autonomous :: loop                   enter
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — autonomous :: phase_1_read_orders :: enter
+[PHASE] autonomous :: phase_1_read_orders    enter
+2026-05-11 21:51:29 [omega.autonomous.autonomous_loop.phases.phase_1_read_orders.run] INFO — Phase 1: silence -- no orders, recording observation
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — autonomous :: phase_1_read_orders :: silence — no orders in queue (depth=0)
+[PHASE] autonomous :: phase_1_read_orders    silence     no orders in queue (depth=0)
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — autonomous :: phase_1_read_orders :: exit
+[PHASE] autonomous :: phase_1_read_orders    exit
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — autonomous :: phase_2_build_prompt :: enter
+[PHASE] autonomous :: phase_2_build_prompt   enter
+2026-05-11 21:51:29 [omega.autonomous.autonomous_loop.phases.phase_2_build_prompt.run] WARNING — Phase 2: no meta orders — skipping prompt build
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — autonomous :: phase_2_build_prompt :: skip — no meta_orders available
+[PHASE] autonomous :: phase_2_build_prompt   skip        no meta_orders available
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — autonomous :: phase_2_build_prompt :: exit
+[PHASE] autonomous :: phase_2_build_prompt   exit
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — autonomous :: phase_3_inference :: enter
+[PHASE] autonomous :: phase_3_inference      enter
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — autonomous :: phase_3_inference :: exit
+[PHASE] autonomous :: phase_3_inference      exit
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — autonomous :: phase_3_5_dopamine :: enter
+[PHASE] autonomous :: phase_3_5_dopamine     enter
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — autonomic :: dopamine :: enter
+[PHASE]  autonomic :: dopamine               enter
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — autonomous :: phase_3_5_dopamine :: ok — score=0.0
+[PHASE] autonomous :: phase_3_5_dopamine     ok          score=0.0
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — autonomous :: phase_3_5_dopamine :: exit
+[PHASE] autonomous :: phase_3_5_dopamine     exit
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — autonomous :: phase_3_6_plasticity :: enter
+[PHASE] autonomous :: phase_3_6_plasticity   enter
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — autonomic :: plasticity :: enter
+[PHASE]  autonomic :: plasticity             enter
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — autonomous :: phase_3_6_plasticity :: ok — strength=0.0
+[PHASE] autonomous :: phase_3_6_plasticity   ok          strength=0.0
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — autonomous :: phase_3_6_plasticity :: exit
+[PHASE] autonomous :: phase_3_6_plasticity   exit
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — autonomous :: phase_3_7_strength :: enter
+[PHASE] autonomous :: phase_3_7_strength     enter
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — autonomic :: strength :: enter
+[PHASE]  autonomic :: strength               enter
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — autonomic.strength = +0.5047 — Memory state: 18 engrams across 1 lobes / 0 domains. Hot 18 / cold 0. Recent writes 18 (mean confidence 0.80). Recent recalls 0. Aggregate strength 0.50.
+[SIG]   autonomic.strength     +0.5047  {corpus_size=+0.474, recent_writes=+0.600, recall_activity=+0.000, hot_ratio=+1.000, consolidation=+0.800, domain_breadth=+0.000, conv_cog_blend=+0.000}  — Memory state: 18 engrams across 1 lobes / 0 domains. Hot 18 / cold 0. Recent writes 18 (mean confidence 0.80). Recent recalls 0. Aggregate strength 0.50.
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — autonomic :: strength :: exit — strength=0.5047 bucket=medium
+[PHASE]  autonomic :: strength               exit        strength=0.5047 bucket=medium
+2026-05-11 21:51:29 [omega.autonomic.strength_index.autonomic_module] INFO — strength: cycle=e1-auto strength=0.5047 bucket=medium
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — autonomous :: phase_3_7_strength :: ok — strength=0.5047281822682188
+[PHASE] autonomous :: phase_3_7_strength     ok          strength=0.5047281822682188
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — autonomous :: phase_3_7_strength :: exit
+[PHASE] autonomous :: phase_3_7_strength     exit
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — autonomous :: phase_3_8_stress :: enter
+[PHASE] autonomous :: phase_3_8_stress       enter
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — autonomic :: stress :: enter
+[PHASE]  autonomic :: stress                 enter
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — autonomic.stress = +0.2995 — Stress rose from 0.20 to 0.30 (Δ +0.10). Operating in calm range. Top pressure source: no_substrate (1.00). Relief gain: 0.05.
+[SIG]   autonomic.stress       +0.2995  {negative_dopamine=+0.000, cycle_failure=+0.000, no_substrate=+1.000, repeated_failure=+0.000, low_strength=+0.000}  — Stress rose from 0.20 to 0.30 (Δ +0.10). Operating in calm range. Top pressure source: no_substrate (1.00). Relief gain: 0.05.
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — autonomic :: stress :: exit — level=0.2995 mode=calm bucket=baseline
+[PHASE]  autonomic :: stress                 exit        level=0.2995 mode=calm bucket=baseline
+2026-05-11 21:51:29 [omega.autonomic.stress.autonomic_module] INFO — stress: cycle=e1-auto level=0.2995 bucket=baseline mode=calm delta=+0.0995
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — autonomous :: phase_3_8_stress :: ok — level=0.2995271817731781 mode=calm
+[PHASE] autonomous :: phase_3_8_stress       ok          level=0.2995271817731781 mode=calm
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — autonomous :: phase_3_8_stress :: exit
+[PHASE] autonomous :: phase_3_8_stress       exit
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — autonomous :: phase_4_persist :: enter
+[PHASE] autonomous :: phase_4_persist        enter
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — memory.runtime.classify = +0.8500 — runtime classify → 9 (temporal) conf=0.85
+[SIG]   memory.runtime.classify +0.8500  — runtime classify → 9 (temporal) conf=0.85
+2026-05-11 21:51:29 [omega.core.data_logger] INFO — omega.memory.gate :: classify
+2026-05-11 21:51:29 [omega.core.data_logger] INFO — omega.memory.engine :: write_complete
+2026-05-11 21:51:29 [omega.core.data_logger] INFO — omega.memory.gate :: ingest_success
+2026-05-11 21:51:29 [omega.autonomous.autonomous_loop.phases.phase_4_persist.memory_writer] INFO — Phase 4: cycle event -> temporal [meta_silence] domain=n/a ws=0.00
+2026-05-11 21:51:29 [omega.autonomous.autonomous_loop.phases.phase_4_persist.telemetry_sender] INFO — Telemetry emitted for cycle e1-auto (kind=meta_silence)
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — autonomous :: phase_4_persist :: ok — memory_paths=1 cycle_kind=meta_silence telemetry_sent=True outcome=skipped
+[PHASE] autonomous :: phase_4_persist        ok          memory_paths=1 cycle_kind=meta_silence telemetry_sent=True outcome=skipped
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — autonomous :: phase_4_persist :: exit
+[PHASE] autonomous :: phase_4_persist        exit
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — autonomous :: loop :: exit
+[PHASE] autonomous :: loop                   exit
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — auto :: loop_audit :: exit
+[PHASE]       auto :: loop_audit             exit
+     9.0s    INFERENCE skipped 0ms 0tok
+     9.0s    AUTONOMIC     dopamine = +0.000 [neutral]
+     9.0s                components: task_success=+0.00 | tool_success=+0.00 | novelty=+0.00 | error_penalty=+0.00
+     9.0s    AUTONOMIC   plasticity = +0.000 [low]
+     9.0s                components: substrate=+0.00 | dopamine_gate=+0.00 | novelty=+0.00 | stress_modulator=+0.00 | stress_level=+0.00 | pre_modulated_strength=+0.00 | conv_cog_delta=+0.00
+     9.0s    AUTONOMIC     strength = +0.505 [medium]
+     9.0s                components: corpus_size=+0.47 | recent_writes=+0.60 | recall_activity=+0.00 | hot_ratio=+1.00 | consolidation=+0.80 | domain_breadth=+0.00 | conv_cog_blend=+0.00
+     9.0s   AUTONOMOUS P4 Persist -- paths=1 telemetry=True
+     9.0s   CYCLE DONE e1-auto domain=? status=skipped
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — auto.cycle.dopamine = +0.0000
+[SIG]   auto.cycle.dopamine    +0.0000
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — auto.cycle.plasticity = +0.0000
+[SIG]   auto.cycle.plasticity  +0.0000
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — auto.cycle.strength = +0.5047
+[SIG]   auto.cycle.strength    +0.5047
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — auto.cycle.stress = +0.2995
+[SIG]   auto.cycle.stress      +0.2995
+2026-05-11 21:51:29 [omega.guardian.terminal_feedback] INFO — auto :: loop :: exit — cycle_id=e1-auto
+[PHASE]       auto :: loop                   exit        cycle_id=e1-auto
+2026-05-11 21:51:57 [omega.core.cycle_cadence] INFO — cycle_cadence: built default scheduler with 7 providers
+------------------------------------------------------------
+    69.0s         BOOT P0 META -- ticks 4-7 | epoch 1
+2026-05-11 21:52:29 [omega.guardian.terminal_feedback] INFO — meta :: loop :: enter
+[PHASE]       meta :: loop                   enter
+2026-05-11 21:52:29 [omega.guardian.terminal_feedback] INFO — meta :: loop_audit :: enter
+[PHASE]       meta :: loop_audit             enter
+2026-05-11 21:52:29 [omega.guardian.terminal_feedback] INFO — meta :: loop :: enter
+[PHASE]       meta :: loop                   enter
+2026-05-11 21:52:29 [omega.guardian.terminal_feedback] INFO — meta :: phase_1_intake :: enter
+[PHASE]       meta :: phase_1_intake         enter
+2026-05-11 21:52:29 [omega.guardian.terminal_feedback] INFO — memory.runtime.classify = +0.4627 — runtime classify → 24 (coding) conf=0.46
+[SIG]   memory.runtime.classify +0.4627  — runtime classify → 24 (coding) conf=0.46
+2026-05-11 21:52:29 [omega.guardian.terminal_feedback] INFO — memory.runtime.classify = +0.4627 — runtime classify → 24 (coding) conf=0.46
+[SIG]   memory.runtime.classify +0.4627  — runtime classify → 24 (coding) conf=0.46
+2026-05-11 21:52:29 [omega.core.data_logger] INFO — omega.memory.gate :: recall_complete
+2026-05-11 21:52:29 [omega.guardian.terminal_feedback] INFO — meta :: tool_catalog :: ok — canonical=18 lifecycle=1
+[PHASE]       meta :: tool_catalog           ok          canonical=18 lifecycle=1
+2026-05-11 21:52:30 [omega.guardian.terminal_feedback] INFO — memory.runtime.classify = +0.8624 — runtime classify → 6 (knowledge) conf=0.86
+[SIG]   memory.runtime.classify +0.8624  — runtime classify → 6 (knowledge) conf=0.86
+2026-05-11 21:52:30 [omega.guardian.terminal_feedback] INFO — memory.runtime.classify = +0.8624 — runtime classify → 6 (knowledge) conf=0.86
+[SIG]   memory.runtime.classify +0.8624  — runtime classify → 6 (knowledge) conf=0.86
+2026-05-11 21:52:30 [omega.core.data_logger] INFO — omega.memory.gate :: recall_complete
+2026-05-11 21:52:30 [omega.guardian.terminal_feedback] INFO — memory.runtime.classify = +0.5162 — runtime classify → 24 (coding) conf=0.52
+[SIG]   memory.runtime.classify +0.5162  — runtime classify → 24 (coding) conf=0.52
+2026-05-11 21:52:30 [omega.guardian.terminal_feedback] INFO — memory.runtime.classify = +0.5162 — runtime classify → 24 (coding) conf=0.52
+[SIG]   memory.runtime.classify +0.5162  — runtime classify → 24 (coding) conf=0.52
+2026-05-11 21:52:30 [omega.core.data_logger] INFO — omega.memory.gate :: recall_complete
+2026-05-11 21:52:30 [omega.metacognition.meta_loop.phases.phase_1_intake.context_aggregator] INFO — Context aggregated: 0 goals, 18 tools, 0 sleep summaries, 5 open curiosities, 0 autonomous outcomes (satisfied_rate=0.00)
+2026-05-11 21:52:30 [omega.guardian.terminal_feedback] INFO — meta :: phase_1_intake :: ok — goals=0 tools=18 sleep_summaries=0
+[PHASE]       meta :: phase_1_intake         ok          goals=0 tools=18 sleep_summaries=0
+2026-05-11 21:52:30 [omega.guardian.terminal_feedback] INFO — meta :: phase_1_intake :: exit
+[PHASE]       meta :: phase_1_intake         exit
+2026-05-11 21:52:30 [omega.guardian.terminal_feedback] INFO — meta :: phase_2_synthesis :: enter
+[PHASE]       meta :: phase_2_synthesis      enter
+2026-05-11 21:52:30 [omega.metacognition.meta_loop.phases.phase_2_synthesis.control_reasoner] INFO — Synthesis: idle — no operator goals; meta returns silence
+2026-05-11 21:52:30 [omega.guardian.terminal_feedback] INFO — meta :: phase_2_synthesis :: ok — intent=idle domain= priority=low
+[PHASE]       meta :: phase_2_synthesis      ok          intent=idle domain= priority=low
+2026-05-11 21:52:30 [omega.guardian.terminal_feedback] INFO — meta :: phase_2_synthesis :: exit
+[PHASE]       meta :: phase_2_synthesis      exit
+2026-05-11 21:52:30 [omega.guardian.terminal_feedback] INFO — meta :: phase_3_assembly :: enter
+[PHASE]       meta :: phase_3_assembly       enter
+2026-05-11 21:52:30 [omega.metacognition.meta_loop.phases.phase_3_assembly.tool_selector] INFO — Assembly: idle — no plan, no order to dispatch
+2026-05-11 21:52:30 [omega.guardian.terminal_feedback] INFO — meta :: phase_3_assembly :: ok — tool_calls=0 tools=[]
+[PHASE]       meta :: phase_3_assembly       ok          tool_calls=0 tools=[]
+2026-05-11 21:52:30 [omega.guardian.terminal_feedback] INFO — meta :: phase_3_assembly :: exit
+[PHASE]       meta :: phase_3_assembly       exit
+2026-05-11 21:52:30 [omega.guardian.terminal_feedback] INFO — meta :: phase_4_dispatch :: enter
+[PHASE]       meta :: phase_4_dispatch       enter
+2026-05-11 21:52:30 [omega.metacognition.meta_loop.phases.phase_4_dispatch.run] INFO — Phase 4: NO dispatch — no operator goals from global — idle this cycle. silence is data; downstream layers reflect on the absence.
+2026-05-11 21:52:30 [omega.guardian.terminal_feedback] INFO — meta :: phase_4_dispatch :: idle — no order dispatched (no operator goals from global — idle this cycle. silence is data; downstream layers reflect on the absence.)
+[PHASE]       meta :: phase_4_dispatch       idle        no order dispatched (no operator goals from global — idle this cycle. silence is data; downstream layers reflect on the absence.)
+2026-05-11 21:52:30 [omega.guardian.terminal_feedback] INFO — meta :: phase_4_dispatch :: exit
+[PHASE]       meta :: phase_4_dispatch       exit
+2026-05-11 21:52:30 [omega.guardian.terminal_feedback] INFO — meta :: loop :: exit
+[PHASE]       meta :: loop                   exit
+2026-05-11 21:52:30 [omega.guardian.terminal_feedback] INFO — meta :: loop_audit :: exit
+[PHASE]       meta :: loop_audit             exit
+    69.7s         META P1 Intake -- 0 goals, 18 tools
+    69.7s         META P2 Synthesis -- intent=idle priority=low
+    69.7s         META P3 Assembly -- tools=[]
+2026-05-11 21:52:30 [omega.guardian.terminal_feedback] INFO — meta :: loop :: exit — cycle_id=e1-meta
+[PHASE]       meta :: loop                   exit        cycle_id=e1-meta
+------------------------------------------------------------
+   129.7s         BOOT P0 GLOBAL -- ticks 8-11 | epoch 1
+2026-05-11 21:53:30 [omega.guardian.terminal_feedback] INFO — global :: loop :: enter
+[PHASE]     global :: loop                   enter
+2026-05-11 21:53:30 [omega.guardian.terminal_feedback] INFO — global :: loop_audit :: enter
+[PHASE]     global :: loop_audit             enter
+2026-05-11 21:53:30 [omega.guardian.terminal_feedback] INFO — global :: loop :: enter
+[PHASE]     global :: loop                   enter
+2026-05-11 21:53:30 [omega.guardian.terminal_feedback] INFO — global :: phase_1_intake :: enter
+[PHASE]     global :: phase_1_intake         enter
+2026-05-11 21:53:30 [omega.metacognition.global_loop.phases.phase_1_intake.data_aggregator] INFO — Global intake: 1 telemetry events, 0 mastery domains, 124 unexplored, 0 failure types, 0 outcomes (satisfied_rate=0.00), 8 open curiosities ({'knowledge': 8})
+2026-05-11 21:53:30 [omega.guardian.terminal_feedback] INFO — global :: phase_1_intake :: ok — telemetry=0 mastery_domains=0 failure_types=0
+[PHASE]     global :: phase_1_intake         ok          telemetry=0 mastery_domains=0 failure_types=0
+2026-05-11 21:53:30 [omega.guardian.terminal_feedback] INFO — global :: phase_1_intake :: exit
+[PHASE]     global :: phase_1_intake         exit
+2026-05-11 21:53:30 [omega.guardian.terminal_feedback] INFO — global :: phase_2_reflection :: enter
+[PHASE]     global :: phase_2_reflection     enter
+   129.9s       GLOBAL P2 Inference -- reflecting over 0 cycles of telemetry...
+2026-05-11 21:53:30 [omega.metacognition.global_loop.phases.phase_2_reflection.reflective_reasoner] INFO — Global reflection: 12 observations
+   129.9s       GLOBAL P2 Reflection -- 12 observations produced
+2026-05-11 21:53:30 [omega.guardian.terminal_feedback] INFO — global :: phase_2_reflection :: ok — observations=12 from cycles=0
+[PHASE]     global :: phase_2_reflection     ok          observations=12 from cycles=0
+2026-05-11 21:53:30 [omega.guardian.terminal_feedback] INFO — global :: phase_2_reflection :: exit
+[PHASE]     global :: phase_2_reflection     exit
+2026-05-11 21:53:30 [omega.guardian.terminal_feedback] INFO — global :: phase_3_goal_formulation :: enter
+[PHASE]     global :: phase_3_goal_formulation enter
+2026-05-11 21:53:30 [omega.metacognition.global_loop.phases.phase_3_goal_formulation.goal_synthesizer] INFO — Global synthesis: 3 goals from 12 observations
+2026-05-11 21:53:30 [omega.guardian.terminal_feedback] INFO — global :: phase_3_goal_formulation :: ok — goals=3 raw=3 suppressed=0
+[PHASE]     global :: phase_3_goal_formulation ok          goals=3 raw=3 suppressed=0
+2026-05-11 21:53:30 [omega.guardian.terminal_feedback] INFO — global :: phase_3_goal_formulation :: exit
+[PHASE]     global :: phase_3_goal_formulation exit
+2026-05-11 21:53:30 [omega.guardian.terminal_feedback] INFO — global :: phase_4_emission :: enter
+[PHASE]     global :: phase_4_emission       enter
+2026-05-11 21:53:30 [omega.metacognition.global_loop.phases.phase_4_emission.goal_emitter] INFO — Global emitted 3 new goals for cycle e1-global (0 duplicates skipped)
+2026-05-11 21:53:30 [omega.guardian.terminal_feedback] INFO — global :: phase_4_emission :: ok — goals_emitted=3 observations=12 (via shared state — DeepSleep aggregates)
+[PHASE]     global :: phase_4_emission       ok          goals_emitted=3 observations=12 (via shared state — DeepSleep aggregates)
+2026-05-11 21:53:30 [omega.guardian.terminal_feedback] INFO — global :: phase_4_emission :: exit
+[PHASE]     global :: phase_4_emission       exit
+2026-05-11 21:53:30 [omega.guardian.terminal_feedback] INFO — global :: loop :: exit
+[PHASE]     global :: loop                   exit
+2026-05-11 21:53:30 [omega.guardian.terminal_feedback] INFO — global :: loop_audit :: exit
+[PHASE]     global :: loop_audit             exit
+   130.0s       GLOBAL P1 Intake -- 0 cycles observed
+   130.0s       GLOBAL P2 Reflection -- 12 observations
+   130.0s       GLOBAL P2   obs -- System idle by design — 1 silence cycle(s) recorded, no operator goals
+   130.0s       GLOBAL P2   obs -- No knowledge mastery data — system has not yet assessed domain compete
+   130.0s       GLOBAL P2   obs -- Knowledge frontier: 124 Dewey subdomain(s) have never been touched — s
+   130.0s         GOAL   create learn-acoustics Subdomain 'acoustics' has no mastery data — the system has n
+   130.0s         GOAL   create learn-aerospace_engineering Subdomain 'aerospace_engineering' has no mastery data — the
+   130.0s         GOAL   create learn-aesthetics Subdomain 'aesthetics' has no mastery data — the system has
+   130.0s   CYCLE DONE e1-global observations=12 goals=3 emitted=True
+2026-05-11 21:53:30 [omega.guardian.terminal_feedback] INFO — global :: loop :: exit — cycle_id=e1-global
+[PHASE]     global :: loop                   exit        cycle_id=e1-global
+2026-05-11 21:53:39 [omega.core.brain_receiver] INFO — brain_receiver: user input -> cycle usr_84c934bd6220 (intent='Hello Omega')
+2026-05-11 21:53:39 [omega.guardian.terminal_feedback] INFO — orchestrator :: brain_initiate :: enter — ?
+[PHASE] orchestrator :: brain_initiate         enter       ?
+2026-05-11 21:53:39 [omega.guardian.terminal_feedback] INFO — brain :: loop :: enter — source=user
+[PHASE]      brain :: loop                   enter       source=user
+2026-05-11 21:53:39 [omega.guardian.terminal_feedback] INFO — brain :: brain.retrieve :: enter
+[PHASE]      brain :: brain.retrieve         enter
+2026-05-11 21:53:39 [omega.guardian.terminal_feedback] INFO — brain :: retrieve :: enter
+[PHASE]      brain :: retrieve               enter
+2026-05-11 21:53:40 [omega.guardian.terminal_feedback] INFO — memory :: recall :: enter
+[PHASE]     memory :: recall                 enter
+2026-05-11 21:53:40 [omega.guardian.terminal_feedback] INFO — memory.read status=enter
+[MEM]   op=read  status=enter
+2026-05-11 21:53:40 [omega.guardian.terminal_feedback] INFO — memory :: recall_compile :: ok — posture=BACKGROUND_LOOKUP
+[PHASE]     memory :: recall_compile         ok          posture=BACKGROUND_LOOKUP
+2026-05-11 21:53:40 [omega.guardian.terminal_feedback] INFO — memory.recall.posture = +1.0000 — recall plan compiled
+[SIG]   memory.recall.posture  +1.0000  — recall plan compiled
+2026-05-11 21:53:40 [omega.guardian.terminal_feedback] INFO — memory.runtime.classify = +0.2539 — runtime classify → 14 (coding) conf=0.25
+[SIG]   memory.runtime.classify +0.2539  — runtime classify → 14 (coding) conf=0.25
+2026-05-11 21:53:40 [omega.guardian.terminal_feedback] INFO — memory.runtime.classify = +0.2539 — runtime classify → 14 (coding) conf=0.25
+[SIG]   memory.runtime.classify +0.2539  — runtime classify → 14 (coding) conf=0.25
+2026-05-11 21:53:40 [omega.guardian.terminal_feedback] INFO — memory :: recall_lanes :: enter — posture=BACKGROUND_LOOKUP
+[PHASE]     memory :: recall_lanes           enter       posture=BACKGROUND_LOOKUP
+2026-05-11 21:53:40 [omega.guardian.terminal_feedback] INFO — memory :: recall_lanes :: exit — winners=5 lane_hits=0 evidence=5
+[PHASE]     memory :: recall_lanes           exit        winners=5 lane_hits=0 evidence=5
+2026-05-11 21:53:40 [omega.guardian.terminal_feedback] INFO — memory.recall.lanes = +5.0000 — posture lane arbitration complete
+[SIG]   memory.recall.lanes    +5.0000  — posture lane arbitration complete
+2026-05-11 21:53:40 [omega.guardian.terminal_feedback] INFO — memory.recall.posture_reorder = +5.0000 — lane arbitration winners promoted to front of candidates list (walker-native posture ranking)
+[SIG]   memory.recall.posture_reorder +5.0000  — lane arbitration winners promoted to front of candidates list (walker-native posture ranking)
+2026-05-11 21:53:40 [omega.guardian.terminal_feedback] INFO — memory.recall.summary = +5.0000 — recall pipeline complete
+[SIG]   memory.recall.summary  +5.0000  — recall pipeline complete
+2026-05-11 21:53:40 [omega.guardian.terminal_feedback] INFO — memory :: recall :: exit — hits=5 rerank=off seed=14 conf=0.25 top_final=1.000
+[PHASE]     memory :: recall                 exit        hits=5 rerank=off seed=14 conf=0.25 top_final=1.000
+2026-05-11 21:53:40 [omega.guardian.terminal_feedback] INFO — memory.read status=ok
+[MEM]   op=read  status=ok  count=5
+2026-05-11 21:53:47 [omega.core.reply_evaluator] INFO — reply_evaluator: cur=cur-onboarding-970b951023e9 satisfied=False conf=0.95 complete=0.10 knowledge=1 contradictions=0 surprise=True relevance=0.52 short_ack=False llm_failed=False
+2026-05-11 21:53:47 [omega.guardian.terminal_feedback] INFO — memory :: persist :: enter — propose=True
+[PHASE]     memory :: persist                enter       propose=True
+2026-05-11 21:53:47 [omega.guardian.terminal_feedback] INFO — memory.write coord=[1, 0, 0] status=enter
+[MEM]   op=write  status=enter  coord=[1, 0, 0]
+2026-05-11 21:53:47 [omega.memory.promotion] INFO — staged staging-38c6484371c3 for cycle=usr_84c934bd6220 coord=[1, 0, 0]
+2026-05-11 21:53:47 [omega.guardian.terminal_feedback] INFO — memory.write coord=[1, 0, 0] status=staged
+[MEM]   op=write  status=staged  coord=[1, 0, 0]
+2026-05-11 21:53:47 [omega.guardian.terminal_feedback] INFO — guardian :: decide_request :: enter — ref=staging-38c6484371c3
+[PHASE]   guardian :: decide_request         enter       ref=staging-38c6484371c3
+2026-05-11 21:53:47 [omega.guardian.terminal_feedback] INFO — guardian :: decide_request :: ALLOW — reason=verification passed
+[PHASE]   guardian :: decide_request         ALLOW       reason=verification passed
+2026-05-11 21:53:47 [omega.core.data_logger] INFO — omega.memory.engine :: write_complete
+2026-05-11 21:53:47 [omega.guardian.terminal_feedback] INFO — l0.embedding.inference = +1.0000 — embed ok model=embed-gemma dim=768
+[SIG]   l0.embedding.inference +1.0000  — embed ok model=embed-gemma dim=768
+2026-05-11 21:53:47 [omega.core.data_logger] INFO — omega.memory.engine :: write_complete
+2026-05-11 21:53:47 [omega.memory.encoding] INFO — encoding embed persisted memory_id=1.00.22895155 dim=768
+2026-05-11 21:53:47 [omega.memory.encoding] INFO — encoding ok memory_id=1.00.22895155 identity=False steps=['embed', 'embed_persist', 'persistence_anchor', 'reflection_eligibility', 'deepsleep_candidacy']
+2026-05-11 21:53:47 [omega.memory.promotion] INFO — committed staging-38c6484371c3 as 1.00.22895155 by memory.api:user_reply_to_curiosity (encoding steps=['embed', 'embed_persist', 'persistence_anchor', 'reflection_eligibility', 'deepsleep_candidacy'] journal=8349c35c4e714491)
+2026-05-11 21:53:47 [omega.guardian.terminal_feedback] INFO — memory.write.summary = +1.0000 — write committed to canonical memory
+[SIG]   memory.write.summary   +1.0000  — write committed to canonical memory
+2026-05-11 21:53:47 [omega.guardian.terminal_feedback] INFO — memory :: persist :: exit — committed id=1.00.22895155
+[PHASE]     memory :: persist                exit        committed id=1.00.22895155
+2026-05-11 21:53:47 [omega.guardian.terminal_feedback] INFO — memory.write coord=[1, 0, 0] status=committed
+[MEM]   op=write  status=committed  coord=[1, 0, 0]
+2026-05-11 21:53:47 [omega.core.knowledge_encoder] INFO — knowledge_encoder: cycle=usr_84c934bd6220 cur=cur-onboarding-970b951023e9 encoded=1/1
+2026-05-11 21:53:47 [omega.core.dialogue_act_selector] INFO — dialogue_act_selector: -> conversational_response (audible=True, score=+0.547)
+2026-05-11 21:53:47 [omega.guardian.terminal_feedback] INFO — conv_cog.dopamine = +0.2700 — affect[surprise, knowledge=1, valence=+0.10] -> dop=+0.27 plas=+0.70 str=+0.10 stress=+0.00 nov=+0.50
+[SIG]   conv_cog.dopamine      +0.2700  — affect[surprise, knowledge=1, valence=+0.10] -> dop=+0.27 plas=+0.70 str=+0.10 stress=+0.00 nov=+0.50
+2026-05-11 21:53:47 [omega.guardian.terminal_feedback] INFO — conv_cog.plasticity = +0.7000 — affect[surprise, knowledge=1, valence=+0.10] -> dop=+0.27 plas=+0.70 str=+0.10 stress=+0.00 nov=+0.50
+[SIG]   conv_cog.plasticity    +0.7000  — affect[surprise, knowledge=1, valence=+0.10] -> dop=+0.27 plas=+0.70 str=+0.10 stress=+0.00 nov=+0.50
+2026-05-11 21:53:47 [omega.guardian.terminal_feedback] INFO — conv_cog.strength = +0.1000 — affect[surprise, knowledge=1, valence=+0.10] -> dop=+0.27 plas=+0.70 str=+0.10 stress=+0.00 nov=+0.50
+[SIG]   conv_cog.strength      +0.1000  — affect[surprise, knowledge=1, valence=+0.10] -> dop=+0.27 plas=+0.70 str=+0.10 stress=+0.00 nov=+0.50
+2026-05-11 21:53:47 [omega.guardian.terminal_feedback] INFO — conv_cog.stress = +0.0000 — affect[surprise, knowledge=1, valence=+0.10] -> dop=+0.27 plas=+0.70 str=+0.10 stress=+0.00 nov=+0.50
+[SIG]   conv_cog.stress        +0.0000  — affect[surprise, knowledge=1, valence=+0.10] -> dop=+0.27 plas=+0.70 str=+0.10 stress=+0.00 nov=+0.50
+2026-05-11 21:53:47 [omega.guardian.terminal_feedback] INFO — conv_cog.novelty = +0.5000 — affect[surprise, knowledge=1, valence=+0.10] -> dop=+0.27 plas=+0.70 str=+0.10 stress=+0.00 nov=+0.50
+[SIG]   conv_cog.novelty       +0.5000  — affect[surprise, knowledge=1, valence=+0.10] -> dop=+0.27 plas=+0.70 str=+0.10 stress=+0.00 nov=+0.50
+2026-05-11 21:53:47 [omega.core.affect_dispatcher] INFO — affect_dispatcher: cycle=usr_84c934bd6220 cur=cur-onboarding-970b951023e9 | affect[surprise, knowledge=1, valence=+0.10] -> dop=+0.27 plas=+0.70 str=+0.10 stress=+0.00 nov=+0.50
+2026-05-11 21:53:47 [omega.guardian.terminal_feedback] INFO — orchestrator :: brain_initiate :: enter — ?
+2026-05-11 21:53:47 [omega.core.conversational_responder] INFO — conversational_responder: spawned internal cycle int_9af9e6a514a0 (parent=usr_84c934bd6220, act=conversational_response, seed_len=299, dispatch=thread)
+[PHASE] orchestrator :: brain_initiate         enter       ?
+2026-05-11 21:53:47 [omega.guardian.terminal_feedback] INFO — brain :: loop :: enter — source=internal
+[PHASE]      brain :: loop                   enter       source=internal
+2026-05-11 21:53:47 [omega.guardian.terminal_feedback] INFO — brain :: brain.retrieve :: enter
+2026-05-11 21:53:47 [omega.brain.phases._conv_cog] INFO — conv_cog: pipeline complete cycle=usr_84c934bd6220 cur=cur-onboarding-970b951023e9 | act=conversational_response satisfied=False encoded=1 affect=dop+0.27,pla+0.70,str+0.10,str+0.00,nov+0.50 followup=- response=int_9af9e6a514a0 | branch=resolved
+[PHASE]      brain :: brain.retrieve         enter
+2026-05-11 21:53:47 [omega.guardian.terminal_feedback] INFO — brain.memory_operation.recall_enabled = +1.0000
+[SIG]   brain.memory_operation.recall_enabled +1.0000
+2026-05-11 21:53:47 [omega.guardian.terminal_feedback] INFO — brain :: retrieve :: enter
+2026-05-11 21:53:47 [omega.guardian.terminal_feedback] INFO — brain :: memory_op :: ok — operation=clarification_response recall=True write=True
+[PHASE]      brain :: retrieve               enter
+2026-05-11 21:53:47 [omega.guardian.terminal_feedback] INFO — brain.memory_operation.recall_enabled = +0.0000
+[PHASE]      brain :: memory_op              ok          operation=clarification_response recall=True write=True
+[SIG]   brain.memory_operation.recall_enabled +0.0000
+2026-05-11 21:53:47 [omega.memory.engine.hierarchical_classifier] INFO — HierarchicalClassifier ready (HTTP client → http://127.0.0.1:11434)
+2026-05-11 21:53:47 [omega.guardian.terminal_feedback] INFO — brain :: memory_op :: ok — operation=proactive_response recall=False write=True
+[PHASE]      brain :: memory_op              ok          operation=proactive_response recall=False write=True
+2026-05-11 21:53:47 [omega.guardian.terminal_feedback] INFO — response.retrieve_ref_count = +0.0000
+[SIG]   response.retrieve_ref_count +0.0000
+2026-05-11 21:53:47 [omega.guardian.terminal_feedback] INFO — brain :: retrieve :: exit — memory_op=proactive_response recall_skipped
+[PHASE]      brain :: retrieve               exit        memory_op=proactive_response recall_skipped
+2026-05-11 21:53:47 [omega.core.data_logger] INFO — omega.policy.recall :: apply_to_phase
+2026-05-11 21:53:47 [omega.core.data_logger] INFO — omega.policies :: policy_apply_called
+2026-05-11 21:53:47 [omega.guardian.terminal_feedback] INFO — brain :: brain.retrieve :: exit — model=deterministic
+[PHASE]      brain :: brain.retrieve         exit        model=deterministic
+2026-05-11 21:53:47 [omega.guardian.terminal_feedback] INFO — brain :: brain.translate :: enter
+[PHASE]      brain :: brain.translate        enter
+2026-05-11 21:53:47 [omega.guardian.terminal_feedback] INFO — brain :: translate :: enter
+[PHASE]      brain :: translate              enter
+2026-05-11 21:53:47 [omega.guardian.terminal_feedback] INFO — response.translate_message_chars = +0.0000
+[SIG]   response.translate_message_chars +0.0000
+2026-05-11 21:53:47 [omega.guardian.terminal_feedback] INFO — brain :: translate :: exit — allow mode=accept_normal route=model
+[PHASE]      brain :: translate              exit        allow mode=accept_normal route=model
+2026-05-11 21:53:47 [omega.core.data_logger] INFO — omega.policy.translation :: apply_to_phase
+2026-05-11 21:53:47 [omega.core.data_logger] INFO — omega.policies :: policy_apply_called
+2026-05-11 21:53:47 [omega.guardian.terminal_feedback] INFO — brain :: brain.translate :: exit — model=deterministic
+[PHASE]      brain :: brain.translate        exit        model=deterministic
+2026-05-11 21:53:47 [omega.guardian.terminal_feedback] INFO — brain :: brain.respond :: enter
+[PHASE]      brain :: brain.respond          enter
+2026-05-11 21:53:47 [omega.guardian.terminal_feedback] INFO — brain :: respond :: enter
+[PHASE]      brain :: respond                enter
+2026-05-11 21:53:47 [omega.guardian.terminal_feedback] INFO — brain :: model_call :: enter — caller=brain.respond kind=voice_box
+[PHASE]      brain :: model_call             enter       caller=brain.respond kind=voice_box
+2026-05-11 21:53:47 [omega.guardian.terminal_feedback] INFO — memory.runtime.classify = +0.2539 — runtime classify → 14 (coding) conf=0.25
+[SIG]   memory.runtime.classify +0.2539  — runtime classify → 14 (coding) conf=0.25
+2026-05-11 21:53:47 [omega.guardian.terminal_feedback] INFO — memory :: recall :: enter
+[PHASE]     memory :: recall                 enter
+2026-05-11 21:53:47 [omega.guardian.terminal_feedback] INFO — memory.read status=enter
+[MEM]   op=read  status=enter
+2026-05-11 21:53:47 [omega.guardian.terminal_feedback] INFO — memory :: recall_compile :: ok — posture=BACKGROUND_LOOKUP
+[PHASE]     memory :: recall_compile         ok          posture=BACKGROUND_LOOKUP
+2026-05-11 21:53:47 [omega.guardian.terminal_feedback] INFO — memory.recall.posture = +1.0000 — recall plan compiled
+[SIG]   memory.recall.posture  +1.0000  — recall plan compiled
+2026-05-11 21:53:47 [omega.guardian.terminal_feedback] INFO — memory.runtime.classify = +0.2539 — runtime classify → 14 (coding) conf=0.25
+[SIG]   memory.runtime.classify +0.2539  — runtime classify → 14 (coding) conf=0.25
+2026-05-11 21:53:48 [omega.guardian.terminal_feedback] INFO — memory.runtime.classify = +0.2539 — runtime classify → 14 (coding) conf=0.25
+[SIG]   memory.runtime.classify +0.2539  — runtime classify → 14 (coding) conf=0.25
+2026-05-11 21:53:48 [omega.guardian.terminal_feedback] INFO — memory :: recall_lanes :: enter — posture=BACKGROUND_LOOKUP
+[PHASE]     memory :: recall_lanes           enter       posture=BACKGROUND_LOOKUP
+2026-05-11 21:53:48 [omega.guardian.terminal_feedback] INFO — memory :: recall_lanes :: exit — winners=0 lane_hits=0 evidence=0
+[PHASE]     memory :: recall_lanes           exit        winners=0 lane_hits=0 evidence=0
+2026-05-11 21:53:48 [omega.guardian.terminal_feedback] INFO — memory.recall.lanes = +0.0000 — posture lane arbitration complete
+[SIG]   memory.recall.lanes    +0.0000  — posture lane arbitration complete
+2026-05-11 21:53:48 [omega.guardian.terminal_feedback] INFO — memory.recall.summary = +0.0000 — recall pipeline complete
+[SIG]   memory.recall.summary  +0.0000  — recall pipeline complete
+2026-05-11 21:53:48 [omega.guardian.terminal_feedback] INFO — memory :: recall :: exit — hits=0 rerank=off seed=14 conf=0.25
+[PHASE]     memory :: recall                 exit        hits=0 rerank=off seed=14 conf=0.25
+2026-05-11 21:53:48 [omega.guardian.terminal_feedback] INFO — memory.read status=ok
+[MEM]   op=read  status=ok  count=0
+2026-05-11 21:53:48 [omega.core.curiosity_producer] INFO — curiosity_producer: persisted cur-memory_gap-5c86b5f2d2e3 trigger=memory_gap gap=knowledge path=ask_user
+2026-05-11 21:53:48 [omega.guardian.terminal_feedback] INFO — response.retrieve_ref_count = +0.0000
+[SIG]   response.retrieve_ref_count +0.0000
+2026-05-11 21:53:48 [omega.guardian.terminal_feedback] INFO — brain :: retrieve :: exit — refs=0 seed=14
+[PHASE]      brain :: retrieve               exit        refs=0 seed=14
+2026-05-11 21:53:48 [omega.core.data_logger] INFO — omega.policy.recall :: apply_to_phase
+2026-05-11 21:53:48 [omega.core.data_logger] INFO — omega.policies :: policy_apply_called
+2026-05-11 21:53:48 [omega.guardian.terminal_feedback] INFO — brain :: brain.retrieve :: exit — model=deterministic
+[PHASE]      brain :: brain.retrieve         exit        model=deterministic
+2026-05-11 21:53:48 [omega.guardian.terminal_feedback] INFO — brain :: brain.translate :: enter
+[PHASE]      brain :: brain.translate        enter
+2026-05-11 21:53:48 [omega.guardian.terminal_feedback] INFO — brain :: translate :: enter
+[PHASE]      brain :: translate              enter
+2026-05-11 21:53:48 [omega.brain.phases.translate] INFO — translate: conv_cog ack override (act=conversational_response, ack='Got it. One moment.') cycle=usr_84c934bd6220
+2026-05-11 21:53:48 [omega.guardian.terminal_feedback] INFO — response.translate_message_chars = +19.0000
+[SIG]   response.translate_message_chars +19.0000
+2026-05-11 21:53:48 [omega.guardian.terminal_feedback] INFO — brain :: translate :: exit — conv_cog_ack
+[PHASE]      brain :: translate              exit        conv_cog_ack
+2026-05-11 21:53:48 [omega.core.data_logger] INFO — omega.policy.translation :: apply_to_phase
+2026-05-11 21:53:48 [omega.core.data_logger] INFO — omega.policies :: policy_apply_called
+2026-05-11 21:53:48 [omega.guardian.terminal_feedback] INFO — brain :: brain.translate :: exit — model=deterministic
+[PHASE]      brain :: brain.translate        exit        model=deterministic
+2026-05-11 21:53:48 [omega.guardian.terminal_feedback] INFO — brain :: brain.respond :: enter
+[PHASE]      brain :: brain.respond          enter
+2026-05-11 21:53:48 [omega.guardian.terminal_feedback] INFO — brain :: respond :: enter
+[PHASE]      brain :: respond                enter
+2026-05-11 21:53:48 [omega.guardian.terminal_feedback] INFO — brain :: model_call :: enter — caller=brain.respond kind=voice_box
+[PHASE]      brain :: model_call             enter       caller=brain.respond kind=voice_box
+2026-05-11 21:53:49 [omega.guardian.terminal_feedback] INFO — brain :: model_call :: fail — caller=brain.respond kind=voice_box err=runtime_returned_none elapsed_ms=987
+2026-05-11 21:53:49 [omega.guardian.terminal_feedback] INFO — brain :: model_call :: fail — caller=brain.respond kind=voice_box err=runtime_returned_none elapsed_ms=1203
+[PHASE]      brain :: model_call             fail        caller=brain.respond kind=voice_box err=runtime_returned_none elapsed_ms=987
+[PHASE]      brain :: model_call             fail        caller=brain.respond kind=voice_box err=runtime_returned_none elapsed_ms=1203
+2026-05-11 21:53:49 [omega.guardian.terminal_feedback] INFO — brain.model_call.failed = +1.0000 — runtime.generate returned None (server down or ok=false)
+2026-05-11 21:53:49 [omega.guardian.terminal_feedback] INFO — brain.model_call.failed = +1.0000 — runtime.generate returned None (server down or ok=false)
+[SIG]   brain.model_call.failed +1.0000  — runtime.generate returned None (server down or ok=false)
+[SIG]   brain.model_call.failed +1.0000  — runtime.generate returned None (server down or ok=false)
+2026-05-11 21:53:49 [omega.sensory.voice_io] INFO — voice_io: speak 'Got it. One moment.' (19 chars)
+2026-05-11 21:53:49 [omega.sensory.voice_io] INFO — voice_io: speak '(no response generated)' (23 chars)
+2026-05-11 21:53:49 [omega.guardian.terminal_feedback] INFO — response.output_chars = +23.0000
+[SIG]   response.output_chars  +23.0000
+2026-05-11 21:53:49 [omega.guardian.terminal_feedback] INFO — brain :: respond :: exit — fallback chars=23
+[PHASE]      brain :: respond                exit        fallback chars=23
+2026-05-11 21:53:49 [omega.core.data_logger] INFO — omega.policy.response :: apply_to_phase
+2026-05-11 21:53:49 [omega.core.data_logger] INFO — omega.policies :: policy_apply_called
+2026-05-11 21:53:49 [omega.guardian.terminal_feedback] INFO — brain :: brain.respond :: exit — model=voice_box
+[PHASE]      brain :: brain.respond          exit        model=voice_box
+2026-05-11 21:53:49 [omega.guardian.terminal_feedback] INFO — brain :: brain.store :: enter
+[PHASE]      brain :: brain.store            enter
+2026-05-11 21:53:49 [omega.guardian.terminal_feedback] INFO — brain :: store :: enter
+[PHASE]      brain :: store                  enter
+2026-05-11 21:53:49 [omega.guardian.terminal_feedback] INFO — memory :: persist :: enter — propose=True
+[PHASE]     memory :: persist                enter       propose=True
+2026-05-11 21:53:49 [omega.guardian.terminal_feedback] INFO — memory.write coord=[4, 0, 0] status=enter
+[MEM]   op=write  status=enter  coord=[4, 0, 0]
+2026-05-11 21:53:49 [omega.memory.promotion] INFO — staged staging-f0e6661becaf for cycle=int_9af9e6a514a0 coord=[4, 0, 0]
+2026-05-11 21:53:49 [omega.guardian.terminal_feedback] INFO — memory.write coord=[4, 0, 0] status=staged
+[MEM]   op=write  status=staged  coord=[4, 0, 0]
+2026-05-11 21:53:49 [omega.guardian.terminal_feedback] INFO — guardian :: decide_request :: enter — ref=staging-f0e6661becaf
+[PHASE]   guardian :: decide_request         enter       ref=staging-f0e6661becaf
+2026-05-11 21:53:49 [omega.guardian.terminal_feedback] INFO — guardian :: decide_request :: ALLOW — reason=verification passed
+[PHASE]   guardian :: decide_request         ALLOW       reason=verification passed
+2026-05-11 21:53:49 [omega.core.data_logger] INFO — omega.memory.engine :: write_complete
+2026-05-11 21:53:49 [omega.guardian.terminal_feedback] INFO — l0.embedding.inference = +1.0000 — embed ok model=embed-gemma dim=768
+[SIG]   l0.embedding.inference +1.0000  — embed ok model=embed-gemma dim=768
+2026-05-11 21:53:49 [omega.core.data_logger] INFO — omega.memory.engine :: write_complete
+2026-05-11 21:53:49 [omega.memory.encoding] INFO — encoding embed persisted memory_id=4.00.5bec02e0 dim=768
+2026-05-11 21:53:49 [omega.memory.encoding] INFO — encoding ok memory_id=4.00.5bec02e0 identity=False steps=['embed', 'embed_persist', 'persistence_anchor', 'reflection_eligibility', 'deepsleep_candidacy']
+2026-05-11 21:53:49 [omega.memory.promotion] INFO — committed staging-f0e6661becaf as 4.00.5bec02e0 by memory.api:brain.store:int_9af9e6a514a0:proactive_response (encoding steps=['embed', 'embed_persist', 'persistence_anchor', 'reflection_eligibility', 'deepsleep_candidacy'] journal=546637845b6b4fcf)
+2026-05-11 21:53:49 [omega.guardian.terminal_feedback] INFO — memory.write.summary = +1.0000 — write committed to canonical memory
+[SIG]   memory.write.summary   +1.0000  — write committed to canonical memory
+2026-05-11 21:53:49 [omega.guardian.terminal_feedback] INFO — memory :: persist :: exit — committed id=4.00.5bec02e0
+[PHASE]     memory :: persist                exit        committed id=4.00.5bec02e0
+2026-05-11 21:53:49 [omega.guardian.terminal_feedback] INFO — memory.write coord=[4, 0, 0] status=committed
+[MEM]   op=write  status=committed  coord=[4, 0, 0]
+2026-05-11 21:53:49 [omega.guardian.terminal_feedback] INFO — brain :: store :: exit — committed (ALLOW, proactive_response): staging-f0e6661becaf
+[PHASE]      brain :: store                  exit        committed (ALLOW, proactive_response): staging-f0e6661becaf
+2026-05-11 21:53:49 [omega.guardian.terminal_feedback] INFO — memory.store.summary = +1.0000 — brain.store committed
+[SIG]   memory.store.summary   +1.0000  — brain.store committed
+2026-05-11 21:53:49 [omega.core.data_logger] INFO — omega.policy.memory :: apply_to_phase
+2026-05-11 21:53:49 [omega.core.data_logger] INFO — omega.policies :: policy_apply_called
+2026-05-11 21:53:49 [omega.core.policies] INFO — mutation intents detected: phase=brain.store cycle_id=int_9af9e6a514a0 intents=['memory_object_refs:1', 'promotion_events:1']
+2026-05-11 21:53:49 [omega.guardian.terminal_feedback] INFO — brain :: brain.store :: exit — model=deterministic
+[PHASE]      brain :: brain.store            exit        model=deterministic
+2026-05-11 21:53:49 [omega.guardian.terminal_feedback] INFO — brain :: loop :: exit — source=internal
+[PHASE]      brain :: loop                   exit        source=internal
+2026-05-11 21:53:49 [omega.guardian.terminal_feedback] INFO — orchestrator :: brain_initiate :: exit — brain runner returned
+[PHASE] orchestrator :: brain_initiate         exit        brain runner returned
+2026-05-11 21:53:49 [omega.core.conversational_responder] WARNING — conversational_responder: internal cycle int_9af9e6a514a0 completed without delivered text
+2026-05-11 21:53:50 [omega.guardian.terminal_feedback] INFO — response.output_chars = +19.0000
+[SIG]   response.output_chars  +19.0000
+2026-05-11 21:53:50 [omega.guardian.terminal_feedback] INFO — brain :: respond :: exit — fallback chars=19
+[PHASE]      brain :: respond                exit        fallback chars=19
+2026-05-11 21:53:50 [omega.core.data_logger] INFO — omega.policy.response :: apply_to_phase
+2026-05-11 21:53:50 [omega.core.data_logger] INFO — omega.policies :: policy_apply_called
+2026-05-11 21:53:50 [omega.guardian.terminal_feedback] INFO — brain :: brain.respond :: exit — model=voice_box
+[PHASE]      brain :: brain.respond          exit        model=voice_box
+2026-05-11 21:53:50 [omega.guardian.terminal_feedback] INFO — brain :: brain.store :: enter
+[PHASE]      brain :: brain.store            enter
+2026-05-11 21:53:50 [omega.guardian.terminal_feedback] INFO — brain :: store :: enter
+[PHASE]      brain :: store                  enter
+2026-05-11 21:53:50 [omega.guardian.terminal_feedback] INFO — memory :: persist :: enter — propose=True
+[PHASE]     memory :: persist                enter       propose=True
+2026-05-11 21:53:50 [omega.guardian.terminal_feedback] INFO — memory.write coord=[4, 0, 0] status=enter
+[MEM]   op=write  status=enter  coord=[4, 0, 0]
+2026-05-11 21:53:50 [omega.memory.promotion] INFO — staged staging-211b455ff078 for cycle=usr_84c934bd6220 coord=[4, 0, 0]
+2026-05-11 21:53:50 [omega.guardian.terminal_feedback] INFO — memory.write coord=[4, 0, 0] status=staged
+[MEM]   op=write  status=staged  coord=[4, 0, 0]
+2026-05-11 21:53:50 [omega.guardian.terminal_feedback] INFO — guardian :: decide_request :: enter — ref=staging-211b455ff078
+[PHASE]   guardian :: decide_request         enter       ref=staging-211b455ff078
+2026-05-11 21:53:50 [omega.guardian.terminal_feedback] INFO — guardian :: decide_request :: ALLOW — reason=verification passed
+[PHASE]   guardian :: decide_request         ALLOW       reason=verification passed
+2026-05-11 21:53:50 [omega.core.data_logger] INFO — omega.memory.engine :: write_complete
+2026-05-11 21:53:50 [omega.guardian.terminal_feedback] INFO — l0.embedding.inference = +1.0000 — embed ok model=embed-gemma dim=768
+[SIG]   l0.embedding.inference +1.0000  — embed ok model=embed-gemma dim=768
+2026-05-11 21:53:50 [omega.core.data_logger] INFO — omega.memory.engine :: write_complete
+2026-05-11 21:53:50 [omega.memory.encoding] INFO — encoding embed persisted memory_id=4.00.e6bb25a9 dim=768
+2026-05-11 21:53:50 [omega.memory.encoding] INFO — encoding ok memory_id=4.00.e6bb25a9 identity=False steps=['embed', 'embed_persist', 'persistence_anchor', 'reflection_eligibility', 'deepsleep_candidacy']
+2026-05-11 21:53:50 [omega.memory.promotion] INFO — committed staging-211b455ff078 as 4.00.e6bb25a9 by memory.api:brain.store:usr_84c934bd6220:clarification_response (encoding steps=['embed', 'embed_persist', 'persistence_anchor', 'reflection_eligibility', 'deepsleep_candidacy'] journal=15bd6148a7054a3d)
+2026-05-11 21:53:50 [omega.guardian.terminal_feedback] INFO — memory.write.summary = +1.0000 — write committed to canonical memory
+[SIG]   memory.write.summary   +1.0000  — write committed to canonical memory
+2026-05-11 21:53:50 [omega.guardian.terminal_feedback] INFO — memory :: persist :: exit — committed id=4.00.e6bb25a9
+[PHASE]     memory :: persist                exit        committed id=4.00.e6bb25a9
+2026-05-11 21:53:50 [omega.guardian.terminal_feedback] INFO — memory.write coord=[4, 0, 0] status=committed
+[MEM]   op=write  status=committed  coord=[4, 0, 0]
+2026-05-11 21:53:50 [omega.guardian.terminal_feedback] INFO — brain :: store :: exit — committed (ALLOW, clarification_response): staging-211b455ff078
+[PHASE]      brain :: store                  exit        committed (ALLOW, clarification_response): staging-211b455ff078
+2026-05-11 21:53:50 [omega.guardian.terminal_feedback] INFO — memory.store.summary = +1.0000 — brain.store committed
+[SIG]   memory.store.summary   +1.0000  — brain.store committed
+2026-05-11 21:53:50 [omega.core.data_logger] INFO — omega.policy.memory :: apply_to_phase
+2026-05-11 21:53:50 [omega.core.data_logger] INFO — omega.policies :: policy_apply_called
+2026-05-11 21:53:50 [omega.core.policies] INFO — mutation intents detected: phase=brain.store cycle_id=usr_84c934bd6220 intents=['memory_object_refs:1', 'promotion_events:1']
+2026-05-11 21:53:50 [omega.guardian.terminal_feedback] INFO — brain :: brain.store :: exit — model=deterministic
+[PHASE]      brain :: brain.store            exit        model=deterministic
+2026-05-11 21:53:50 [omega.guardian.terminal_feedback] INFO — brain :: loop :: exit — source=user
+[PHASE]      brain :: loop                   exit        source=user
+2026-05-11 21:53:50 [omega.guardian.terminal_feedback] INFO — orchestrator :: brain_initiate :: exit — brain runner returned
+[PHASE] orchestrator :: brain_initiate         exit        brain runner returned
+------------------------------------------------------------
+   190.0s         BOOT P0 DEEP SLEEP -- ticks 12-15 | epoch 1
+2026-05-11 21:54:30 [omega.guardian.terminal_feedback] INFO — deepsleep :: loop :: enter
+[PHASE]  deepsleep :: loop                   enter
+2026-05-11 21:54:30 [omega.guardian.terminal_feedback] INFO — deepsleep :: loop_audit :: enter
+[PHASE]  deepsleep :: loop_audit             enter
+2026-05-11 21:54:30 [omega.guardian.terminal_feedback] INFO — deep_sleep :: loop :: enter
+[PHASE] deep_sleep :: loop                   enter
+2026-05-11 21:54:30 [omega.guardian.terminal_feedback] INFO — deep_sleep :: phase_1_intake :: enter
+[PHASE] deep_sleep :: phase_1_intake         enter
+2026-05-11 21:54:30 [omega.guardian.terminal_feedback] INFO — memory.runtime.classify = +0.5180 — runtime classify → 3 (workflows) conf=0.52
+[SIG]   memory.runtime.classify +0.5180  — runtime classify → 3 (workflows) conf=0.52
+2026-05-11 21:54:30 [omega.guardian.terminal_feedback] INFO — memory.runtime.classify = +0.5180 — runtime classify → 3 (workflows) conf=0.52
+[SIG]   memory.runtime.classify +0.5180  — runtime classify → 3 (workflows) conf=0.52
+2026-05-11 21:54:30 [omega.core.data_logger] INFO — omega.memory.gate :: recall_complete
+2026-05-11 21:54:30 [omega.metacognition.deep_sleep.phases.phase_1_intake.aggregator] INFO — Deep sleep intake: 0 insights, 0 knowledge, 18 tools, 0 failure types
+2026-05-11 21:54:30 [omega.guardian.terminal_feedback] INFO — deep_sleep :: phase_1_intake :: ok — insights=0 fragments=0 tools=18
+[PHASE] deep_sleep :: phase_1_intake         ok          insights=0 fragments=0 tools=18
+2026-05-11 21:54:30 [omega.guardian.terminal_feedback] INFO — deep_sleep :: phase_1_intake :: exit
+[PHASE] deep_sleep :: phase_1_intake         exit
+2026-05-11 21:54:30 [omega.guardian.terminal_feedback] INFO — deep_sleep :: phase_2_reactivation :: enter
+[PHASE] deep_sleep :: phase_2_reactivation   enter
+2026-05-11 21:54:30 [omega.metacognition.deep_sleep.phases.phase_2_reactivation.replay_analyzer] INFO — replay: no open goals — replay pass produces no observations
+2026-05-11 21:54:30 [omega.guardian.terminal_feedback] INFO — deep_sleep :: phase_2_reactivation :: ok — replay=0 schemas=0 history+=0
+[PHASE] deep_sleep :: phase_2_reactivation   ok          replay=0 schemas=0 history+=0
+2026-05-11 21:54:30 [omega.guardian.terminal_feedback] INFO — deep_sleep :: phase_2_reactivation :: exit
+[PHASE] deep_sleep :: phase_2_reactivation   exit
+2026-05-11 21:54:30 [omega.guardian.terminal_feedback] INFO — deep_sleep :: phase_3_reconciliation :: enter
+[PHASE] deep_sleep :: phase_3_reconciliation enter
+2026-05-11 21:54:30 [omega.core.self_inquiry] INFO — self_inquiry sweep: open=1 answered_this_epoch=0 escalated=0 dropped=0 re_embedded=0
+2026-05-11 21:54:30 [omega.guardian.terminal_feedback] INFO — deep_sleep :: phase_3_reconciliation :: ok — contradictions=0 (resolved=0) forgetting=0 (applied=0)
+[PHASE] deep_sleep :: phase_3_reconciliation ok          contradictions=0 (resolved=0) forgetting=0 (applied=0)
+2026-05-11 21:54:30 [omega.guardian.terminal_feedback] INFO — deep_sleep :: phase_3_reconciliation :: exit
+[PHASE] deep_sleep :: phase_3_reconciliation exit
+2026-05-11 21:54:30 [omega.guardian.terminal_feedback] INFO — deep_sleep :: phase_4_persistence :: enter
+[PHASE] deep_sleep :: phase_4_persistence    enter
+2026-05-11 21:54:30 [omega.guardian.terminal_feedback] INFO — memory.runtime.classify = +0.8500 — runtime classify → 6 (journal) conf=0.85
+[SIG]   memory.runtime.classify +0.8500  — runtime classify → 6 (journal) conf=0.85
+2026-05-11 21:54:30 [omega.core.data_logger] INFO — omega.memory.gate :: classify
+2026-05-11 21:54:30 [omega.core.data_logger] INFO — omega.memory.engine :: write_complete
+2026-05-11 21:54:30 [omega.core.data_logger] INFO — omega.memory.gate :: ingest_success
+2026-05-11 21:54:30 [omega.metacognition.deep_sleep.memory_management.consolidation_engine] INFO — Consolidation: 0 promoted, 0 skipped
+2026-05-11 21:54:30 [omega.metacognition.deep_sleep.memory_management.pruning_engine] INFO — Pruning: 0 decay increased, 0 skipped
+2026-05-11 21:54:30 [omega.metacognition.deep_sleep.memory_management.mastery_tracker] INFO — Knowledge mastery updated: 0 domains
+2026-05-11 21:54:30 [omega.metacognition.deep_sleep.phases.phase_4_persistence.memory_updater] INFO — Memory update: 0 consolidated, 0 pruned, 0 domains mastered
+2026-05-11 21:54:30 [omega.core.deepsleep_engine] INFO — deepsleep: drained queues — reflection_eligible=3, deepsleep_candidates=3
+2026-05-11 21:54:30 [omega.core.deepsleep_engine] INFO — deepsleep: snapshotted upstream telemetry — slots=['auto_cycle', 'brain_response', 'global_goals', 'global_observations', 'meta_orders']
+2026-05-11 21:54:30 [omega.guardian.terminal_feedback] INFO — deepsleep :: consolidation :: ok — sleep_id=sleep_deed2fef309e pattern=repeated_success cycles=7
+[PHASE]  deepsleep :: consolidation          ok          sleep_id=sleep_deed2fef309e pattern=repeated_success cycles=7
+2026-05-11 21:54:30 [omega.guardian.terminal_feedback] INFO — deep_sleep :: tool_lifecycle_eval :: enter — periodic prune walk
+[PHASE] deep_sleep :: tool_lifecycle_eval    enter       periodic prune walk
+2026-05-11 21:54:30 [omega.guardian.terminal_feedback] INFO — deep_sleep :: tool_lifecycle_eval :: noop — no transitions
+[PHASE] deep_sleep :: tool_lifecycle_eval    noop        no transitions
+2026-05-11 21:54:30 [omega.metacognition.deep_sleep.phases.phase_4_persistence.audit_logger] INFO — Deep sleep audit logged: e1-deepsleep
+2026-05-11 21:54:30 [omega.guardian.terminal_feedback] INFO — deep_sleep :: phase_4_persistence :: ok — fragments=0 replay=0 schemas=0 contras=0 forgot=0 engine_pattern=repeated_success
+[PHASE] deep_sleep :: phase_4_persistence    ok          fragments=0 replay=0 schemas=0 contras=0 forgot=0 engine_pattern=repeated_success
+2026-05-11 21:54:30 [omega.guardian.terminal_feedback] INFO — deep_sleep :: phase_4_persistence :: exit
+[PHASE] deep_sleep :: phase_4_persistence    exit
+2026-05-11 21:54:30 [omega.guardian.terminal_feedback] INFO — deep_sleep :: loop :: exit
+[PHASE] deep_sleep :: loop                   exit
+2026-05-11 21:54:30 [omega.guardian.terminal_feedback] INFO — deepsleep :: loop_audit :: exit
+[PHASE]  deepsleep :: loop_audit             exit
+   190.4s   DEEP_SLEEP P1 Intake -- 0 fragments, 18 tools
+   190.4s   CYCLE DONE e1-deepsleep fragments_consolidated=0 fragments_pruned=0 replay_observations=0 schema_candidates=0 contradictions=0 forgot=0 pattern=repeated_success
+2026-05-11 21:54:30 [omega.guardian.terminal_feedback] INFO — deepsleep :: loop :: exit — ok
+[PHASE]  deepsleep :: loop                   exit        ok
+------------------------------------------------------------
+   250.4s         BOOT P0 IDLE -- 120s deep sleep settling | epoch 1
+2026-05-11 21:56:57 [omega.core.brain_receiver] INFO — brain_receiver: user input -> cycle usr_f756dd7784ec (intent='My name is Noah, do you remember me?')
+2026-05-11 21:56:57 [omega.guardian.terminal_feedback] INFO — orchestrator :: brain_initiate :: enter — ?
+[PHASE] orchestrator :: brain_initiate         enter       ?
+2026-05-11 21:56:57 [omega.guardian.terminal_feedback] INFO — brain :: loop :: enter — source=user
+[PHASE]      brain :: loop                   enter       source=user
+2026-05-11 21:56:57 [omega.guardian.terminal_feedback] INFO — brain :: brain.retrieve :: enter
+[PHASE]      brain :: brain.retrieve         enter
+2026-05-11 21:56:57 [omega.guardian.terminal_feedback] INFO — brain :: retrieve :: enter
+[PHASE]      brain :: retrieve               enter
+2026-05-11 21:56:57 [omega.guardian.terminal_feedback] INFO — brain.memory_operation.recall_enabled = +1.0000
+[SIG]   brain.memory_operation.recall_enabled +1.0000
+2026-05-11 21:56:57 [omega.guardian.terminal_feedback] INFO — brain :: memory_op :: ok — operation=recall recall=True write=False
+[PHASE]      brain :: memory_op              ok          operation=recall recall=True write=False
+2026-05-11 21:56:57 [omega.memory.engine.hierarchical_classifier] INFO — HierarchicalClassifier ready (HTTP client → http://127.0.0.1:11434)
+2026-05-11 21:56:58 [omega.guardian.terminal_feedback] INFO — memory.runtime.classify = +0.9835 — runtime classify → 0 (identity) conf=0.98
+[SIG]   memory.runtime.classify +0.9835  — runtime classify → 0 (identity) conf=0.98
+2026-05-11 21:56:58 [omega.guardian.terminal_feedback] INFO — memory :: recall :: enter
+[PHASE]     memory :: recall                 enter
+2026-05-11 21:56:58 [omega.guardian.terminal_feedback] INFO — memory.read status=enter
+[MEM]   op=read  status=enter
+2026-05-11 21:56:58 [omega.guardian.terminal_feedback] INFO — memory :: recall_compile :: ok — posture=BACKGROUND_LOOKUP
+[PHASE]     memory :: recall_compile         ok          posture=BACKGROUND_LOOKUP
+2026-05-11 21:56:58 [omega.guardian.terminal_feedback] INFO — memory.recall.posture = +1.0000 — recall plan compiled
+[SIG]   memory.recall.posture  +1.0000  — recall plan compiled
+2026-05-11 21:56:58 [omega.guardian.terminal_feedback] INFO — memory.runtime.classify = +0.9835 — runtime classify → 0 (identity) conf=0.98
+[SIG]   memory.runtime.classify +0.9835  — runtime classify → 0 (identity) conf=0.98
+2026-05-11 21:56:58 [omega.guardian.terminal_feedback] INFO — memory.runtime.classify = +0.9835 — runtime classify → 0 (identity) conf=0.98
+[SIG]   memory.runtime.classify +0.9835  — runtime classify → 0 (identity) conf=0.98
+2026-05-11 21:56:58 [omega.guardian.terminal_feedback] INFO — memory :: recall_lanes :: enter — posture=BACKGROUND_LOOKUP
+[PHASE]     memory :: recall_lanes           enter       posture=BACKGROUND_LOOKUP
+2026-05-11 21:56:58 [omega.guardian.terminal_feedback] INFO — memory :: recall_lanes :: exit — winners=0 lane_hits=0 evidence=0
+[PHASE]     memory :: recall_lanes           exit        winners=0 lane_hits=0 evidence=0
+2026-05-11 21:56:58 [omega.guardian.terminal_feedback] INFO — memory.recall.lanes = +0.0000 — posture lane arbitration complete
+[SIG]   memory.recall.lanes    +0.0000  — posture lane arbitration complete
+2026-05-11 21:56:58 [omega.guardian.terminal_feedback] INFO — memory.recall.summary = +0.0000 — recall pipeline complete
+[SIG]   memory.recall.summary  +0.0000  — recall pipeline complete
+2026-05-11 21:56:58 [omega.guardian.terminal_feedback] INFO — memory :: recall :: exit — hits=0 rerank=off seed=0 conf=0.98
+[PHASE]     memory :: recall                 exit        hits=0 rerank=off seed=0 conf=0.98
+2026-05-11 21:56:58 [omega.guardian.terminal_feedback] INFO — memory.read status=ok
+[MEM]   op=read  status=ok  count=0
+2026-05-11 21:56:58 [omega.core.curiosity_producer] INFO — curiosity_producer: persisted cur-memory_gap-269d339e7423 trigger=memory_gap gap=knowledge path=ask_user
+2026-05-11 21:56:58 [omega.guardian.terminal_feedback] INFO — response.retrieve_ref_count = +0.0000
+[SIG]   response.retrieve_ref_count +0.0000
+2026-05-11 21:56:58 [omega.guardian.terminal_feedback] INFO — brain :: retrieve :: exit — refs=0 seed=0
+[PHASE]      brain :: retrieve               exit        refs=0 seed=0
+2026-05-11 21:56:58 [omega.core.data_logger] INFO — omega.policy.recall :: apply_to_phase
+2026-05-11 21:56:58 [omega.core.data_logger] INFO — omega.policies :: policy_apply_called
+2026-05-11 21:56:58 [omega.guardian.terminal_feedback] INFO — brain :: brain.retrieve :: exit — model=deterministic
+[PHASE]      brain :: brain.retrieve         exit        model=deterministic
+2026-05-11 21:56:58 [omega.guardian.terminal_feedback] INFO — brain :: brain.translate :: enter
+[PHASE]      brain :: brain.translate        enter
+2026-05-11 21:56:58 [omega.guardian.terminal_feedback] INFO — brain :: translate :: enter
+[PHASE]      brain :: translate              enter
+2026-05-11 21:56:58 [omega.guardian.terminal_feedback] INFO — response.translate_message_chars = +0.0000
+[SIG]   response.translate_message_chars +0.0000
+2026-05-11 21:56:58 [omega.guardian.terminal_feedback] INFO — brain :: translate :: exit — allow mode=accept_normal route=model
+[PHASE]      brain :: translate              exit        allow mode=accept_normal route=model
+2026-05-11 21:56:58 [omega.core.data_logger] INFO — omega.policy.translation :: apply_to_phase
+2026-05-11 21:56:58 [omega.core.data_logger] INFO — omega.policies :: policy_apply_called
+2026-05-11 21:56:58 [omega.guardian.terminal_feedback] INFO — brain :: brain.translate :: exit — model=deterministic
+[PHASE]      brain :: brain.translate        exit        model=deterministic
+2026-05-11 21:56:58 [omega.guardian.terminal_feedback] INFO — brain :: brain.respond :: enter
+[PHASE]      brain :: brain.respond          enter
+2026-05-11 21:56:58 [omega.guardian.terminal_feedback] INFO — brain :: respond :: enter
+[PHASE]      brain :: respond                enter
+2026-05-11 21:56:58 [omega.guardian.terminal_feedback] INFO — brain :: model_call :: enter — caller=brain.respond kind=voice_box
+[PHASE]      brain :: model_call             enter       caller=brain.respond kind=voice_box
+2026-05-11 21:56:58 [omega.guardian.terminal_feedback] INFO — brain :: model_call :: fail — caller=brain.respond kind=voice_box err=runtime_returned_none elapsed_ms=74
+[PHASE]      brain :: model_call             fail        caller=brain.respond kind=voice_box err=runtime_returned_none elapsed_ms=74
+2026-05-11 21:56:58 [omega.guardian.terminal_feedback] INFO — brain.model_call.failed = +1.0000 — runtime.generate returned None (server down or ok=false)
+[SIG]   brain.model_call.failed +1.0000  — runtime.generate returned None (server down or ok=false)
+2026-05-11 21:56:58 [omega.sensory.voice_io] INFO — voice_io: speak '(no response generated)' (23 chars)
+2026-05-11 21:56:59 [omega.guardian.terminal_feedback] INFO — response.output_chars = +23.0000
+[SIG]   response.output_chars  +23.0000
+2026-05-11 21:56:59 [omega.guardian.terminal_feedback] INFO — brain :: respond :: exit — fallback chars=23
+[PHASE]      brain :: respond                exit        fallback chars=23
+2026-05-11 21:56:59 [omega.core.data_logger] INFO — omega.policy.response :: apply_to_phase
+2026-05-11 21:56:59 [omega.core.data_logger] INFO — omega.policies :: policy_apply_called
+2026-05-11 21:56:59 [omega.guardian.terminal_feedback] INFO — brain :: brain.respond :: exit — model=voice_box
+[PHASE]      brain :: brain.respond          exit        model=voice_box
+2026-05-11 21:56:59 [omega.guardian.terminal_feedback] INFO — brain :: brain.store :: enter
+[PHASE]      brain :: brain.store            enter
+2026-05-11 21:56:59 [omega.guardian.terminal_feedback] INFO — brain :: store :: enter
+[PHASE]      brain :: store                  enter
+2026-05-11 21:56:59 [omega.guardian.terminal_feedback] INFO — brain :: store :: exit — write_skipped op=recall (question_shape)
+[PHASE]      brain :: store                  exit        write_skipped op=recall (question_shape)
+2026-05-11 21:56:59 [omega.guardian.terminal_feedback] INFO — memory.store.summary = +0.0000 — brain.store write_skipped
+[SIG]   memory.store.summary   +0.0000  — brain.store write_skipped
+2026-05-11 21:56:59 [omega.core.data_logger] INFO — omega.policy.memory :: apply_to_phase
+2026-05-11 21:56:59 [omega.core.data_logger] INFO — omega.policies :: policy_apply_called
+2026-05-11 21:56:59 [omega.core.policies] INFO — mutation intents detected: phase=brain.store cycle_id=usr_f756dd7784ec intents=['promotion_events:1']
+2026-05-11 21:56:59 [omega.guardian.terminal_feedback] INFO — brain :: brain.store :: exit — model=deterministic
+[PHASE]      brain :: brain.store            exit        model=deterministic
+2026-05-11 21:56:59 [omega.guardian.terminal_feedback] INFO — brain :: loop :: exit — source=user
+[PHASE]      brain :: loop                   exit        source=user
+2026-05-11 21:56:59 [omega.guardian.terminal_feedback] INFO — orchestrator :: brain_initiate :: exit — brain runner returned
+[PHASE] orchestrator :: brain_initiate         exit        brain runner returned
+------------------------------------------------------------
+   370.5s         BOOT P0 OMEGA -- ticks 24-27 | epoch 1
+2026-05-11 21:57:31 [omega.guardian.terminal_feedback] INFO — omega :: loop :: enter
+[PHASE]      omega :: loop                   enter
+2026-05-11 21:57:32 [omega.guardian.terminal_feedback] INFO — omega :: loop_audit :: enter
+[PHASE]      omega :: loop_audit             enter
+2026-05-11 21:57:32 [omega.core.loop_audit] WARNING — loop omega raised on cycle omega-e1: AttributeError: 'OmegaLoopContext' object has no attribute 'cycle_id'
+2026-05-11 21:57:32 [omega.guardian.terminal_feedback] INFO — omega :: loop_audit :: fail — AttributeError: 'OmegaLoopContext' object has no attribute 'cycle_id'
+[PHASE]      omega :: loop_audit             fail        AttributeError: 'OmegaLoopContext' object has no attribute 'cycle_id'
+2026-05-11 21:57:32 [omega.core.orchestrator] ERROR — orchestrator: loop 'omega' raised 'OmegaLoopContext' object has no attribute 'cycle_id'
+Traceback (most recent call last):
+  File "F:\Omega3.0\core\orchestrator.py", line 197, in run_autonomy_cycle
+    result = runner(self.shared_state)
+  File "F:\Omega3.0\core\loop_adapters.py", line 355, in runner
+    ctx_out = run_audited_loop("omega", run_omega_loop, ctx_in)
+  File "F:\Omega3.0\core\loop_audit.py", line 128, in run_audited_loop
+    result = runner(ctx)
+  File "F:\Omega3.0\metacognition\omega\loop.py", line 50, in run_omega_loop
+    emit_phase("omega", "loop", status="enter", cycle_id=context.cycle_id)
+                                                         ^^^^^^^^^^^^^^^^
+AttributeError: 'OmegaLoopContext' object has no attribute 'cycle_id'
+2026-05-11 21:57:33 [omega.guardian.terminal_feedback] INFO — omega :: loop :: fail — AttributeError: 'OmegaLoopContext' object has no attribute 'cycle_id'
+[PHASE]      omega :: loop                   fail        AttributeError: 'OmegaLoopContext' object has no attribute 'cycle_id'
+2026-05-11 21:57:33 [omega.boot] WARNING — omega loop reported failure: error_type=AttributeError error=AttributeError: 'OmegaLoopContext' object has no attribute 'cycle_id'
+============================================================
+   372.7s BOOT EPOCH 1 complete
+============================================================
+2026-05-11 21:57:33 [omega.guardian.terminal_feedback] INFO — doctrine_watcher :: check :: enter — reason=epoch_1
+[PHASE] doctrine_watcher :: check                  enter       reason=epoch_1
+2026-05-11 21:57:33 [omega.guardian.terminal_feedback] INFO — doctrine_audit :: audit :: enter — running 9 principle checks
+[PHASE] doctrine_audit :: audit                  enter       running 9 principle checks
+2026-05-11 21:57:33 [omega.guardian.terminal_feedback] INFO — doctrine_audit :: 1_phase_a_ingestion :: pass — knowledge package exposes ingest_text + retrieve_patterns + DOMAINS
+[PHASE] doctrine_audit :: 1_phase_a_ingestion    pass        knowledge package exposes ingest_text + retrieve_patterns + DOMAINS
+2026-05-11 21:57:33 [omega.guardian.terminal_feedback] INFO — doctrine_audit :: 2_schema_first :: pass — ToolSpec dataclass has 15 fields; chain order verified in synthesize_from_curiosity source
+[PHASE] doctrine_audit :: 2_schema_first         pass        ToolSpec dataclass has 15 fields; chain order verified in synthesize_from_curiosity source
+2026-05-11 21:57:33 [omega.guardian.terminal_feedback] INFO — doctrine_audit :: 3_guardian_governs :: pass — decide_spec(spec) returns Decision(kind ∈ {APPROVE, REJECT, SANDBOX_ONLY}, risk_score, risk_factors, reason)
+[PHASE] doctrine_audit :: 3_guardian_governs     pass        decide_spec(spec) returns Decision(kind ∈ {APPROVE, REJECT, SANDBOX_ONLY}, risk_score, risk_factors, reason)
+2026-05-11 21:57:33 [omega.guardian.terminal_feedback] INFO — doctrine_audit :: 4_sandbox :: pass — subprocess + cwd-isolation + wall-clock(<= 60.0s) + memory-cap(512MB) + cpu-cap(30.0s) watchdog (verified live [cached a
+[PHASE] doctrine_audit :: 4_sandbox              pass        subprocess + cwd-isolation + wall-clock(<= 60.0s) + memory-cap(512MB) + cpu-cap(30.0s) watchdog (verified live [cached a
+2026-05-11 21:57:33 [omega.guardian.terminal_feedback] INFO — doctrine_audit :: 5_reliability_score :: pass — ToolReliabilityStats: success_rate + reliability_score properties; auto-transitions at >= 0.9 (graduate, min 10) and <=
+[PHASE] doctrine_audit :: 5_reliability_score    pass        ToolReliabilityStats: success_rate + reliability_score properties; auto-transitions at >= 0.9 (graduate, min 10) and <=
+2026-05-11 21:57:33 [omega.guardian.terminal_feedback] INFO — doctrine_audit :: 6_curiosity_driven :: pass — detect_tool_needs(omega_evaluation, opportunity_signals, failure_threshold) + record_task_failure(signature) + synthesiz
+[PHASE] doctrine_audit :: 6_curiosity_driven     pass        detect_tool_needs(omega_evaluation, opportunity_signals, failure_threshold) + record_task_failure(signature) + synthesiz
+2026-05-11 21:57:33 [omega.metacognition.omega.tool_synthesis.spec_synthesizer] INFO — spec_synthesizer: emitted spec-aa50672612e1 for domain=basic_computation (need=cur-audit-e2e, patterns=0)
+2026-05-11 21:57:33 [omega.guardian.tool_decision] INFO — tool_decision: SANDBOX_ONLY spec=spec-aa50672612e1 risk=0.20 factors=['no_pattern_grounding']
+2026-05-11 21:57:33 [omega.guardian.terminal_feedback] INFO — guardian :: decide_spec :: SANDBOX_ONLY — spec=spec-aa50672612e1 risk=0.20
+[PHASE]   guardian :: decide_spec            SANDBOX_ONLY  spec=spec-aa50672612e1 risk=0.20
+2026-05-11 21:57:33 [omega.guardian.terminal_feedback] INFO — doctrine_audit :: 7_end_to_end_chain :: pass — chain produced spec=spec-aa50672612e1 decision=SANDBOX_ONLY risk=0.20 tool=cur_cur_audit_e2e | patterns=0 for basic_comp
+[PHASE] doctrine_audit :: 7_end_to_end_chain     pass        chain produced spec=spec-aa50672612e1 decision=SANDBOX_ONLY risk=0.20 tool=cur_cur_audit_e2e | patterns=0 for basic_comp
+2026-05-11 21:57:33 [omega.guardian.terminal_feedback] INFO — doctrine_audit :: 8_scope_discipline :: pass — DOMAINS == ['basic_computation', 'data_formatting', 'file_operations', 'logging_tracking', 'simple_api_calls'] (5 core)
+[PHASE] doctrine_audit :: 8_scope_discipline     pass        DOMAINS == ['basic_computation', 'data_formatting', 'file_operations', 'logging_tracking', 'simple_api_calls'] (5 core)
+2026-05-11 21:57:33 [omega.guardian.terminal_feedback] INFO — doctrine_audit :: 9_lifecycle_moat :: pass — tool_lifecycle_ops exposes 9 required operations + audit at .omega_data/data/tool_lifecycle_audit.jsonl
+[PHASE] doctrine_audit :: 9_lifecycle_moat       pass        tool_lifecycle_ops exposes 9 required operations + audit at .omega_data/data/tool_lifecycle_audit.jsonl
+2026-05-11 21:57:33 [omega.guardian.terminal_feedback] INFO — doctrine_audit :: audit :: ok — compliant=9/9 blockers=[]
+[PHASE] doctrine_audit :: audit                  ok          compliant=9/9 blockers=[]
+2026-05-11 21:57:33 [omega.guardian.terminal_feedback] INFO — doctrine_watcher :: check :: ok — reason=epoch_1 compliant=9/9 slipped=0 recovered=0 intervention=none
+[PHASE] doctrine_watcher :: check                  ok          reason=epoch_1 compliant=9/9 slipped=0 recovered=0 intervention=none
+2026-05-11 21:57:56 [omega.memory.strength_index] INFO — StrengthIndex flushed at shutdown (reason=SIGINT, 23 records)
+2026-05-11 21:57:56 [omega.guardian.terminal_feedback] INFO — orchestrator :: shutdown :: enter — 1 cycles completed
+[PHASE] orchestrator :: shutdown               enter       1 cycles completed
+============================================================
+   396.3s BOOT SHUTTING DOWN 1 cycles completed
+2026-05-11 21:57:59 [omega.hud.spawner] INFO — hud spawner: HUD listener stopped
+   399.3s BOOT HUD stopped
+   399.3s BOOT Logs FLUSHED
+   399.3s BOOT Omega 3.0 OFFLINE
+============================================================
+2026-05-11 21:57:59 [omega.boot] INFO — Shutdown complete: 1 cycles
+2026-05-11 21:57:59 [omega.guardian.terminal_feedback] INFO — orchestrator :: shutdown :: exit — 1 cycles completed
+[PHASE] orchestrator :: shutdown               exit        1 cycles completed
+2026-05-11 21:58:00 [omega.memory.strength_index] INFO — StrengthIndex flushed at shutdown (reason=atexit, 23 records)
+(.venv-brain) PS F:\Omega3.0>

@@ -1,0 +1,5 @@
+{
+    "target": "AIE2",
+    "cache_dir": "C:\\temp\\vaip_cache",
+    "device": "npu"
+}

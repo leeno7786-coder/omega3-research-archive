@@ -1,0 +1,201 @@
+# JSON Schema (YAML) — pressure loop canonical types
+# Authority: pressure_loop/contributors.py, pressure_loop/pressure.py
+# Episode pressure snapshot: pressure_loop/episode.py (live authority)
+
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "omega://schema/pressure/v1"
+title: PressureLoopTypes
+description: |
+  Canonical datatypes for the pressure tick loop. Contributors are gathered
+  each tick; EpisodeIgnition is emitted when aggregate pressure crosses the
+  effective open threshold while no episode is active.
+
+definitions:
+  unit_scalar:
+    type: number
+    minimum: 0.0
+    maximum: 1.0
+
+  contributor_source:
+    type: string
+    description: |
+      Contributor provenance. Internal Omega and recall/taxonomy observations
+      are distinct from operator ingress and remain bounded by pressure policy.
+    enum: [operator, autonomous, system, omega, memory_taxonomy, recall_verdict]
+
+  contributor_type:
+    type: string
+    description: |
+      Canonical contributor.type values used by pressure_loop.pressure after
+      field-id mapping. Operator ingress may refine operator_message into
+      operator_command | operator_query | operator_response. Phase 7M taxonomy
+      pressure uses recommended_pressure kinds (capability_gap, repair_needed, …)
+      as type when source=memory_taxonomy.
+    enum:
+      - curiosity_gap
+      - operator_command
+      - operator_query
+      - operator_response
+      - proactive_update
+      - outstanding_question
+      - epistemic_emptiness
+      - idle_probe_aggregate
+      - learning_debt
+      - operator_intent
+      - neuromod_spike
+      - mastery_gap
+      - identity_gap
+      - trajectory_gap
+      - execution_gap
+      - application_gap
+      - execution_continuation
+      - operator_priority
+      - capability_gap
+      - tool_failure
+      - repair_needed
+      - verification_needed
+      - incomplete_task
+      - confidence_reinforcement
+      - requires_operator_input
+      - clarification_gap
+      - self_wake
+      - memory_integrity
+      - plugin_permission_decision
+      - memory_gap
+      - sense_resolution
+      - memory_reconciliation
+
+  Contributor:
+    type: object
+    additionalProperties: false
+    required: [source, type, weight, metadata]
+    properties:
+      source:
+        $ref: "#/definitions/contributor_source"
+      type:
+        $ref: "#/definitions/contributor_type"
+      weight:
+        $ref: "#/definitions/unit_scalar"
+      metadata:
+        type: object
+        description: Reader-specific detail (field_id, message, ingress_class, …)
+        additionalProperties: true
+
+  EpisodeIgnition:
+    type: object
+    additionalProperties: false
+    required:
+      - episode_id
+      - aggregate_pressure
+      - opened_by
+      - dominant_contributor
+      - contributors
+    properties:
+      episode_id:
+        type: string
+        format: uuid
+      aggregate_pressure:
+        $ref: "#/definitions/unit_scalar"
+      opened_by:
+        type: string
+        description: dominant_contributor.type at ignition
+      dominant_contributor:
+        $ref: "#/definitions/Contributor"
+      contributors:
+        type: array
+        items:
+          $ref: "#/definitions/Contributor"
+        minItems: 1
+      trajectory_snapshot:
+        type: object
+        nullable: true
+        additionalProperties: true
+        description: Copy of LAST_OMEGA_TRAJECTORY at open (optional)
+
+  PressureContributorSnapshot:
+    type: object
+    additionalProperties: false
+    required: [id, weight]
+    properties:
+      id:
+        type: string
+        description: pressure_field contributor id or canonical type
+      weight:
+        $ref: "#/definitions/unit_scalar"
+      detail:
+        type: object
+        additionalProperties: true
+        default: {}
+
+  EpisodePressureSnapshot:
+    type: object
+    additionalProperties: false
+    required: [aggregate, contributors]
+    properties:
+      aggregate:
+        $ref: "#/definitions/unit_scalar"
+      contributors:
+        type: array
+        items:
+          $ref: "#/definitions/PressureContributorSnapshot"
+      cognitive_churn:
+        type: object
+        additionalProperties: true
+
+  NeuromodSnapshot:
+    type: object
+    additionalProperties: false
+    properties:
+      dopamine:
+        $ref: "#/definitions/unit_scalar"
+      serotonin:
+        $ref: "#/definitions/unit_scalar"
+      stress:
+        $ref: "#/definitions/unit_scalar"
+      spike:
+        $ref: "#/definitions/unit_scalar"
+
+  PressureEvaluationRequest:
+    type: object
+    required: [contributors, active_episode]
+    properties:
+      contributors:
+        type: array
+        items:
+          $ref: "#/definitions/Contributor"
+      active_episode:
+        type: boolean
+      open_threshold:
+        $ref: "#/definitions/unit_scalar"
+      neuromod:
+        $ref: "#/definitions/NeuromodSnapshot"
+      trajectory_snapshot:
+        type: object
+        nullable: true
+
+  PressureEvaluationResult:
+    type: object
+    properties:
+      ignition:
+        oneOf:
+          - $ref: "#/definitions/EpisodeIgnition"
+          - type: "null"
+      queued_operator_only:
+        type: boolean
+        description: True when active_episode caused operator-only enqueue
+
+  PressureConfig:
+    type: object
+    required: [pressure]
+    properties:
+      pressure:
+        type: object
+        properties:
+          tick_interval_seconds: { type: number }
+          open_threshold: { type: number }
+          winner_margin: { type: number }
+          neuromod:
+            type: object
+            properties:
+              weight_modulation: { type: object }
+              tonic_decay: { type: object }

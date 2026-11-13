@@ -1,0 +1,19 @@
+# =============================================================================
+# Reflection window — 10-episode Omega input window
+# =============================================================================
+#
+# Consumed by: pressure_loop/reflection_window.py, pressure_loop/episode.py
+# Policy: policy/reflection_window.policy.yaml
+#
+# =============================================================================
+
+reflection_window:
+  window_size: 10
+  # WO-10: the bounded history a sealed window may cite (omega_loop/window/history.py).
+  # record_cap bounds admitted history units per window; token_candidate_cap is carried for
+  # WO-12's verified token accounting and is not a character estimate; the policy revision pins
+  # the retrieval policy the code implements, and a mismatch is refused.
+  history:
+    record_cap: 24
+    token_candidate_cap: 6000
+    retrieval_policy_revision: "omega_loop.window.history/1"

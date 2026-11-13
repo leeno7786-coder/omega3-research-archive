@@ -1,0 +1,38 @@
+# =============================================================================
+# Text-to-speech — runtime synthesise socket defaults
+# =============================================================================
+#
+# Consumed by: runtime/tts.py, runtime/client.py (synthesise timeout)
+# Runtime socket: config/runtime.yaml services.tts
+#
+# Qwen is explicitly selected. Local mind seats use CPU. Cloud mind seats use
+# the configured Vulkan GPU device. Missing payload or backend startup failure
+# is reported as unavailable; another voice engine must not silently replace it.
+#
+# =============================================================================
+
+tts:
+  engine: qwen
+  default_voice: Aiden
+  length_scale: 1.0
+  synthesise_timeout_seconds: 180
+  warmup_on_boot: true
+  qwen:
+    # Paths are relative to the portable Omega root unless absolute or
+    # overridden by OMEGA_QWEN_TTS_ROOT / OMEGA_QWEN_TTS_BIN.
+    # The voice payload sits beside the product tree, at the root that holds
+    # it: the SSD root beside a development checkout, and the package root
+    # beside Omega/ in a release. scripts/build_portable.ps1 reads this value
+    # and stages the payload exactly there, so the same relative path resolves
+    # on any machine the product is moved to.
+    root: ../models/qwen3-tts
+    binary: ../models/qwen3-tts/tts-server.exe
+    model: qwen-talker-0.6b-customvoice-Q8_0.gguf
+    codec: qwen-tokenizer-12hz-Q8_0.gguf
+    speaker: Aiden
+    # GPU placement for the cloud mind seat. Local mind seats override this
+    # with CPU at service construction; a failed backend match blocks readiness.
+    device: Vulkan0
+    provider: vulkan
+    alias: omega-qwen3-tts
+    start_timeout_seconds: 120

@@ -1,0 +1,25 @@
+# =============================================================================
+# Boot lifecycle — ordered start manifest + reverse teardown
+# =============================================================================
+#
+# Consumed by: core/boot_lifecycle.py, boot.py
+# Policy: policy/boot.policy.yaml
+# Schema: schema/boot.schema.yaml
+#
+# =============================================================================
+
+boot:
+  enabled: true
+  components:
+    - boot_lock
+    # runtime_process: the Omega-owned local-services process spawned by the
+    # supervisor.
+    # Placed right after boot_lock so reverse teardown kills it after substrate
+    # persist but before the lock releases. Operator-started runtimes are never
+    # recorded here, so they survive brain restarts.
+    - runtime_process
+    - substrate
+    - mcp_host
+    - cognition_runtime
+    - hud
+    - pressure_loop

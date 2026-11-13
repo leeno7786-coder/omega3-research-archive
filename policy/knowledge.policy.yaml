@@ -1,0 +1,39 @@
+# Knowledge extractor — operational policy
+# Code: knowledge_extractor/
+# Config: config/knowledge.yaml
+
+version: 1
+
+enabled: true
+deterministic_derive: true
+models: none
+
+role:
+  description: |
+    Post-processing pipeline: unstructured tool outputs → KnowledgeArtifact JSONL
+    buffer for future DeepSleep mastery. Not a model tool — a cognition-side
+    structuring layer between LEARN/tool outputs and mastery tracking.
+
+sequence:
+  - module: knowledge_extractor.ingest.run
+    output: normalized_text
+  - module: knowledge_extractor.derive.run
+    output: structured_fields
+  - module: knowledge_extractor.store.run
+    output: artifact_id
+
+writes:
+  path: knowledge_extractor/state/artifacts.jsonl
+  loader: pressure_loop.policy.knowledge_artifact_store_path
+  failure_soft: true
+
+integration_status:
+  learn_pipeline_wired: true
+  note: |
+    Live since config/knowledge.yaml learn_integration.wired=true —
+    auto_loop/execute/run.py::_maybe_extract_knowledge distills successful LEARN
+    tool results into KnowledgeArtifacts (gate: knowledge_learn_integration_wired).
+
+alignment:
+  schema: schema/knowledge.schema.yaml
+  spec: docs/architecture/TOOL_INTEGRATION.md §3

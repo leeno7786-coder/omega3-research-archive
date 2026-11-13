@@ -1,0 +1,27 @@
+name: Source archive sanity
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  syntax:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Parse every Python source file
+        run: |
+          python - <<'PY'
+          import ast
+          from pathlib import Path
+          count = 0
+          for path in Path('.').rglob('*.py'):
+              if '.git' in path.parts or '__pycache__' in path.parts:
+                  continue
+              ast.parse(path.read_text(encoding='utf-8-sig'), filename=str(path))
+              count += 1
+          print(f'Parsed {count} Python files')
+          PY

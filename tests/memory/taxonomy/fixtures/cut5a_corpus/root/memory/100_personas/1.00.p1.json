@@ -1,0 +1,44 @@
+{
+  "coord": [
+    1,
+    0,
+    0
+  ],
+  "domain": "noah",
+  "enrichment": {
+    "canonical": true,
+    "closed_at": "2026-06-29T10:04:00Z",
+    "entities": [
+      {
+        "facet": "name",
+        "name": "Noah",
+        "subject": "operator"
+      },
+      {
+        "facet": "relationship",
+        "linked_name": "Abel",
+        "name": "son",
+        "subject": "operator"
+      },
+      {
+        "facet": "business",
+        "name": "Omega AI",
+        "subject": "operator"
+      },
+      {
+        "facet": "occupation",
+        "name": "engineer",
+        "subject": "operator"
+      },
+      {
+        "facet": "location",
+        "name": "Texas",
+        "subject": "operator"
+      }
+    ]
+  },
+  "id": "1.00.p1",
+  "summary": "Persona record with parsed relations.",
+  "title": "About Noah",
+  "type": "concept"
+}

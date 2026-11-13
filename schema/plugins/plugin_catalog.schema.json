@@ -1,0 +1,185 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://omega2ai.com/schema/plugins/plugin_catalog.schema.json",
+  "title": "Omega Marketplace Plugin Catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "catalog_id",
+    "publisher_id",
+    "sequence",
+    "entries",
+    "signing_key_id",
+    "signature"
+  ],
+  "properties": {
+    "schema_version": {"const": 2},
+    "catalog_id": {"$ref": "#/$defs/identifier"},
+    "publisher_id": {"$ref": "#/$defs/identifier"},
+    "sequence": {"type": "integer", "minimum": 1},
+    "entries": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/entry"}
+    },
+    "signing_key_id": {"$ref": "#/$defs/identifier"},
+    "signature": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9+/]{85}[AQgw]==(?![\\s\\S])"
+    }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._+-]*(?![\\s\\S])"
+    },
+    "digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}(?![\\s\\S])"
+    },
+    "nullable_digest": {
+      "oneOf": [{"type": "null"}, {"$ref": "#/$defs/digest"}]
+    },
+    "semver": {
+      "type": "string",
+      "pattern": "^(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)(?:-(?:0|[1-9][0-9]*|[0-9A-Za-z-]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9A-Za-z-]*[A-Za-z-][0-9A-Za-z-]*))*)?(?:\\+[0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*)?(?![\\s\\S])"
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9](?:[a-z0-9_-]{0,30}[a-z0-9])?(?![\\s\\S])"
+    },
+    "package_uri": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://[a-z0-9](?:[a-z0-9-]*[a-z0-9])?(?:\\.[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)*(?:/(?!(?:\\.|\\.\\.)(?:/|(?![\\s\\S])))[A-Za-z0-9._~!$&'()*+,;=:@+-]+)+(?![\\s\\S])"
+    },
+    "https_url": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://[a-z0-9](?:[a-z0-9-]*[a-z0-9])?(?:\\.[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)*(?:/(?!(?:\\.|\\.\\.)(?:/|(?![\\s\\S])))[A-Za-z0-9._~!$&'()*+,;=:@+-]+)*(?![\\s\\S])"
+    },
+    "nullable_https_url": {
+      "oneOf": [{"type": "null"}, {"$ref": "#/$defs/https_url"}]
+    },
+    "package_path": {
+      "type": "string",
+      "pattern": "^(?!\\.{1,2}(?:/|(?![\\s\\S])))[A-Za-z0-9._-]+(?:/(?!\\.{1,2}(?:/|(?![\\s\\S])))[A-Za-z0-9._-]+)*(?![\\s\\S])"
+    },
+    "nullable_package_path": {
+      "oneOf": [{"type": "null"}, {"$ref": "#/$defs/package_path"}]
+    },
+    "utc_timestamp": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z(?![\\s\\S])"
+    },
+    "distribution": {
+      "type": "object",
+      "required": ["kind"],
+      "properties": {
+        "kind": {"enum": ["remote_package", "remote_mcp", "portable_package"]},
+        "remote_origin": {"$ref": "#/$defs/https_url"},
+        "artifact_sha256": {"$ref": "#/$defs/digest"}
+      },
+      "additionalProperties": false,
+      "oneOf": [
+        {
+          "properties": {"kind": {"const": "remote_package"}},
+          "required": ["kind"],
+          "not": {
+            "anyOf": [
+              {"required": ["remote_origin"]},
+              {"required": ["artifact_sha256"]}
+            ]
+          }
+        },
+        {
+          "properties": {"kind": {"const": "remote_mcp"}},
+          "required": ["kind", "remote_origin"],
+          "not": {"required": ["artifact_sha256"]}
+        },
+        {
+          "properties": {"kind": {"const": "portable_package"}},
+          "required": ["kind", "artifact_sha256"],
+          "not": {"required": ["remote_origin"]}
+        }
+      ]
+    },
+    "release_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["plugin_version", "package_sha256"],
+      "properties": {
+        "plugin_version": {"$ref": "#/$defs/semver"},
+        "package_sha256": {"$ref": "#/$defs/digest"}
+      }
+    },
+    "entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "plugin_id",
+        "publisher_id",
+        "plugin_version",
+        "manifest_sha256",
+        "package_sha256",
+        "package_uri",
+        "title",
+        "summary",
+        "categories",
+        "search_terms",
+        "icon_asset_path",
+        "support_url",
+        "source_url",
+        "trust_tier",
+        "distribution",
+        "provenance_sha256",
+        "released_at",
+        "pricing",
+        "offline_capable",
+        "release_history",
+        "update_notes_sha256"
+      ],
+      "properties": {
+        "plugin_id": {"$ref": "#/$defs/identifier"},
+        "publisher_id": {"$ref": "#/$defs/identifier"},
+        "plugin_version": {"$ref": "#/$defs/semver"},
+        "manifest_sha256": {"$ref": "#/$defs/digest"},
+        "package_sha256": {"$ref": "#/$defs/digest"},
+        "package_uri": {"$ref": "#/$defs/package_uri"},
+        "title": {"type": "string", "minLength": 1, "maxLength": 80},
+        "summary": {"type": "string", "minLength": 1, "maxLength": 280},
+        "categories": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 4,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/slug"}
+        },
+        "search_terms": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 12,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/slug"}
+        },
+        "icon_asset_path": {"$ref": "#/$defs/nullable_package_path"},
+        "support_url": {"$ref": "#/$defs/nullable_https_url"},
+        "source_url": {"$ref": "#/$defs/https_url"},
+        "trust_tier": {"enum": ["omega_verified", "publisher_verified", "personal"]},
+        "distribution": {"$ref": "#/$defs/distribution"},
+        "provenance_sha256": {"$ref": "#/$defs/digest"},
+        "released_at": {"$ref": "#/$defs/utc_timestamp"},
+        "pricing": {"enum": ["free", "paid", "unknown"]},
+        "offline_capable": {"type": "boolean"},
+        "release_history": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 8,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/release_record"}
+        },
+        "update_notes_sha256": {"$ref": "#/$defs/nullable_digest"}
+      }
+    }
+  }
+}

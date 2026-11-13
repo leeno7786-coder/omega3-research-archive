@@ -1,0 +1,13 @@
+{
+  "repository": "https://github.com/modelcontextprotocol/ext-tasks",
+  "commit": "2c1425d9a288b9b1f489430fe1e00bb392b47e48",
+  "path": "schema/draft/schema.json",
+  "sha256": "b17cb4a2534379c214b17770bd5d3d54f69fde16a953bfb542c58235a61274bb",
+  "license": {
+    "name": "Apache License 2.0",
+    "spdx_id": "Apache-2.0",
+    "path": "LICENSE",
+    "url": "https://github.com/modelcontextprotocol/ext-tasks/blob/2c1425d9a288b9b1f489430fe1e00bb392b47e48/LICENSE"
+  },
+  "retrieval_date": "2026-08-16"
+}

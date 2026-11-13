@@ -1,0 +1,22 @@
+# =============================================================================
+# Directive tools — IMAGE_CREATE / DOCUMENT_CREATE routing
+# =============================================================================
+#
+# Consumed by: core.directives_config (config bundle loader)
+# Callers: pressure_loop/operator_chat.py, meta_loop/tool/run.py
+#
+# =============================================================================
+
+directives:
+  image_create:
+    intent: IMAGE_CREATE
+    route: auto_loop.route
+    runtime_capability: image_gen
+  document_create:
+    intent: DOCUMENT_CREATE
+    route: auto_loop.route
+    runtime_capability: document_parsing
+  plugin_operation:
+    intent: PLUGIN_OPERATION
+    route: auto_loop.route
+    runtime_capability: mcp_plugin

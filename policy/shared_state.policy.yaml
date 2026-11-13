@@ -1,0 +1,26 @@
+# SharedState persistence policy — Guardian durable write contract
+# Consumed by: guardian/state_persistence.py
+# Validation: core.shared_state_keys.KEY_REGISTRY + guardian/state_persistence.py
+
+version: 1
+
+persistence:
+  atomic: true
+  cadence: post_loop
+  min_interval_seconds: 0.5
+  retention_snapshots: 1
+  restore_at_boot: true
+  hydrate_max_age_seconds: 21600
+
+validation:
+  on_canonical_shape_violation: raise
+  on_unknown_key_write: allow
+
+audit:
+  emit_phase: true
+  emit_restore_phase: true
+  embed_manifest: true
+
+keys:
+  conversation_state:
+    persist: false

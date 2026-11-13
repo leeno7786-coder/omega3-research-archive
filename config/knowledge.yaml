@@ -1,0 +1,14 @@
+# =============================================================================
+# Knowledge extractor — artifact buffer (DeepSleep consumes later)
+# =============================================================================
+#
+# Consumed by: pressure_loop.policy (knowledge_artifact_store_path)
+# Authority: knowledge_extractor.store.run
+#
+# =============================================================================
+
+knowledge:
+  artifact_store_path: knowledge_extractor/state/artifacts.jsonl
+  learn_integration:
+    wired: true
+    post_tool_hook: auto_loop.execute._maybe_extract_knowledge

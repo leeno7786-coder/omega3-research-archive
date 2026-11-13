@@ -1,0 +1,45 @@
+# =============================================================================
+# Pressure loop — conductor cadence & evaluation
+# =============================================================================
+#
+# Consumed by pressure_loop.policy.* helpers. This file is the AUTHORITATIVE
+# BASE for the pressure block: policy/symphony.policy.yaml overlays it per-key
+# (symphony wins for anything it declares), and when symphony.yaml is absent
+# this file is the sole, production-correct source. (core.symphony_policy was
+# retired in the v2 rebuild — pressure_loop.policy replaced it.)
+#
+# Code anchors:
+#   - pressure_loop.loop.run_pressure_tick_loop
+#   - pressure_loop.pressure.evaluate
+#   - pressure_loop.pressure_field.build_registry (contributor reader registry)
+#
+# =============================================================================
+
+pressure:
+  # Wall-clock seconds between ticks (sole product sleep interval).
+  tick_interval_seconds: 5
+
+  # Hybrid ignition: dominant contributor must reach this ceiling.
+  # Set to 0.10 (= the deepsleep mastery knowledge_increment) so autonomous
+  # learning drives can ignite: a mastery_gap weight is target-knowledge, and
+  # the loop must continue until knowledge reaches target. The threshold must
+  # be <= the increment, else learning stalls in a dead band of width T just
+  # below target (the contributor exists but can't clear the gate). At 0.10 the
+  # last ignitable step (knowledge target-0.10, weight ~0.10) fires and reaches
+  # target. Operator inputs ride ~1.0 and clear it regardless. (7c, 2026-06-05)
+  open_threshold: 0.10
+  # Top must exceed runner-up by at least this margin or suppress ambiguous_winner.
+  winner_margin: 0.05
+
+  neuromod:
+    # Weight scale: gamma = clamp(1 + dopamine_coeff * dopamine, min, max)
+    weight_modulation:
+      enabled: true
+      dopamine_coeff: 0.5
+      gamma_min: 0.25
+      gamma_max: 2.5
+    # Tonic inhibitor: refreshed on episode close, decays on idle ticks only.
+    tonic_decay:
+      enabled: true
+      decay_rate: 0.4
+      baseline: 0.0

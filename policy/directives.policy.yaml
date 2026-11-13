@@ -1,0 +1,32 @@
+# Directive tools — operational policy (behavioral contract)
+# Code: pressure_loop/operator_chat.py, global_loop/intent/run.py
+
+version: 1
+
+enabled: true
+
+role:
+  description: |
+    Deterministic UI directive routing for image, document, and signed plugin
+    operations. This is the explicit-directive path outside normal AUTO
+    inference dispatch.
+
+directives:
+  image_create:
+    intent: IMAGE_CREATE
+    ingress: operator_command
+  document_create:
+    intent: DOCUMENT_CREATE
+    ingress: operator_command
+  plugin_operation:
+    intent: PLUGIN_OPERATION
+    ingress: operator_command
+
+constraints:
+  no_symphony_outlet_placeholder: true
+  guardian_required_for_persist: true
+
+alignment:
+  config: config/directives.yaml
+  schema: schema/directives.schema.yaml
+  tools_policy: policy/tools.policy.yaml

@@ -1,0 +1,160 @@
+{
+  "$comment": "Current Omega portable modality assets. Model paths are relative to this manifest directory; Qwen3-TTS is staged at the release root beside Omega. The cognition language-model seat is deployment-owned and is not listed here.",
+  "version": "2.0",
+  "schema": "current_modality_manifest",
+  "models": {
+    "dme_overlap_matmul": {
+      "name": "DME packed overlap matmul",
+      "owner": "runtime.local_services",
+      "default_variant": "onnx",
+      "variants": {
+        "onnx": {
+          "path": "onnxs/dme/overlap_matmul.onnx",
+          "format": "onnx",
+          "bytes": 156,
+          "sha256": "30b79950d075a15b1f8ba410c9f1d5c4fced48cd50312d50c9f69f0c051a073f",
+          "backends": [
+            "VitisAIExecutionProvider",
+            "QNNExecutionProvider",
+            "CPUExecutionProvider"
+          ],
+          "shipped": true
+        }
+      }
+    },
+    "parakeet_stt": {
+      "name": "Parakeet CrispASR STT",
+      "owner": "runtime.local_services",
+      "default_variant": "gguf_q4_k",
+      "variants": {
+        "gguf_q4_k": {
+          "path": "ggufs/crispasr/parakeet-tdt-0.6b-v3-q4_k.gguf",
+          "format": "gguf",
+          "bytes": 417894912,
+          "sha256": "addef407ab841eef45739e78920fd8c00e63f78eaa823c490e600e0ab58080a1",
+          "backends": [
+            "cpu",
+            "vulkan"
+          ],
+          "shipped": true
+        }
+      }
+    },
+    "face_det_10g": {
+      "name": "InsightFace SCRFD det_10g",
+      "owner": "runtime.face.recognizer",
+      "default_variant": "onnx_cpu",
+      "variants": {
+        "onnx_cpu": {
+          "path": "onnxs/face/det_10g.onnx",
+          "format": "onnx",
+          "bytes": 16923827,
+          "sha256": "5838f7fe053675b1c7a08b633df49e7af5495cee0493c7dcf6697200b85b5b91",
+          "backends": [
+            "CPUExecutionProvider"
+          ],
+          "shipped": true
+        }
+      }
+    },
+    "face_w600k_r50": {
+      "name": "InsightFace ArcFace w600k_r50",
+      "owner": "runtime.face.recognizer",
+      "default_variant": "onnx_cpu",
+      "variants": {
+        "onnx_cpu": {
+          "path": "onnxs/face/w600k_r50.onnx",
+          "format": "onnx",
+          "bytes": 174383860,
+          "sha256": "4c06341c33c2ca1f86781dab0e829f88ad5b64be9fba56e56bc9ebdefc619e43",
+          "backends": [
+            "CPUExecutionProvider"
+          ],
+          "shipped": true
+        }
+      }
+    },
+    "face_2d106det": {
+      "name": "InsightFace 2D landmarks 106",
+      "owner": "runtime.face.recognizer",
+      "default_variant": "onnx_cpu",
+      "variants": {
+        "onnx_cpu": {
+          "path": "onnxs/face/2d106det.onnx",
+          "format": "onnx",
+          "bytes": 5030888,
+          "sha256": "f001b856447c413801ef5c42091ed0cd516fcd21f2d6b79635b1e733a7109dbf",
+          "backends": [
+            "CPUExecutionProvider"
+          ],
+          "shipped": true
+        }
+      }
+    },
+    "face_1k3d68": {
+      "name": "InsightFace 3D landmarks 68",
+      "owner": "runtime.face.recognizer",
+      "default_variant": "onnx_cpu",
+      "variants": {
+        "onnx_cpu": {
+          "path": "onnxs/face/1k3d68.onnx",
+          "format": "onnx",
+          "bytes": 143607619,
+          "sha256": "df5c06b8a0c12e422b2ed8947b8869faa4105387f199c477af038aa01f9a45cc",
+          "backends": [
+            "CPUExecutionProvider"
+          ],
+          "shipped": true
+        }
+      }
+    },
+    "face_genderage": {
+      "name": "InsightFace gender and age",
+      "owner": "runtime.face.recognizer",
+      "default_variant": "onnx_cpu",
+      "variants": {
+        "onnx_cpu": {
+          "path": "onnxs/face/genderage.onnx",
+          "format": "onnx",
+          "bytes": 1322532,
+          "sha256": "4fde69b1c810857b88c64a335084f1c3fe8f01246c9a191b48c7bb756d6652fb",
+          "backends": [
+            "CPUExecutionProvider"
+          ],
+          "shipped": true
+        }
+      }
+    },
+    "qwen3_tts": {
+      "name": "Qwen3-TTS 0.6B CustomVoice",
+      "owner": "runtime.local_services",
+      "default_variant": "customvoice_q8_0",
+      "payload_root": "../../models/qwen3-tts",
+      "provider": "vulkan",
+      "device": "Vulkan0",
+      "variants": {
+        "customvoice_q8_0": {
+          "path": "../../models/qwen3-tts/qwen-talker-0.6b-customvoice-Q8_0.gguf",
+          "format": "gguf",
+          "bytes": 968588544,
+          "sha256": "4eb38675c736ed6ac72012846ac8d6ef80e5af8bc05726870f0b3a6569588519",
+          "shipped": true
+        },
+        "codec_12hz_q8_0": {
+          "path": "../../models/qwen3-tts/qwen-tokenizer-12hz-Q8_0.gguf",
+          "format": "gguf",
+          "bytes": 291150624,
+          "sha256": "1883beeed99348fc35e23dd225e9082f93f6f8c109330a33d935baa8acdbfd94",
+          "shipped": true
+        }
+      },
+      "runtime": {
+        "path": "../../models/qwen3-tts/tts-server.exe",
+        "format": "windows-executable",
+        "bytes": 818176,
+        "sha256": "b1da6b13773ca5b2b8852cc8137286da469185aef92c4266a7e9aadca62f9649",
+        "shipped": true
+      }
+    }
+  }
+}

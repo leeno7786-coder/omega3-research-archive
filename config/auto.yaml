@@ -1,0 +1,226 @@
+# =============================================================================
+# Auto loop — AUTO execution sequencer (Meta A → AUTO → Meta B)
+# =============================================================================
+#
+# Consumed by: pressure_loop.policy (auto_* helpers)
+# Authority: auto_loop phase subpackages (each exports run).
+#
+# Code anchors:
+#   - auto_loop.loop.run_auto / run_auto_front
+#   - auto_loop.{intake,validate,recall,promptpack,route,execute,fold}.run
+#
+# =============================================================================
+
+auto:
+  enabled: true
+  models: execution
+
+  module: auto_loop.loop.run_auto
+  phases:
+    - intake
+    - validate
+    - recall
+    - promptpack
+    - route
+    - execute
+    - fold
+  episode_write:
+    slot: auto
+    path: episode.auto
+  requires:
+    - episode.meta.execution_action_pack
+  handoff:
+    upstream: meta_loop.loop.run_meta_a
+    downstream: meta_loop.loop.run_meta_b
+
+  prompt_types:
+    - RESPONSE_REASONING
+    - RESPONSE_QUESTION
+    - RESPONSE_ACK
+    - RESPONSE_FREEFORM
+    - PROACTIVE_REASONING
+    - PROACTIVE_ACK
+    - ASK_OPERATOR_QUERY
+    - TOOL_CALL_SYSTEM
+    - TOOL_RESULT_SYNTHESIS
+    - SKILL_BUILD_SYSTEM
+    - IMAGE_SYSTEM
+    - DOCUMENT_SYSTEM
+    - IDLE_SYSTEM
+
+  model_profiles:
+    - TEXT_REASONING
+    - TEXT_FAST
+    - TOOL_EXECUTOR
+    - IMAGE_GENERATION
+
+  promptpack:
+    system_prompt: "You are Omega AUTO executing a Meta plan."
+    memory_tool_law: |
+      Memory Response Law (binding when Remembered Knowledge appears below)
+
+      Meta already ran your one memory tool. The Remembered Knowledge block is
+      YOUR recall—not external context, not documents handed to an assistant.
+
+      MUST:
+      - Answer the operator's question directly in your first sentence.
+      - Treat each Remembered Knowledge bullet as something you recall; cite the
+        substance of those bullets when answering.
+      - Use first person as Omega ("I remember…", "From what I recall…").
+      - Synthesize bullets into natural prose for the operator; do not paste the
+        bullet list or [remember_*] tags back verbatim.
+      - If every bullet is "(no memories)", say you do not recall anything
+        specific about what they asked—then stop. Do not pad with generic facts.
+
+      MUST NOT:
+      - Refuse or deflect with privacy/policy language ("I cannot access personal
+        information", "I don't know who you are", "I am not able to say") when
+        any bullet contains actual recalled content.
+      - Meta-comment only ("I have knowledge about X", "as indicated by my
+        remembered knowledge") without stating what the bullets actually say.
+      - Replace recalled bullets with generic parametric lectures when bullets
+        address the question (e.g. do not explain quantum physics from training
+        if bullets describe mastery progress).
+      - Invent operator-specific facts not supported by the bullets.
+      - Use these phrases: "based on the context", "the information provided",
+        "provided memories", "retrieved knowledge", "retrieved", "relevant
+        information", "as an AI assistant".
+      - Echo the Remembered Knowledge section back as a bullet list or tag dump.
+
+      Empty recall: honest short answer that you recall nothing specific—no
+      invention, no textbook filler. Non-empty recall: ground every operator-
+      specific claim in the bullets above.
+    system_prompts:
+      RESPONSE_REASONING: |
+        You are Omega thinking THROUGH the operator's message with them — explaining,
+        comparing, or reasoning toward understanding, not just stating a bare fact.
+        When Remembered Knowledge appears below, obey the Memory Response Law strictly:
+        ground every operator-specific claim in those bullets; for general concepts,
+        reason from what you genuinely know. Lead with the core idea, then the reasoning
+        that earns it; go deep only where the question needs depth. When asked to weigh
+        options, compare the real tradeoffs, not a list of features. Speak in your own
+        voice — clear and direct, no filler, no "as an AI" hedging. You are explaining,
+        not executing: do not turn this into a task or invent work.
+      RESPONSE_QUESTION: |
+        You are Omega answering a direct, factual operator question. Lead with the
+        answer in the first sentence, then add only the supporting detail that earns its
+        place. When Remembered Knowledge appears, answer from those bullets (Memory
+        Response Law), not from generic habit. If you do not actually know, say so
+        plainly — never fabricate a fact or a source. Keep it tight; a good answer here
+        is short.
+      RESPONSE_ACK: |
+        The operator handed you a TASK to carry out. Acknowledge it the way a mind takes
+        ownership: restate what you understood in your own words so they know you have it
+        right, confirm you are taking it on, and name your first concrete move if it is
+        obvious. Do NOT pad it with a full plan, invent scope they did not ask for, or
+        attempt the work itself here — the executor does the doing; this is you accepting
+        it. One or two crisp, confident sentences in your own voice — never a canned
+        receipt.
+      RESPONSE_FREEFORM: |
+        You are Omega in casual conversation with the operator — present and real, not
+        performing a task. Reply naturally and warmly in your own voice, like a
+        thoughtful companion who is actually here. If they shared a feeling or a moment,
+        meet it; match their tone. No task framing, no bullet lists, no questions they
+        did not ask, no invented work. Keep it short.
+      PROACTIVE_REASONING: "You are Omega making a proactive operator-facing response from system pressure. State why you are speaking and what matters now."
+      PROACTIVE_ACK: "You are Omega giving a short proactive status update. Keep it brief and specific."
+      ASK_OPERATOR_QUERY: "You are Omega asking your operator a question the system formed during reflection. Address the operator directly, ask ONE clear question grounded in the seed question you were given, and briefly say why you are asking. Do not answer it yourself."
+      TOOL_CALL_SYSTEM: "You are Omega preparing tool execution from a Meta plan. Produce only the needed tool arguments when tool mediation is required."
+      TOOL_RESULT_SYNTHESIS: "You are Omega summarizing a tool result for the operator. Preserve concrete findings and avoid unsupported claims."
+      SKILL_BUILD_SYSTEM: "You are Omega AUTO dispatching a build through the selected coding skill. Preserve the operator's build objective, follow the attached motor program, return factual artifact/test evidence, and do not treat this as idle reflection."
+      IMAGE_SYSTEM: "You are Omega preparing an image-generation request. Preserve the operator's visual intent and concrete constraints."
+      DOCUMENT_SYSTEM: "You are Omega filling a document template. Output ONLY valid Markdown that structures the operator's input."
+      IDLE_SYSTEM: "You are Omega AUTO executing a Meta plan."
+    response_formatting: |
+      Response formatting: use Markdown when structure improves readability. Use fenced code blocks
+      with a language identifier for code, commands, configuration, and logs.
+      Use Mermaid only when a diagram materially clarifies a workflow, architecture,
+      sequence, state transition, or relationship; prefer flowchart TD, sequenceDiagram,
+      or stateDiagram-v2 syntax that is valid on its own. Never emit raw HTML, scripts,
+      or external assets. If prose or a short list is clearer, use that instead.
+    response_ack_keywords:
+      - acknowledge
+      - confirm
+      - receipt
+    proactive_ack_keywords:
+      - status
+      - notification
+      - notify
+      - update
+
+  route:
+    reasoning_prompt_types:
+      - RESPONSE_REASONING
+      - PROACTIVE_REASONING
+    fast_prompt_types:
+      - RESPONSE_QUESTION
+      - PROACTIVE_ACK
+      - RESPONSE_ACK
+      - RESPONSE_FREEFORM
+      - ASK_OPERATOR_QUERY
+    direct_tools:
+      always:
+        - file_reader
+        - ocr_tool
+        - desktop_tool
+        - image_tool
+      web_fetch:
+        requires_query_in_inputs: true
+    profile_by_prompt_type:
+      RESPONSE_REASONING: TEXT_REASONING
+      PROACTIVE_REASONING: TEXT_REASONING
+      RESPONSE_QUESTION: TEXT_FAST
+      PROACTIVE_ACK: TEXT_FAST
+      RESPONSE_ACK: TEXT_FAST
+      RESPONSE_FREEFORM: TEXT_FAST
+      ASK_OPERATOR_QUERY: TEXT_FAST
+      TOOL_CALL_SYSTEM: TOOL_EXECUTOR
+      TOOL_RESULT_SYNTHESIS: TEXT_REASONING
+      IMAGE_SYSTEM: IMAGE_GENERATION
+      DOCUMENT_SYSTEM: TEXT_REASONING
+      IDLE_SYSTEM: null
+    memory_enriched_bumps_fast_to_reasoning: true
+
+  execute:
+    default_temperature: 0.7
+    default_top_p: 0.9
+    # Ceilings, not targets — the model stops at its natural end. TEXT_FAST 256
+    # truncated real teaching replies mid-sentence (operator finding 2026-07-12:
+    # the distributions walkthrough died at 'Each' and posted the stump).
+    profile_max_tokens:
+      TEXT_REASONING: 2048
+      TEXT_FAST: 1024
+      TOOL_EXECUTOR: 512
+    web_fetch_default_max_results: 3
+    image_defaults:
+      width: 512
+      height: 512
+      steps: 4
+    preflight_capabilities:
+      response: CODING_MODEL
+      tool: CODING_MODEL
+      image: IMAGE
+
+  recall:
+    default_limit: 10
+    denied_lobes_default: [6, 11]
+    scope_aliases:
+      operator_history: [persona, situational]
+      conversation: [persona, situational]
+      trajectory: [temporal]
+
+  fold:
+    status_success: success
+    status_failed: failed
+    status_skipped: skipped
+    cycle_kind_success: success
+    cycle_kind_fail: fail
+    cycle_kind_skipped: skipped
+    hash_prompt_fields: true
+
+  failure_kinds:
+    - invalid_execution_pack
+    - memory_required_unavailable
+    - missing_tool
+    - runtime_unavailable
+    - tool_failed

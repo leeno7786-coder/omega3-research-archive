@@ -1,0 +1,465 @@
+OMEGA 3.0 — END-TO-END SYSTEM FLOW
+(Updated 2026-05-05 to match the current architecture after the
+ thinking-vs-action / packet-rationale / closed-feedback / scoring sweep)
+
+  Two clocks, one mind
+
+  The system runs two parallel clocks:
+
+  1. Epoch clock (boot.run_continuous, ~7-min epochs) — fires the
+     layer rotation:
+       AUTO* → GLOBAL → META → AUTO** → DEEPSLEEP → IDLE → OMEGA
+     where AUTO* is GATED on (drop file OR queue depth > 0) and
+     AUTO** is the same-cycle inline fire after META dispatch.
+     This is the heartbeat.
+  2. Cadence clock (core.cycle_cadence.tick()) — pressure-driven
+     sub-epoch firings of sweep_and_initiate. After today's TS-F
+     bridge removal it drives ASK_USER pursuits ONLY (tool_creation
+     pursuits go through Omega Phase 4 commit).
+     Tightens to 90s under high pressure, relaxes to 180s when quiet.
+
+  The thinking layers (global, meta, deepsleep, omega) fire on the
+  epoch clock every cycle. The action layer (autonomous) fires only
+  when meta has commanded it — both clocks now respect that gate.
+
+  ---
+  THE LAYERS (in epoch order)
+
+  0. Brain Loop — user/system/autonomous-initiated, NOT on the epoch
+     clock
+
+  Location: brain/brainloop.py
+  Triggers: user input via brain_receiver.handle_user_input, OR
+            core.autonomous_engine.sweep_and_initiate for ask_user
+            curiosity pursuits (cycle_cadence pressure-fired).
+  Phases:
+   1. brain.retrieve  — Perceive + classify + memory recall
+                        (Guardian classify_input runs here)
+   2. brain.translate — Act-prep: shape structured_response from
+                        posture + retrieved refs
+   3. brain.respond   — voice_box invocation + delivery
+                        (Omega execution lock honored here)
+   4. brain.verify    — autonomous-only. Feedback channel: scores
+                        cycle outcome, emits PENDING_CURIOSITY_RESOLUTION
+
+  Reads: memory lobes, conversation pool, conv-cog state.
+  Writes: last_brain_response (canonical SharedState key),
+          conversation memory, PENDING_CURIOSITY_RESOLUTION.
+  Affects: curiosity_store (resolution via curiosity_feedback_consumer),
+           memory.api (any tool-call results).
+
+  ---
+  1. AUTONOMOUS — the action layer (ticks 0–3 + post-META inline)
+
+  Location: autonomous/autonomous_loop/
+
+  GATES (today):
+   - Pre-AUTO tick (boot.py): peeks order queue + drop file BEFORE
+     invoking. If both empty → skip the entire loop with banner
+     "AUTONOMOUS idle — no orders from meta this epoch."
+   - Post-META inline (boot.py): right after META tick, re-checks
+     drop file + queue. If meta just dispatched, fires _run_loop("auto")
+     SAME EPOCH so deepsleep/omega see the result this cycle (not next).
+
+  Phases:
+   1. phase_1_read_orders — drains meta_orders.json drop into queue,
+                            peeks next, builds MetaOrders (carries
+                            rationale block) OR sets cycle_kind=
+                            META_SILENCE and returns
+   2. phase_2_build_prompt — loads tool schemas from skills lobe; if
+                            orders.tools empty OR none resolve →
+                            context.prompt = None, emit degraded.
+                            NO web_fetch synthetic fallback.
+   3. phase_3_inference  — voice_box dispatch; if prompt is None →
+                            records skip and exits
+   4. phase_3_5_dopamine /
+      phase_3_6_plasticity /
+      phase_3_7_strength /
+      phase_3_8_stress    — neuromodulator updates from outcome
+                            (autonomic modules, config-driven thresholds)
+   5. phase_4_persist    — three writes:
+                            (a) memory_writer.write_cycle_record
+                                (lobe 9 temporal; lobe 2 on success)
+                            (b) telemetry_sender.emit_cycle_event
+                                (telemetry.jsonl)
+                            (c) outcome_recorder.record_outcome  ← NEW
+                                bundles meta_packet + result +
+                                neuromodulators + goal_satisfied
+                                heuristic into autonomous_outcomes.jsonl
+                                (META_SILENCE skips — no packet to evaluate)
+
+  Reads: order queue, skills lobe (tool schemas), omega_policy.
+  Writes: memory (via memory.api), tool_reliability_store events,
+          telemetry.jsonl, autonomous_outcomes.jsonl, last_auto_cycle
+          (canonical SharedState key).
+  Affects: memory corpus, reliability stats, neuromodulator state,
+           global's next intake (via outcomes feedback).
+
+  ---
+  2. GLOBAL — goal formulation + closed-loop reflection (ticks 4–7)
+
+  Location: metacognition/global_loop/
+  Phases:
+   1. phase_1_intake          — data_aggregator.aggregate() reads:
+                                  - telemetry events (signal trends)
+                                  - knowledge_mastery
+                                  - failure_patterns
+                                  - autonomous_outcomes.jsonl  ← NEW
+                                    + outcome_summary (satisfied_rate,
+                                    by_goal_id, by_domain, unsatisfied_recent)
+                                  - curiosity_open  ← NEW
+                                    + curiosity_summary (count, by_gap_type,
+                                    by_path, high_pressure_top)
+   2. phase_2_reflection      — produces observations including
+                                  - signal-trend observations
+                                  - failure observations
+                                  - mastery observations
+                                  - unresolved-curiosity observations  ← NEW
+                                    (carries curiosity_id forward)
+                                  - goal-outcome verdicts  ← NEW
+                                    ("approaching closure" / "not converging")
+   3. phase_3_goal_formulation — synthesize(observations) with new mappings:
+                                  - learn / fix / boost / rotate /
+                                    deepen / strengthen (legacy, now
+                                    populate domain+kind+summary)
+                                  - investigate (from unresolved curiosity;
+                                    carries source_curiosity_id)
+                                  - reformulate (from unsatisfied goal)
+                                  - close (from satisfied goal)
+                                  → resolve_conflicts → deduped goals
+   4. phase_4_emission         — appends new goals to goals.jsonl
+                                  (deduped by goal_id)
+
+  Reads: telemetry, mastery, failure_audit, autonomous_outcomes,
+         curiosity_store.
+  Writes: goals.jsonl, last_global_observations + last_global_goals
+          (canonical SharedState keys).
+  Affects: what meta plans next epoch.
+
+  ---
+  3. META — planning + action-packet authoring (ticks 8–11)
+
+  Location: metacognition/meta_loop/
+  Phases:
+   1. phase_1_intake     — context_aggregator.aggregate() reads:
+                            - goals.jsonl
+                            - omega_policy
+                            - tool catalog (skills lobe + lifecycle log;
+                              deprecated/retired filtered out;
+                              tool_class enriched from lifecycle)
+                            - deepsleep summaries
+                            - active reasoning
+   2. phase_2_synthesis  — control_reasoner.synthesize(snapshot):
+                            - if snapshot["goals"] empty → returns
+                              intent="idle" (no domain invention)
+                            - else → carries source_goal_id +
+                              source_goal_kind + source_goal_summary +
+                              source_goal_priority forward
+                              (closed-loop traceability)
+   3. phase_3_assembly  — tool_selector.select_and_bind:
+                            - intent=="idle" → empty plan + idle: True
+                            - catalog match found → tool_calls bound
+                            - catalog empty (non-idle) → empty plan +
+                              record_task_failure(catalog_miss)
+                              NO web_fetch fallback per doctrine
+   4. phase_4_dispatch  — package_builder.build_and_dispatch:
+                            - SKIPS write entirely on idle/empty plan
+                            - else writes meta_orders.json with
+                              RATIONALE block:
+                                source_goal_id, source_goal_kind,
+                                source_goal_summary, source_goal_priority,
+                                why_this_tool, success_definition,
+                                capability_evidence
+
+  Reads: goals.jsonl, omega_policy, tool catalog, deepsleep summaries.
+  Writes: meta_orders.json (action contract — only when commanding
+          action), last_meta_orders (canonical SharedState key).
+  Affects: triggers SAME-EPOCH inline AUTO fire when packet written.
+
+  ---
+  4. DEEP SLEEP — memory consolidation (ticks 12–15)
+
+  Location: metacognition/deep_sleep/
+  Phases:
+   1. phase_1_intake        — collect global insights, recent memory
+                              fragments, tool registry
+   2. phase_2_reactivation  — REPLAY (BGE-driven salience scoring against
+                              open goals) + SCHEMA INTEGRATION (cosine
+                              clustering ≥0.75, ≥3 members). READ-ONLY.
+   3. phase_3_reconciliation — CONTRADICTION DETECTION (resolved via
+                               memory.api Guardian seam) + ACTIVE
+                               FORGETTING (StrengthIndex demotion;
+                               requires salience<-5 AND idle≥24h AND
+                               touch<3). The only DeepSleep phase that
+                               mutates state.
+   4. phase_4_persistence   — writes the journal entry (Omega reads it
+                              next), appends deep_sleep_recommendations.
+                              jsonl (schema_emergence + contradiction_
+                              pattern + salience_drift signals), runs
+                              DeepSleep engine consolidation, truncates
+                              replay_history
+
+  Reads: memory corpus, goals, replay_history, autonomous_outcomes
+         (via the journal/telemetry feed).
+  Writes: journal lobe, deep_sleep_recommendations.jsonl, StrengthIndex
+          demotions, contradictions resolved, last_deepsleep_consolidation
+          (canonical SharedState key).
+  Affects: Omega's next cycle (reads the journal), memory shape.
+
+  Note: 0/0/0 (schemas/contras/forgot) on a fresh sparse corpus is
+  CORRECT behavior — gates are biologically calibrated. Activates as
+  the corpus thickens.
+
+  IDLE — 120s settling (ticks 16–23)
+  Pure sleep. Lets writes durably hit disk before Omega reads.
+
+  ---
+  5. OMEGA — evolutionary governance + sole tool creator (ticks 24–27)
+
+  Location: metacognition/omega/
+
+  DOCTRINAL RULE: Phases 1/2/3 are PURELY DETERMINISTIC — no LLM
+  inference. The only model invocation in the omega tree lives in
+  Phase 4's _dispatch_tool_synthesis (and only when its three gates pass).
+
+  Phases:
+   1. phase_1_intake    — state_collector reads goals, telemetry, recent
+                          journal entries, curiosity state, reliability
+                          stats
+   2. phase_2_evaluate  — evolutionary_evaluator produces health verdict
+                          (status ∈ {healthy, growth, degradation,
+                          instability, stagnation}) and patterns (incl.
+                          missing_capability patterns). DETERMINISTIC.
+   3. phase_3_propose   — policy_designer (deterministic) produces
+                          config-change proposals; ALSO calls
+                          detect_tool_needs(omega_evaluation,
+                          opportunity_signals) → creates tool_creation
+                          curiosity entries (deduped by signature) for
+                          missing capabilities + DeepSleep recommendations
+                          + deprecated-tool replacements.
+                          ALL SCORES via core.scoring (canonical contract;
+                          see _score_synthesis_curiosity helper).
+   4. phase_4_commit    — gatekeeper validates → committer enqueues
+                          policy proposals to operator approval queue.
+                          THEN _dispatch_tool_synthesis runs:
+                            - Health gate: only fires when status ∈
+                              {healthy, growth}
+                            - Per-cycle budget: 1 synthesis max
+                            - For each pending tool_creation curiosity:
+                                * Registry-existence dedup
+                                  (_existing_active_tool_for_curiosity)
+                                  — short-circuit if active tool already
+                                  covers it (mark resolved with existing
+                                  tool_id)
+                                * synthesize_from_curiosity →
+                                  author_spec_via_inference (THIS is the
+                                  ONLY LLM CALL) → decide_spec (Guardian)
+                                  → apply_decision → generate_artifact
+                                  → register_tool + record_registration
+                                * Mark curiosity resolved with new tool's
+                                  name + spec_id
+
+  Reads: goals, journal entries, telemetry, curiosity_store,
+         deep_sleep_recommendations, tool_reliability stats.
+  Writes: policy proposals to operator approval queue, NEW TOOLS to
+          skills lobe + voice_box registry, lifecycle audit, curiosity
+          resolutions, last_omega_evaluation + last_omega_proposals
+          (canonical SharedState keys).
+  Affects: what tools meta sees next epoch (via skills lobe + tool
+           decisions log).
+
+  ---
+  THE COORDINATED ORCHESTRATION CYCLE
+
+  ┌────────────────────────────────────────────────────────────────┐
+  │ EPOCH N                                                         │
+  │                                                                  │
+  │ [autonomous*]   GATE: drop file OR queue non-empty?              │
+  │                  NO  → idle (don't fire); thinking layers        │
+  │                        continue                                  │
+  │                  YES → execute order; write outcome record       │
+  │                                                                  │
+  │ [global]        reads telemetry + curiosity_open + outcomes      │
+  │                  reflection produces investigate / reformulate / │
+  │                  close observations                              │
+  │                  → if signals justify → publish goals.jsonl      │
+  │                                                                  │
+  │ [meta]          reads goals.jsonl + tool catalog                 │
+  │                  no goals → synthesis idle → no order written    │
+  │                  goal + matching tool → meta_orders.json         │
+  │                    WITH rationale block                          │
+  │                  goal + no matching tool → catalog_miss recorded │
+  │                                                                  │
+  │ [autonomous**]  POST-META INLINE GATE: drop file present?        │
+  │                  YES → fire AUTO same-epoch, write outcome       │
+  │                  NO  → defer to next epoch                       │
+  │                                                                  │
+  │ [deepsleep]     consolidates everything that happened            │
+  │                   writes JOURNAL ENTRY                           │
+  │                   writes deep_sleep_recommendations.jsonl        │
+  │                                                                  │
+  │ [idle 120s]                                                      │
+  │                                                                  │
+  │ [omega]         reads journal + telemetry + DS recommendations + │
+  │                   outcomes + curiosity                           │
+  │                 (deterministic) phase 2 evaluates health         │
+  │                 (deterministic) phase 3 creates tool_creation    │
+  │                   curiosities for capability gaps                │
+  │                   (canonical scoring via core.scoring)           │
+  │                 (deterministic) phase 4 commits policy proposals │
+  │                 *INFERENCE FIRES ONLY HERE* — synthesis dispatch:│
+  │                   for each open tool_creation curiosity →        │
+  │                     dedup check → Guardian decide → register tool│
+  └────────────────────────────────────────────────────────────────┘
+                                  ↓
+  ┌────────────────────────────────────────────────────────────────┐
+  │ EPOCH N+1                                                       │
+  │                                                                  │
+  │ [global]        sees autonomous_outcomes from N — outcome_summary│
+  │                   updates by_goal_id satisfaction stats          │
+  │                 reformulate/close goal mappings fire if needed   │
+  │                                                                  │
+  │ [meta]          sees the new tool in the skills lobe catalog     │
+  │                   + sees the standing goal that needed it        │
+  │                   → writes meta_orders.json with the new tool    │
+  │                                                                  │
+  │ [autonomous]    gate: order present → FIRES                      │
+  │                   executes the new tool → writes outcome record  │
+  │                                                                  │
+  │ [global]        evaluates new evidence → next goal               │
+  └────────────────────────────────────────────────────────────────┘
+
+  INVARIANTS NOW ENFORCED
+
+  Invariant: Autonomous fires only on order
+  Where: boot.py queue+drop gate (AUTO tick + post-META inline)
+  Prevents: Blind cycle hammering
+  ────────────────────────────────────────
+  Invariant: Same-cycle action — autonomous fires SAME EPOCH on dispatch
+  Where: boot.py post-META inline check
+  Prevents: Stale state for deepsleep/omega (results don't exist yet)
+  ────────────────────────────────────────
+  Invariant: Meta synthesis idle when no goals
+  Where: control_reasoner.synthesize
+  Prevents: Synthetic goal fabrication (50/50 random domain rotation)
+  ────────────────────────────────────────
+  Invariant: Meta dispatch skips on idle/empty plan
+  Where: phase_4_dispatch.run
+  Prevents: Empty orders flooding queue
+  ────────────────────────────────────────
+  Invariant: Action packet carries rationale (source_goal_id +
+            why_this_tool + success_definition)
+  Where: package_builder._build_rationale
+  Prevents: Outcome records that can't be traced back to a goal
+  ────────────────────────────────────────
+  Invariant: Outcome bundle records every cycle's packet+result
+  Where: outcome_recorder.record_outcome
+  Prevents: Global blind goal generation (closes the feedback loop)
+  ────────────────────────────────────────
+  Invariant: Global reads outcomes + curiosity directly
+  Where: data_aggregator._read_autonomous_outcomes +
+         _read_open_curiosities
+  Prevents: Goals divorced from what actually happened or what the
+            system has flagged
+  ────────────────────────────────────────
+  Invariant: No web_fetch auto-fallback
+  Where: tool_selector.select_and_bind +
+         autonomous phase_2_build_prompt.run
+  Prevents: Failures swallowed by reflexive search
+  ────────────────────────────────────────
+  Invariant: Synthesis dedup before authoring
+  Where: _existing_active_tool_for_curiosity
+  Prevents: Duplicate tool explosion (was 16× detect_failure_pattern)
+  ────────────────────────────────────────
+  Invariant: Synthesis health-gated, 1/cycle
+  Where: _dispatch_tool_synthesis (Omega Phase 4)
+  Prevents: Tool-creation flood under instability
+  ────────────────────────────────────────
+  Invariant: Omega inference only in dispatch (Phases 1/2/3 deterministic)
+  Where: omega/phases/phase_{1,2,3}_*/run.py
+  Prevents: Burning model cycles on calm epochs
+  ────────────────────────────────────────
+  Invariant: Omega is sole tool creator
+  Where: autonomous_engine TS-F bridge removed (lines 351-384)
+  Prevents: Bypass of Omega evaluation gate
+  ────────────────────────────────────────
+  Invariant: Canonical scoring only (no hand-rolled magic numbers)
+  Where: core.scoring + _score_synthesis_curiosity helper
+  Prevents: Score drift across producers
+  ────────────────────────────────────────
+  Invariant: Strong negative dopamine RPE vetoes goal_satisfied
+  Where: outcome_recorder._evaluate_goal_satisfied
+  Prevents: Bad cycles being counted as wins because cycle_kind=success
+  ────────────────────────────────────────
+  Invariant: cycle_cadence.curiosity_event_provider works
+  Where: core.cycle_cadence (uses list_open, not nonexistent list_entries)
+  Prevents: Silent dead pressure provider (was returning 0 always)
+
+  SIGNAL SOURCES THAT FEED THE FLOW
+
+  ┌─────────────────────────┬───────────────────────┬──────────────────────┐
+  │         Source          │        Drives         │      Consumed by     │
+  ├─────────────────────────┼───────────────────────┼──────────────────────┤
+  │ failure_audit /         │ failure pattern       │ tool_synthesis_      │
+  │ record_task_failure     │ accumulation          │ trigger threshold    │
+  │                         │                       │ cross → curiosity    │
+  ├─────────────────────────┼───────────────────────┼──────────────────────┤
+  │                         │                       │ global goal          │
+  │ curiosity_store         │ gap signals (open     │ formation, omega     │
+  │                         │ entries, ranked)      │ tool_creation, brain │
+  │                         │                       │ ask_user, cadence    │
+  │                         │                       │ pressure provider    │
+  ├─────────────────────────┼───────────────────────┼──────────────────────┤
+  │ tool_reliability_store  │ per-tool stats +      │ omega Phase 3        │
+  │                         │ transitions           │ (deprecated→         │
+  │                         │                       │ replacement signal)  │
+  ├─────────────────────────┼───────────────────────┼──────────────────────┤
+  │ deep_sleep_             │ schema /              │ omega Phase 3        │
+  │ recommendations.jsonl   │ contradiction /       │ detect_tool_needs    │
+  │                         │ salience signals      │ (opportunity_signals)│
+  ├─────────────────────────┼───────────────────────┼──────────────────────┤
+  │ autonomous_outcomes     │ packet+result+        │ global Phase 1       │
+  │ .jsonl  ← NEW           │ goal_satisfied per    │ intake (closes the   │
+  │                         │ cycle                 │ feedback loop)       │
+  ├─────────────────────────┼───────────────────────┼──────────────────────┤
+  │ goals.jsonl             │ active goals          │ meta Phase 1 intake  │
+  ├─────────────────────────┼───────────────────────┼──────────────────────┤
+  │ Skills lobe (lobe 5)    │ tool catalog          │ meta Phase 1 intake  │
+  │                         │                       │ (what's plannable)   │
+  ├─────────────────────────┼───────────────────────┼──────────────────────┤
+  │ telemetry.jsonl         │ neuromodulator        │ global signal-trend  │
+  │                         │ trends                │ aggregation          │
+  ├─────────────────────────┼───────────────────────┼──────────────────────┤
+  │ cycle_cadence pressure  │ when to fire          │ autonomous_engine    │
+  │ providers (7)           │ ask_user pursuits     │ sub-epoch sweep      │
+  └─────────────────────────┴───────────────────────┴──────────────────────┘
+
+  THE BOUNDARY THAT MAKES IT A MIND
+
+  Thinking layers run every epoch. Their output is observation,
+  reasoning, journal entries, proposals — all reversible, all
+  auditable, none of them touch the world.
+
+  The action layer fires only when commanded. Its output mutates
+  external state (tool calls, memory writes that affect future
+  cognition).
+
+  Meta packets carry the WHY (rationale → source_goal_id +
+  success_definition). Autonomous bundles outcomes (packet + result +
+  goal_satisfied) so global can evaluate goal satisfaction next
+  cycle. Curiosity flows directly into global so goal formation is
+  driven by what the system has actually flagged, not by blind
+  generation. Omega is the sole tool creator; its only model call is
+  a gated, deduped, Guardian-approved synthesis dispatch.
+
+  When global has nothing to say, meta has nothing to dispatch,
+  autonomous stays silent — but global, deepsleep, and omega keep
+  thinking. The system is awake without being agitated. That's the
+  difference between a mind and a chatbot.
+
+  ---
+  FLOW CHART PACKAGE
+
+  For maintained visual flow charts (Mermaid + ASCII + Key Gates table
+  + Source Anchors), see:
+    docs/system_audit/DATA_FLOW_CHARTS.md

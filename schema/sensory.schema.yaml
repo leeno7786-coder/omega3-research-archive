@@ -1,0 +1,30 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "omega://schema/sensory/v1"
+title: SensoryTypes
+
+definitions:
+  PresenceState:
+    type: string
+    enum: [PRESENT, ABSENT, UNKNOWN]
+
+  SensoryConfig:
+    type: object
+    required: [sensory]
+    properties:
+      sensory:
+        type: object
+        properties:
+          presence:
+            $ref: "#/definitions/PresenceConfig"
+
+  PresenceConfig:
+    type: object
+    properties:
+      acquire_threshold: { type: number, minimum: 0, maximum: 1 }
+      release_threshold: { type: number, minimum: 0, maximum: 1 }
+      acquire_frames: { type: integer, minimum: 1 }
+      release_seconds: { type: number, minimum: 0 }
+      degraded_holds_last_state: { type: boolean }
+      heartbeat_max_age_seconds: { type: integer, minimum: 1 }
+      recognition_threshold: { type: number, minimum: 0, maximum: 1 }
+      assume_operator_present: { type: boolean }

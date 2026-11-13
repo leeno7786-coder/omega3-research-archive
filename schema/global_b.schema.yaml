@@ -1,0 +1,167 @@
+# JSON Schema (YAML) — Global B phase I/O
+# Authority: global_loop/assemble, package
+
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "omega://schema/global_b/v1"
+title: GlobalBLoopTypes
+description: |
+  Global B consumes MetaReflectionPack + episode.auto; emits GlobalOutcomePack.
+
+definitions:
+  outcome_status:
+    type: string
+    enum: [completed, degraded, failed, skipped, invalid]
+
+  followup_type:
+    type: string
+    enum: [needs_clarification, needs_retry, none]
+
+  GlobalBInput:
+    type: object
+    required:
+      - episode_id
+      - pressure
+      - source_action_goal
+      - execution_pack
+      - auto_outcome
+      - meta_reflection
+    properties:
+      episode_id: { type: string }
+      pressure: { type: object }
+      source_action_goal: { type: object }
+      execution_pack: { type: object }
+      auto_outcome: { type: object }
+      meta_reflection: { type: object }
+
+  FollowupSuggestion:
+    type: object
+    required: [type, reason, suggested_intent]
+    properties:
+      type:
+        $ref: "#/definitions/followup_type"
+      reason: { type: string }
+      suggested_intent:
+        oneOf: [{ type: string }, { type: "null" }]
+
+  GlobalOutcomePack:
+    type: object
+    required:
+      - episode_id
+      - outcome
+      - observations
+      - artifacts
+      - followups
+      - consistency
+    properties:
+      episode_id: { type: string }
+      outcome:
+        type: object
+        required:
+          - intent
+          - trajectory_alignment
+          - divergence_score
+          - execution_outcome
+          - status
+          - grounded
+          - grounding_basis
+          - summary
+        properties:
+          intent: { type: string }
+          trajectory_alignment: { type: string }
+          divergence_score: { type: number }
+          execution_outcome: { type: object }
+          status:
+            $ref: "#/definitions/outcome_status"
+          grounded: { type: boolean }
+          grounding_basis:
+            type: array
+            items: { type: string }
+          summary: { type: string }
+          failure_kind: { type: [string, "null"] }
+          failure_reason: { type: [string, "null"] }
+      observations:
+        type: object
+        properties:
+          response_text_present: { type: boolean }
+          tool_result_present: { type: boolean }
+          image_artifact_present: { type: boolean }
+          document_artifact_present: { type: boolean }
+          plugin_evidence_present: { type: boolean }
+          plugin_permission_pending: { type: boolean }
+          plugin_failure_present: { type: boolean }
+          memory_used: { type: boolean }
+          warnings:
+            type: array
+            items: { type: string }
+      artifacts:
+        type: object
+      followups:
+        type: array
+        items:
+          $ref: "#/definitions/FollowupSuggestion"
+      consistency: { type: object }
+      temporal: { type: [object, "null"] }
+      learning_state: { type: [object, "null"] }
+      chemical_state: { type: [object, "null"] }
+      # WO-06: Meta B's and AUTO's outcome evidence as Observations, and the exact
+      # cross-lane mail admitted to this episode's Omega fold.
+      phase_evidence: { type: [object, "null"] }
+      cross_lane_mail: { type: [object, "null"] }
+
+  GlobalBConfig:
+    type: object
+    required: [global_b]
+    properties:
+      global_b:
+        type: object
+        properties:
+          enabled: { type: boolean }
+          models: { type: string }
+          module: { type: string }
+          phases:
+            type: array
+            items: { type: string }
+          episode_write:
+            type: object
+            properties:
+              slot: { type: string }
+              path: { type: string }
+          requires:
+            type: array
+            items: { type: string }
+          default_disposition: { type: string }
+          ground:
+            type: object
+            properties:
+              auto_output_paths:
+                type: object
+                additionalProperties: { type: string }
+              meta_disposition_path: { type: string }
+          summarize:
+            type: object
+            properties:
+              completed_by_action:
+                type: object
+                additionalProperties: { type: string }
+              failed_template: { type: string }
+              degraded: { type: string }
+              skipped: { type: string }
+              idle: { type: string }
+              invalid: { type: string }
+          followups:
+            type: object
+            properties:
+              types:
+                type: array
+                items: { type: string }
+              clarification_failure_kinds:
+                type: array
+                items: { type: string }
+              tool_failure_kinds:
+                type: array
+                items: { type: string }
+              rules: { type: object }
+          outcome_pack:
+            type: object
+            properties:
+               memory_success_status: { type: string }

@@ -1,0 +1,118 @@
+# JSON Schema (YAML) — Meta B phase I/O
+# Authority: meta_loop/consistency, disposition, reflect
+
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "omega://schema/meta_b/v1"
+title: MetaBLoopTypes
+description: |
+  Meta B consumes episode.auto and emits MetaReflectionPack for Global B.
+
+definitions:
+  meta_disposition:
+    type: string
+    enum: [completed, degraded, failed, skipped, invalid]
+
+  meta_execution_status:
+    type: string
+    enum: [success, partial, failed, skipped, pending_input, pending_approval, idle, invalid]
+
+  MetaBInput:
+    type: object
+    required:
+      - episode_id
+      - pressure
+      - source_action_goal
+      - execution_pack
+      - auto_outcome
+    properties:
+      episode_id: { type: string }
+      pressure: { type: object }
+      source_action_goal: { type: object }
+      execution_pack: { type: object }
+      auto_outcome: { type: object }
+
+  ConsistencyReport:
+    type: object
+    required: [pack_matches, mismatch_reasons]
+    properties:
+      pack_matches: { type: boolean }
+      mismatch_reasons:
+        type: array
+        items: { type: string }
+
+  MetaReflectionPack:
+    type: object
+    required: [episode_id, consistency, execution, trace_summary]
+    properties:
+      episode_id: { type: string }
+      consistency:
+        $ref: "#/definitions/ConsistencyReport"
+      execution:
+        type: object
+        required: [executed, result, action, status, disposition, memory_status, warnings]
+        properties:
+          executed: { type: boolean }
+          result: { type: string }
+          action: { type: string }
+          tool: {}
+          status:
+            $ref: "#/definitions/meta_execution_status"
+          disposition:
+            $ref: "#/definitions/meta_disposition"
+          failure_kind: {}
+          failure_reason: {}
+          memory_status: { type: string }
+          reason: { type: [string, "null"] }
+          execution_intent: { type: [string, "null"] }
+          warnings:
+            type: array
+            items: { type: string }
+          plugin_execution: { type: [object, "null"] }
+          plugin_failure: { type: [object, "null"] }
+          # WO-06: an operator-requested stop, with its source; null otherwise.
+          cancellation: { type: [object, "null"] }
+      trace_summary:
+        type: object
+        properties:
+          has_response_text: { type: boolean }
+          has_tool_result: { type: boolean }
+          has_image_artifact: { type: boolean }
+          has_plugin_evidence: { type: boolean }
+          plugin_plan_present: { type: boolean }
+          plugin_step_results_present: { type: boolean }
+          plugin_permission_request_present: { type: boolean }
+          plugin_permission_pending: { type: boolean }
+          plugin_result_present: { type: boolean }
+          plugin_failure_present: { type: boolean }
+          runtime_ms: { type: ["integer", "null"] }
+      neuromod_adjustments: { type: object }
+      # WO-06: the deterministic criteria checks (meta_loop/checks).
+      checks: { type: object }
+
+  cycle_kind_map:
+    type: object
+    description: AUTO cycle_kind → [disposition, meta_status]
+    additionalProperties:
+      type: array
+      minItems: 2
+      maxItems: 2
+      items: { type: string }
+
+  MetaBConfig:
+    type: object
+    required: [meta_b]
+    properties:
+      meta_b:
+        type: object
+        required: [enabled, phases]
+        properties:
+          enabled: { type: boolean }
+          models: { type: string }
+          module: { type: string }
+          phases: { type: array, items: { type: string } }
+          episode_write: { type: object }
+          requires: { type: array, items: { type: string } }
+          handoff: { type: object }
+          consistency: { type: object }
+          disposition: { type: object }
+          reflect: { type: object }

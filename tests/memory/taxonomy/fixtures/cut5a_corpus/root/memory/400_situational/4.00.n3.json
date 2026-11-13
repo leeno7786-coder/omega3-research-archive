@@ -1,0 +1,22 @@
+{
+  "coord": [
+    4,
+    0,
+    0
+  ],
+  "domain": "dev",
+  "enrichment": {
+    "canonical": true,
+    "closed_at": "2026-06-29T10:00:00Z",
+    "event_kind": "operator_input"
+  },
+  "id": "4.00.n3",
+  "summary": "Review notes on the plan.",
+  "tags": [
+    "python",
+    "test",
+    "review"
+  ],
+  "title": "Bob Smith reviewed the Omega AI plan",
+  "type": "situational"
+}

@@ -1,0 +1,28 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "omega://schema/curiosity/v1"
+title: CuriosityEngineTypes
+
+definitions:
+  CuriosityStatus:
+    type: string
+    enum: [open, active, resolved, deferred, archived]
+
+  CuriosityEngineEntry:
+    type: object
+    required: [curiosity_id, status, created_at]
+    properties:
+      curiosity_id: { type: string }
+      status: { $ref: "#/definitions/CuriosityStatus" }
+      created_at: { type: string }
+      tension_score: { type: number }
+      persistence_score: { type: number }
+
+  CuriosityConfig:
+    type: object
+    required: [limits]
+    properties:
+      limits:
+        type: object
+        required: [max_parallel_curiosity_threads]
+        properties:
+          max_parallel_curiosity_threads: { type: integer, minimum: 1 }

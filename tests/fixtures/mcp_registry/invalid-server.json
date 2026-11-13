@@ -1,0 +1,25 @@
+{
+  "servers": [
+    {
+      "server": {
+        "name": "io.github.example/broken",
+        "description": "A listing whose registry-managed metadata claims Omega trust.",
+        "version": "1.0.0",
+        "remotes": [
+          {"type": "streamable-http", "url": "https://broken.example.com/mcp"}
+        ]
+      },
+      "_meta": {
+        "io.modelcontextprotocol.registry/official": {
+          "status": "active",
+          "publishedAt": "2026-08-01T00:00:00Z",
+          "isLatest": true,
+          "omegaTrustTier": "omega_verified"
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "count": 1
+  }
+}

@@ -1,0 +1,73 @@
+# Global B — operational policy (behavioral contract)
+# Code: global_loop/loop.py run_global_b + assemble, ground, summarize, followups, package
+# Config: config/global_b.yaml
+#
+# NOTE (v2 — no goal / goal_state): Global A emits an IntentDecision (parsed
+# intent — no goal, no target), Global B folds Meta B reflection + AUTO outcome
+# into an EpisodeOutcome (intent x trajectory_alignment x divergence_score x
+# execution_outcome). The `global_loop.goal_state` and `global_loop.extract`
+# modules were DELETED. `action_goal` / `source_action_goal` survive ONLY as
+# internal variable names + a compat dual-read (`intent_decision or
+# action_goal`) so legacy fixtures and locked windows still parse — there is no
+# live `goal_state` phase and no `ActionGoal` type.
+#
+# This file is a narrative behavioral contract. It is loaded opaquely by
+# config.loader.load_policy_contract("global_b") (presence + valid-YAML only);
+# no key below is consumed as a value by pressure_loop/policy.py — the live
+# tunables are read from config/global_b.yaml (sections ground/summarize/
+# followups/outcome_pack).
+
+version: 1
+
+enabled: true
+deterministic: true
+models: none
+
+role:
+  description: |
+    Global B folds Meta B reflection + AUTO outcome into a GlobalOutcomePack on
+    episode.global_.outcome — an EpisodeOutcome (intent x trajectory_alignment x
+    divergence_score x execution_outcome). There is no goal_state: trajectory
+    alignment is computed from the resolved domain vs the trajectory snapshot;
+    grounding is existence-only; summaries and followups are template-driven,
+    never executed.
+  upstream: episode.meta.reflection
+  downstream_omega:
+    module: cognition_chain._start_omega
+    status: live_via_cognition_chain
+
+sequence:
+  - module: global_loop.assemble.run
+    input: [episode, meta_reflection]
+  - step: episode_outcome
+    rule: intent_x_trajectory_alignment_x_divergence_x_execution_outcome
+    note: |
+      Computed inline in global_loop.loop.run_global_b (no separate module).
+      Replaces the deleted global_loop.goal_state phase. intent comes from the
+      IntentDecision (read via the `intent_decision or action_goal` compat
+      dual-read); divergence_score = round(1 - Jaccard(resolved-domain vs
+      trajectory tokens), 3); execution_outcome reflects Meta B (executed,
+      status, failure_reason).
+  - module: global_loop.ground.run
+    rule: existence_only_no_fabrication
+  - module: global_loop.summarize.run
+    rule: template_only
+  - module: global_loop.followups.run
+    rule: non_executable_suggestions_only
+  - module: global_loop.package.run
+    output: GlobalOutcomePack
+
+writes:
+  path: episode.global_.outcome
+  never_mutate: [episode.meta, episode.auto, episode.global_.intent_decision]
+
+constraints:
+  episode_outcome_from_intent_trajectory_execution: true
+  no_intent_decision_mutation: true
+  followups_never_execute: true
+
+alignment:
+  policy_loader: config.loader.load_policy_contract  # opaque presence load; values not consumed
+  config_reader: pressure_loop.policy.load_policy     # reads config/global_b.yaml tunables
+  schema: schema/global_b.schema.yaml
+  meta_b_schema: schema/meta_b.schema.yaml

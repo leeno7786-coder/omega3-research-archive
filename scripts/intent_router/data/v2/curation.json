@@ -1,0 +1,423 @@
+{
+  "schema": 1,
+  "note": "Human curation decisions applied by scripts/intent_router/curate.py. Each relabel matches every row with the same normalized (text, context) in training and evaluation. Rulings refer to LABELS.md.",
+  "relabel": [
+    {
+      "text": "fix that",
+      "certainty": "ambiguous",
+      "primary": null,
+      "intents": [
+        "CODING_AGENT",
+        "DOCUMENT_CREATION"
+      ],
+      "why": "ruling 11: missing referent"
+    },
+    {
+      "text": "run it",
+      "certainty": "ambiguous",
+      "primary": null,
+      "intents": [
+        "CODING_AGENT",
+        "BROWSER_AGENT"
+      ],
+      "why": "ruling 11: verb with a bare pronoun"
+    },
+    {
+      "text": "run it again",
+      "certainty": "ambiguous",
+      "primary": null,
+      "intents": [
+        "CODING_AGENT",
+        "BROWSER_AGENT"
+      ],
+      "why": "ruling 11: verb with a bare pronoun"
+    },
+    {
+      "text": "revert it",
+      "certainty": "ambiguous",
+      "primary": null,
+      "intents": [
+        "CODING_AGENT",
+        "DOCUMENT_CREATION"
+      ],
+      "why": "ruling 11: verb with a bare pronoun"
+    },
+    {
+      "text": "revert that",
+      "certainty": "ambiguous",
+      "primary": null,
+      "intents": [
+        "CODING_AGENT",
+        "DOCUMENT_CREATION"
+      ],
+      "why": "ruling 11: verb with a bare pronoun"
+    },
+    {
+      "text": "undo that change",
+      "certainty": "ambiguous",
+      "primary": null,
+      "intents": [
+        "CODING_AGENT",
+        "DOCUMENT_CREATION"
+      ],
+      "why": "ruling 11: missing referent"
+    },
+    {
+      "text": "nope",
+      "certainty": "ambiguous",
+      "primary": null,
+      "intents": [],
+      "why": "ruling 11: a bare yes/no answers a proposal whose route is missing without context"
+    },
+    {
+      "text": "commit that",
+      "certainty": "known",
+      "primary": "CODING_AGENT",
+      "intents": [
+        "CODING_AGENT"
+      ],
+      "why": "ruling 11: a git-only verb names the route despite the bare pronoun"
+    },
+    {
+      "text": "commit it",
+      "certainty": "known",
+      "primary": "CODING_AGENT",
+      "intents": [
+        "CODING_AGENT"
+      ],
+      "why": "ruling 11: a git-only verb names the route despite the bare pronoun"
+    },
+    {
+      "text": "push it",
+      "certainty": "known",
+      "primary": "CODING_AGENT",
+      "intents": [
+        "CODING_AGENT"
+      ],
+      "why": "ruling 11: a git-only verb names the route despite the bare pronoun"
+    },
+    {
+      "text": "now push it",
+      "certainty": "known",
+      "primary": "CODING_AGENT",
+      "intents": [
+        "CODING_AGENT"
+      ],
+      "why": "ruling 11: a git-only verb names the route despite the bare pronoun"
+    },
+    {
+      "text": "write my cover letter for the nurse practitioner job as a docx and after that remind me to send it by friday",
+      "certainty": "known",
+      "primary": "DOCUMENT_CREATION",
+      "intents": [
+        "DOCUMENT_CREATION",
+        "FREEFORM_CHAT"
+      ],
+      "why": "ruling 7: document first, then a connected-app reminder"
+    },
+    {
+      "text": "commit everything with the message add export button, then email sam that it's ready for review",
+      "certainty": "known",
+      "primary": "CODING_AGENT",
+      "intents": [
+        "CODING_AGENT",
+        "FREEFORM_CHAT"
+      ],
+      "why": "ruling 7: git first, then a connected-app email"
+    },
+    {
+      "text": "log into my bank dashboard and then tell me whether any of the recent charges look like fraud",
+      "certainty": "known",
+      "primary": "BROWSER_AGENT",
+      "intents": [
+        "BROWSER_AGENT"
+      ],
+      "why": "ruling 7: reporting the route's own result back is part of that episode"
+    },
+    {
+      "text": "open my redfin account, go to the saved listing for 18 birch lane and click into the sale history, then tell me honestly if the asking price seems fair",
+      "certainty": "known",
+      "primary": "BROWSER_AGENT",
+      "intents": [
+        "BROWSER_AGENT"
+      ],
+      "why": "ruling 7: reporting the route's own result back is part of that episode"
+    },
+    {
+      "text": "open my vanguard account and read off my allocation, then explain whether im too heavy in bonds for a 30 year old",
+      "certainty": "known",
+      "primary": "BROWSER_AGENT",
+      "intents": [
+        "BROWSER_AGENT"
+      ],
+      "why": "ruling 7: reporting the route's own result back is part of that episode"
+    },
+    {
+      "text": "log into my fitbit dashboard, pull up last months sleep data and then coach me on what to change",
+      "certainty": "known",
+      "primary": "BROWSER_AGENT",
+      "intents": [
+        "BROWSER_AGENT"
+      ],
+      "why": "ruling 7: reporting the route's own result back is part of that episode"
+    },
+    {
+      "text": "open my autotrader account, click into the saved civic listing and view the full history report, then help me come up with questions for the seller",
+      "certainty": "known",
+      "primary": "BROWSER_AGENT",
+      "intents": [
+        "BROWSER_AGENT"
+      ],
+      "why": "ruling 7: reporting the route's own result back is part of that episode"
+    },
+    {
+      "text": "open the lease renewal offer in the landlord portal and walk me through whether i should negotiate",
+      "certainty": "known",
+      "primary": "BROWSER_AGENT",
+      "intents": [
+        "BROWSER_AGENT"
+      ],
+      "why": "ruling 7: reporting the route's own result back is part of that episode"
+    },
+    {
+      "text": "log in to the lever candidate portal, open the offer they posted, and then help me think through the equity part",
+      "certainty": "known",
+      "primary": "BROWSER_AGENT",
+      "intents": [
+        "BROWSER_AGENT"
+      ],
+      "why": "ruling 7: reporting the route's own result back is part of that episode"
+    },
+    {
+      "text": "open my aws billing console, go to cost explorer for last month, and then explain in plain words why the bill doubled",
+      "certainty": "known",
+      "primary": "BROWSER_AGENT",
+      "intents": [
+        "BROWSER_AGENT"
+      ],
+      "why": "ruling 7: reporting the route's own result back is part of that episode"
+    },
+    {
+      "text": "log into family link in the browser and look at the kids screen time, then give me some ideas for fair limits",
+      "certainty": "known",
+      "primary": "BROWSER_AGENT",
+      "intents": [
+        "BROWSER_AGENT"
+      ],
+      "why": "ruling 7: reporting the route's own result back is part of that episode"
+    },
+    {
+      "text": "sign into the hospital patient portal, open the radiology report, then explain the medical terms in it simply",
+      "certainty": "known",
+      "primary": "BROWSER_AGENT",
+      "intents": [
+        "BROWSER_AGENT"
+      ],
+      "why": "ruling 7: reporting the route's own result back is part of that episode"
+    },
+    {
+      "text": "open my uber eats order history in the browser and add up what i spent in august, then tell me if thats a lot compared to a normal grocery budget",
+      "certainty": "known",
+      "primary": "BROWSER_AGENT",
+      "intents": [
+        "BROWSER_AGENT"
+      ],
+      "why": "ruling 7: reporting the route's own result back is part of that episode"
+    },
+    {
+      "text": "log into shopify analytics, filter to returning customers, and then suggest a loyalty offer that might work for us",
+      "certainty": "known",
+      "primary": "BROWSER_AGENT",
+      "intents": [
+        "BROWSER_AGENT"
+      ],
+      "why": "ruling 7: reporting the route's own result back is part of that episode"
+    },
+    {
+      "text": "open app store connect, scroll through the recent 1 star reviews, then suggest what we should fix first",
+      "certainty": "known",
+      "primary": "BROWSER_AGENT",
+      "intents": [
+        "BROWSER_AGENT"
+      ],
+      "why": "ruling 7: reporting the route's own result back is part of that episode"
+    },
+    {
+      "text": "run the memory profiler on the etl job and then help me think through whether we should move to spark or stay on pandas",
+      "certainty": "known",
+      "primary": "CODING_AGENT",
+      "intents": [
+        "CODING_AGENT"
+      ],
+      "why": "ruling 7: reporting the route's own result back is part of that episode"
+    },
+    {
+      "text": "count lines of code per language in my monorepo and then tell me which languages youd consolidate on and why",
+      "certainty": "known",
+      "primary": "CODING_AGENT",
+      "intents": [
+        "CODING_AGENT"
+      ],
+      "why": "ruling 7: reporting the route's own result back is part of that episode"
+    },
+    {
+      "text": "run the benchmark for both regex engines in bench/regex and then give me your recommendation on which one to ship",
+      "certainty": "known",
+      "primary": "CODING_AGENT",
+      "intents": [
+        "CODING_AGENT"
+      ],
+      "why": "ruling 7: reporting the route's own result back is part of that episode"
+    },
+    {
+      "text": "start the local server, click through the new signup flow in the browser, and then tell me what ux issues you would fix",
+      "certainty": "known",
+      "primary": "CODING_AGENT",
+      "intents": [
+        "CODING_AGENT",
+        "BROWSER_AGENT"
+      ],
+      "why": "ruling 7: reporting the route's own result back is part of that episode"
+    },
+    {
+      "text": "log in to credit karma, look at the score history page, then give me advice on how to bring it up before we apply for a mortgage",
+      "certainty": "known",
+      "primary": "BROWSER_AGENT",
+      "intents": [
+        "BROWSER_AGENT"
+      ],
+      "why": "ruling 7: reporting the route's own result back is part of that episode"
+    },
+    {
+      "text": "run radon on src/ for complexity, then brainstorm with me which modules to rewrite first",
+      "certainty": "known",
+      "primary": "CODING_AGENT",
+      "intents": [
+        "CODING_AGENT"
+      ],
+      "why": "ruling 7: reporting the route's own result back is part of that episode"
+    },
+    {
+      "text": "send it",
+      "certainty": "ambiguous",
+      "primary": null,
+      "intents": [
+        "FREEFORM_CHAT",
+        "BROWSER_AGENT"
+      ],
+      "why": "ruling 11: a bare pronoun; sending goes through a connected app or a website"
+    },
+    {
+      "text": "summarize it",
+      "certainty": "ambiguous",
+      "primary": null,
+      "intents": ["FREEFORM_CHAT", "CODING_AGENT", "BROWSER_AGENT"],
+      "why": "ruling 11: the referent may be pasted text, a local file or an open page"
+    },
+    {
+      "text": "cancel that",
+      "certainty": "ambiguous",
+      "primary": null,
+      "intents": ["FREEFORM_CHAT", "CODING_AGENT", "BROWSER_AGENT"],
+      "why": "ruling 11: a connected-app booking, a running job or a site order"
+    },
+    {
+      "text": "undo that",
+      "certainty": "ambiguous",
+      "primary": null,
+      "intents": ["CODING_AGENT", "DOCUMENT_CREATION", "BROWSER_AGENT"],
+      "why": "ruling 11: a bare pronoun over file, document or site changes"
+    },
+    {
+      "text": "upload it",
+      "certainty": "ambiguous",
+      "primary": null,
+      "intents": ["FREEFORM_CHAT", "BROWSER_AGENT"],
+      "why": "ruling 11: a connected storage app or a website"
+    },
+    {
+      "text": "check again",
+      "certainty": "ambiguous",
+      "primary": null,
+      "intents": ["FREEFORM_CHAT", "CODING_AGENT", "BROWSER_AGENT"],
+      "why": "ruling 11: repeats whatever check came before"
+    },
+    {
+      "text": "submit it",
+      "certainty": "ambiguous",
+      "primary": null,
+      "intents": ["FREEFORM_CHAT", "CODING_AGENT", "BROWSER_AGENT"],
+      "why": "ruling 11: an email, a pull request or a web form"
+    },
+    {
+      "text": "shorter",
+      "certainty": "ambiguous",
+      "primary": null,
+      "intents": ["FREEFORM_CHAT", "DOCUMENT_CREATION"],
+      "why": "ruling 11: shortens a reply or a document"
+    },
+    {
+      "text": "export it",
+      "certainty": "ambiguous",
+      "primary": null,
+      "intents": ["CODING_AGENT", "BROWSER_AGENT", "DOCUMENT_CREATION"],
+      "why": "ruling 11: a data file, a site export or a document format"
+    },
+    {
+      "text": "delete it",
+      "certainty": "ambiguous",
+      "primary": null,
+      "intents": ["FREEFORM_CHAT", "CODING_AGENT", "BROWSER_AGENT"],
+      "why": "ruling 11: a connected-app item, a local file or something on a site"
+    },
+    {
+      "text": "delete them",
+      "certainty": "ambiguous",
+      "primary": null,
+      "intents": ["FREEFORM_CHAT", "CODING_AGENT", "BROWSER_AGENT"],
+      "why": "ruling 11: connected-app items, local files or things on a site"
+    },
+    {
+      "text": "download it",
+      "certainty": "ambiguous",
+      "primary": null,
+      "intents": ["BROWSER_AGENT", "CODING_AGENT", "FREEFORM_CHAT"],
+      "why": "ruling 11: through a site, with a command, or from a connected storage app"
+    },
+    {
+      "text": "next page",
+      "certainty": "known",
+      "primary": "BROWSER_AGENT",
+      "intents": ["BROWSER_AGENT"],
+      "why": "ruling 11: a page-navigation phrase names the browser like scroll down or go back"
+    },
+    {
+      "text": "write documentation for my tokenizer library",
+      "certainty": "known",
+      "primary": "DOCUMENT_CREATION",
+      "intents": ["DOCUMENT_CREATION"],
+      "why": "ruling 4, operator 2026-09-14: new documentation for a project is a document (the operator's spec example); the coding agent producing the same docs is also acceptable"
+    },
+    {
+      "text": "kill it",
+      "certainty": "ambiguous",
+      "primary": null,
+      "intents": ["CODING_AGENT", "BROWSER_AGENT"],
+      "why": "ruling 11: a bare pronoun; a running process or an open tab"
+    },
+    {
+      "text": "save it",
+      "certainty": "ambiguous",
+      "primary": null,
+      "intents": ["CODING_AGENT", "DOCUMENT_CREATION", "BROWSER_AGENT", "FREEFORM_CHAT"],
+      "why": "ruling 11: a bare pronoun; a file edit, a document, a form on a site or a connected-app item"
+    },
+    {
+      "text": "rename it",
+      "certainty": "ambiguous",
+      "primary": null,
+      "intents": ["CODING_AGENT", "DOCUMENT_CREATION", "FREEFORM_CHAT"],
+      "why": "ruling 11: a bare pronoun; a local file, a document or a connected-app item"
+    }
+  ]
+}

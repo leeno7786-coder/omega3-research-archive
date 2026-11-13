@@ -1,0 +1,62 @@
+# Auto loop — operational policy (behavioral contract)
+# Code: auto_loop/
+# Config tunables: config/auto.yaml
+
+version: 1
+
+enabled: true
+deterministic_phases: true
+models_in_execute_only: true
+
+role:
+  description: |
+    AUTO is the execution limb: validates Meta A ExecutionActionPack, recalls
+    memory when required, builds PromptPack, routes model profile, runs
+    inference/tools/image generation, folds episode.auto, emits AutoOutcomePack.
+  upstream: episode.meta.execution_action_pack
+  downstream: meta_loop.loop.run_meta_b
+  cognition_handoff:
+    module: cognition_chain._start_auto
+    mandatory: true
+
+sequence:
+  - module: auto_loop.intake.run
+    output: AutoInput
+    skip_when: no_execution_action_pack
+  - module: auto_loop.validate.run
+    reuses: meta_loop.meta_a.validate_execution_action_pack
+  - module: auto_loop.recall.run
+    rule: memory.api.read_memory_when_required
+  - module: auto_loop.promptpack.run
+    rule: deterministic_prompt_type_mapping
+  - module: auto_loop.route.run
+    rule: profile_selection_no_execution
+  - module: auto_loop.execute.run
+    rule: model_tool_image_execution
+    use_skill_rule: auto_loop.skill.run.dispatch_skill_pack
+    preflight: runtime.runtime_capability_broker
+  - module: auto_loop.fold.run
+    output: AutoOutcomePack
+
+writes:
+  path: episode.auto
+  never_mutate: [episode.meta, episode.global_]
+
+tool_dispatch:
+  authority: core.tool_dispatch
+  web_fetch:
+    model_owns: query_only
+    auto_binds: [domain, max_results]
+    # overlay helper retired 2026-07-14 — deterministic_args_from_order is the sole binder
+
+constraints:
+  validate_before_execute: true
+  memory_recall_tool_failure_is_hard_fail: true
+  idle_action_skips_execution: true
+
+alignment:
+  policy_loader: pressure_loop.policy.load_policy
+  schema: schema/auto.schema.yaml
+  execution_pack_schema: schema/meta.schema.yaml#/definitions/ExecutionActionPack
+  skill_execution_config: config/skill_execution.yaml
+  skill_dispatch: auto_loop.skill.run

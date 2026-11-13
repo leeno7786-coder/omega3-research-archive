@@ -1,0 +1,36 @@
+{
+  "audit": [],
+  "coord": [
+    9,
+    1,
+    0
+  ],
+  "enrichment": {
+    "canonical": true,
+    "cascade_status": "completed",
+    "closed_at": "",
+    "episode_id": "hist-untimed-0006",
+    "event_kind": "auto_outcome"
+  },
+  "flags": {
+    "canonical": true,
+    "private": false
+  },
+  "id": "9.01.0a7e0006",
+  "provenance": {
+    "author": "lobe:temporal",
+    "confidence": 0.5,
+    "ingested_at": "2026-08-02T10:11:13.000000+00:00",
+    "origin_id": "lobe:temporal",
+    "origin_type": "stage_propose",
+    "source_session_id": "hist-untimed-0006"
+  },
+  "speech_act": "statement",
+  "subtopic": "episode",
+  "summary": "synthetic historical episode",
+  "temporal_epoch_us": 1785665473000000,
+  "temporal_hash": "0006580da434b240-fc6b510ce1390b94",
+  "text": "{\"action\": \"web_fetch\", \"cascade_status\": \"completed\", \"episode_id\": \"hist-untimed-0006\", \"intent\": \"LEARN\", \"outcome\": {\"artifacts\": {\"response_text\": \"synthetic reply\"}, \"chemical_state\": {}, \"consistency\": {}, \"episode_id\": \"hist-untimed-0006\", \"followups\": [], \"learning_state\": {}, \"observations\": {}, \"outcome\": {\"status\": \"failed\", \"summary\": \"HIST-SUMMARY: the fetch failed\"}, \"temporal\": {}}}",
+  "title": "LEARN: synthetic 9.01.0a7e0006",
+  "type": "episode"
+}

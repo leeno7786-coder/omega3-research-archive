@@ -1,0 +1,44 @@
+# JSON Schema (YAML) — Phase 6 skill execution config
+# Authority: config/skill_execution.yaml, core/skill_execution_config.py
+
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "omega://schema/skill_execution/v1"
+title: SkillExecutionConfig
+
+definitions:
+  SkillExecutionRoot:
+    type: object
+    required: [enabled, routing, bundled_skill_roots, user_skills, guard]
+    properties:
+      enabled: { type: boolean }
+      routing:
+        type: object
+        required: [use_skill_default]
+        properties:
+          use_skill_default: { type: boolean }
+      bundled_skill_roots:
+        type: array
+        items: { type: string }
+      user_skill_roots:
+        type: array
+        items: { type: string }
+      user_skills:
+        type: object
+        required: [disabled_by_default]
+        properties:
+          disabled_by_default: { type: boolean }
+          trust_all_default: { type: boolean }
+      selection:
+        type: object
+      guard:
+        type: object
+      global_forbidden_tools:
+        type: array
+        items: { type: string }
+
+  SkillExecutionConfig:
+    type: object
+    required: [skill_execution]
+    properties:
+      skill_execution:
+        $ref: "#/definitions/SkillExecutionRoot"

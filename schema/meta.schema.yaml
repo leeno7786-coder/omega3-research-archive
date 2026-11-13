@@ -1,0 +1,190 @@
+# JSON Schema (YAML) — Meta loop packs and phase I/O
+# Authority: meta_loop/intake, pack, reflect, consistency, disposition
+
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "omega://schema/meta/v1"
+title: MetaLoopTypes
+
+definitions:
+  MetaAInput:
+    type: object
+    required: [episode_id, pressure, trajectory_snapshot, action_goal]
+    properties:
+      episode_id: { type: string }
+      pressure: { type: object }
+      trajectory_snapshot: { type: object }
+      action_goal: { type: object }
+
+  ExecutionActionPack:
+    type: object
+    required:
+      - episode_id
+      - action
+      - memory_required
+      - execution_intent
+      - execution_inputs
+      - execution_constraints
+      - source_action_goal
+    properties:
+      episode_id: { type: string }
+      action:
+        type: string
+        enum: [USE_TOOL, USE_SKILL, EXECUTE_MOTOR_PROGRAM, RESPONSE, PROACTIVE_RESPONSE, IMAGE_CREATION, DOCUMENT_CREATION, PLUGIN_OPERATION, IDLE]
+      tool: { type: ["string", "null"] }
+      tool_reason: { type: ["string", "null"] }
+      memory_required: { type: boolean }
+      memory_reason: { type: ["string", "null"] }
+      memory_scope:
+        type: array
+        items: { type: string }
+      execution_intent: { type: string }
+      execution_inputs: { type: object }
+      execution_constraints:
+        type: object
+        required:
+          - planning_only
+          - no_inference_in_meta
+          - no_execution_in_meta
+          - no_model_fields
+        properties:
+          planning_only: { const: true }
+          no_inference_in_meta: { const: true }
+          no_execution_in_meta: { const: true }
+          no_model_fields: { const: true }
+      source_action_goal: { type: object }
+
+  MetaBInput:
+    type: object
+    required:
+      - episode_id
+      - pressure
+      - source_action_goal
+      - execution_pack
+      - auto_outcome
+    properties:
+      episode_id: { type: string }
+      pressure: { type: object }
+      source_action_goal: { type: object }
+      execution_pack: { type: object }
+      auto_outcome: { type: object }
+
+  MetaReflectionPack:
+    type: object
+    required: [episode_id, consistency, execution, trace_summary]
+    properties:
+      episode_id: { type: string }
+      consistency: { type: object }
+      execution:
+        type: object
+        properties:
+          action: { type: string }
+          tool: {}
+          status:
+            type: string
+            enum: [success, partial, failed, skipped, invalid]
+          disposition:
+            type: string
+            enum: [completed, degraded, failed, skipped, invalid]
+          failure_kind: {}
+          failure_reason: {}
+          memory_status: { type: string }
+          warnings:
+            type: array
+            items: { type: string }
+          # WO-06: an operator-requested stop, with its source; null otherwise.
+          cancellation: { type: [object, "null"] }
+      trace_summary: { type: object }
+      # WO-06: the deterministic criteria checks (meta_loop/checks).
+      checks: { type: object }
+
+  SkillRecallContext:
+    description: |
+      Phase 7N — deterministic taxonomy recall attached to episode.meta when
+      OMEGA_MEMORY_TAXONOMY is ON and Meta A selects USE_SKILL. Informs skill
+      selection; never executes or chooses action alone.
+    type: object
+    additionalProperties: false
+    properties:
+      query_hash: { type: string }
+      snapshot_hash: { type: string }
+      evidence_event_ids:
+        type: array
+        items: { type: string }
+      cautions:
+        type: array
+        items: { type: object }
+      applied_penalties:
+        type: object
+        additionalProperties: { type: number }
+      applied_boosts:
+        type: object
+        additionalProperties: { type: number }
+
+  TaxonomyCompileReport:
+    description: Phase 7S — surfaced on episode.meta.taxonomy_compile after close.
+    type: object
+    properties:
+      compile_mode:
+        type: string
+        enum: [incremental, full, fallback_full]
+      events_seen: { type: integer }
+      new_events_compiled: { type: integer }
+      snapshot_hash: { type: string }
+      fallback_reason: { type: ["string", "null"] }
+
+  cycle_kind_map:
+    type: object
+    description: AUTO telemetry cycle_kind → [disposition, meta_status]
+    additionalProperties:
+      type: array
+      minItems: 2
+      maxItems: 2
+      items: { type: string }
+
+  MetaConfig:
+    type: object
+    required: [meta]
+    properties:
+      meta:
+        type: object
+        required: [enabled, meta_a, meta_b, action]
+        properties:
+          enabled: { type: boolean }
+          models: { type: string }
+          planning_only: { type: boolean }
+          no_inference_in_meta: { type: boolean }
+          no_execution_in_meta: { type: boolean }
+          meta_a:
+            type: object
+            properties:
+              module: { type: string }
+              phases: { type: array, items: { type: string } }
+              episode_write: { type: object }
+              skill_recall: { type: object }
+              requires: { type: array, items: { type: string } }
+          meta_b:
+            type: object
+            properties:
+              module: { type: string }
+              phases: { type: array, items: { type: string } }
+              episode_write: { type: object }
+              handoff: { type: object }
+              requires: { type: array, items: { type: string } }
+          action:
+            type: object
+            properties:
+              meta_actions: { type: array, items: { type: string } }
+              intent_to_action: { type: object, additionalProperties: { type: string } }
+              default_action: { type: string }
+              execution_constraints: { type: object }
+          tool:
+            type: object
+            properties:
+              capability_map: { type: object, additionalProperties: { type: string } }
+              learn_default_tool: { type: string }
+              image_create_tool: { type: string }
+              use_tool_keywords: { type: object }
+          memory: { type: object }
+          pack: { type: object }
+          meta_b_disposition: { type: object }
+          consistency: { type: object }

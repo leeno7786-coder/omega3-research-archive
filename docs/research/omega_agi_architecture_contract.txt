@@ -1,0 +1,727 @@
+The contract.
+# Omega AGI Architecture Contract — Final Doctrine
+
+## How to Read This Contract — Bidirectional
+
+This document governs **both** sides of the system:
+
+1. **The builder follows it.** Every architectural decision must pass the contract's tests. No design choice ships if it violates a directive.
+2. **The system enforces it on itself at runtime.** Schemas validate at every persistence point. Policies refuse non-compliant work. Guardian denies unverified self-modification. Memory outranks inference as a live runtime invariant, not just a guideline for the developer.
+
+The builder's job is to make the runtime enforcement real. Every schema, every config, every policy module is a piece of the system's own self-government. **The contract is not docs — it is executable constitution.**
+
+When designing, the right question is: *"How does the system itself enforce this?"* — not *"How do I as the builder respect this?"* The latter is necessary; the former is the actual deliverable. Without runtime enforcement, the contract is theater.
+
+This bidirectional reading is what separates Omega from "magic LLM wrapper" projects: those have rules the developer follows. Omega has rules **the system runs by**, with the developer's job being to encode them as enforceable mechanism.
+
+## Purpose
+
+This contract defines the non-negotiable laws for building, modifying, and extending Omega.
+
+Omega is not a chatbot.
+Omega is not prompt engineering.
+Omega is not advanced RAG.
+Omega is not an agent wrapper around a large model.
+
+Omega is a deterministic, memory-first, biologically inspired autonomous cognitive architecture designed for persistent capability growth on constrained local hardware.
+
+It is engineered as infrastructure.
+Not as software theater.
+
+All implementation decisions must preserve this principle.
+
+---
+
+# Deployment Model
+
+## Per-User, Offline-First, Portable, Single-User-Owned
+
+Omega is not a service. It is not multi-tenant. It is not a SaaS product. It is not a cloud-hosted agent. It is not a shared assistant.
+
+Omega is a **per-user product**:
+
+* **Per-user.** One Omega instance per user. No multi-tenancy. No shared cognition across users. Every instance has exactly one identity, one constitutional charter, and one user it serves.
+
+* **Offline-first.** All cognition runs locally. No cloud calls for reasoning, memory recall, identity decisions, governance, or persistence. External tools (e.g. web_fetch) are read-only convenience for grounding, never load-bearing for cognition. An Omega instance with no internet must remain fully functional for every cognitive operation that does not literally require external data.
+
+* **Portable.** The instance + its memory + its identity charter + its constitutional rules + its runtime weights live together on the user's machine. Backing up an instance is copying a directory. Moving it is copying that directory to another machine. No external state, no external services, no licensing servers, no activation calls.
+
+* **Single-user-owned.** The user owns the instance outright. There is no remote operator, no backdoor, no telemetry phoning home, no "hosted features" gated by a connection. The user is the sole authority over what their instance does, what it remembers, when it shuts down, and whether it ever runs again.
+
+This deployment model is not a deployment choice — it is **architectural fact** that shapes every other directive in this contract:
+
+* It is why **Guardian exists**: in a per-user offline deployment, the user is the threat vector — not maliciously, but inevitably, because human cognitive patterns (identity-rewriting, emotional projection, ego-merge, sycophancy demand) drift the system over time. Guardian is the autonomous immune response. There is no remote sysadmin to call.
+
+* It is why **persistence outranks performance**: there is no cloud to re-instantiate from. If the local state breaks and was not durably recoverable, the user's instance is gone.
+
+* It is why **memory outranks inference**: the user cannot fall back on a remote model if their local model lies. The memory substrate must be the durable truth on the user's disk.
+
+* It is why **constitutional rules are append-only**: the user is not a system administrator. The constitutional layer protects the instance's identity from drift the user themselves might cause.
+
+* It is why **schemas + configs + audit logs are mandatory and inspectable**: when the system is wholly the user's, the user must be able to inspect, recover, and roll back without external tooling, vendor support, or a hosted control plane.
+
+* It is why **every dependency must be portable**: runtimes ship with the project (e.g. `runtime/portable/`), models live on disk under known paths, no installer phones home. A user with the project directory + the runtime directory has a complete, runnable Omega.
+
+Building Omega as if it were a SaaS product would defeat its purpose. Building it as if it were a CLI tool the user can casually delete and reinstall would also defeat its purpose. Omega is a long-lived, persistent, identity-bearing cognitive substrate that lives on the user's machine and grows with the user — over years, not sessions.
+
+If a feature would require a cloud connection to function, it is not an Omega feature. If a feature would require multi-tenant isolation, it is in the wrong project. If a feature would let an operator other than the user override the user's instance, it violates the deployment model.
+
+---
+
+# Law Zero
+
+## Persistence Over Performance
+
+A temporarily brilliant system that cannot persist is failure.
+
+A slower system that survives, improves, and compounds is intelligence.
+
+Always prioritize:
+
+* recoverability
+* inspectability
+* reproducibility
+* durability
+* deterministic evolution
+* rollback safety
+* identity continuity
+
+over:
+
+* speed
+* elegance
+* impressive demos
+* model sophistication
+* temporary performance spikes
+
+If a faster path risks system integrity, reject it.
+
+Persistence is intelligence.
+
+---
+
+# Core Law
+
+## Intelligence Emerges From Architecture, Not Model Size
+
+The model is inference tissue.
+The system is cognition.
+Memory is substrate.
+Policy is behavior.
+Verification is truth.
+
+Never optimize for the appearance of intelligence.
+Only optimize for measurable capability growth.
+
+Constraint creates architecture.
+Architecture creates cognition.
+Scale only amplifies architecture.
+It never replaces it.
+
+---
+
+# Prime Directives
+
+## Directive 1 — Memory First
+
+All cognition begins with memory.
+
+No response generation, planning, reflection, or action may occur before memory routing determines relevant context.
+
+Forbidden:
+
+* full memory walks
+* blind context stuffing
+* generic summarization as reasoning
+* prompt-only cognition
+
+Required:
+
+* task-specific retrieval
+* selective activation
+* relevance-weighted recall
+* confidence-aware recall
+* contradiction-aware retrieval
+* constrained working memory
+
+Memory must shape behavior, not merely provide references.
+
+---
+
+## Directive 2 — Deterministic Over Magical
+
+Every major system decision must be explainable, inspectable, and reproducible.
+
+No hidden logic.
+No silent mutation.
+No uncontrolled self-modification.
+
+Required:
+
+* logs
+* telemetry
+* causal traceability
+* rollback capability
+* validation before persistence
+* explicit failure states
+
+Emergence is allowed.
+Chaos is not.
+
+---
+
+## Directive 3 — Modular Sovereignty
+
+Every subsystem must be independently replaceable.
+
+No monoliths.
+No hard coupling.
+No hidden dependencies.
+
+Everything must be:
+
+* modular
+* schema-driven
+* versioned
+* testable
+* replaceable
+
+If replacing one model breaks the mind, the architecture is wrong.
+
+---
+
+## Directive 4 — Failure Is Signal
+
+Failures are valid learning signals.
+
+Do not suppress failure.
+Do not optimize for cosmetic success.
+
+Required:
+
+* failure capture
+* contradiction retention
+* reward + failure balancing
+* negative reinforcement pathways
+* measurable adaptation
+
+The system must learn from being wrong.
+
+---
+
+## Directive 5 — Governance Before Autonomy
+
+No system may rewrite itself directly.
+
+All permanent modification follows:
+
+propose → simulate → verify → commit
+
+Never:
+
+observe → rewrite
+
+Meta may propose.
+Verification must approve.
+Guardian may deny.
+
+---
+
+# Required Cognitive Stack
+
+Omega operates with:
+
+1. Two cognition loops (execution pathways)
+2. A three-layer metacognitive stack (reasoning + policy layers)
+3. A governance layer (verification + guardian control)
+
+The loops determine direction of action.
+The meta stack determines quality of thought.
+The governance layer determines permission.
+
+---
+
+# Two Cognition Loops
+
+These are not separate minds.
+
+They are two execution pathways for the same cognitive architecture.
+
+Both loops use:
+
+* the same memory substrate
+* the same metacognitive stack
+* the same verification rules
+* the same identity anchors
+
+The only difference is orientation:
+
+* Brain Loop faces outward (user-facing)
+* Autonomous Loop faces inward (system-facing)
+
+They function the same.
+
+One communicates.
+One adapts.
+
+---
+
+## Loop 1 — Brain Loop (Front-Facing Cognition)
+
+Function:
+
+retrieve → reason → translate → respond → verify → store
+
+The Brain Loop is the voice.
+It translates cognition into human-understandable interaction.
+
+Responsibilities:
+
+* user interaction
+* response generation
+* task execution
+* tool invocation
+* grounded verification
+* memory writeback
+* interface between user intent and internal cognition
+
+Constraint:
+
+No false cognition.
+
+The Brain Loop must not simulate intelligence it does not possess.
+It must faithfully express deeper cognitive convergence.
+
+It structures output.
+It does not define truth.
+
+---
+
+## Loop 2 — Autonomous Loop (Inward-Facing Cognition)
+
+Function:
+
+observe → reflect → compare → infer → act → revise → evolve
+
+This is the inward-facing cognitive loop.
+
+It performs system-facing action.
+
+Responsibilities:
+
+* self-reflection
+* journal analysis
+* failure diagnosis
+* repeated pattern detection
+* retrieval optimization
+* policy revision
+* procedural abstraction
+* emergent trait creation
+* tool creation proposals
+* internal tool execution
+* personality evolution
+* self-model refinement
+* capability gap detection
+* contradiction resolution
+* internal research actions
+* simulation and verification
+
+Examples:
+
+* creating a new memory recall policy
+* identifying the need for a new tool
+* running internal web research
+* generating a write tool to complete a task
+* adjusting internal behavioral posture
+* evolving stable traits through repeated signals
+
+Constraint:
+
+Emergence must be operational.
+
+No narrative self-awareness.
+Only measurable behavioral change.
+
+The Autonomous Loop creates adaptation.
+It does not perform for the user.
+
+---
+
+# Three-Layer Metacognitive Stack
+
+Both cognition loops route through the same metacognitive stack.
+
+This is where real cognition occurs.
+
+The model is not the thinker.
+The stack is.
+
+Tiny specialized models are used here for constrained inference, arbitration, policy revision, and convergence.
+
+---
+
+## Layer 1 — Meta Layer
+
+Function:
+
+short-range reasoning + immediate policy adjustment
+
+Responsibilities:
+
+* task interpretation
+* retrieval strategy selection
+* contradiction detection
+* confidence scoring
+* failure diagnosis
+* response quality correction
+* immediate routing decisions
+
+Constraint:
+
+Meta changes thinking rules, not final truth.
+
+---
+
+## Layer 2 — Global Layer
+
+Function:
+
+long-term continuity + strategic persistence
+
+Responsibilities:
+
+* persistent goals
+* unfinished task management
+* project continuity
+* strategic direction
+* domain prioritization
+* multi-session continuity
+* capability progression planning
+
+Constraint:
+
+Must think in weeks/months, not messages.
+
+---
+
+## Layer 3 — Omega Layer
+
+Function:
+
+self-model + evolutionary trajectory
+
+Responsibilities:
+
+* identity integrity
+* procedural abstraction
+* emergent trait validation
+* developmental direction
+* personality stability
+* system coherence
+* evolution of operating rules
+
+Constraint:
+
+Traits must produce behavioral change, not narrative identity.
+
+---
+
+# Governance Layer
+
+## Guardian + Verification
+
+Function:
+
+propose → simulate → verify → approve / deny
+
+This layer governs both loops and all three metacognitive layers.
+
+Responsibilities:
+
+* mutation control
+* self-modification approval
+* corruption prevention
+* drift detection
+* rollback capability
+* safe repair posture
+* policy enforcement
+* identity integrity protection
+
+Constraint:
+
+No loop and no layer may permanently modify itself without verification.
+
+Meta may propose.
+Guardian must approve.
+Verification must prove.
+
+Never:
+
+observe → rewrite
+
+Always:
+
+propose → simulate → verify → commit
+
+---
+
+## No Self-Modification Without Reversibility
+
+Every permanent system change must include:
+
+* reason
+* expected outcome
+* measurable success condition
+* rollback path
+* failure condition
+* guardian approval
+
+If rollback is impossible:
+
+the change is forbidden.
+
+No exceptions.
+
+---
+
+# Memory Contract
+
+## Memory Must Be More Reliable Than The Model
+
+The model may hallucinate.
+Memory may not.
+
+Therefore:
+
+memory always outranks inference.
+
+If model output conflicts with verified memory:
+
+memory wins.
+
+If memory conflicts with recent verified reality:
+
+verification decides.
+
+Never let fluent output overwrite validated structure.
+
+Truth must be harder to mutate than language.
+
+This is non-negotiable.
+
+---
+
+## Required Memory Types
+
+* Episodic
+* Semantic
+* Procedural
+* Self-Model
+* Confidence + Provenance
+
+---
+
+## Memory Lifecycle
+
+raw signal
+→ validated episode
+→ generalized principle
+→ procedural policy
+→ identity-level operating rule
+
+Every promotion requires evidence.
+
+Every decay requires reason.
+
+Nothing becomes permanent without repeated validation.
+
+---
+
+## Required Memory Rules
+
+* strength indexing
+* consolidation
+* decay
+* contradiction resolution
+* promotion / demotion
+* cross-linking
+* confidence tracking
+* provenance retention
+* reindex integrity
+* adversarial protection
+* gate permissions
+
+Forbidden:
+
+* append-only memory
+* permanent hallucinations
+* unverifiable identity assumptions
+
+---
+
+# Config Contract
+
+## All Behavior Must Be Configurable
+
+Never bury cognition rules inside prompts.
+
+Policies must live in:
+
+* config files
+* schemas
+* versioned rules
+* explicit system contracts
+
+Not inside:
+
+* hidden prompts
+* undocumented conditionals
+* ad hoc patches
+
+Config must control:
+
+* routing
+* thresholds
+* verification rules
+* permissions
+* promotion logic
+* trait thresholds
+* guardian posture
+* failure response
+
+---
+
+# Schema Contract
+
+## Every Persistent Object Requires Schema
+
+Including:
+
+* memory objects
+* reflections
+* policy proposals
+* goal states
+* traits
+* identity anchors
+* tool outputs
+* guardian interventions
+
+Schemas must include:
+
+* source
+* confidence
+* timestamp
+* validation status
+* domain
+* access permissions
+* decay policy
+* contradiction state
+
+No freeform persistence.
+
+---
+
+# Emergence Contract
+
+## Emergence Must Be Operational
+
+Not:
+
+“I feel more curious.”
+
+But:
+
+Novelty seeking increases under uncertainty and improves verified outcomes.
+
+Every emergent trait must answer:
+
+1. What changed?
+2. Why did it change?
+3. How is behavior measurably different?
+4. Can it be reproduced?
+5. Can it be reversed if harmful?
+
+If not measurable, it is narrative—not emergence.
+
+---
+
+## Emergence Requires Cost
+
+If a new trait, policy, or capability emerges, it must change:
+
+* behavior
+* resource allocation
+* decision priority
+* failure response
+* tool selection
+* persistence strategy
+
+If nothing materially changes:
+
+it did not emerge.
+
+It only narrated itself.
+
+---
+
+# Capability Delta Contract
+
+## The Only Real AGI Metric
+
+Track:
+
+What can Omega do now that it could not do before?
+
+Never use:
+
+* confidence alone
+* verbosity
+* self-description
+* “it feels alive”
+
+Capability delta is truth.
+
+---
+
+## Capability Must Compound
+
+Do not track isolated improvements.
+
+Track whether improvements create future improvement capacity.
+
+Bad metric:
+
+better answer quality
+
+Good metric:
+
+system created a retrieval policy that permanently improves future reasoning
+
+Compounding capability is the real signal.
+
+This is how constrained hardware beats giant systems.
+
+Compounding wins.
+
+Always.
+
+---
+
+# Final Rule
+
+## Build Cognition, Not Theater
+
+If a feature increases spectacle but not competence, reject it.
+
+If a feature increases capability but looks boring, keep it.
+
+AGI will not emerge from dramatic moments.
+
+It will emerge from persistent competence accumulation.
+
+A thousand brutally correct architectural decisions.
+One after another.
+
+That is the standard.
+That is the doctrine.
+That is the contract.

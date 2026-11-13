@@ -1,0 +1,39 @@
+# Global A intent routing — operational policy (behavioral contract)
+# Code: global_loop/intent/run.py
+# Config: config/global_intent.yaml
+
+version: 1
+
+enabled: true
+deterministic: true
+models: none
+
+role:
+  description: |
+    Maps EpisodeIgnition.opened_by (+ operator_command heuristics) to one of the
+    allowed intents including USE_SKILL for agentic work. No inference; invalid
+    or unknown mappings → IDLE.
+
+authority: global_loop.intent
+config_ref: config/global_intent.yaml
+
+routing:
+  opened_by_primary_map: true
+  operator_command_heuristics:
+    - image_regex
+    - task_regex
+    - learn_prefixes
+  unknown_opened_by: IDLE
+  invalid_mapped_intent: IDLE
+  taxonomy_pressure_opened_by:
+    description: |
+      When Phase 7M memory_taxonomy wins ignition (rare — weight capped at 0.60).
+      Governed mirror: config/global_intent.yaml opened_by_map entries for
+      capability_gap, repair_needed, tool_failure, verification_needed,
+      incomplete_task, confidence_reinforcement, requires_operator_input.
+    authority: global_loop.intent.run._map_opened_by_to_intent
+
+alignment:
+  schema: schema/global_intent.schema.yaml
+  parent_policy: policy/global.policy.yaml
+  allowed_intents_enum: schema/global_intent.schema.yaml#/definitions/allowed_intent

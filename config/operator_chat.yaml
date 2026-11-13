@@ -1,0 +1,13 @@
+# =============================================================================
+# Operator chat — pressure-led ingress adapter
+# =============================================================================
+#
+# Consumed by: pressure_loop/operator_chat.py
+# Policy: policy/operator_chat.policy.yaml
+#
+# =============================================================================
+
+operator_chat:
+  thinking_preview:
+    memory_snippet_limit: 3
+    text_compact_limit: 150

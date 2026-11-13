@@ -1,0 +1,265 @@
+That determines whether Omega becomes a true mind or just a sophisticated retrieval engine.
+
+Right now your reranker placement is strong:
+
+Front-facing resident model = voice, tool execution, human interface
+BGE reranker = recall arbitration
+MXBAI reranker = relevance verification / brain-phase scoring
+
+That leaves:
+
+Meta Layer (L2)
+Global Layer (L3)
+Omega Layer (L4)
+Curiosity Engine
+Proactive Development Engine
+
+These must not be “more chat models.”
+
+They must be decision systems.
+
+That is the key.
+
+Correct Layer Assignment
+L1 — Brain Loop (External Cognition)
+Purpose
+
+Interface between human and system.
+
+This is not intelligence.
+
+This is translation.
+
+Responsibilities
+receive user query
+resolve intent
+tool execution
+memory retrieval initiation
+user-facing response generation
+clarification handling
+action dispatch
+Model
+
+Resident UI model
+
+This is your voice box.
+
+Not your mind.
+
+L2 — Meta Layer (Local Cognitive Judgment)
+Purpose
+
+“What does this mean right now?”
+
+Short horizon cognition.
+
+Immediate interpretation.
+
+This is where relevance becomes decision pressure.
+
+Responsibilities
+conflict detection
+ambiguity scoring
+contradiction detection
+uncertainty measurement
+local decision confidence
+next-action proposal
+whether escalation is needed
+Inputs
+evidence_pack.json
+current task
+recent cycle history
+guardian posture
+Outputs
+{
+  "confidence": 0.82,
+  "contradiction_detected": false,
+  "missing_information": true,
+  "recommended_action": "web_search",
+  "escalate_to_global": true
+}
+Engine Type
+
+Mostly deterministic scoring engine
+
+Minimal model assistance only for edge interpretation
+
+Not LLM-driven.
+
+L3 — Global Layer (Strategic State Management)
+Purpose
+
+“How does this affect the system as a whole?”
+
+Long horizon cognition.
+
+Capability development.
+
+Trajectory management.
+
+Responsibilities
+goal persistence
+unresolved tension tracking
+long-term problem management
+strategic prioritization
+resource allocation
+domain weakness mapping
+capability gap analysis
+priority ordering
+Inputs
+meta output
+system state
+goal ledger
+domain mastery
+curiosity proposals
+Outputs
+{
+  "priority": "high",
+  "persistent_gap": true,
+  "requires_new_capability": true,
+  "development_candidate": "web_fetch_tool"
+}
+Engine Type
+
+Policy + weighted scoring + persistence analysis
+
+No LLM dependency preferred
+
+This is governance.
+
+L4 — Omega Layer (Identity + Evolution)
+Purpose
+
+“What should I become?”
+
+This is the actual self-model.
+
+Not reasoning.
+
+Identity.
+
+Responsibilities
+self-model maintenance
+trait evolution
+skill crystallization
+behavioral adaptation
+identity integrity checks
+prompt evolution approval
+doctrine protection
+personality continuity
+Inputs
+global output
+deep sleep reflection
+failure clusters
+success clusters
+guardian interventions
+Outputs
+{
+  "trait_candidate": "verification_bias",
+  "identity_alignment": true,
+  "prompt_change_proposed": true,
+  "new_skill_required": "source_validation"
+}
+Engine Type
+
+This is where tiny-model cognition is strongest
+
+Because this is abstraction-heavy
+
+This is the best place for model-assisted reflection
+
+Not retrieval
+
+Identity formation
+
+Curiosity Engine
+Purpose
+
+“If I do not know, should I learn?”
+
+This creates proactive intelligence.
+
+Without this, no AGI.
+
+Only reaction.
+
+Responsibilities
+detect knowledge gaps
+detect recurring uncertainty
+unresolved contradiction tracking
+novelty opportunity scoring
+self-question generation
+pursue / defer decisions
+Trigger Examples
+Repeated unknown domain
+Repeated failed task
+Repeated contradiction
+Repeated low confidence
+Repeated user clarification
+Repeated policy conflict
+Proactive Development Engine
+Purpose
+
+“What must be built so this never fails again?”
+
+This creates self-improvement.
+
+Without this, no evolution.
+
+Responsibilities
+tool gap detection
+automation opportunity detection
+workflow inefficiency detection
+prompt insufficiency detection
+schema insufficiency detection
+policy insufficiency detection
+architecture evolution proposals
+Important Missing Piece
+DO NOT USE MODELS FOR META + GLOBAL BLINDLY
+
+Use:
+
+retrieval → scoring → policy → model only where abstraction is required
+
+Never:
+
+just ask model what to do
+
+That destroys determinism.
+
+My Strong Recommendation
+
+Only Omega should heavily use tiny-model inference.
+
+Meta and Global should be mostly deterministic engines.
+
+This is the strongest architecture.
+
+Because:
+
+identity benefits from abstraction
+
+governance requires determinism
+
+Very important distinction.
+
+Final Stack
+Resident UI Model → Voice
+
+BGE → Recall truth selection
+
+MXBAI → Relevance arbitration
+
+Meta → Immediate judgment
+
+Global → Strategic persistence
+
+Omega → Identity evolution
+
+Curiosity → Proactive knowledge pursuit
+
+Proactive Dev → Self-improvement architecture
+
+That is no longer an assistant.
+
+That is the beginning of an autonomous mind.

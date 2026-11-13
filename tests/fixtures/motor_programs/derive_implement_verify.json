@@ -1,0 +1,45 @@
+{
+  "program_id": "fixture-derive-implement-verify",
+  "parent_program_id": "fixture-shallow-retrieval",
+  "outcome_id": "fixture-gradient-outcome",
+  "episode_id": "fixture-episode",
+  "attempt_number": 2,
+  "created_at": "2026-07-11T00:00:01+00:00",
+  "fingerprint": "computed-by-live-planner",
+  "material_fingerprint": "computed-by-live-planner",
+  "material_signature": {
+    "pathway_id": "derive-implement-verify",
+    "capability_class": "testing",
+    "required_capabilities": ["building", "code_execution", "testing"]
+  },
+  "outcome_contract": {
+    "objective": "learn how gradient checks establish implementation correctness",
+    "acceptance_criteria": ["derive the finite-difference check", "implement it", "run a passing verification"],
+    "constraints": ["preserve the predecessor outcome", "executor reports facts only"],
+    "priorities": ["technical depth", "verified application"]
+  },
+  "pathway": {
+    "pathway_id": "derive-implement-verify",
+    "revision": 2,
+    "name": "derive implement verify",
+    "method": "derive the check, implement an executable artifact, and verify it with a passing test",
+    "operational_rationale": "the retrieval-only predecessor failed the technical-depth and application evidence gates",
+    "failed_predecessor_id": "fixture-shallow-retrieval",
+    "change_evidence": ["technical_depth_gap", "retrieval supplied no demonstrated application"]
+  },
+  "execution_plan": {
+    "capability_class": "testing",
+    "operations": ["derive the finite-difference relation", "implement a gradient checker", "run the checker against an analytic gradient"],
+    "required_capabilities": ["building", "code_execution", "testing"],
+    "permitted_local_discretion": ["choose bounded finite-difference epsilon"],
+    "prohibited_deviations": ["change the outcome contract", "self-attest verification"],
+    "return_to_mind_conditions": ["verification fails", "required capabilities are unavailable"]
+  },
+  "evidence_contract": {
+    "required_artifacts": ["files changed"],
+    "required_source_proof": [],
+    "required_checks": ["pytest"],
+    "completion_signals": ["executor-owned verification is green"],
+    "disqualifying_failures": ["no test execution", "executor changes Omega's outcome contract"]
+  }
+}

@@ -1,0 +1,309 @@
+# JSON Schema (YAML) — auto_loop canonical types
+# Authority: auto_loop/_auto_state.py, auto_loop/fold/run.py
+
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "omega://schema/auto/v1"
+title: AutoLoopTypes
+description: |
+  AUTO execution packs and phase I/O. Consumes ExecutionActionPack from Meta A;
+  produces episode.auto + AutoOutcomePack for Meta B.
+
+definitions:
+  memory_status:
+    type: string
+    enum: [skipped, success, failed]
+
+  auto_status:
+    type: string
+    enum: [success, failed, skipped]
+
+  cycle_kind:
+    type: string
+    enum: [success, fail, skipped]
+
+  prompt_type:
+    type: string
+    enum:
+      - RESPONSE_REASONING
+      - RESPONSE_QUESTION
+      - RESPONSE_ACK
+      - RESPONSE_FREEFORM
+      - RESPONSE_TEMPORAL
+      - PROACTIVE_REASONING
+      - PROACTIVE_ACK
+      - TOOL_CALL_SYSTEM
+      - TOOL_RESULT_SYNTHESIS
+      - SKILL_BUILD_SYSTEM
+      - IMAGE_SYSTEM
+      - DOCUMENT_SYSTEM
+      - IDLE_SYSTEM
+
+  model_profile:
+    type: string
+    enum:
+      - TEXT_REASONING
+      - TEXT_FAST
+      - TOOL_EXECUTOR
+      - IMAGE_GENERATION
+
+  AutoInput:
+    type: object
+    required:
+      - episode_id
+      - pressure
+      - source_action_goal
+      - execution_pack
+      - trajectory_snapshot
+    properties:
+      episode_id: { type: string }
+      pressure: { type: object }
+      source_action_goal: { type: object }
+      execution_pack: { type: object }
+      trajectory_snapshot: { type: object }
+
+  MemoryEnvelope:
+    type: object
+    required:
+      - memory_required
+      - memory_status
+      - memory_scope
+      - items
+    properties:
+      memory_required: { type: boolean }
+      memory_status:
+        $ref: "#/definitions/memory_status"
+      memory_reason: { type: ["string", "null"] }
+      memory_scope:
+        type: array
+        items: { type: string }
+      items:
+        type: array
+        items:
+          type: object
+          properties:
+            memory_id: { type: string }
+            source: { type: string }
+            timestamp: {}
+            relevance: { type: number }
+            content: { type: string }
+      error: { type: ["string", "null"] }
+
+  PromptPack:
+    type: object
+    required:
+      - prompt_type
+      - system_prompt
+      - context_blocks
+    properties:
+      prompt_type:
+        $ref: "#/definitions/prompt_type"
+      system_prompt: { type: string }
+      developer_prompt: { type: ["string", "null"] }
+      user_prompt: { type: ["string", "null"] }
+      context_blocks:
+        type: object
+        properties:
+          memory_block: { type: ["string", "null"] }
+          tool_block: { type: ["string", "null"] }
+          constraints_block: { type: ["string", "null"] }
+      response_mode:
+        type: ["string", "null"]
+        enum: [reasoning, question, ack, freeform, summary, null]
+      tool_call_spec: { type: ["object", "null"] }
+      image_spec: { type: ["object", "null"] }
+
+  AutoOutcomePack:
+    type: object
+    required:
+      - episode_id
+      - source_action_goal
+      - execution_pack
+      - auto
+    properties:
+      episode_id: { type: string }
+      source_action_goal: { type: object }
+      execution_pack: { type: object }
+      auto:
+        $ref: "#/definitions/AutoEmit"
+
+  AutoEmit:
+    type: object
+    required: [status, cycle_kind, memory_status, outputs, telemetry]
+    properties:
+      status:
+        $ref: "#/definitions/auto_status"
+      cycle_kind:
+        $ref: "#/definitions/cycle_kind"
+      memory_status:
+        $ref: "#/definitions/memory_status"
+      model_profile:
+        oneOf:
+          - $ref: "#/definitions/model_profile"
+          - { type: "null" }
+      outputs:
+        type: object
+        properties:
+          response_text: { type: ["string", "null"] }
+          tool_result: {}
+          tool_result_summary: { type: ["string", "null"] }
+          image_artifact: { type: ["object", "null"] }
+      failure_kind: { type: ["string", "null"] }
+      failure_reason: { type: ["string", "null"] }
+      telemetry:
+        type: object
+        required: [runtime_ms, warnings]
+        properties:
+          runtime_ms: { type: integer, minimum: 0 }
+          warnings:
+            type: array
+            items: { type: string }
+
+  EpisodeAutoFold:
+    type: object
+    description: Full shape written to episode.auto by fold phase
+    required:
+      - episode_id
+      - action
+      - status
+      - memory
+      - prompt_pack
+      - outputs
+      - telemetry
+    properties:
+      episode_id: { type: string }
+      action: { type: string }
+      status:
+        $ref: "#/definitions/auto_status"
+      failure_kind: { type: ["string", "null"] }
+      failure_reason: { type: ["string", "null"] }
+      memory:
+        type: object
+        properties:
+          memory_required: { type: boolean }
+          memory_status:
+            $ref: "#/definitions/memory_status"
+          memory_reason: { type: ["string", "null"] }
+          memory_scope:
+            type: array
+            items: { type: string }
+          items: { type: array }
+          error: { type: ["string", "null"] }
+      model_profile:
+        oneOf:
+          - $ref: "#/definitions/model_profile"
+          - { type: "null" }
+      model_id: { type: ["string", "null"] }
+      prompt_pack:
+        type: object
+        properties:
+          prompt_type:
+            $ref: "#/definitions/prompt_type"
+          response_mode: { type: ["string", "null"] }
+          system_prompt_hash: { type: ["string", "null"] }
+          user_prompt_hash: { type: ["string", "null"] }
+          memory_block_hash: { type: ["string", "null"] }
+          tool_block_hash: { type: ["string", "null"] }
+      outputs:
+        type: object
+      telemetry:
+        type: object
+        properties:
+          cycle_kind:
+            $ref: "#/definitions/cycle_kind"
+          runtime_ms: { type: integer }
+          tool_runtime_ms: { type: ["integer", "null"] }
+          memory_runtime_ms: { type: ["integer", "null"] }
+          warnings:
+            type: array
+            items: { type: string }
+
+  AutoConfig:
+    type: object
+    required: [auto]
+    properties:
+      auto:
+        type: object
+        properties:
+          enabled: { type: boolean }
+          models: { type: string }
+          module: { type: string }
+          phases:
+            type: array
+            items: { type: string }
+          episode_write:
+            type: object
+            properties:
+              slot: { type: string }
+              path: { type: string }
+          requires:
+            type: array
+            items: { type: string }
+          handoff:
+            type: object
+            properties:
+              upstream: { type: string }
+              downstream: { type: string }
+          prompt_types:
+            type: array
+            items: { type: string }
+          model_profiles:
+            type: array
+            items: { type: string }
+          promptpack:
+            type: object
+            properties:
+              system_prompt: { type: string }
+              memory_tool_law: { type: string }
+              system_prompts:
+                type: object
+                additionalProperties: { type: string }
+              response_ack_keywords:
+                type: array
+                items: { type: string }
+              proactive_ack_keywords:
+                type: array
+                items: { type: string }
+          route:
+            type: object
+            properties:
+              reasoning_prompt_types:
+                type: array
+                items: { type: string }
+              fast_prompt_types:
+                type: array
+                items: { type: string }
+              direct_tools: { type: object }
+              profile_by_prompt_type: { type: object }
+              memory_enriched_bumps_fast_to_reasoning: { type: boolean }
+          execute:
+            type: object
+            properties:
+              default_temperature: { type: number }
+              default_top_p: { type: number }
+              profile_max_tokens:
+                type: object
+                additionalProperties: { type: integer }
+              web_fetch_default_max_results: { type: integer }
+              image_defaults: { type: object }
+              preflight_capabilities: { type: object }
+          recall:
+            type: object
+            properties:
+              default_limit: { type: integer }
+              denied_lobes_default:
+                type: array
+                items: { type: integer }
+              scope_aliases: { type: object }
+          fold:
+            type: object
+            properties:
+              status_success: { type: string }
+              status_failed: { type: string }
+              status_skipped: { type: string }
+              cycle_kind_success: { type: string }
+              cycle_kind_fail: { type: string }
+              cycle_kind_skipped: { type: string }
+              hash_prompt_fields: { type: boolean }
+          failure_kinds:
+            type: array
+            items: { type: string }

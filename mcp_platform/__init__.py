@@ -1,0 +1,167 @@
+"""Strict contracts for Omega's signed local-first MCP packages."""
+
+from mcp_platform.client_contracts import (
+    DiscoverySource,
+    McpClientDeployment,
+    McpClientError,
+    McpClientErrorReason,
+    McpClientLimits,
+    McpConnectionDescriptor,
+    McpDiscoveryReceipt,
+    McpInputRequest,
+    McpOperationKind,
+    McpOperationRequest,
+    McpOperationResult,
+    McpOperationStatus,
+    McpTaskHandle,
+    McpTransport,
+)
+from mcp_platform.app_registry import McpAppRegistrySnapshot
+from mcp_platform.authority import McpOperationAuthorityEvaluator
+from mcp_platform.ingress import (
+    McpPlannerTextReceipt,
+    screen_mcp_planner_text,
+    validate_mcp_planner_text,
+)
+from mcp_platform.package_contracts import (
+    MCP_PROTOCOL_VERSION,
+    McpPackageManifest,
+    NetworkClass,
+    ResourceCatalog,
+    RiskClass,
+    ToolCatalog,
+)
+from mcp_platform.provisioner import McpAppProvisionError, McpAppProvisioner
+from mcp_platform.plugin_lifecycle import (
+    PluginAppSelectionRequired,
+    PluginLifecycleService,
+    get_default_plugin_lifecycle_service,
+)
+from mcp_platform.plugin_runtime import (
+    PluginOperationRequest,
+    PluginOperationResult,
+    PluginRuntime,
+    PluginRuntimeError,
+    get_default_plugin_runtime,
+)
+from mcp_platform.plugin_backend import CurrentMcpPluginBackend
+from mcp_platform.plugin_catalog import (
+    PluginToolBinding,
+    compile_plugin_tool_bindings,
+    plugin_tool_registry_entries,
+)
+from mcp_platform.plugin_dispatch import (
+    canonical_plugin_tool_name,
+    plugin_tool_bindings,
+    resolve_plugin_tool_request,
+)
+from mcp_platform.plugin_planning import (
+    PluginOperationPlan,
+    PluginOperationStep,
+    PluginPlanDecision,
+    PluginPlanDecisionKind,
+    PluginPlannerContext,
+    PluginPlannerMetadata,
+    PluginStepResult,
+    ScreenedPlannerText,
+    build_plugin_planner_prompt,
+    parse_plugin_plan_decision,
+    plugin_decision_schema,
+    retrieve_plugin_candidates,
+)
+from mcp_platform.operation_contracts import McpAuthorityDecision, McpToolAuthority
+from mcp_platform.oauth_profiles import (
+    OAuthClientMode,
+    OAuthProfile,
+    OAuthProfileCatalog,
+    OAuthProfileMatchInput,
+    OAuthProfileRegistry,
+)
+from mcp_platform.plugin_authority import (
+    PluginAuthorityService,
+    PluginAuthorityStore,
+    PluginConnectionAuthority,
+    PluginExecutionPolicy,
+    plugin_connection_authority_revision,
+    plugin_plan_digest,
+)
+from mcp_platform.plugin_permissions import (
+    PluginPermissionDisplay,
+    PluginPermissionRequest,
+    PluginPermissionStore,
+    PluginPlanGrant,
+)
+
+__all__ = [
+    "DiscoverySource",
+    "MCP_PROTOCOL_VERSION",
+    "McpClientDeployment",
+    "McpClientError",
+    "McpClientErrorReason",
+    "McpClientLimits",
+    "McpConnectionDescriptor",
+    "McpDiscoveryReceipt",
+    "McpInputRequest",
+    "McpOperationKind",
+    "McpOperationRequest",
+    "McpOperationResult",
+    "McpOperationStatus",
+    "McpPackageManifest",
+    "McpAppProvisionError",
+    "McpAppProvisioner",
+    "McpAppRegistrySnapshot",
+    "McpAuthorityDecision",
+    "McpOperationAuthorityEvaluator",
+    "OAuthClientMode",
+    "OAuthProfile",
+    "OAuthProfileCatalog",
+    "OAuthProfileMatchInput",
+    "OAuthProfileRegistry",
+    "McpToolAuthority",
+    "McpPlannerTextReceipt",
+    "screen_mcp_planner_text",
+    "validate_mcp_planner_text",
+    "McpTaskHandle",
+    "McpTransport",
+    "PluginAppSelectionRequired",
+    "PluginLifecycleService",
+    "PluginOperationRequest",
+    "PluginOperationResult",
+    "PluginRuntime",
+    "PluginRuntimeError",
+    "CurrentMcpPluginBackend",
+    "get_default_plugin_runtime",
+    "get_default_plugin_lifecycle_service",
+    "PluginToolBinding",
+    "compile_plugin_tool_bindings",
+    "canonical_plugin_tool_name",
+    "plugin_tool_bindings",
+    "plugin_tool_registry_entries",
+    "resolve_plugin_tool_request",
+    "PluginOperationPlan",
+    "PluginOperationStep",
+    "PluginPlanDecision",
+    "PluginPlanDecisionKind",
+    "PluginPlannerContext",
+    "PluginPlannerMetadata",
+    "PluginStepResult",
+    "ScreenedPlannerText",
+    "build_plugin_planner_prompt",
+    "parse_plugin_plan_decision",
+    "plugin_decision_schema",
+    "retrieve_plugin_candidates",
+    "PluginAuthorityService",
+    "PluginAuthorityStore",
+    "PluginConnectionAuthority",
+    "PluginExecutionPolicy",
+    "PluginPermissionDisplay",
+    "PluginPermissionRequest",
+    "PluginPermissionStore",
+    "PluginPlanGrant",
+    "plugin_connection_authority_revision",
+    "plugin_plan_digest",
+    "NetworkClass",
+    "ResourceCatalog",
+    "RiskClass",
+    "ToolCatalog",
+]

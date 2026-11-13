@@ -1,0 +1,36 @@
+# Omega — mandatory episodic metacognition
+# Code: omega_loop/episode/
+# Config: config/omega.yaml
+
+version: 2
+mandatory_every_episode: true
+fail_hard: true
+
+role:
+  description: |
+    Omega reasons over Global B's full episodic pack after AUTO, Meta B, and
+    Global B. It uses an action-specific prompt, writes its metacognition and
+    Global B's pack to the journal carrier, and chooses the next pressure move.
+  upstream: episode.global_.omega_packet
+  downstream: deepsleep_loop.loop.run_deepsleep_for_episode
+  reply_path: false
+
+sequence:
+  - module: omega_loop.episode.packet
+    output: EpisodeCognitionPacket
+  - module: omega_loop.episode.prompts
+    rule: action_specific_prompt
+  - module: omega_loop.episode.run
+    entry: run_omega_for_episode
+    output: EpisodeCognitionResult
+
+constraints:
+  no_window_variant: true
+  no_stage_gate: true
+  meta_remains_deterministic: true
+  auto_owns_operator_reply: true
+
+alignment:
+  policy_loader: pressure_loop.policy.load_policy
+  schema: schema/omega.schema.yaml
+  law: AGENTS.md §3

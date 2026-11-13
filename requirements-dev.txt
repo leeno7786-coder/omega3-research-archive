@@ -1,0 +1,28 @@
+# Omega 3.0 - Development Dependencies
+# Generated: 2026-05-15
+# This file documents development-only dependencies
+
+# Linting and formatting
+mypy>=1.0.0
+pylint>=3.0.0
+black>=24.0.0
+isort>=5.12.0
+
+# Testing
+pytest-cov>=4.0.0
+pytest-mock>=3.0.0
+pytest-xdist>=3.0.0
+pytest-timeout>=2.4.0   # honors `timeout = 300` in pytest.ini (kills hung tests)
+
+# Signed MCP peer compilation (portable Windows test toolchain)
+PyInstaller==6.22.2
+altgraph==0.17.5
+pefile==2024.8.26
+pyinstaller-hooks-contrib==2026.7
+pywin32-ctypes==0.2.3
+
+# Type checking
+mypy-extensions>=1.0.0
+
+# Documentation
+towncrier>=23.0.0

@@ -1,0 +1,24 @@
+{
+  "coord": [
+    4,
+    0,
+    0
+  ],
+  "domain": "dev",
+  "enrichment": {
+    "canonical": true,
+    "closed_at": "2026-06-29T10:01:00Z",
+    "event_kind": "recall_query"
+  },
+  "id": "4.00.n4",
+  "links": [
+    "4.00.n3"
+  ],
+  "summary": "Second review pass.",
+  "tags": [
+    "python",
+    "test"
+  ],
+  "title": "Follow-up with Bob Smith",
+  "type": "situational"
+}

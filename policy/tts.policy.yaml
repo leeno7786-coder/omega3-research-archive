@@ -1,0 +1,24 @@
+# TTS — operational policy (behavioral contract)
+# Code: runtime/tts.py
+
+version: 1
+
+enabled: true
+
+role:
+  description: |
+    Text-to-speech via omega-portable-lite /synthesise. Empty text returns
+    empty audio without error.
+
+runtime:
+  client: runtime.client.get_runtime_client
+  socket_ref: config/runtime.yaml services.tts
+  preflight: runtime.runtime_capability_broker.preflight_runtime_operation
+
+failure_mode:
+  empty_input: return_empty_bytes
+  runtime_down: failure_soft_empty
+
+alignment:
+  config: config/tts.yaml
+  schema: schema/tts.schema.yaml

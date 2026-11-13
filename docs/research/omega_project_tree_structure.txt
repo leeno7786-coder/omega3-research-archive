@@ -1,0 +1,1066 @@
+Omega3.0/  (git-tracked tree — regenerated 2026-05-18 post-housekeeping)
+
+|-- .github/
+|   |-- extensions/
+|   |   |-- omega3-review-automation/
+|   |   |   +-- extension.mjs
+|   |   +-- omega3-system-tools/
+|   |       +-- extension.mjs
+|   |-- workflows/
+|   |   +-- guardian-logging.yml
+|   +-- copilot-instructions.md
+|-- autonomic/
+|   |-- dopamine/
+|   |   |-- __init__.py
+|   |   |-- autonomic_module.py
+|   |   +-- README.md
+|   |-- phase_clock/
+|   |   |-- __init__.py
+|   |   |-- autonomic_module.py
+|   |   +-- README.md
+|   |-- plasticity/
+|   |   |-- __init__.py
+|   |   |-- autonomic_module.py
+|   |   +-- README.md
+|   |-- strength_index/
+|   |   |-- __init__.py
+|   |   |-- autonomic_module.py
+|   |   +-- README.md
+|   |-- stress/
+|   |   |-- __init__.py
+|   |   |-- autonomic_module.py
+|   |   +-- README.md
+|   |-- temporal_grounding/
+|   |   |-- __init__.py
+|   |   |-- autonomic_module.py
+|   |   +-- README.md
+|   |-- __init__.py
+|   |-- _history.py
+|   |-- _memory_stats.py
+|   +-- README.md
+|-- autonomous/
+|   |-- autonomous_loop/
+|   |   |-- phases/
+|   |   |   |-- phase_1_read_orders/
+|   |   |   |   |-- __init__.py
+|   |   |   |   |-- load.py
+|   |   |   |   |-- queue.py
+|   |   |   |   |-- README.md
+|   |   |   |   |-- run.py
+|   |   |   |   |-- signals.py
+|   |   |   |   +-- state.py
+|   |   |   |-- phase_2_build_prompt/
+|   |   |   |   |-- __init__.py
+|   |   |   |   |-- README.md
+|   |   |   |   |-- run.py
+|   |   |   |   +-- state.py
+|   |   |   |-- phase_2_resolve_schema/
+|   |   |   |   |-- __init__.py
+|   |   |   |   +-- run.py
+|   |   |   |-- phase_3_5_dopamine/
+|   |   |   |   |-- __init__.py
+|   |   |   |   |-- README.md
+|   |   |   |   +-- run.py
+|   |   |   |-- phase_3_6_plasticity/
+|   |   |   |   |-- __init__.py
+|   |   |   |   |-- README.md
+|   |   |   |   +-- run.py
+|   |   |   |-- phase_3_7_strength/
+|   |   |   |   |-- __init__.py
+|   |   |   |   |-- README.md
+|   |   |   |   +-- run.py
+|   |   |   |-- phase_3_8_stress/
+|   |   |   |   |-- __init__.py
+|   |   |   |   |-- README.md
+|   |   |   |   +-- run.py
+|   |   |   |-- phase_3_inference/
+|   |   |   |   |-- __init__.py
+|   |   |   |   |-- inference_trace.py
+|   |   |   |   |-- README.md
+|   |   |   |   |-- run.py
+|   |   |   |   +-- state.py
+|   |   |   |-- phase_4_persist/
+|   |   |   |   |-- __init__.py
+|   |   |   |   |-- memory_writer.py
+|   |   |   |   |-- outcome_recorder.py
+|   |   |   |   |-- README.md
+|   |   |   |   |-- run.py
+|   |   |   |   |-- state.py
+|   |   |   |   +-- telemetry_sender.py
+|   |   |   |-- __init__.py
+|   |   |   +-- README.md
+|   |   |-- loop.py
+|   |   |-- loop_context.py
+|   |   |-- metrics.py
+|   |   +-- README.md
+|   |-- __init__.py
+|   +-- README.md
+|-- brain/
+|   |-- phases/
+|   |   |-- respond/
+|   |   |   |-- __init__.py
+|   |   |   |-- prompt_builder.py
+|   |   |   +-- run.py
+|   |   |-- verify/
+|   |   |   |-- __init__.py
+|   |   |   |-- parser.py
+|   |   |   |-- prompt_builder.py
+|   |   |   +-- run.py
+|   |   |-- __init__.py
+|   |   |-- _conv_cog.py
+|   |   |-- _model_client.py
+|   |   |-- intent_classify.py
+|   |   |-- memory_operations.py
+|   |   |-- retrieve.py
+|   |   |-- store.py
+|   |   +-- translate.py
+|   |-- __init__.py
+|   |-- brainloop.py
+|   |-- cycle_state.py
+|   |-- README.md
+|   +-- runtime_client.py
+|-- browser_agent/
+|   +-- edge_extension/
+|       |-- content_script.js
+|       |-- manifest.json
+|       |-- popup.css
+|       |-- popup.html
+|       |-- popup.js
+|       |-- README.md
+|       +-- service_worker.js
+|-- config/
+|   |-- __init__.py
+|   |-- affect_attribution.yaml
+|   |-- autonomic_modulator.yaml
+|   |-- autonomous_loop.yaml
+|   |-- brain_loop.yaml
+|   |-- curiosity.yaml
+|   |-- deep_sleep.yaml
+|   |-- development.yaml
+|   |-- dialogue_acts.yaml
+|   |-- dopamine.yaml
+|   |-- failure.yaml
+|   |-- global.yaml
+|   |-- goals.yaml
+|   |-- governance.yaml
+|   |-- guardian_response_classes.yaml
+|   |-- identity_policy.json
+|   |-- knowledge_domains.yaml
+|   |-- loader.py
+|   |-- memory.yaml
+|   |-- meta.yaml
+|   |-- models.yaml
+|   |-- omega.yaml
+|   |-- omega_intervention.yaml
+|   |-- phase_clock.yaml
+|   |-- phase_registry.yaml
+|   |-- plasticity.yaml
+|   |-- queue.yaml
+|   |-- README.md
+|   |-- runtime_policy.yaml
+|   |-- strength_index.yaml
+|   |-- stress.yaml
+|   |-- system.yaml
+|   |-- temporal_grounding.yaml
+|   |-- timing.yaml
+|   |-- tools.yaml
+|   |-- trait.yaml
+|   +-- web_sources.yaml
+|-- core/
+|   |-- logging/
+|   |   |-- __init__.py
+|   |   |-- README.md
+|   |   +-- setup.py
+|   |-- policy/
+|   |   |-- __init__.py
+|   |   |-- curiosity_policy.yaml
+|   |   |-- development_policy.yaml
+|   |   |-- guardian_policy.py
+|   |   |-- identity_policy.yaml
+|   |   |-- inference_policy.py
+|   |   |-- memory_policy.py
+|   |   |-- memory_policy.yaml
+|   |   |-- output_validators.py
+|   |   |-- queue_policy.py
+|   |   |-- README.md
+|   |   |-- response_policy.py
+|   |   |-- shared_state.yaml
+|   |   |-- tool_policy.py
+|   |   |-- trait_policy.py
+|   |   +-- verification_policy.py
+|   |-- runtime/
+|   |   |-- __init__.py
+|   |   +-- handler_runtime.py
+|   |-- schema/
+|   |   |-- tools/
+|   |   |   |-- __init__.py
+|   |   |   |-- web_fetch.json
+|   |   |   +-- web_fetch.py
+|   |   |-- __init__.py
+|   |   |-- autonomous_activation.py
+|   |   |-- brain_intake.py
+|   |   |-- confidence.py
+|   |   |-- curiosity_engine.py
+|   |   |-- cycle_envelope.py
+|   |   |-- cycle_kind.py
+|   |   |-- deepsleep_consolidation.py
+|   |   |-- deepsleep_phases.py
+|   |   |-- development_engine.py
+|   |   |-- dopamine.py
+|   |   |-- failure_record.py
+|   |   |-- goal.py
+|   |   |-- guardian_intervention.py
+|   |   |-- identity_anchor.py
+|   |   |-- inference_token.py
+|   |   |-- memory_object.py
+|   |   |-- memory_schema.json
+|   |   |-- meta_orders.py
+|   |   |-- model_kind.py
+|   |   |-- omega.py
+|   |   |-- omega_decision_schema.json
+|   |   |-- omega_identity_v2.py
+|   |   |-- omega_trajectory.py
+|   |   |-- phase_clock.py
+|   |   |-- phase_entry.py
+|   |   |-- phase_guard.py
+|   |   |-- phase_io.py
+|   |   |-- phase_signal.py
+|   |   |-- plasticity.py
+|   |   |-- policy_proposal.py
+|   |   |-- provenance.py
+|   |   |-- queued_order.py
+|   |   |-- README.md
+|   |   |-- reflection.py
+|   |   |-- shared_state.schema.json
+|   |   |-- strength_index.py
+|   |   |-- stress.py
+|   |   |-- temporal_grounding.py
+|   |   |-- tool_spec.py
+|   |   |-- trait.py
+|   |   +-- verification.py
+|   |-- __init__.py
+|   |-- affect_dispatcher.py
+|   |-- autonomic.py
+|   |-- autonomic_modulator.py
+|   |-- autonomous_engine.py
+|   |-- boot_hydration.py
+|   |-- brain_receiver.py
+|   |-- compat.py
+|   |-- continuous_timing.py
+|   |-- conversation_state.py
+|   |-- conversational_responder.py
+|   |-- curiosity_engine.py
+|   |-- curiosity_feedback_consumer.py
+|   |-- curiosity_producer.py
+|   |-- curiosity_store.py
+|   |-- cycle.py
+|   |-- cycle_cadence.py
+|   |-- data_logger.py
+|   |-- deepsleep_engine.py
+|   |-- deepsleep_store.py
+|   |-- dev_agent_tools.py
+|   |-- dev_tool_registry.py
+|   |-- development_engine.py
+|   |-- development_store.py
+|   |-- dialogue_act_selector.py
+|   |-- execution_engine.py
+|   |-- face_recall_warmup.py
+|   |-- failure.py
+|   |-- failure_query.py
+|   |-- feedback.py
+|   |-- feedback_hooks.py
+|   |-- first_contact.py
+|   |-- followup_spawner.py
+|   |-- json_extract.py
+|   |-- knowledge_encoder.py
+|   |-- layer_state.py
+|   |-- loop_adapters.py
+|   |-- loop_audit.py
+|   |-- model_lifecycle.py
+|   |-- model_router.py
+|   |-- omega_lock.py
+|   |-- open_questions.py
+|   |-- operator_approval_queue.py
+|   |-- operator_identity.py
+|   |-- operator_persona_completeness.py
+|   |-- orchestrator.py
+|   |-- outstanding_question_state.py
+|   |-- paths.py
+|   |-- pending_curiosity_queue.py
+|   |-- persona_router.py
+|   |-- phase_registry.py
+|   |-- policies.py
+|   |-- provenance.py
+|   |-- README.md
+|   |-- reply_evaluator.py
+|   |-- response_engine.py
+|   |-- role_registry.py
+|   |-- runtime_policy.py
+|   |-- runtime_registry.py
+|   |-- sandbox_executor.py
+|   |-- scoring.py
+|   |-- self_inquiry.py
+|   |-- semantic_state_engine.py
+|   |-- shared_state.py
+|   |-- shared_state_keys.py
+|   |-- tool_result_utils.py
+|   +-- trait_writer.py
+|-- docs/
+|   |-- audits/
+|   |   |-- AUDIT_RECONCILIATION.md
+|   |   |-- AUDIT_REPORT.md
+|   |   |-- AUDIT_REPORT_2026-05-15.md
+|   |   |-- audit_the_cwd_output.md
+|   |   |-- autonomic_review.md
+|   |   |-- autonomous_review.md
+|   |   |-- brain_review.md
+|   |   |-- core_review.md
+|   |   |-- DATA_FLOW_CHARTS.md
+|   |   |-- DOMAIN_I_boot.md
+|   |   |-- DOMAIN_II_memory.md
+|   |   |-- DOMAIN_III_guardian.md
+|   |   |-- DOMAIN_IV_brain.md
+|   |   |-- DOMAIN_IX_deepsleep.md
+|   |   |-- DOMAIN_V_autonomous.md
+|   |   |-- DOMAIN_VI_meta_layers.md
+|   |   |-- DOMAIN_VII_curiosity.md
+|   |   |-- DOMAIN_VIII_development.md
+|   |   |-- DOMAIN_X_ui.md
+|   |   |-- hud_review.md
+|   |   |-- IMPROVEMENTS_SUMMARY_2026-05-15.md
+|   |   |-- memory_recall_review.md
+|   |   |-- metacognition_review.md
+|   |   |-- NEURO_PIPELINE_AUDIT.md
+|   |   |-- omega2.5_rebuild_AUDIT_SUMMARY.md
+|   |   |-- README.md
+|   |   |-- SYSTEM_AUDIT_DELTA_2026-05-17.md
+|   |   |-- SYSTEM_AUDIT_REPORT.md
+|   |   +-- tools_review.md
+|   |-- build_log/
+|   |   |-- 0001_doc_consolidation.md
+|   |   |-- 0002_repair_deepsleep.md
+|   |   |-- 0003_5_memory_enrollment.md
+|   |   |-- 0003_schemas_phase1.md
+|   |   |-- 0004_scoring_module.md
+|   |   |-- 0005_configs.md
+|   |   |-- 0006_policies.md
+|   |   |-- 0007_failure_flow_law.md
+|   |   |-- 0008_mandatory_flow.md
+|   |   |-- 0009_curiosity_engine.md
+|   |   |-- 0010_development_engine.md
+|   |   |-- 0011_autonomous_initiator.md
+|   |   |-- 0012_brain_receiver.md
+|   |   |-- 0013_deepsleep_consolidation.md
+|   |   |-- 0014_bge_reranker.md
+|   |   |-- 0014_first_contact.md
+|   |   |-- 0014b_bge_reranker_live_validation.md
+|   |   |-- 0015_e2e_verification.md
+|   |   |-- 0015_l0_semantic_substrate.md
+|   |   |-- 0015b_l0_live_validation.md
+|   |   |-- 0019_runtime_restructure.md
+|   |   |-- 0020_runtime_registry.md
+|   |   |-- 0021_lifecycle_via_roles.md
+|   |   |-- 0022_qwen_retirement.md
+|   |   |-- 0023_memory_api_l0_wiring.md
+|   |   |-- 0024_canonical_seed_backfill.md
+|   |   |-- 0025_omega_lock_output_validators.md
+|   |   |-- 0026_approval_queue_durability.md
+|   |   |-- 0027_brain_retrieve_verify_cutover.md
+|   |   |-- 0028_first_contact_boot_hydration.md
+|   |   |-- 0029_cycle_cadence_hybrid.md
+|   |   |-- 0030_intra_layer_failure.md
+|   |   |-- 0031_legacy_retirement.md
+|   |   |-- 0032_strength_index_graceful_shutdown.md
+|   |   |-- 0033_embedding_substrate_state.md
+|   |   |-- 0034_resolve_contradiction.md
+|   |   |-- 0035_encoding_journal.md
+|   |   |-- 0036_coord_index_concurrency.md
+|   |   |-- 0037_kill_9_survival.md
+|   |   |-- 0038_production_charter_verification.md
+|   |   |-- 0039_audit_reconciliation.md
+|   |   |-- 0040_orchestrator_sharedstate.md
+|   |   |-- 0041_brainloop_4_5_phase.md
+|   |   |-- 0042_retire_wrong_abstractions.md
+|   |   |-- 0043_boot_orchestrator_wiring.md
+|   |   |-- 0044_entrypoint_redirect.md
+|   |   |-- 0045_layer_state_per_loop.md
+|   |   |-- 0046_approve_request_constructor_fix.md
+|   |   |-- 0047_orphan_queue_drain.md
+|   |   |-- 0048_hygiene_sweep.md
+|   |   |-- 0049_repair_pass_closure.md
+|   |   |-- 0050_doctrine_lock_v2.md
+|   |   |-- 0051_shared_state_keys.md
+|   |   |-- 0052_background_loops_via_orchestrator.md
+|   |   |-- 0053_autonomous_loop_repair.md
+|   |   |-- 0054_global_loop_verification.md
+|   |   |-- 0055_meta_loop_verification.md
+|   |   |-- 0056_deepsleep_loop_engine_wiring.md
+|   |   |-- 0057_omega_operator_approval_queue.md
+|   |   |-- 0058_brain_verify_autonomy_feedback.md
+|   |   |-- 0059_curiosity_feedback_closure.md
+|   |   |-- 0060_voice_box_tool_dispatch.md
+|   |   |-- 0061_omega_tool_synthesis_v0.md
+|   |   |-- 0062_phase_registry_autonomous_loop_separation.md
+|   |   |-- 0063_cross_loop_integration_test.md
+|   |   |-- 0064_capability_delta_metric.md
+|   |   |-- 0065_ts_a_knowledge_ingestion.md
+|   |   |-- 0066_ts_b_schema_first_spec_layer.md
+|   |   |-- 0067_ts_c_guardian_tool_decision.md
+|   |   |-- 0068_ts_d_sandbox_executor.md
+|   |   |-- 0069_ts_e_tool_reliability_store.md
+|   |   |-- 0070_ts_f_curiosity_synthesis_trigger.md
+|   |   |-- 0071_ts_h_lifecycle_operator_surface.md
+|   |   |-- 0072_slice16_readiness_signoff.md
+|   |   |-- 0073_preflight_f1_f2_logging_substrate.md
+|   |   |-- 0074_preflight_audit_108_boot.md
+|   |   |-- 0075_preflight_audit_109_core_substrate.md
+|   |   |-- 0076_preflight_audit_110_config.md
+|   |   |-- 0077_preflight_audit_111_memory.md
+|   |   |-- 0078_preflight_audit_114_autonomic.md
+|   |   |-- 0079_preflight_audit_115_guardian.md
+|   |   |-- 0080_preflight_audit_116_runtime.md
+|   |   |-- 0081_preflight_audit_117_core_services.md
+|   |   |-- 0082_preflight_audit_118_global_loop.md
+|   |   |-- 0083_preflight_audit_119_meta_loop.md
+|   |   |-- 0084_preflight_audit_120_deep_sleep.md
+|   |   |-- 0085_preflight_audit_121_omega.md
+|   |   |-- 0086_preflight_audit_122_autonomous_loop.md
+|   |   |-- 0087_preflight_audit_123_brain.md
+|   |   |-- 0088_preflight_audit_124_handlers.md
+|   |   |-- 0089_preflight_audit_125_tools.md
+|   |   |-- 0090_conversational_cognition_design.md
+|   |   |-- 0091_conversational_cognition_implementation.md
+|   |   |-- 0092_memory_api_atomic_encoding_enforcement.md
+|   |   |-- 0093_setfit_perfection_round.md
+|   |   |-- 0094_gemma4_contract_test.md
+|   |   |-- 0095_strength_index_review_pass.md
+|   |   |-- 0096_mxbai_retirement_single_recall_pipeline.md
+|   |   |-- 0097_plasticity_maturity_hardening.md
+|   |   |-- 0098_temporal_grounding_maturity.md
+|   |   |-- 0099_lane_discipline_inventory.md
+|   |   |-- 0100_brain_runtime_cutover_self_inquiry_drift_hardening.md
+|   |   |-- 0101_gate_routing_fix.md
+|   |   |-- 0102_single_lane_recall.md
+|   |   |-- 0103_guardian_out_of_memory_path.md
+|   |   |-- 0104_deepsleep_journal_ownership.md
+|   |   |-- 0105_pollution_wipe_and_live_verification.md
+|   |   |-- 0106_journal_telemetry_cascade.md
+|   |   |-- 0107_guardian_tool_registrar.md
+|   |   |-- 0108_pollution_audit_post_cycle.md
+|   |   |-- 0109_audit_findings_cleanup_pass.md
+|   |   |-- 0110_memory_promote_path_fix.md
+|   |   |-- 0111_audit_batch2_cleanup.md
+|   |   |-- 0112_runtime_setfit_cleanup.md
+|   |   |-- 0113_hud_telemetry_post_audit.md
+|   |   |-- 0114_setfit_retrain_mi300x.md
+|   |   |-- 0115_runtime_classifier_contract_fix_pipelines_verified.md
+|   |   |-- 0116_face_pipeline_hud_contract_fix.md
+|   |   |-- 0117_face_persistence_via_vision_lobe.md
+|   |   |-- 0118_mtp_it_it_spec_decode_benchmark.md
+|   |   +-- README.md
+|   |-- contracts/
+|   |   |-- 00_cognitive_doctrine.md
+|   |   |-- 01_schema_contract.md
+|   |   |-- 02_deepsleep_governance.md
+|   |   |-- 03_curiosity_development.md
+|   |   |-- 04_scoring_contract.md
+|   |   |-- 05_terminal_pill_authority.md
+|   |   |-- DOCTRINE_V2.md
+|   |   |-- proactive_cognition.md
+|   |   |-- README.md
+|   |   |-- runtime_and_models.md
+|   |   +-- tool_lifecycle_pruning.md
+|   |-- plans/
+|   |   |-- handoffs/
+|   |   |   |-- recall_posture_memory_substrate/
+|   |   |   |   |-- claude_fill_plan.md
+|   |   |   |   |-- kimi_context_packet.md
+|   |   |   |   |-- schema_implementation_matrix.md
+|   |   |   |   +-- validation_log.md
+|   |   |   |-- browser_agent_authority_plan.md
+|   |   |   |-- browser_agent_autonomous_system_plan.md
+|   |   |   |-- browser_agent_next_slices.md
+|   |   |   +-- kimi_claude_schema_implementation_protocol.md
+|   |   |-- 2026-05-16-cure-wiring-step6.md
+|   |   |-- 2026-05-16-goal-mortality-at-meta.md
+|   |   |-- 2026-05-17-generated-source-toolsynth.md
+|   |   +-- 2026-05-17-terminal-pill-governance.md
+|   +-- research/
+|       |-- .mcp.json
+|       |-- cell.py
+|       |-- CLAUDE.md
+|       |-- Core Principle.txt
+|       |-- Final Decisions.txt
+|       |-- his is stronger than using another.txt
+|       |-- memory.api is not just another inte.txt
+|       |-- now for the hat trick, we make it h.txt
+|       |-- OMEGA 3.0 — END-TO-END SYSTEM FLOW.txt
+|       |-- OMEGA 3.0 — SYSTEM-WIDE ARCHITECTUR.txt
+|       |-- Omega 3.0 — Terminal Agent Executio.txt
+|       |-- orchestrator.py
+|       |-- original-info-signature.txt
+|       |-- original-model-signature.txt
+|       |-- package-lock.json
+|       |-- package.json
+|       |-- PowerShell 7.6.0-rc.1.txt
+|       |-- README.md
+|       |-- That determines whether Omega becom.txt
+|       |-- The contract..txt
+|       |-- This is strong..txt
+|       |-- This is the right direction..txt
+|       |-- Two hard truths up front.txt
+|       |-- two_way_cognition.md
+|       +-- vaip_config.json
+|-- guardian/
+|   |-- __init__.py
+|   |-- auto_drain.py
+|   |-- credential_ledger.py
+|   |-- cycle_context.py
+|   |-- decision.py
+|   |-- guardian_node.py
+|   |-- hmac_ledger.py
+|   |-- identity_charter.py
+|   |-- identity_check.py
+|   |-- identity_guard.py
+|   |-- memory_purity.py
+|   |-- production_mode.py
+|   |-- README.md
+|   |-- recovery.py
+|   |-- response_classes.py
+|   |-- state_persistence.py
+|   |-- terminal_feedback.py
+|   |-- tool_authority.py
+|   +-- write_guard.py
+|-- handlers/
+|   |-- __init__.py
+|   |-- auto.py
+|   |-- brain.py
+|   +-- README.md
+|-- hud/
+|   |-- __init__.py
+|   |-- browser_agent.py
+|   |-- events.py
+|   |-- omega_cli_launch.py
+|   |-- omega_interface.html
+|   |-- README.md
+|   |-- server.py
+|   |-- settings.py
+|   |-- spawner.py
+|   |-- standalone.py
+|   +-- telemetry.py
+|-- memory/
+|   |-- engine/
+|   |   |-- __init__.py
+|   |   |-- classifier_cache.py
+|   |   |-- hierarchical_classifier.py
+|   |   |-- README.md
+|   |   |-- reindex.py
+|   |   |-- train_lobe_vm.py
+|   |   |-- train_setfit.py
+|   |   |-- validate_write.py
+|   |   |-- walker.py
+|   |   +-- walker_loader.py
+|   |-- enrichment/
+|   |   |-- __init__.py
+|   |   |-- coding.py
+|   |   |-- entity_linker.py
+|   |   |-- identity.py
+|   |   |-- journal.py
+|   |   |-- knowledge.py
+|   |   |-- personas.py
+|   |   |-- README.md
+|   |   |-- signal_detectors.py
+|   |   |-- situational.py
+|   |   |-- vision_enrichment.py
+|   |   +-- workflow.py
+|   |-- gates/
+|   |   |-- __init__.py
+|   |   |-- base.py
+|   |   |-- lobe_gates.py
+|   |   +-- README.md
+|   |-- __init__.py
+|   |-- answerability_index.py
+|   |-- api.py
+|   |-- coding_project.py
+|   |-- coding_project_tools.py
+|   |-- consolidation.py
+|   |-- coord_resonance.py
+|   |-- core.py
+|   |-- dewey_map.py
+|   |-- encoding.py
+|   |-- encoding_journal.py
+|   |-- evidence_set.py
+|   |-- knowledge_router.py
+|   |-- promotion.py
+|   |-- queues.py
+|   |-- README.md
+|   |-- recall_aliases.py
+|   |-- recall_arbitrator.py
+|   |-- recall_compiler.py
+|   |-- recall_lanes.py
+|   |-- recall_plan.py
+|   |-- recall_posture.py
+|   |-- recall_receipt.py
+|   |-- rollback.py
+|   |-- self_vector.py
+|   |-- strength_index.py
+|   +-- supersedes.py
+|-- metacognition/
+|   |-- deep_sleep/
+|   |   |-- audit/
+|   |   |   |-- __init__.py
+|   |   |   |-- deep_sleep_log.py
+|   |   |   +-- README.md
+|   |   |-- memory_management/
+|   |   |   |-- __init__.py
+|   |   |   |-- consolidation_engine.py
+|   |   |   |-- mastery_tracker.py
+|   |   |   |-- pruning_engine.py
+|   |   |   |-- README.md
+|   |   |   +-- scoring.py
+|   |   |-- phases/
+|   |   |   |-- phase_1_intake/
+|   |   |   |   |-- __init__.py
+|   |   |   |   |-- aggregator.py
+|   |   |   |   |-- README.md
+|   |   |   |   +-- run.py
+|   |   |   |-- phase_2_reactivation/
+|   |   |   |   |-- __init__.py
+|   |   |   |   |-- README.md
+|   |   |   |   |-- replay_analyzer.py
+|   |   |   |   |-- run.py
+|   |   |   |   +-- schema_clusterer.py
+|   |   |   |-- phase_3_reconciliation/
+|   |   |   |   |-- __init__.py
+|   |   |   |   |-- contradiction_detector.py
+|   |   |   |   |-- forgetting_calculator.py
+|   |   |   |   |-- README.md
+|   |   |   |   +-- run.py
+|   |   |   |-- phase_4_persistence/
+|   |   |   |   |-- __init__.py
+|   |   |   |   |-- audit_logger.py
+|   |   |   |   |-- memory_updater.py
+|   |   |   |   |-- README.md
+|   |   |   |   +-- run.py
+|   |   |   |-- __init__.py
+|   |   |   +-- README.md
+|   |   |-- __init__.py
+|   |   |-- loop.py
+|   |   |-- loop_context.py
+|   |   +-- README.md
+|   |-- global_loop/
+|   |   |-- phases/
+|   |   |   |-- phase_1_intake/
+|   |   |   |   |-- __init__.py
+|   |   |   |   |-- data_aggregator.py
+|   |   |   |   |-- README.md
+|   |   |   |   +-- run.py
+|   |   |   |-- phase_2_reflection/
+|   |   |   |   |-- __init__.py
+|   |   |   |   |-- README.md
+|   |   |   |   |-- reflective_reasoner.py
+|   |   |   |   +-- run.py
+|   |   |   |-- phase_3_goal_formulation/
+|   |   |   |   |-- __init__.py
+|   |   |   |   |-- conflict_resolver.py
+|   |   |   |   |-- goal_synthesizer.py
+|   |   |   |   |-- README.md
+|   |   |   |   +-- run.py
+|   |   |   |-- phase_4_emission/
+|   |   |   |   |-- __init__.py
+|   |   |   |   |-- goal_emitter.py
+|   |   |   |   |-- README.md
+|   |   |   |   +-- run.py
+|   |   |   |-- __init__.py
+|   |   |   +-- README.md
+|   |   |-- __init__.py
+|   |   |-- loop.py
+|   |   |-- loop_context.py
+|   |   |-- README.md
+|   |   +-- SUMMARIZATION_RULES.md
+|   |-- meta_loop/
+|   |   |-- phases/
+|   |   |   |-- phase_1_intake/
+|   |   |   |   |-- __init__.py
+|   |   |   |   |-- context_aggregator.py
+|   |   |   |   |-- README.md
+|   |   |   |   +-- run.py
+|   |   |   |-- phase_2_synthesis/
+|   |   |   |   |-- __init__.py
+|   |   |   |   |-- control_reasoner.py
+|   |   |   |   |-- README.md
+|   |   |   |   +-- run.py
+|   |   |   |-- phase_3_assembly/
+|   |   |   |   |-- __init__.py
+|   |   |   |   |-- README.md
+|   |   |   |   |-- run.py
+|   |   |   |   +-- tool_selector.py
+|   |   |   |-- phase_4_dispatch/
+|   |   |   |   |-- __init__.py
+|   |   |   |   |-- package_builder.py
+|   |   |   |   |-- README.md
+|   |   |   |   +-- run.py
+|   |   |   |-- __init__.py
+|   |   |   +-- README.md
+|   |   |-- __init__.py
+|   |   |-- loop.py
+|   |   |-- loop_context.py
+|   |   +-- README.md
+|   |-- omega/
+|   |   |-- audit/
+|   |   |   |-- __init__.py
+|   |   |   +-- README.md
+|   |   |-- phases/
+|   |   |   |-- phase_1_intake/
+|   |   |   |   |-- __init__.py
+|   |   |   |   |-- README.md
+|   |   |   |   |-- run.py
+|   |   |   |   +-- state_collector.py
+|   |   |   |-- phase_2_evaluate/
+|   |   |   |   |-- __init__.py
+|   |   |   |   |-- evolutionary_evaluator.py
+|   |   |   |   |-- README.md
+|   |   |   |   +-- run.py
+|   |   |   |-- phase_3_propose/
+|   |   |   |   |-- __init__.py
+|   |   |   |   |-- policy_designer.py
+|   |   |   |   |-- README.md
+|   |   |   |   +-- run.py
+|   |   |   |-- phase_4_commit/
+|   |   |   |   |-- __init__.py
+|   |   |   |   |-- auditor.py
+|   |   |   |   |-- committer.py
+|   |   |   |   |-- gatekeeper.py
+|   |   |   |   |-- README.md
+|   |   |   |   +-- run.py
+|   |   |   |-- __init__.py
+|   |   |   +-- README.md
+|   |   |-- policy_store/
+|   |   |   |-- __init__.py
+|   |   |   |-- invariants.py
+|   |   |   |-- README.md
+|   |   |   |-- rollback.py
+|   |   |   +-- versioning.py
+|   |   |-- schemas/
+|   |   |   |-- __init__.py
+|   |   |   +-- README.md
+|   |   |-- __init__.py
+|   |   |-- loop.py
+|   |   |-- loop_context.py
+|   |   |-- README.md
+|   |   |-- tool_synthesis_prompt.py
+|   |   +-- trajectory_store.py
+|   |-- __init__.py
+|   |-- README.md
+|   +-- user_goal_dispatch.py
+|-- omega_cli/
+|   |-- backends/
+|   |   |-- __init__.py
+|   |   |-- anthropic_adapter.py
+|   |   |-- base.py
+|   |   |-- flm_adapter.py
+|   |   |-- llamacpp_adapter.py
+|   |   +-- openai_adapter.py
+|   |-- core/
+|   |   |-- __init__.py
+|   |   |-- autonomy.py
+|   |   |-- context.py
+|   |   |-- engine.py
+|   |   |-- llama_autoboot.py
+|   |   |-- seed_config.py
+|   |   |-- session.py
+|   |   |-- think_split.py
+|   |   |-- todos.py
+|   |   +-- trust.py
+|   |-- memory/
+|   |   |-- __init__.py
+|   |   |-- contracts.py
+|   |   |-- dewey_reader.py
+|   |   +-- dewey_writer.py
+|   |-- prompts/
+|   |   |-- __init__.py
+|   |   +-- system.py
+|   |-- tools/
+|   |   |-- __init__.py
+|   |   |-- base.py
+|   |   |-- files.py
+|   |   |-- git.py
+|   |   |-- grep.py
+|   |   |-- memory.py
+|   |   |-- project_init.py
+|   |   |-- project_summary.py
+|   |   |-- pytest.py
+|   |   |-- registry.py
+|   |   |-- search.py
+|   |   |-- shell.py
+|   |   |-- todo.py
+|   |   +-- web_fetch.py
+|   |-- tui/
+|   |   |-- __init__.py
+|   |   |-- app.py
+|   |   |-- chat.py
+|   |   |-- commands.py
+|   |   |-- settings.py
+|   |   |-- status.py
+|   |   +-- styles.tcss
+|   |-- __init__.py
+|   |-- __main__.py
+|   |-- config.py
+|   |-- constants.py
+|   |-- dev_main.py
+|   |-- main.py
+|   |-- pyproject.toml
+|   |-- pytest.ini
+|   +-- server.py
+|-- runtime/
+|   |-- face/
+|   |   |-- __init__.py
+|   |   |-- anchor_store.py
+|   |   |-- capability_check.py
+|   |   |-- capture.py
+|   |   +-- loader.py
+|   |-- jarvis_tts/
+|   |   |-- __init__.py
+|   |   |-- client.py
+|   |   +-- loader.py
+|   |-- setfit/
+|   |   |-- __init__.py
+|   |   +-- loader.py
+|   |-- whisper/
+|   |   |-- __init__.py
+|   |   |-- client.py
+|   |   +-- loader.py
+|   +-- __init__.py
+|-- scripts/
+|   |-- automation/
+|   |   |-- _common.sh
+|   |   |-- omega-ask
+|   |   |-- omega-audit
+|   |   |-- omega-fix
+|   |   |-- omega-install-hooks
+|   |   |-- omega-post-commit
+|   |   |-- omega-review
+|   |   +-- omega-review-commit
+|   |-- setfit_dataset/
+|   |   |-- build_datasets.py
+|   |   |-- phrase_pool_builder.py
+|   |   |-- phrase_pools.py
+|   |   |-- promote_weights.py
+|   |   +-- train_three.py
+|   |-- _ctxprobe.py
+|   |-- _dev_pill_e2e.py
+|   |-- _diag_queues.py
+|   |-- _diff_inventories.py
+|   |-- _doc_log_inventory.py
+|   |-- _task7_verify_recall.py
+|   |-- _test_meta_sees_all_tools.py
+|   |-- _test_meta_tool_catalog_layer.py
+|   |-- _test_omega_synthesis_e2e.py
+|   |-- _test_tool_authority_e2e.py
+|   |-- _verify_journal_cascade.py
+|   |-- _wipe_fossil_logs.py
+|   |-- backfill_canonical_embeddings.py
+|   |-- browser_agent_smoke.py
+|   |-- build_lobe_training_set.py
+|   |-- coding_lobe_project_helper.py
+|   |-- day_zero_reset.py
+|   |-- drain_pending_approvals.py
+|   |-- dump_memory_skeleton.py
+|   |-- empty_msth.py
+|   |-- guardian_hook_sweep.py
+|   |-- guardian_logging_walk.py
+|   |-- hud-only.bat
+|   |-- import_probe_tests.py
+|   |-- live_brain_through_runtime.py
+|   |-- omega3_env_check.mjs
+|   |-- omega3_review_swarm_runner.mjs
+|   |-- probe_reversed_setfit.py
+|   |-- prune_strength_orphans.py
+|   |-- reconcile_pending_approvals.py
+|   |-- reset_to_day_one.py
+|   |-- seed_doctrine_contracts.py
+|   |-- seed_omega_constitution.py
+|   |-- setup_local_https.py
+|   |-- state_only_reset.py
+|   |-- verify_omega3.py
+|   |-- verify_web_sources.py
+|   +-- wipe_lobe0_pollution.py
+|-- sensory/
+|   |-- __init__.py
+|   |-- README.md
+|   |-- voice_io.py
+|   +-- voice_loop.py
+|-- terminal_agent/
+|   |-- __init__.py
+|   |-- agent.py
+|   |-- contracts.py
+|   |-- dev_tool_adapter.py
+|   |-- events.py
+|   |-- gemma_contract.py
+|   |-- hud_bridge.py
+|   |-- ledger_engine_glue.py
+|   |-- live_adapters.py
+|   |-- memory_tools.py
+|   |-- omega_cli_executor.py
+|   |-- planner.py
+|   |-- policy.py
+|   |-- protocols.py
+|   |-- qwen_contract.py
+|   |-- README.md
+|   |-- registry.py
+|   |-- sandbox_ledger.py
+|   +-- validators.py
+|-- tests/
+|   |-- autonomic/
+|   |   |-- test_autonomic_modulator.py
+|   |   |-- test_cycle_cadence.py
+|   |   |-- test_dopamine_review_fixes.py
+|   |   |-- test_neuromodulators.py
+|   |   |-- test_plasticity_review_fixes.py
+|   |   |-- test_strength_index_graceful_shutdown.py
+|   |   |-- test_strength_index_review_fixes.py
+|   |   +-- test_temporal_grounding_review_fixes.py
+|   |-- autonomous/
+|   |   +-- test_autonomous_loop.py
+|   |-- brain/
+|   |   |-- test_brain_loop_postures.py
+|   |   |-- test_brain_runner_abort_cleanup.py
+|   |   |-- test_brainloop_4_5_phase.py
+|   |   |-- test_conversation_state.py
+|   |   |-- test_conversational_responder.py
+|   |   |-- test_dialogue_act_selector.py
+|   |   |-- test_reply_evaluator.py
+|   |   |-- test_response_engine_live.py
+|   |   |-- test_think_split.py
+|   |   +-- test_translate_conv_cog_ack.py
+|   |-- browser_agent/
+|   |   |-- test_browser_agent_extension_contract.py
+|   |   |-- test_browser_agent_hud.py
+|   |   +-- test_browser_agent_smoke_script.py
+|   |-- core/
+|   |   |-- test_affect_dispatcher.py
+|   |   |-- test_architecture_pins.py
+|   |   |-- test_boot_hydration.py
+|   |   |-- test_coding_project_helpers.py
+|   |   |-- test_engine_drive.py
+|   |   |-- test_feedback_audit_jsonl.py
+|   |   |-- test_legacy_retirement.py
+|   |   |-- test_orchestrator_agent_pause.py
+|   |   +-- test_orchestrator_sharedstate.py
+|   |-- guardian/
+|   |   |-- test_approval_queue_durability.py
+|   |   |-- test_guardian_logging_walk.py
+|   |   |-- test_kill_9_survival.py
+|   |   +-- test_production_charter.py
+|   |-- hud/
+|   |   |-- test_face_recognizer.py
+|   |   |-- test_hud_foundation.py
+|   |   |-- test_hud_settings.py
+|   |   +-- test_operator_onboarding.py
+|   |-- integration/
+|   |   |-- test_conversation_arc_e2e.py
+|   |   |-- test_curiosity_producer_e2e.py
+|   |   |-- test_guardian_e2e.py
+|   |   |-- test_guardian_integration.py
+|   |   |-- test_memory_integration.py
+|   |   |-- test_memory_lobe_restructure_e2e.py
+|   |   |-- test_perceive_conv_cog.py
+|   |   +-- test_response_engine_e2e.py
+|   |-- memory/
+|   |   |-- test_brain_memory_operation_resolver.py
+|   |   |-- test_brain_recall.py
+|   |   |-- test_coord_index_concurrency.py
+|   |   |-- test_encoding_journal.py
+|   |   |-- test_gate_recall_force_lobe.py
+|   |   |-- test_gate_routing_lobe_enforcement.py
+|   |   |-- test_guardian_out_of_memory_path.py
+|   |   |-- test_knowledge_encoder.py
+|   |   |-- test_memory.py
+|   |   |-- test_memory_comprehensive.py
+|   |   |-- test_memory_l0_wiring.py
+|   |   |-- test_memory_stress.py
+|   |   |-- test_memory_supersedes.py
+|   |   |-- test_persona.py
+|   |   |-- test_persona_router.py
+|   |   |-- test_proactive_memory_enriched_prompt.py
+|   |   |-- test_recall_lanes_arbitration.py
+|   |   |-- test_recall_memory.py
+|   |   |-- test_recall_plan_compiler.py
+|   |   |-- test_recall_posture_read_memory.py
+|   |   |-- test_recall_posture_selection.py
+|   |   |-- test_recall_posture_stress.py
+|   |   |-- test_recall_posture_uncle_frank.py
+|   |   |-- test_response_engine_memory_route.py
+|   |   |-- test_single_lane_recall.py
+|   |   |-- test_situational_enrichment.py
+|   |   |-- test_terminal_agent_memory_tools.py
+|   |   +-- test_walker_recall.py
+|   |-- metacognition/
+|   |   |-- test_deepsleep_journal_cascade.py
+|   |   |-- test_deepsleep_journal_ownership.py
+|   |   |-- test_deepsleep_phases_2_3.py
+|   |   |-- test_followup_spawner.py
+|   |   |-- test_global_loop.py
+|   |   |-- test_goal_mortality.py
+|   |   |-- test_identity_trajectory_triggers.py
+|   |   |-- test_meta_loop.py
+|   |   |-- test_meta_tool_selection.py
+|   |   |-- test_omega.py
+|   |   |-- test_omega_lock_validators.py
+|   |   |-- test_omega_tool_creation_audit.py
+|   |   |-- test_open_questions.py
+|   |   |-- test_outstanding_question_state.py
+|   |   |-- test_resolve_contradiction.py
+|   |   +-- test_task_aware_curiosity.py
+|   |-- regression/
+|   |   |-- test_audit_reconciliation.py
+|   |   |-- test_f1_deterministic_model_kind.py
+|   |   |-- test_f3_detect_patterns_defensive.py
+|   |   |-- test_repair3_retirement.py
+|   |   |-- test_repair4_orchestrator_wiring.py
+|   |   |-- test_repair5_entrypoint_redirect.py
+|   |   |-- test_repair6_layer_state_per_loop.py
+|   |   |-- test_repair7_approve_request_failure_path.py
+|   |   |-- test_repair8_orphan_queue_drain.py
+|   |   |-- test_repair9_hygiene_sweep.py
+|   |   |-- test_slice10_curiosity_feedback_closure.py
+|   |   |-- test_slice13_autonomous_loop_separation.py
+|   |   |-- test_slice14_cross_loop_integration.py
+|   |   |-- test_slice2_shared_state_keys.py
+|   |   |-- test_slice3_loop_registration.py
+|   |   |-- test_slice4_autonomous_endpoint_scoring.py
+|   |   |-- test_slice5_global_loop_verification.py
+|   |   |-- test_slice6_meta_loop_verification.py
+|   |   |-- test_slice8_omega_approval_queue.py
+|   |   +-- test_slice9_brain_verify_autonomy_feedback.py
+|   |-- runtime/
+|   |   |-- test_embedding_substrate_state.py
+|   |   |-- test_gemma_tool_contract.py
+|   |   |-- test_json_extract.py
+|   |   |-- test_qwen_tool_contract.py
+|   |   |-- test_routing_coverage.py
+|   |   |-- test_web_fetch_persistence.py
+|   |   +-- test_web_sources_config.py
+|   |-- terminal_agent/
+|   |   |-- test_dev_agent_tools.py
+|   |   |-- test_dev_tool_registry_isolation.py
+|   |   |-- test_terminal_agent_core.py
+|   |   |-- test_terminal_feedback_coverage.py
+|   |   |-- test_terminal_hud_bridge.py
+|   |   +-- test_terminal_pill_governance.py
+|   |-- _audit6_victim.py
+|   |-- conftest.py
+|   |-- monitor_stress_runs.py
+|   |-- README.md
+|   |-- run_full_matrix.py
+|   +-- smoke_guardian_hooks.py
+|-- .gitignore
+|-- .ruff.toml
+|-- AGENTS.md
+|-- boot.py
+|-- package-lock.json
+|-- package.json
+|-- pytest.ini
+|-- README.md
+|-- requirements-dev.txt
++-- requirements.txt

@@ -1,0 +1,38 @@
+# Web sources catalog — operational policy (behavioral contract)
+# Code: schema/tools/web_fetch.py (catalog consumer), scripts/verify_web_sources.py
+# Config: config/web_sources.yaml
+
+version: 1
+
+enabled: true
+deterministic: true
+models: none
+
+role:
+  description: |
+    Curated, live-verified URL catalog for web_fetch. The catalog is the
+    routing surface for autonomous knowledge acquisition; trust tiers order
+    consultation.
+
+consumers:
+  - schema.tools.web_fetch (catalog load + tier dispatch)
+
+curation:
+  verify_before_commit: scripts/verify_web_sources.py   # the credit-check
+  add_rule: only_commit_on_clean_verifier_pass
+  reverify_cadence: on_catalog_change
+
+tiers:
+  consultation_order: [primary, academic, community, reference, defer]
+  wikipedia: defer   # operator directive — keep it, don't lean on it
+  defer_rule: consulted_only_when_higher_tiers_return_nothing
+
+domains:
+  vocabulary_rule: match memory.dewey_map KNOWLEDGE_DOMAINS / CODING_DOMAINS where possible
+
+failure_mode:
+  catalog_load: failure_soft   # a broken catalog degrades fetch routing, never bricks the loop
+
+alignment:
+  config: config/web_sources.yaml
+  schema: schema/web_sources.schema.yaml

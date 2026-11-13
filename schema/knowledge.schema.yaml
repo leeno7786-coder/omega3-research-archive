@@ -1,0 +1,92 @@
+# JSON Schema (YAML) — knowledge_extractor types
+# Authority: knowledge_extractor/_types.py
+
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "omega://schema/knowledge/v1"
+title: KnowledgeExtractorTypes
+
+definitions:
+  source_kind:
+    type: string
+    enum:
+      - web_result
+      - file
+      - pdf
+      - video_transcript
+      - tool_output
+
+  Source:
+    type: object
+    required: [kind, content]
+    properties:
+      kind:
+        $ref: "#/definitions/source_kind"
+      content:
+        type: string
+        minLength: 1
+      title:
+        type: ["string", "null"]
+      source_ref:
+        type: ["string", "null"]
+      meta:
+        type: object
+
+  Relationship:
+    type: object
+    properties:
+      subject: { type: string }
+      object: { type: string }
+      relation: { type: string }
+
+  KnowledgeArtifact:
+    type: object
+    required:
+      - domain
+      - concepts
+      - facts
+      - relationships
+      - mastery_tags
+      - confidence
+      - artifact_id
+    properties:
+      domain:
+        type: string
+      concepts:
+        type: array
+        items: { type: string }
+      facts:
+        type: array
+        items: { type: string }
+      relationships:
+        type: array
+        items:
+          $ref: "#/definitions/Relationship"
+      mastery_tags:
+        type: array
+        items: { type: string }
+      confidence:
+        type: number
+        minimum: 0.0
+        maximum: 1.0
+      source_ref:
+        type: ["string", "null"]
+      source_kind:
+        type: string
+      artifact_id:
+        type: string
+
+  KnowledgeConfig:
+    type: object
+    required: [knowledge]
+    properties:
+      knowledge:
+        type: object
+        required: [artifact_store_path, learn_integration]
+        properties:
+          artifact_store_path: { type: string }
+          learn_integration:
+            type: object
+            required: [wired]
+            properties:
+              wired: { type: boolean }
+              post_tool_hook: { type: string }

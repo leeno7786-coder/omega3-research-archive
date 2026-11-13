@@ -1,0 +1,227 @@
+{
+  "1.00.p1": {
+    "canonical": true,
+    "coord": [
+      1,
+      0,
+      0
+    ],
+    "domain": "noah",
+    "id": "1.00.p1",
+    "path": "memory/100_personas/1.00.p1.json",
+    "subtopic": "",
+    "summary": "Persona record with parsed relations.",
+    "title": "About Noah",
+    "type": "concept"
+  },
+  "2.00.s1": {
+    "canonical": true,
+    "coord": [
+      2,
+      0,
+      0
+    ],
+    "domain": "dev",
+    "id": "2.00.s1",
+    "path": "memory/200_knowledge/2.00.s1.json",
+    "subtopic": "",
+    "summary": "Aligning a Dobsonian telescope mirror.",
+    "title": "Telescope collimation notes",
+    "type": "concept"
+  },
+  "2.01.s6": {
+    "canonical": true,
+    "coord": [
+      2,
+      1,
+      0
+    ],
+    "domain": "",
+    "id": "2.01.s6",
+    "path": "memory/200_knowledge/2.01.s6.json",
+    "subtopic": "",
+    "summary": "Focal ratio arithmetic for eyepieces.",
+    "title": "Eyepiece focal ratios",
+    "type": "concept"
+  },
+  "2.02.s4": {
+    "canonical": true,
+    "coord": [
+      2,
+      2,
+      0
+    ],
+    "domain": "",
+    "id": "2.02.s4",
+    "path": "memory/200_knowledge/2.02.s4.json",
+    "subtopic": "",
+    "summary": "Cold proof overnight, bake in the morning.",
+    "title": "Bread proofing schedule",
+    "type": "concept"
+  },
+  "2.03.n1": {
+    "canonical": true,
+    "coord": [
+      2,
+      3,
+      0
+    ],
+    "domain": "",
+    "id": "2.03.n1",
+    "path": "memory/200_knowledge/2.03.n1.json",
+    "subtopic": "",
+    "summary": "Legacy record whose stored vector is 128-dim.",
+    "title": "Short vector record",
+    "type": "concept"
+  },
+  "2.04.n2": {
+    "canonical": true,
+    "coord": [
+      2,
+      4,
+      0
+    ],
+    "domain": "",
+    "id": "2.04.n2",
+    "path": "memory/200_knowledge/2.04.n2.json",
+    "subtopic": "",
+    "summary": "Legacy record whose stored vector is all zeros.",
+    "title": "Zero vector record",
+    "type": "concept"
+  },
+  "2.05.k1": {
+    "canonical": true,
+    "coord": [
+      2,
+      5,
+      0
+    ],
+    "domain": "",
+    "id": "2.05.k1",
+    "path": "memory/200_knowledge/2.05.k1.json",
+    "subtopic": "",
+    "summary": "Measured cold boot at 40 s.",
+    "title": "Boot takes 40 seconds",
+    "type": "concept"
+  },
+  "2.05.k2": {
+    "canonical": true,
+    "coord": [
+      2,
+      5,
+      0
+    ],
+    "domain": "",
+    "id": "2.05.k2",
+    "path": "memory/200_knowledge/2.05.k2.json",
+    "subtopic": "",
+    "summary": "Re-measured cold boot at 25 s after the cache fix.",
+    "title": "Boot takes 25 seconds",
+    "type": "concept"
+  },
+  "2.06.k3": {
+    "canonical": true,
+    "coord": [
+      2,
+      6,
+      0
+    ],
+    "domain": "",
+    "id": "2.06.k3",
+    "path": "memory/200_knowledge/2.06.k3.json",
+    "subtopic": "",
+    "summary": "X holds.",
+    "title": "claim X is true",
+    "type": "concept"
+  },
+  "2.06.k4": {
+    "canonical": true,
+    "coord": [
+      2,
+      6,
+      1
+    ],
+    "domain": "",
+    "id": "2.06.k4",
+    "path": "memory/200_knowledge/2.06.k4.json",
+    "subtopic": "",
+    "summary": "X does not hold.",
+    "title": "claim X is false",
+    "type": "concept"
+  },
+  "4.00.n3": {
+    "canonical": true,
+    "coord": [
+      4,
+      0,
+      0
+    ],
+    "domain": "dev",
+    "id": "4.00.n3",
+    "path": "memory/400_situational/4.00.n3.json",
+    "subtopic": "",
+    "summary": "Review notes on the plan.",
+    "title": "Bob Smith reviewed the Omega AI plan",
+    "type": "situational"
+  },
+  "4.00.n4": {
+    "canonical": true,
+    "coord": [
+      4,
+      0,
+      0
+    ],
+    "domain": "dev",
+    "id": "4.00.n4",
+    "path": "memory/400_situational/4.00.n4.json",
+    "subtopic": "",
+    "summary": "Second review pass.",
+    "title": "Follow-up with Bob Smith",
+    "type": "situational"
+  },
+  "4.02.s2": {
+    "canonical": true,
+    "coord": [
+      4,
+      2,
+      0
+    ],
+    "domain": "",
+    "id": "4.02.s2",
+    "path": "memory/400_situational/4.02.s2.json",
+    "subtopic": "",
+    "summary": "Collimated the primary mirror last night.",
+    "title": "Mirror alignment session",
+    "type": "situational"
+  },
+  "6.00.j1": {
+    "canonical": true,
+    "coord": [
+      6,
+      0,
+      0
+    ],
+    "domain": "",
+    "id": "6.00.j1",
+    "path": "memory/600_journal/6.00.j1.json",
+    "subtopic": "",
+    "summary": "Reflection.",
+    "title": "Journal with the same vector",
+    "type": "journal"
+  },
+  "9.01.s3": {
+    "canonical": true,
+    "coord": [
+      9,
+      1,
+      0
+    ],
+    "domain": "",
+    "id": "9.01.s3",
+    "path": "memory/900_temporal/9.01.s3.json",
+    "subtopic": "",
+    "summary": "",
+    "title": "Collimation episode",
+    "type": "episode"
+  }
+}

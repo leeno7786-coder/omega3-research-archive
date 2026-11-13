@@ -1,0 +1,77 @@
+# =============================================================================
+# Runtime sockets — the selected mind plugs into the portable local-services seat
+# =============================================================================
+#
+# slot / slots: descriptive capability labels for the selected portable seat.
+# n_ctx, n_gpu_layers, backend, ram — NOT here; live only in the runtime process.
+#
+# Authority: pressure_loop.policy
+# Weights: <Omega root>\models (derived from core.paths.OMEGA_ROOT)
+# Client: runtime.client (OMEGA_RUNTIME_URL overrides endpoint)
+#
+# =============================================================================
+
+runtime:
+  endpoint: http://127.0.0.1:11434
+  failure_soft: false
+
+  # ── Substrate services ─────────────────────────────────────────────────────
+  services:
+    stt:
+      endpoint: /transcribe
+      capability: stt
+      method: transcribe
+      slot: parakeet_tdt_06b_v3
+
+    tts:
+      endpoint: /synthesise
+      capability: tts
+      method: synthesise
+      slot: qwen3-tts
+
+    voice:
+      endpoint: /voice/command
+      capability: voice
+      method: voice_command
+      slot: mind
+
+  # ── Single mind route (AUTO response, tool-arg pick, Omega reason) ───────
+  # /generate is the one cognition surface. The backend and model are selected
+  # by deployment configuration; this socket deliberately carries no provider-
+  # specific model id. Cloud and local seats return the same gateway-shaped body.
+  generate:
+    endpoint: /generate
+    capability: coding_model
+    method: generate_completion
+    slot: mind
+
+  # ── Runtime-backed Meta tools ──────────────────────────────────────────────
+  tools:
+    image_tool:
+      endpoint: /image/generate
+      capability: image_generation
+      method: image_generate
+      # 2026-08-13: was sd_turbo, an id that has not existed in the runtime
+      # registry for some time — /image/generate binds to flux2_klein (4-step
+      # distilled, Qwen3-4B encoder offloaded to CPU). A label, not a route, so
+      # nothing broke; the HUD and audit trail just named the wrong model.
+      slot: flux2_klein
+
+    vision_reasoning_tool:
+      endpoint: /vision/describe
+      capability: specialist_vision
+      method: vision_describe
+      slot: optional
+
+    face_tool:
+      # Logical contract retained for tool metadata; runtime.socket dispatches
+      # this tool to the brain-local CPU ONNX engine, not the retired HTTP seat.
+      endpoint: /face/identify
+      capability: face
+      method: face_identify
+      slots:
+        detector: face_det_10g
+        embedding: face_w600k_r50
+        landmarks_2d: face_2d106det
+        landmarks_3d: face_1k3d68
+        age_gender: face_genderage

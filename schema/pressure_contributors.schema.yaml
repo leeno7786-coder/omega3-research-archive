@@ -1,0 +1,32 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "omega://schema/pressure_contributors/v1"
+title: PressureContributorTypes
+
+definitions:
+  PressureContributorsConfig:
+    type: object
+    required: [pressure_contributors]
+    properties:
+      pressure_contributors:
+        type: object
+        required: [contributors, retired_contributors]
+        properties:
+          enabled: { type: boolean }
+          field_to_canonical_type:
+            type: object
+            additionalProperties: { type: string }
+          contributors:
+            type: object
+            additionalProperties:
+              type: object
+              properties:
+                active: { type: boolean }
+                source: { type: string }
+                reader: { type: string }
+          retired_contributors:
+            type: object
+            additionalProperties:
+              type: object
+              properties:
+                reader: { type: string }
+                reason: { type: string }

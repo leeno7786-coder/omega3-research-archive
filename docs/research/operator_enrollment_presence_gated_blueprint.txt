@@ -1,0 +1,309 @@
+# Omega 3.0 — Reflective Continuity + Presence-Gated Operator Blueprint
+
+## Constitutional Layer
+
+## Reflective Lineage Conservation Doctrine
+
+Every reflective lineage must remain globally bounded in:
+
+* Reflection budget
+* Branch multiplication
+* Escalation frequency
+* Held persistence
+* Resolution authority class
+
+No unresolved lineage may amplify indefinitely.
+All unresolved cognition trends toward:
+
+* Resolve
+* Refine
+* Collapse
+* Dissolve
+* Escalate (bounded)
+
+---
+
+## Five Hard Laws
+
+### Law 1 — Shared Lineage Budget
+
+Each lineage owns one finite shared reflection pool.
+All descendants consume from same budget.
+
+```yaml
+lineage:
+  id: uuid
+  max_budget: 12
+  consumed: 0
+```
+
+Exhaustion requires terminal verdict.
+
+---
+
+### Law 2 — Resolution Class Separation
+
+#### Operator Verified
+
+External truth confirmation.
+
+```yaml
+resolution_class: operator_verified
+reopenable: false
+```
+
+#### Provisional Internal
+
+Internal coherence only.
+
+```yaml
+resolution_class: provisional_internal
+reopenable: true
+confidence: 0.0-1.0
+```
+
+Self-resolution can never overwrite operator truth.
+
+---
+
+### Law 3 — Refractory Escalation
+
+```yaml
+escalation:
+  cooldown_hours: 6
+  decay_lambda: 0.2
+```
+
+Escalation pressure decays exponentially.
+No monotonic amplification.
+
+---
+
+### Law 4 — Held Set Bound
+
+```yaml
+MAX_HELD_LINEAGES: 3
+```
+
+Eviction policy:
+
+* Lowest salience removed
+* Redundant ancestry collapsed
+
+Operator receives only highest-value matured questions.
+
+---
+
+### Law 5 — DeepSleep Census
+
+Every DeepSleep pass asserts:
+
+```python
+assert total_open <= GLOBAL_CAP
+assert held_count <= MAX_HELD
+assert no_budget_violation()
+assert no_monotonic_priority_drift()
+```
+
+Emit metadata-only audit record.
+
+---
+
+# Presence-Gated Identity Loop
+
+## Operator Presence Contract
+
+Proactive speech requires:
+
+* Webcam active
+* Face enrolled
+* Identity match above threshold
+
+```yaml
+presence:
+  confidence_threshold: 0.82
+  latch_seconds: 8
+  release_seconds: 20
+```
+
+State:
+
+* PRESENT
+* ABSENT
+* UNKNOWN
+
+---
+
+## Hello World Enrollment Flow
+
+### First Boot
+
+HUD shows:
+
+```text
+Welcome to Omega.
+Look at camera to enroll operator identity.
+3...2...1...
+Capture complete.
+Enter operator name.
+```
+
+Writes:
+
+```json
+face_anchors.json
+{
+  "operator": "Noah",
+  "embedding": [...],
+  "created_at": "timestamp"
+}
+```
+
+---
+
+## Presence Watcher Loop
+
+```python
+while True:
+    frame = webcam.read()
+    face = detect(frame)
+
+    if match(face):
+        operator_present = True
+        latch_presence()
+    else:
+        decay_presence()
+```
+
+---
+
+# Closed Reflective Loop
+
+## Operator Absent
+
+Generated proactive query enters reflection queue.
+
+Flow:
+
+```text
+query generated
+↓
+presence check
+↓ absent
+reflect
+↓
+verdict
+```
+
+Possible verdicts:
+
+* refine
+* split
+* collapse
+* dissolve
+* provisional_resolve
+* escalate
+
+Escalations enter held queue.
+
+---
+
+## Operator Returns
+
+Presence latch fires:
+
+```text
+held queue sorted by salience
+↓
+top lineage selected
+↓
+voice dispatch
+```
+
+Example:
+
+> Earlier I was reflecting on memory continuity drift. I have one question.
+
+Single matured interaction only.
+Never backlog flush.
+
+---
+
+# Voice Integration Contract
+
+Gemma 4 E2B receives:
+
+```json
+{
+  "presence": true,
+  "identity": "operator_verified",
+  "lineage_context": {...},
+  "neuromod_state": {...}
+}
+```
+
+Voice may:
+
+* Ask matured question
+* Respond to operator answer
+* Write verified resolution
+* Collapse lineage
+
+Never invent operator confirmation.
+
+---
+
+# Neuromod Reflection Controls
+
+## Curiosity
+
+Allows branch split if budget supports.
+
+## Stress
+
+Raises validation strictness.
+Cannot bypass caps.
+
+## Plasticity
+
+Permits schema mutation.
+
+## Strength
+
+Promotes operator-verified memory persistence.
+
+---
+
+# Guardian Audit Events
+
+Emit:
+
+```yaml
+LINEAGE_CREATED
+LINEAGE_SPLIT
+LINEAGE_COLLAPSED
+LINEAGE_RESOLVED
+LINEAGE_ESCALATED
+LINEAGE_DISSOLVED
+DEEPSLEEP_CENSUS
+PRESENCE_ENTER
+PRESENCE_EXIT
+OPERATOR_VERIFIED
+```
+
+All JSONL logged.
+
+---
+
+# Success Condition
+
+Omega behaves as continuous thought:
+
+* Thinks while absent
+* Distills instead of obsesses
+* Waits intelligently
+* Speaks only when operator verified
+* Learns from operator response
+* Preserves epistemic integrity
+
+This is the production-safe reflective continuity substrate for Omega 3.0.

@@ -1,0 +1,27 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "omega://schema/boot/v1"
+title: BootLifecycleTypes
+
+definitions:
+  BootManifest:
+    type: object
+    required: [pid, started_at, components]
+    properties:
+      pid: { type: integer }
+      started_at: { type: string }
+      components:
+        type: array
+        items: { type: string }
+
+  BootConfig:
+    type: object
+    required: [boot]
+    properties:
+      boot:
+        type: object
+        required: [enabled, components]
+        properties:
+          enabled: { type: boolean }
+          components:
+            type: array
+            items: { type: string }

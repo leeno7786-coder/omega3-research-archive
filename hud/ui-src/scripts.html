@@ -1,0 +1,150 @@
+<!-- HUD_UI_SRC:SHELL -->
+<script>
+    // HUD_UI_SRC:INJECT_BOOT_START
+    // HUD_UI_SRC:INJECT_BOOT_END
+
+    // HUD_UI_SRC:INJECT_CHAT_FEED_START
+    // HUD_UI_SRC:INJECT_CHAT_FEED_END
+
+
+    // ── Clock/voice pill wiring — hud/ui-src/core/live-wiring.js (SECTION:chrome) ──
+    // HUD_UI_SRC:INJECT_LIVE_CHROME_START
+    // HUD_UI_SRC:INJECT_LIVE_CHROME_END
+    // ─────────────────────────────────────────────────────────────────
+    // Panel system — bundled from hud/ui-src/panels/register.js
+    // HUD_UI_SRC:INJECT_REGISTER_START
+    // HUD_UI_SRC:INJECT_REGISTER_END
+    // ── Left slide-out rail — hud/ui-src/core/side-drawer.js ──
+    // HUD_UI_SRC:INJECT_SIDE_DRAWER_START
+    // HUD_UI_SRC:INJECT_SIDE_DRAWER_END
+    // ─────────────────────────────────────────────────────────────────
+    // ── Operator identity + canvas live refresh — hud/ui-src/core/canvas-live.js ──
+    // HUD_UI_SRC:INJECT_CANVAS_LIVE_START
+    // HUD_UI_SRC:INJECT_CANVAS_LIVE_END
+
+    // HUD_UI_SRC:INJECT_TELEMETRY_START
+    // HUD_UI_SRC:INJECT_TELEMETRY_END
+
+    // ── Voice + Vision — hud/ui-src/core/voice-runtime.js + vision-runtime.js ──
+    // HUD_UI_SRC:INJECT_VOICE_RUNTIME_START
+    // HUD_UI_SRC:INJECT_VOICE_RUNTIME_END
+    // HUD_UI_SRC:INJECT_VISION_RUNTIME_START
+    // HUD_UI_SRC:INJECT_VISION_RUNTIME_END
+    // ─────────────────────────────────────────────────────────────────
+    // Panel content builders
+    // ─────────────────────────────────────────────────────────────────
+    function _statusClassForTag(t) {
+      const s = String(t == null ? '' : t).trim().toLowerCase();
+      if (!s) return '';
+      if (s === 'live' || s === 'ok' || s === 'pass' || s === 'ready' || s === 'active' || s === 'running') {
+        return 'tag-ok';
+      }
+      if (s === 'fail' || s === 'error' || s === 'critical' || s === 'broken' || s === 'down') {
+        return 'tag-fail';
+      }
+      if (s === 'warn' || s === 'degraded' || s === 'amber' || s === 'paused') {
+        return 'tag-warn';
+      }
+      if (s === 'idle' || s === '—' || s === '-' || s === 'n/a' || s === 'na' || s === 'unknown') {
+        return 'tag-idle';
+      }
+      return 'tag-neutral';
+    }
+
+    function row(b, k, v, t) {
+      const el = document.createElement('div');
+      el.className = 'panel-row';
+      const tag = t || '';
+      const tagCls = _statusClassForTag(tag);
+      el.innerHTML = `<span class="k">${k}</span><span class="v">${v}</span><span class="t ${tagCls}">${tag}</span>`;
+      b.appendChild(el);
+    }
+    function section(b, label) {
+      const wrap = document.createElement('div');
+      wrap.className = 'panel-section';
+      const lab = document.createElement('div');
+      lab.className = 'panel-label';
+      lab.textContent = label;
+      wrap.appendChild(lab);
+      b.appendChild(wrap);
+      return wrap;
+    }
+
+    // HUD_UI_SRC:INJECT_CANVAS_START
+    // HUD_UI_SRC:INJECT_CANVAS_END
+    // HUD_UI_SRC:INJECT_PANELS_START
+    // HUD_UI_SRC:INJECT_PANELS_END
+    // ── Panel canvas renderers — hud/ui-src/core/canvas-panels.js ──
+    // HUD_UI_SRC:INJECT_CANVAS_PANELS_START
+    // HUD_UI_SRC:INJECT_CANVAS_PANELS_END
+
+    // P3-S08: lightweight presence-state flip — called from the v2
+    // polling loop when presence changes. No full repaint; just flips
+    // data-state on the orb wrapper so CSS tints take over.
+
+    // Signature SVG heroes — bundled from hud/ui-src/core/canvas-heroes.js
+    // ── Composer input — hud/ui-src/core/live-wiring.js (SECTION:composer) ──
+    // HUD_UI_SRC:INJECT_LIVE_COMPOSER_START
+    // HUD_UI_SRC:INJECT_LIVE_COMPOSER_END
+    // ── Composer + OmegaUI — hud/ui-src/core/omega-ui.js ──
+    // HUD_UI_SRC:INJECT_OMEGA_UI_START
+    // HUD_UI_SRC:INJECT_OMEGA_UI_END
+
+  </script>
+
+  <!-- =============================================================
+     HUD LIVE WIRING — bundled from hud/ui-src/core/live-wiring.js
+     ============================================================= -->
+  <script>
+// HUD_UI_SRC:INJECT_LIVE_SSE_START
+// HUD_UI_SRC:INJECT_LIVE_SSE_END
+
+(function () {
+  'use strict';
+      // ── Cross-module alias (boot.js lives in the prior script scope) ──
+      var _escapeHtml = function(s) { return window._escapeHtml ? window._escapeHtml(s) : s; };
+      // Poll handlers (poll-status.js, poll-telemetry.js, poll-v2.js) are injected
+      // below in this same IIFE — do NOT alias window.poll* here; that shadows the
+      // real function declarations and makes window.pollStatus call itself.
+      // HUD_UI_SRC:INJECT_LIVE_ATMOS_START
+      // HUD_UI_SRC:INJECT_LIVE_ATMOS_END
+
+      // HUD_UI_SRC:INJECT_CORE_START
+    // HUD_UI_SRC:INJECT_CORE_END
+      window._applyV2PillBadges = _applyV2PillBadges;
+})();
+(function () {
+  'use strict';
+      // ── HUD-11/12/13: live action endpoints ───────────────────────
+      // Override the design's ChatBridge + Vision posters to hit the
+      // FastAPI HUD server when same-origin HTTP is available. On
+      // file:// previews the original mock paths still apply.
+      const _liveOrigin = (location.protocol === 'http:' || location.protocol === 'https:');
+      // HUD_UI_SRC:INJECT_CHAT_WIRING_START
+      // HUD_UI_SRC:INJECT_CHAT_WIRING_END
+      // HUD_UI_SRC:INJECT_LIVE_VISION_START
+      // HUD_UI_SRC:INJECT_LIVE_VISION_END
+})();
+
+      // ── FaceWatch — hud/ui-src/core/vision-runtime.js (SECTION:facewatch) ──
+      // HUD_UI_SRC:INJECT_VISION_FACEWATCH_START
+      // HUD_UI_SRC:INJECT_VISION_FACEWATCH_END
+
+      // ── Kokoro TTS + Whisper STT + wake routing — hud/ui-src/core/voice-runtime.js ──
+      // HUD_UI_SRC:INJECT_VOICE_KOKORO_START
+      // HUD_UI_SRC:INJECT_VOICE_KOKORO_END
+      // HUD_UI_SRC:INJECT_VOICE_STT_START
+      // HUD_UI_SRC:INJECT_VOICE_STT_END
+      // HUD_UI_SRC:INJECT_VOICE_WAKE_START
+      // HUD_UI_SRC:INJECT_VOICE_WAKE_END
+    // ── Panel visual effects — hud/ui-src/core/panel-fx.js ──
+    // HUD_UI_SRC:INJECT_PANEL_FX_START
+    // HUD_UI_SRC:INJECT_PANEL_FX_END
+
+    // ── Memory graph visualization — hud/ui-src/core/memory-graph.js ──
+    // HUD_UI_SRC:INJECT_MEMORY_GRAPH_START
+    // HUD_UI_SRC:INJECT_MEMORY_GRAPH_END
+  </script>
+</body>
+
+</html>

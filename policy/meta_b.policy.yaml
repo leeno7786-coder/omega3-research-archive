@@ -1,0 +1,44 @@
+# Meta B — operational policy (behavioral contract)
+# Code: meta_loop/consistency, disposition, reflect
+# Config: config/meta_b.yaml
+
+version: 1
+
+enabled: true
+deterministic: true
+models: none
+
+role:
+  description: |
+    Meta B is a pure sequencer: consistency check on AUTO vs Meta A packs,
+    disposition from AUTO cycle_kind, reflect into MetaReflectionPack on
+    episode.meta.reflection, then hand off to Global B.
+  upstream: episode.auto
+  downstream: global_loop.loop.run_global_b
+  cognition_handoff:
+    module: cognition_chain._start_meta_b_global_b
+    mandatory: true
+
+sequence:
+  - module: meta_loop.consistency.run
+    builds: MetaBInput
+    checks: goal_and_pack_stable_fields
+  - module: meta_loop.disposition.run
+    input: auto.cycle_kind
+    critical_override: invalid
+  - module: meta_loop.reflect.run
+    output: MetaReflectionPack
+
+writes:
+  path: episode.meta.reflection
+  never_mutate: [episode.global_, episode.auto]
+
+constraints:
+  disposition_only_from_cycle_kind: true
+  critical_mismatch_forces_invalid: true
+  never_infer_models: true
+
+alignment:
+  policy_loader: pressure_loop.policy.load_policy
+  schema: schema/meta_b.schema.yaml
+  auto_schema: schema/auto.schema.yaml

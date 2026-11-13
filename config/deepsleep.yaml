@@ -1,0 +1,71 @@
+# =============================================================================
+# DeepSleep loop — episode closure + consolidation (Slice 6)
+# =============================================================================
+#
+# Consumed by: pressure_loop.policy (deepsleep_* helpers)
+# Authority: deepsleep_loop phase subpackages + *_store.py
+#
+# =============================================================================
+
+deepsleep:
+  models: none
+
+  module: deepsleep_loop.loop.run_deepsleep_for_episode
+  phases:
+    - intake
+    - mastery
+    - identity
+    - semantic
+    - trajectory
+    - failure
+    - query_lifecycle
+    - consolidate
+    - projection
+    - reseed
+    - closure
+  stores:
+    journal_path: deepsleep_loop/state/journal.jsonl
+    mastery_path: deepsleep_loop/state/mastery.json
+    identity_path: deepsleep_loop/state/identity.json  # legacy import-only; canonical traits live in memory lobe 0/2
+    semantic_path: deepsleep_loop/state/semantic.json
+    trajectory_path: deepsleep_loop/state/trajectory.json
+    failure_path: deepsleep_loop/state/failure.json
+    query_path: deepsleep_loop/state/open_queries.json
+    projection_path: deepsleep_loop/state/projection.json
+
+  laws:
+    application_credit: |
+      Mastery increments only when episode is successful
+      (auto status success or cycle_kind success per v2 episode close).
+    identity_safety: |
+      Traits are comms-only — projected into prompts, never action-producing.
+    consolidate_after_effects: |
+      JournalEntry is built after all effect phases so deltas are captured.
+
+  mastery:
+    default_target: 0.70
+    learn_intent_increments: knowledge_mastery
+    other_intents_increments: application_mastery
+    status_thresholds:
+      learning_max: 0.60
+      operational_max: 0.80
+
+  identity:
+    strength_increment: 0.10
+    promote_evidence: 2  # one foldback is evidence; repetition promotes a preference
+
+  semantic:
+    promote_evidence: 3
+    developing_knowledge_threshold: 0.40
+
+  trajectory:
+    decay_after: 10
+    decay_increment: 0.05
+
+  knowledge_integration:
+    artifact_store: knowledge_extractor/state/artifacts.jsonl
+    consume_on_consolidate: true
+    note: "When consume_on_consolidate true, consolidate merges matching KnowledgeArtifact JSONL into journal_entry.artifacts.knowledge"
+
+  memory_consolidation:
+    enabled: true

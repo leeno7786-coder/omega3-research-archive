@@ -1,0 +1,14 @@
+# =============================================================================
+# Episode journal — Slice 5a rolling prior-episode window
+# =============================================================================
+#
+# Consumed by: pressure_loop.policy._load_journal_config_yaml
+# Policy: policy/journal.policy.yaml
+# Schema: schema/journal.schema.yaml
+#
+# =============================================================================
+
+episode_journal:
+  path: pressure_loop/state/episode_journal.jsonl
+  window_default: 50
+

@@ -1,0 +1,98 @@
+# Global loop — operational policy (behavioral contract)
+# Code: global_loop/
+# Config mirrors: config/global.yaml, config/global_intent.yaml
+#
+# NOTE (v2 — no goal / extract / ActionGoal): Global A maps pressure
+# EpisodeIgnition → IntentDecision (intent + confidence + reason only; no
+# target). Global B folds Meta B reflection + AUTO outcome → EpisodeOutcome on
+# episode.global_.outcome. The deleted extract/goal/goal_state phases and the
+# ActionGoal type are retired. `action_goal` / `source_action_goal` survive
+# ONLY as compat dual-read aliases for fixtures and locked windows.
+
+version: 1
+
+enabled: true
+deterministic: true
+models: none
+
+role:
+  description: |
+    Global is a pure sequencer: two entry points, no inference. Global A maps
+    pressure EpisodeIgnition → IntentDecision. Global B folds Meta B reflection
+    + AUTO outcome → GlobalOutcomePack on episode.global_.outcome.
+  pressure_handoff:
+    input: EpisodeIgnition
+    rule: pass_through_only
+    never_rebuild: true
+  cognition_handoff:
+    module: cognition_chain.ignite_episode
+    global_a_entry: global_loop.loop.run_global_a
+    global_b_entry: global_loop.loop.run_global_b
+
+global_a:
+  sequence:
+    - module: global_loop.ignition.run
+      validates: [opened_by, dominant_contributor]
+    - module: global_loop.intent.run
+      output: intent
+    - module: global_loop.loop.run_global_a
+      output: IntentDecision
+      inline: true
+  writes:
+    path: episode.global_.intent_decision
+    fields: [episode_id, intent, confidence, reason]
+  failure_mode:
+    on_phase_error: raise
+    propagate_to_cascade: true
+
+global_b:
+  sequence:
+    - module: global_loop.assemble.run
+      input: [episode, meta_reflection]
+      requires: episode.auto_or_meta_b_input
+    - step: episode_outcome
+      rule: intent_x_trajectory_alignment_x_divergence_x_execution_outcome
+    - module: global_loop.ground.run
+      rule: existence_only_no_fabrication
+    - module: global_loop.summarize.run
+      rule: template_only
+    - module: global_loop.followups.run
+      rule: non_executable_suggestions_only
+    - module: global_loop.package.run
+      output: GlobalOutcomePack
+  writes:
+    path: episode.global_.outcome
+  omega:
+    handoff: cognition_chain._start_omega
+    status: live_via_cognition_chain
+
+intent_routing:
+  authority: global_loop.intent.run
+  config_ref: config/global_intent.yaml
+  code_is_live_authority: true
+  allowed_intents: config/global_intent.yaml
+  opened_by_primary_map: true
+  operator_command_route: RESPOND_via_AUTO_bounded_tools
+  agentic_pressure_intent: USE_SKILL
+  skill_routing_kill_switch_intent: USE_TOOL
+  unknown_opened_by: IDLE
+  invalid_mapped_intent: IDLE
+
+grounding:
+  authority: global_loop.ground
+  grounded_when:
+    - at_least_one_auto_output_path_present
+    - meta.execution.disposition_present
+  basis_paths_documented_in_config: true
+
+followups:
+  authority: global_loop.followups
+  never_execute: true
+  types: [needs_clarification, needs_retry, none]
+
+alignment:
+  intent_decision_type: pressure_loop.contributors.IntentDecision
+  episode_ignition_type: pressure_loop.contributors.EpisodeIgnition
+  schema: schema/global.schema.yaml
+  intent_schema: schema/global_intent.schema.yaml
+  policy_loader: pressure_loop.policy.load_policy

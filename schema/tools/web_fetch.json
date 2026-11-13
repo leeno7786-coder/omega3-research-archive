@@ -1,0 +1,153 @@
+{
+  "_schema": "schema.tool_spec.ToolSpec",
+  "_schema_version": 1,
+  "name": "web_fetch",
+  "version": "1.0.0",
+  "tool_id": "web_fetch@1.0.0",
+  "description": "Fetch web content from approved knowledge sources. Pass a full URL to direct-fetch a page; pass a topic/question to search the curated source catalog (config/web_sources.yaml). Primary docs, lab publications, and peer-reviewed references are prioritized over community sources; Wikipedia is consulted but kept in the defer tier.",
+  "summary": "Search the curated knowledge catalog or fetch a URL directly.",
+  "origin_type": "human_authored",
+  "safety": "read_only",
+  "parameters": [
+    {
+      "name": "query",
+      "type": "string",
+      "description": "Search query, topic, or full URL to direct-fetch. URLs MUST be http:// or https:// — file/data/javascript/etc. schemes are rejected.",
+      "required": true,
+      "default": null,
+      "enum": null
+    },
+    {
+      "name": "max_results",
+      "type": "integer",
+      "description": "Maximum number of results to return after de-duplication. Capped by `max_results_ceiling` constraint.",
+      "required": false,
+      "default": 3,
+      "enum": null
+    },
+    {
+      "name": "domain",
+      "type": "string",
+      "description": "Optional dewey category hint (e.g. 'science', 'python') the substrate already knows for this goal. Routes credible_sources deterministically instead of guessing from query keywords; the wiki search still uses the precise subdomain in `query`. Omit for free-text/URL queries.",
+      "required": false,
+      "default": null,
+      "enum": null
+    }
+  ],
+  "returns_schema": {
+    "type": "object",
+    "properties": {
+      "query": {
+        "type": "string",
+        "description": "Original search query, topic, or direct-fetch URL."
+      },
+      "results": {
+        "type": "array",
+        "description": "Fetched content blobs after URL de-duplication.",
+        "items": {
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            },
+            "content": {
+              "type": "string"
+            },
+            "source": {
+              "type": "string"
+            },
+            "content_length": {
+              "type": "integer"
+            },
+            "error": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "credible_sources": {
+        "type": "array",
+        "description": "Curated source hints for the detected domain, from config/web_sources.yaml.",
+        "items": {
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "tier": {
+              "type": "string"
+            },
+            "domain": {
+              "type": "string"
+            },
+            "note": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "url",
+            "name",
+            "tier",
+            "domain",
+            "note"
+          ]
+        }
+      },
+      "domain": {
+        "type": "string",
+        "description": "Detected config/web_sources.yaml domain key, or empty for URL/no-match queries."
+      },
+      "total_results": {
+        "type": "integer",
+        "description": "Count of de-duplicated fetched results BEFORE max_results truncation."
+      },
+      "error": {
+        "type": "string",
+        "description": "Empty string on success; error message when the fetch failed entirely (no results returned)."
+      }
+    },
+    "required": [
+      "query",
+      "results",
+      "credible_sources",
+      "domain",
+      "total_results"
+    ]
+  },
+  "implementation_module": "schema.tools.web_fetch",
+  "implementation_function": "web_fetch",
+  "deprecated": false,
+  "superseded_by": null,
+  "retired_at": null,
+  "verification_id": null,
+  "intervention_id": null,
+  "constraints": {
+    "domain": "knowledge_acquisition",
+    "sandbox_tier": "graduated",
+    "source_catalog": "config/web_sources.yaml",
+    "max_results_ceiling": 10,
+    "respect_tier_priority": true,
+    "allowed_url_schemes": [
+      "http",
+      "https"
+    ],
+    "request_timeout_seconds": 15,
+    "user_agent": "OmegaWebFetch/1.0 (+local-substrate; respect-robots)",
+    "respect_robots_txt": true,
+    "wikipedia_tier": "defer"
+  },
+  "tags": [
+    "web",
+    "knowledge",
+    "fetch",
+    "research",
+    "factual",
+    "curated_sources"
+  ]
+}

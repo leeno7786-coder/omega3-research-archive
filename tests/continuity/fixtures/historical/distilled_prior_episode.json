@@ -1,0 +1,36 @@
+{
+  "audit": [],
+  "coord": [
+    9,
+    1,
+    0
+  ],
+  "enrichment": {
+    "canonical": true,
+    "cascade_status": "completed",
+    "closed_at": "2026-08-02T10:11:12.000000+00:00",
+    "episode_id": "hist-distilled-0002",
+    "event_kind": "auto_outcome"
+  },
+  "flags": {
+    "canonical": true,
+    "private": false
+  },
+  "id": "9.01.0d150002",
+  "provenance": {
+    "author": "lobe:temporal",
+    "confidence": 0.5,
+    "ingested_at": "2026-08-02T10:11:13.000000+00:00",
+    "origin_id": "lobe:temporal",
+    "origin_type": "stage_propose",
+    "source_session_id": "hist-distilled-0002"
+  },
+  "speech_act": "statement",
+  "subtopic": "episode",
+  "summary": "synthetic historical episode",
+  "temporal_epoch_us": 1785665473000000,
+  "temporal_hash": "0006580da434b240-1f3e472639b5f0e6",
+  "text": "{\"action\": \"RESPONSE\", \"cascade_status\": \"completed\", \"episode_id\": \"hist-distilled-0002\", \"ignition_reason\": \"operator_query\", \"intent\": \"RESPOND\", \"outcome\": {\"artifacts\": {\"response_text\": \"synthetic reply\"}, \"chemical_state\": {}, \"consistency\": {}, \"episode_id\": \"hist-distilled-0002\", \"followups\": [], \"learning_state\": {}, \"observations\": {}, \"outcome\": {\"status\": \"success\", \"summary\": \"HIST-SUMMARY: replied\"}, \"temporal\": {}}, \"trajectory_update\": null}",
+  "title": "LEARN: synthetic 9.01.0d150002",
+  "type": "episode"
+}

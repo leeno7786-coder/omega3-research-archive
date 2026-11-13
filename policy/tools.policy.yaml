@@ -1,0 +1,51 @@
+# Tools — operational policy (declarative registry + routing contract)
+# Config: config/tools.yaml, config/runtime.yaml, config/meta.yaml (capability_map)
+# Code: meta_loop/tool/run.py, auto_loop/execute/run.py, runtime/runtime_tool_dispatch.py
+
+version: 1
+
+enabled: true
+execution_in_runtime: true
+cognition_side_only: true
+
+role:
+  description: |
+    Tools are cognition-side routing targets. Meta A selects tool + execution_inputs;
+    AUTO dispatches to the configured runtime socket or signed plugin registry.
+    config/tools.yaml describes the static catalog; endpoints and capabilities
+    come from config/runtime.yaml.
+
+registry:
+  authority: config/tools.yaml plus config/runtime.yaml tools
+  loader: pressure_loop.policy.tool_registry
+  model_bindings: pressure_loop.policy.tool_models
+
+capability_routing:
+  authority: config/meta.yaml tool.capability_map
+  loader: pressure_loop.policy.meta_capability_tool_map
+  code_defaults: meta_loop.tool.run._CAPABILITY_TOOL_MAP_DEFAULT
+  merge_order: [code_defaults, config_overlay]
+
+separation:
+  ocr: ocr_tool
+  vision_reasoning: vision_reasoning_tool
+  vision_runtime: runtime.yaml vision_reasoning_tool
+  image_generation: image_tool
+  face_analysis: face_tool
+
+direct_vs_mediated:
+  direct_tools_authority: config/auto.yaml route.direct_tools.always
+  mediated_tools:
+    - vision_reasoning_tool
+    - face_tool
+  rule: |
+    web_fetch may be direct when query is meta-bound; vision and face tools
+    always require model/runtime mediation.
+
+constraints:
+  meta_never_executes_tools: true
+  auto_invokes_via_tool_invoker_or_runtime: true
+
+alignment:
+  schema: schema/tools.schema.yaml
+  integration_doc: docs/architecture/TOOL_INTEGRATION.md

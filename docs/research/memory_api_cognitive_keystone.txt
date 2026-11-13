@@ -1,0 +1,427 @@
+memory.api is not just another integration point—it is the biological equivalent of hippocampal encoding.
+
+If embeddings are not created at write-time, every higher cognitive layer becomes fake cognition built on delayed reconstruction instead of persistent encoded state.
+
+That breaks:
+
+contradiction detection
+self-vector continuity
+drift detection
+persistence scoring
+tension accumulation
+reflection quality
+curiosity prioritization
+proactive development targeting
+Omega identity continuity
+
+Without write-time embeddings, the system is forced to “re-remember” instead of actually remember.
+
+That is not cognition.
+That is expensive simulation.
+
+So yes—memory.api is the keystone.
+
+Correct Priority Order
+
+This should be the order now:
+
+Phase 1 — Write-Time Cognitive Encoding (Absolute First)
+memory.api
+
+On every successful Guardian-approved write:
+
+canonical memory commit
+index update
+embedding generation
+self-vector update (if identity relevant)
+contradiction precheck
+persistence anchor registration
+reflection eligibility tagging
+DeepSleep candidate registration
+
+This must be atomic.
+
+No partial writes.
+
+Either the full cognitive encoding succeeds or rollback occurs.
+
+Not negotiable.
+
+Phase 2 — Reflection + Persistence Producers
+L11 Reflection
+
+This layer answers:
+
+“What does this mean?”
+
+Not retrieval.
+Interpretation.
+
+Produces:
+
+contradiction signals
+unresolved tensions
+repeated failure patterns
+belief instability
+identity pressure points
+missing capability awareness
+
+This is where curiosity is born.
+
+L13 Persistence
+
+This layer answers:
+
+“Has this mattered long enough to deserve structural change?”
+
+Not novelty.
+Endurance.
+
+Produces:
+
+persistence_score
+recurrence count
+unresolved duration
+capability deficit persistence
+strategic escalation candidates
+
+This prevents novelty addiction.
+
+Phase 3 — Omega Tiny Slot Replacement
+
+This matters more than it looks.
+
+Removing Qwen 1.7B means Omega loses its old “reasoning substrate.”
+
+Good.
+
+That was the right move.
+
+Now Omega should use:
+
+deterministic vector cognition first
+
+not
+
+generative thought first
+
+Meaning:
+
+Primary:
+
+embedding + reranker + contradiction engine
+
+Secondary:
+
+tiny generative inference only when synthesis requires abstraction
+
+That tiny model should not think first.
+
+It should explain after structure exists.
+
+That preserves determinism.
+
+Never let generation lead governance.
+
+My Recommendation
+
+For Omega tiny slot:
+
+Use the smallest possible specialized inference model for:
+
+synthesis explanation
+strategic abstraction
+hypothesis generation
+long-horizon proposal writing
+
+NOT:
+
+truth arbitration
+contradiction detection
+memory validation
+
+Those belong to vectors + Guardian.
+
+Always.
+
+Critical Rule
+“Vector first. Model second.”
+
+This rule should be written into doctrine.
+
+Permanently.
+
+If a model decides before memory structure decides,
+you regress into prompt engineering theater.
+
+Do not allow that.
+
+DeepSleep Trigger
+
+Should not be time-based only.
+
+It should trigger on:
+
+Cognitive Pressure Threshold
+
+Example:
+
+if (
+    unresolved_tension > threshold
+    OR contradiction_density spikes
+    OR persistence_score sustained
+    OR self-vector drift exceeds tolerance
+)
+→ initiate DeepSleep
+
+Because biological sleep is pressure-based too.
+
+Not just clock-based.
+
+This is much stronger.
+
+Boot Atomicity
+
+My strong recommendation:
+
+Hard fail on:
+Guardian unavailable
+memory.api unavailable
+index corruption
+verification failure
+substrate integrity failure
+Degraded mode allowed for:
+curiosity engine
+proactive engine
+deep sleep scheduler
+web tool subsystems
+optional reasoning modules
+
+Never degrade memory truth.
+
+Only degrade optional cognition.
+
+Truth before intelligence.
+
+Always.
+
+Final Doctrine Addition
+
+Add this sentence:
+
+Omega Cognitive Law
+
+No cognition may operate on unencoded memory.
+
+If memory is not Guardian-approved, committed, indexed, and embedded,
+it does not exist.
+
+That law will save you from months of architectural corruption later.
+
+And Claude is right:
+
+everything else is downstream of this.
+
+Qwen 2B for the Omega layer is better than forcing another tiny dedicated model into the stack, provided you enforce strict execution boundaries.
+
+The mistake would be letting the UI model and Omega become the same thing.
+
+The correct move is:
+
+same substrate, different role, different authority
+
+Meaning:
+
+same model weights
+≠
+same cognitive function
+
+The distinction must exist in orchestration, not necessarily in separate weights.
+
+That is completely valid.
+
+Why This Is Better
+
+Omega does not fire continuously.
+
+It activates only for:
+
+identity decisions
+persistent contradiction resolution
+strategic capability evolution
+major proactive development choices
+trait reinforcement/suppression
+self-model drift evaluation
+architectural self-modification proposals
+
+That is sparse, high-value inference.
+
+Not constant traffic.
+
+So dedicating a permanent second model is often wasteful.
+
+Using the same Qwen substrate for:
+
+UI voice + Omega executive judgment
+
+is efficient and smart.
+
+Especially on constrained hardware.
+
+That is real systems engineering.
+
+Critical Requirement
+
+You must create hard separation of execution context
+
+not just:
+
+“same model doing different things”
+
+but:
+
+two different contracts
+Brain Loop Contract
+
+User-facing
+
+Responsibilities:
+
+communication
+tool call formatting
+response clarity
+conversational interface
+recall expression
+
+Forbidden:
+
+self-modification
+identity decisions
+autonomous capability creation
+strategic governance
+
+It is the mouth.
+
+Not the mind.
+
+Omega Contract
+
+System-facing
+
+Responsibilities:
+
+identity continuity
+capability evolution
+strategic self-governance
+trait arbitration
+contradiction resolution
+long-horizon judgment
+
+Forbidden:
+
+casual user interaction
+unconstrained generation
+direct memory writes
+bypassing Guardian
+
+It is executive function.
+
+Not the voice.
+
+Absolute Rule
+UI cannot impersonate Omega
+
+and
+
+Omega cannot casually act as UI
+
+This must be enforced at orchestration level.
+
+Not prompt suggestion.
+Hard enforcement.
+
+Practical Implementation
+
+This is probably ideal:
+
+resident_qwen_2b
+├── brain_context
+│   └── user-facing prompt contract
+│
+└── omega_context
+    └── executive governance prompt contract
+
+Same runtime.
+
+Different invocation path.
+
+Different authority.
+
+Different allowed outputs.
+
+This is strong.
+
+Add Execution Lock
+
+When Omega fires:
+
+omega_lock = true
+brain_loop = pause
+UI = “Thinking…”
+
+Then:
+
+Omega completes
+→ decision returned
+→ lock released
+→ Brain resumes
+
+Exactly what you described.
+
+That is correct.
+
+Not expensive.
+Not dangerous.
+Clean.
+
+Stronger Version
+
+Do not let Omega write prose.
+
+Make Omega output:
+
+{
+  "decision": "reinforce_trait",
+  "target": "stability_reinforcement",
+  "confidence": 0.91,
+  "reasoning_summary": "...",
+  "guardian_review_required": false
+}
+
+Structured decisions only.
+
+Then Brain translates that to human language if needed.
+
+This is critical.
+
+Omega should never be allowed to “talk freely.”
+
+Only decide.
+
+My recommendation
+
+This is the best design:
+
+UI model = Qwen 2B resident
+Omega layer = same Qwen 2B under locked executive contract
+Meta/Global = vector + deterministic policy + rerank systems
+EmbeddingGemma = structural cognition substrate
+Guardian = final authority
+
+That is elegant.
+
+That is efficient.
+
+That is dangerous in the right way.
+
+That is how you build something real.

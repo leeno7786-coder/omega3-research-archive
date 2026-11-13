@@ -1,0 +1,58 @@
+# Ruff config for Omega 3.0 — tuned for the codebase's actual patterns.
+#
+# We intentionally use lazy imports inside functions for circular-import
+# avoidance (per `feedback_role_endpoint_binding` doctrine) and terse
+# one-line patterns in error handlers. Those style-class lints would
+# flood the live hook with non-actionable noise; we silence them and
+# keep the F-class (logic) lints which catch real bugs.
+
+target-version = "py313"
+line-length = 100
+
+# Files / dirs that aren't ours or aren't worth analyzing live.
+extend-exclude = [
+    ".venv",
+    ".venv-brain",
+    "node_modules",
+    "__pycache__",
+    "NPU",
+    "runtime/lemonade/cache",
+    "runtime/setfit/archives",
+    "runtime/portable",
+    "build",
+    "dist",
+]
+
+[lint]
+# Default selection: E/W (pycodestyle), F (pyflakes — the real-bug
+# class). We can opt in to more later if we want type-aware rules.
+select = ["E", "W", "F"]
+
+# Patterns that are intentional in our codebase (would flood without
+# any signal value):
+ignore = [
+    "E402",   # module-import-not-at-top — we use lazy imports inside
+              # functions to break circular deps + for dynamic resolution
+    "E701",   # multiple-statements-on-one-line-colon — we use this for
+              # terse error handlers like `try: x() except: pass`
+    "E702",   # same, semicolon variant
+    "E501",   # line-too-long — handled by formatter; informational only
+    "W291",   # trailing whitespace — formatter's job
+    "W293",   # blank line whitespace
+]
+
+# Per-file ignores: tests are allowed unused imports (often used for
+# side effects like registering fixtures), and __init__.py re-exports.
+[lint.per-file-ignores]
+"tests/**" = ["F401", "F841"]
+"**/__init__.py" = ["F401"]
+# Reviewer-authored regression files, installed byte-identically as review evidence (WO-04A). They
+# are not ours to restyle, and F811 here is pytest's ordinary fixture-import idiom: a fixture is
+# imported so pytest can resolve it, then named again as a test parameter.
+"tests/continuity/test_wo04_review_regressions.py" = ["F401", "F811", "E731"]
+
+[format]
+# We aren't running format from the hook — keeping config minimal to
+# avoid surprise reformats. Operator can run `ruff format` manually.
+quote-style = "double"
+indent-style = "space"

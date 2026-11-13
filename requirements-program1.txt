@@ -1,0 +1,25 @@
+# Retained Ettin semantic-retina stack (formerly labeled Program I/P1-B).
+# The legacy SetFit classifiers are retired; this file remains because the
+# live brain-resident Ettin encoder still requires Torch and Transformers.
+# Install into the repository's `.venv-brain` only -- the brain interpreter.
+# The encoder is brain-resident and loaded in-process; this is deliberately not
+# a runtime-worker dependency set. SentenceTransformers is absent on purpose:
+# the pooling/normalization contract is implemented explicitly.
+#
+# torch is selected from the CPU-only index while the other packages resolve
+# from PyPI, so the default PyPI wheel does not drag in ~2.5 GB of unused
+# CUDA/nvidia dependencies:
+#   .venv-brain/Scripts/python.exe -m pip install \
+#       --index-url https://pypi.org/simple \
+#       --extra-index-url https://download.pytorch.org/whl/cpu \
+#       -r requirements-program1.txt
+# The resolved torch build is therefore 2.7.1+cpu (torch major version 2).
+#
+# Transformers is pinned at 4.57.3 because the live Ettin encoder imports
+# AutoModel and AutoTokenizer directly. It is a direct brain dependency even
+# though pip's reverse-dependency report is empty. This is not a SetFit
+# compatibility pin: SetFit classifiers and their shim are retired; the pin
+# protects the retained Ettin snapshot-loading contract.
+torch==2.7.1
+transformers==4.57.3
+safetensors>=0.5,<1

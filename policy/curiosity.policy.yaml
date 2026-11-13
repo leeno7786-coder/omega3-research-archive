@@ -1,0 +1,23 @@
+# Curiosity engine — operational policy (behavioral contract)
+# Code: hud/curiosity_store.py, schema/curiosity_engine.py
+# Config: config/curiosity.yaml
+# Permission: policy/curiosity.policy.yaml (this file; core/policy/ dissolved 2026-07-04)
+
+version: 1
+
+enabled: true
+
+role:
+  description: |
+    Weighted incompleteness resolution. Open questions persist under
+    memory/000_identity/omega/open_questions/.
+
+constraints:
+  max_parallel_ref: config/curiosity.yaml limits
+  self_modifying_forbidden: true
+
+alignment:
+  config: config/curiosity.yaml
+  schema: schema/curiosity.schema.yaml
+  permission_policy: policy/curiosity.policy.yaml
+  dataclass: schema/curiosity_engine.py

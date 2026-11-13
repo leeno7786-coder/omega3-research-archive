@@ -1,0 +1,21 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "omega://schema/strength_index/v1"
+title: StrengthIndexSignal
+
+definitions:
+  StrengthIndexConfig:
+    type: object
+    required: [strength_index]
+    properties:
+      strength_index:
+        type: object
+        required: [recency]
+        properties:
+          recency:
+            type: object
+            required: [write_window_hours, recall_window_hours, hot_age_hours, cold_age_hours]
+            properties:
+              write_window_hours: { type: number, exclusiveMinimum: 0 }
+              recall_window_hours: { type: number, exclusiveMinimum: 0 }
+              hot_age_hours: { type: number, exclusiveMinimum: 0 }
+              cold_age_hours: { type: number, exclusiveMinimum: 0 }

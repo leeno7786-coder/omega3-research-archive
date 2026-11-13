@@ -1,0 +1,36 @@
+{
+  "audit": [],
+  "coord": [
+    9,
+    1,
+    0
+  ],
+  "enrichment": {
+    "canonical": true,
+    "cascade_status": "completed",
+    "closed_at": "2026-08-02T10:11:12.000000+00:00",
+    "episode_id": "hist-window-deterministic-0004",
+    "event_kind": "auto_outcome"
+  },
+  "flags": {
+    "canonical": true,
+    "private": false
+  },
+  "id": "9.01.0de70004",
+  "provenance": {
+    "author": "lobe:temporal",
+    "confidence": 0.5,
+    "ingested_at": "2026-08-02T10:11:13.000000+00:00",
+    "origin_id": "lobe:temporal",
+    "origin_type": "stage_propose",
+    "source_session_id": "hist-window-deterministic-0004"
+  },
+  "speech_act": "statement",
+  "subtopic": "episode",
+  "summary": "synthetic historical episode",
+  "temporal_epoch_us": 1785665473000000,
+  "temporal_hash": "0006580da434b240-0768025ea9d4c48b",
+  "text": "{\"action\": \"WINDOW_REFLECTION\", \"brain_turns\": [], \"cascade_status\": \"completed\", \"episode_id\": \"hist-window-deterministic-0004\", \"execution\": {\"execution_action_pack\": {\"action\": \"web_fetch\", \"execution_inputs\": {\"domain\": \"synthetic_domain\", \"query\": \"synthetic domain\"}}}, \"intent\": \"REFLECT_WINDOW\", \"learning_state\": {}, \"mastery_effects\": {\"synthetic-domain\": {\"knowledge_delta\": 0.3}}, \"memory_epoch\": {\"causal_parent_episode_ids\": [\"hist-parent-0001\"], \"causal_parents_complete\": true, \"commit\": 41, \"pin\": {\"captured_at\": \"2026-08-02T10:10:01+00:00\", \"coord_index_generation\": 12, \"degraded\": [], \"dme_snapshot_hash\": \"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\", \"epoch\": 40, \"graph_snapshot_hash\": \"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}, \"start\": 40}, \"motor_attempt_assessment\": null, \"motor_program\": null, \"neuromod\": {}, \"omega_result\": {\"window_reflection\": {\"episode_count\": 10, \"reflection\": {\"summary\": \"Deterministic window verdict — no model reflection was produced, so this is counted from the episodes' own recorded outcomes: 10 of 10 episodes completed; no motor attempts were made.\"}, \"reflection_fallback_reason\": \"omega window fold produced no reflection\", \"reflection_source\": \"deterministic\", \"status\": \"reflected\", \"trajectory_update\": {}, \"window_id\": \"window-hist-0004\"}}, \"open_query_state\": [], \"outcome\": {\"artifacts\": {\"response_text\": \"synthetic reply\"}, \"chemical_state\": {}, \"consistency\": {}, \"episode_id\": \"hist-window-deterministic-0004\", \"followups\": [], \"learning_state\": {}, \"observations\": {}, \"outcome\": {\"status\": \"completed\", \"summary\": \"window verdict archived\"}, \"temporal\": {}}, \"outputs\": {}, \"pipeline_id\": 0, \"pressure\": {\"aggregate_pressure\": 0.4, \"contributors\": [{\"id\": \"curiosity_gap\", \"metadata\": {}, \"source\": \"omega\", \"type\": \"curiosity_gap\"}], \"neuromod_state\": {}, \"opened_by\": \"curiosity_gap\", \"trajectory_snapshot\": {}}, \"temporal\": {\"captured_at_iso\": \"2026-08-02T10:10:00+00:00\", \"cycle_id\": \"c1\", \"epoch_id\": \"e1\", \"phase\": \"p\", \"source\": \"tick\", \"tick_count\": 7, \"wall_clock_seconds\": 1.0}, \"timekeeper\": {\"commit_ms\": 1785667872000, \"commit_seq\": 63, \"committed_at\": \"2026-08-02T10:11:12.000000+00:00\", \"event_date\": \"2026-08-02\", \"pipeline_id\": 0, \"work_kind\": \"reflection\"}, \"topic_history\": {\"domain\": \"synthetic_domain\", \"source\": \"x\", \"topic\": \"synthetic domain\"}, \"trajectory_update\": null, \"work_kind\": \"reflection\"}",
+  "title": "LEARN: synthetic 9.01.0de70004",
+  "type": "episode"
+}

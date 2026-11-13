@@ -1,0 +1,36 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "omega://schema/reflection_window/v1"
+title: ReflectionWindowTypes
+
+definitions:
+  ReflectionWindowRecord:
+    type: object
+    required: [window_id, started_at_episode, status, episode_count]
+    properties:
+      window_id: { type: string }
+      started_at_episode: { type: string }
+      status:
+        type: string
+        enum: [collecting, locked]
+      episode_count: { type: integer, minimum: 0 }
+      episodes:
+        type: array
+        items: { type: string }
+      trajectory_snapshot: { type: object }
+
+  ReflectionWindowConfig:
+    type: object
+    required: [reflection_window]
+    properties:
+      reflection_window:
+        type: object
+        required: [window_size]
+        properties:
+          window_size: { type: integer, minimum: 1 }
+          history:
+            type: object
+            required: [record_cap, token_candidate_cap, retrieval_policy_revision]
+            properties:
+              record_cap: { type: integer, minimum: 1 }
+              token_candidate_cap: { type: integer, minimum: 1 }
+              retrieval_policy_revision: { type: string, minLength: 1 }

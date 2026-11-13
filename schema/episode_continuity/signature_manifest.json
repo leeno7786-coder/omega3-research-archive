@@ -1,0 +1,266 @@
+{
+  "schema_version": "omega.episode_continuity.signatures.v1",
+  "contract_version": "omega.episode_continuity.v2",
+  "purpose": "Function signatures WO-03..WO-15 will implement. WO-02 locks the shape without creating stubs: an empty-returning placeholder would be the silent-empty defect AGENTS.md section 2.1 forbids, and tests/continuity/test_contract_interfaces.py asserts none of these names exists yet.",
+  "implemented_by_wo_02": [
+    {
+      "module": "schema.continuity_json",
+      "name": "canonical_bytes",
+      "signature": "(value: object) -> bytes"
+    },
+    {
+      "module": "schema.continuity_json",
+      "name": "parse_json_object",
+      "signature": "(raw: str) -> dict[str, object]"
+    },
+    {
+      "module": "schema.window_reflection",
+      "name": "validate_window_response_payload",
+      "signature": "(payload: Any, *, member_ids: Sequence[str], packet_digest: str = '') -> ValidatedWindowResponse"
+    },
+    {
+      "module": "schema.episode_record",
+      "name": "cascade_and_task_from_outcome_pack",
+      "signature": "(pack: Any, *, cascade_status: str) -> dict[str, Any]"
+    }
+  ],
+  "future_apis": [
+    {
+      "owner_order": "WO-12",
+      "module": "omega_loop.window.evidence",
+      "name": "assemble_window_packet",
+      "signature": "(manifest: WindowManifest, episodes: tuple[EpisodeRecord, ...], *, history: HistoryBundle, metrics: WindowMetrics) -> WindowEvidencePacket",
+      "purpose": "Assemble the validated evidence packet; every citation resolves to shown evidence."
+    },
+    {
+      "owner_order": "WO-12",
+      "module": "omega_loop.window.budget",
+      "name": "build_budgeted_window_request",
+      "signature": "(packet: WindowEvidencePacket, *, counter: TokenCounter, grant: ContextGrant, frame: PromptFrame) -> BudgetedWindowRequest",
+      "purpose": "Whole-request structural admission against a VERIFIED token count. No character heuristic; TokenAccountingUnavailable when no counter exists."
+    },
+    {
+      "owner_order": "WO-12",
+      "module": "omega_loop.window.budget",
+      "name": "count_request",
+      "signature": "(messages: Sequence[Mapping[str, str]]) -> TokenCount",
+      "purpose": "Returns a count plus counter identity and whether it is exact or a verified upper bound. A character estimate is neither."
+    },
+    {
+      "owner_order": "WO-13",
+      "module": "omega_loop.window.validation",
+      "name": "validate_window_response",
+      "signature": "(raw: str, *, request: BudgetedWindowRequest) -> ValidatedWindowResponse",
+      "purpose": "Validates the RAW string before a permissive parse can erase duplicate keys, then delegates field rules to schema.window_reflection."
+    },
+    {
+      "owner_order": "WO-13",
+      "module": "memory.window_findings",
+      "name": "stage_window_findings",
+      "signature": "(response: ValidatedWindowResponse, *, episode_id: str) -> tuple[StagedFindingReceipt, ...]",
+      "purpose": "Stage attributed findings through SRAM. Host mints finding IDs; staging returns staged, not committed, receipts."
+    },
+    {
+      "owner_order": "WO-14",
+      "module": "omega_loop.window.followthrough",
+      "name": "evaluate_learning_links",
+      "signature": "(proposals: tuple[dict, ...], episodes: tuple[EpisodeRecord, ...], *, snapshot: SnapshotRef) -> LearningFollowthrough",
+      "purpose": "Six independent observations per proposal. Never one monotonic success boolean; no comparable opportunity means untested, not ineffective."
+    },
+    {
+      "owner_order": "WO-15",
+      "module": "omega_loop.window.control",
+      "name": "validate_window_control",
+      "signature": "(response: ValidatedWindowResponse, *, context: ControlContext) -> AcceptedWindowControl",
+      "purpose": "Validate proposals against host-owned current grant, trajectory revision and job ownership, rechecked at the staging seam."
+    },
+    {
+      "owner_order": "WO-15",
+      "module": "omega_loop.window.control",
+      "name": "stage_window_control",
+      "signature": "(accepted: AcceptedWindowControl, *, episode_id: str) -> StagedControlReceipt",
+      "purpose": "Stage through the existing successor/mail/trajectory machinery. A proposal is not an applied update."
+    }
+  ],
+  "reused_authorities": [
+    {
+      "capability": "durable owner-bound event identity and conflict detection",
+      "module": "memory.intake_journal",
+      "note": "journal_memory_intake / IntakeJournalConflict / reown_record / reconcile_at_boot. WO-03 builds on this rather than adding a second journal."
+    },
+    {
+      "capability": "restart-complete execution report",
+      "module": "memory.execution_report",
+      "note": "ExecutionReport already carries task, pass gate, did/didn't, succeeded/failed and is already an SRAM record."
+    },
+    {
+      "capability": "snapshot and coverage identity",
+      "module": "memory.projection.generation",
+      "note": "GenerationContent / ProjectionManifest / PublicationLineageRow / CoverageClock are what SnapshotRef binds to."
+    },
+    {
+      "capability": "external source reference",
+      "module": "memory.source_ledger.store",
+      "note": "SourceArtifact.citation() is SourceRef's source of truth."
+    },
+    {
+      "capability": "commit ordering and coverage clock",
+      "module": "core.timekeeper",
+      "note": "finish_line_stamp inside core.commit_region.serialized_commit. No second clock is introduced."
+    },
+    {
+      "capability": "read pin and recall receipt",
+      "module": "memory.epoch",
+      "note": "EpochPin / observe / recall_receipt / seal_episode_epoch."
+    },
+    {
+      "capability": "shared control vocabulary",
+      "module": "schema.omega_control_decision",
+      "note": "Imported unchanged. PRESSURE_INTENTS is not widened by this program."
+    },
+    {
+      "capability": "trajectory operations",
+      "module": "schema.omega_trajectory",
+      "note": "TRAJECTORY_DECISION_VALUES is the authoritative vocabulary; the retired prompt words are refused."
+    },
+    {
+      "capability": "test isolation",
+      "module": "tests.helpers.memory_isolation",
+      "note": "redirect_memory_to_tmp, plus the reflection-window path redirect WO-01 recorded as gap I1."
+    }
+  ],
+  "lifecycle": {
+    "note": "WO-02A source-review obligation 2. The absence assertion in tests/continuity/test_contract_interfaces.py::test_no_future_api_has_been_faked_as_a_production_stub is correct ONLY while an API is unimplemented. It is no-stub protection, not a permanent ban.",
+    "on_implementation": "When an owner order implements an entry, it REPLACES that entry's absence guard with executable signature and behavioural checks, moves the entry into implemented_by, and leaves every still-pending entry's absence guard in place. Never delete the interface lock wholesale, and never allow arbitrary implementations to appear merely to keep tests green.",
+    "next_transition": {
+      "owner_order": "WO-12",
+      "names": [
+        "assemble_window_packet",
+        "build_budgeted_window_request"
+      ],
+      "required_action": "WO-12 must replace the absence guards for exactly these names with executable signature and behavioural checks (a packet of exactly eleven blocks whose every citation resolves to shown evidence, and a budgeted request whose token counts come from a real counter). All other entries keep their absence guard."
+    },
+    "completed_transitions": [
+      {
+        "owner_order": "WO-03",
+        "names": [
+          "record_event",
+          "read_episode_events"
+        ],
+        "note": "Absence guards retired and replaced by executable checks. Every other pending entry kept its guard; the interface lock was not deleted."
+      },
+      {
+        "owner_order": "WO-07",
+        "names": [
+          "seal_episode_record",
+          "resolve_episode_commit"
+        ],
+        "note": "Absence guards retired and replaced by executable checks. Every other pending entry kept its guard; the interface lock was not deleted."
+      },
+      {
+        "owner_order": "WO-08",
+        "names": [
+          "migrate_episode_document"
+        ],
+        "note": "Absence guard retired and replaced by executable checks. Every other pending entry kept its guard; the interface lock was not deleted."
+      },
+      {
+        "owner_order": "WO-09",
+        "names": [
+          "seal_window",
+          "hydrate_window"
+        ],
+        "note": "Absence guards retired and replaced by executable checks. Every other pending entry kept its guard; the interface lock was not deleted."
+      },
+      {
+        "owner_order": "WO-10",
+        "names": [
+          "collect_history"
+        ],
+        "note": "Absence guard retired and replaced by executable checks. Every other pending entry kept its guard; the interface lock was not deleted."
+      },
+      {
+        "owner_order": "WO-11",
+        "names": [
+          "build_window_metrics"
+        ],
+        "note": "Absence guard retired and replaced by executable checks. Every other pending entry kept its guard; the interface lock was not deleted."
+      }
+    ]
+  },
+  "implemented_by_wo_03": [
+    {
+      "module": "memory.episode_events",
+      "name": "record_event",
+      "signature": "(episode_id: str, *, operation_id: str, phase: str, event_kind: str, payload: dict, evidence_refs: tuple[str, ...] = (), occurred_at: str | None = None, evidence_class: str = host_observation) -> EpisodeEvent",
+      "purpose": "Owner-bound capture through the existing intake journal and SRAM. Derives trusted thread/producer/time from the bound runtime context, never from a model payload. Amended 2026-09-22 (known-issues pass, WO-05 deviation 2): the producer states the event's evidence_class; the schema still refuses a host-only class from any non-host authority.",
+      "retired_guard": "WO-03 replaced this entry's absence guard with executable signature and behavioural checks in tests/continuity/test_contract_interfaces.py and tests/continuity/test_event_capture.py / test_event_recovery.py."
+    },
+    {
+      "module": "memory.episode_events",
+      "name": "read_episode_events",
+      "signature": "(episode_id: str) -> tuple[EpisodeEvent, ...]",
+      "purpose": "Owner/recovery working-state read. Not canonical recall.",
+      "retired_guard": "WO-03 replaced this entry's absence guard with executable signature and behavioural checks in tests/continuity/test_contract_interfaces.py and tests/continuity/test_event_capture.py / test_event_recovery.py."
+    }
+  ],
+  "implemented_by_wo_07": [
+    {
+      "module": "memory.episode_record_seal",
+      "name": "seal_episode_record",
+      "signature": "(episode, *, events: tuple[EpisodeEvent, ...], effects: tuple[dict, ...]) -> EpisodeRecord",
+      "purpose": "Pure content assembly called from DeepSleep. Canonical writes stay in the existing memory path.",
+      "retired_guard": "WO-07 replaced this entry's absence guard with executable signature and behavioural checks in tests/continuity/test_contract_interfaces.py and tests/continuity/test_canonical_episode_roundtrip.py / test_episode_commit_view.py / test_effect_idempotency.py / test_terminus_recovery.py."
+    },
+    {
+      "module": "memory.episode_commit_view",
+      "name": "resolve_episode_commit",
+      "signature": "(record_ref: CanonicalRef, *, snapshot: SnapshotRef) -> EpisodeCommitView",
+      "purpose": "Read-only join of the existing terminal, intake and projection authorities. Not a new durable store.",
+      "retired_guard": "WO-07 replaced this entry's absence guard with executable signature and behavioural checks in tests/continuity/test_contract_interfaces.py and tests/continuity/test_canonical_episode_roundtrip.py / test_episode_commit_view.py / test_effect_idempotency.py / test_terminus_recovery.py."
+    }
+  ],
+  "implemented_by_wo_08": [
+    {
+      "module": "scripts.migrate_episode_continuity",
+      "name": "migrate_episode_document",
+      "signature": "(document: dict) -> MigrationResult",
+      "purpose": "Pure offline conversion. Preserves unknowns as not_captured; never invents a historical time.",
+      "retired_guard": "WO-08 replaced this entry's absence guard with executable signature and behavioural checks in tests/continuity/test_contract_interfaces.py and tests/continuity/test_historical_migration.py / test_migration_resume.py."
+    }
+  ],
+  "implemented_by_wo_09": [
+    {
+      "module": "omega_loop.window.membership",
+      "name": "seal_window",
+      "signature": "(window, *, snapshot: SnapshotRef) -> WindowManifest",
+      "purpose": "Fix the cohort against a retained generation, ordered by the existing finish-line authority. Members are the exact CanonicalRefs the commit region pinned as each joined; completeness is earned by publication membership.",
+      "retired_guard": "WO-09 replaced this entry's absence guard with executable signature and behavioural checks in tests/continuity/test_contract_interfaces.py and tests/continuity/test_window_membership.py / test_window_hydration.py / test_window_snapshot.py."
+    },
+    {
+      "module": "omega_loop.window.membership",
+      "name": "hydrate_window",
+      "signature": "(manifest: WindowManifest) -> tuple[EpisodeRecord, ...]",
+      "purpose": "Hydrate the exact canonical revisions the manifest names, verifying each content hash. Replaced the latest-wins scan; missing, corrupt or changed members raise.",
+      "retired_guard": "WO-09 replaced this entry's absence guard with executable signature and behavioural checks in tests/continuity/test_contract_interfaces.py and tests/continuity/test_window_membership.py / test_window_hydration.py / test_window_snapshot.py."
+    }
+  ],
+  "implemented_by_wo_10": [
+    {
+      "module": "omega_loop.window.history",
+      "name": "collect_history",
+      "signature": "(manifest: WindowManifest, episodes: tuple[EpisodeRecord, ...], *, limits: HistoryLimits) -> HistoryBundle",
+      "purpose": "Snapshot-bound history read from the retained recall projection, typed relations from host evidence only, and a retrieval audit that distinguishes not-run from empty from failed. Reflections that cite the same members are one support unit.",
+      "retired_guard": "WO-10 replaced this entry's absence guard with executable signature and behavioural checks in tests/continuity/test_contract_interfaces.py and tests/continuity/test_temporal_links.py / test_history_cutoff.py / test_history_retrieval.py."
+    }
+  ],
+  "implemented_by_wo_11": [
+    {
+      "module": "omega_loop.window.metrics",
+      "name": "build_window_metrics",
+      "signature": "(episodes: tuple[EpisodeRecord, ...], *, history: HistoryBundle) -> WindowMetrics",
+      "purpose": "Reproducible measurements with explicit numerator/denominator populations, exclusions and unknowns with reasons, stratification by comparability, and this module's computation version. A population with no applicable trial is an undefined observation that still reports its counts, never a zero or a 100% rate.",
+      "retired_guard": "WO-11 replaced this entry's absence guard with executable signature and behavioural checks in tests/continuity/test_contract_interfaces.py and tests/continuity/test_window_metrics.py / test_case_independence.py / test_progress_metrics.py."
+    }
+  ]
+}

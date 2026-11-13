@@ -1,0 +1,86 @@
+# =============================================================================
+# Global B — outcome sequencer (MetaReflectionPack → GlobalOutcomePack)
+# =============================================================================
+#
+# Consumed by: pressure_loop.policy (global_b_* helpers)
+# Authority: global_loop assemble → ground → summarize → followups → package
+#
+# =============================================================================
+
+global_b:
+  enabled: true
+  models: none
+
+  module: global_loop.loop.run_global_b
+  phases:
+    - assemble
+    - ground
+    - summarize
+    - followups
+    - package
+  episode_write:
+    slot: outcome
+    path: episode.global_.outcome
+  requires:
+    - episode.auto
+    - episode.meta.reflection
+  default_disposition: invalid
+
+  ground:
+    auto_output_paths:
+      response_text: auto.outputs.response_text
+      tool_result: auto.outputs.tool_result
+      tool_result_summary: auto.outputs.tool_result_summary
+      image_artifact: auto.outputs.image_artifact
+    meta_disposition_path: meta.execution.disposition
+
+  summarize:
+    completed_by_action:
+      USE_TOOL: "Tool execution completed successfully."
+      USE_SKILL: "Skill-mediated execution completed successfully."
+      RESPONSE: "Response generated successfully."
+      PROACTIVE_RESPONSE: "Proactive response generated successfully."
+      IMAGE_CREATION: "Image creation completed successfully."
+      default: "Execution completed successfully."
+    failed_template: "Execution failed: {failure_kind}."
+    degraded: "Execution partially completed with degradation."
+    skipped: "No execution was performed."
+    idle: "Chose idle with a recorded reason."
+    invalid: "Outcome invalid due to packet inconsistency or missing trace."
+
+  followups:
+    types:
+      - needs_clarification
+      - needs_retry
+      - none
+    clarification_failure_kinds:
+      - missing_params
+      - invalid_execution_pack
+      - clarification
+      - missing_param
+    tool_failure_kinds:
+      - tool_error
+      - transient
+      - tool_timeout
+      - runtime_unavailable
+    rules:
+      completed:
+        type: none
+      invalid:
+        type: needs_clarification
+        suggested_intent: IDLE
+      failed_default:
+        type: needs_retry
+        suggested_intent: USE_TOOL
+      failed_clarification:
+        type: needs_clarification
+        suggested_intent: RESPOND
+      degraded:
+        type: needs_retry
+        suggested_intent_from_action:
+          USE_TOOL: USE_TOOL
+          USE_SKILL: USE_SKILL
+          default: RESPOND
+
+  outcome_pack:
+    memory_success_status: success

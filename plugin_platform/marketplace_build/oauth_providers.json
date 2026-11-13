@@ -1,0 +1,890 @@
+[
+  {
+    "account_partition": "issuer_account",
+    "allowed_plugin_publishers": [
+      "omega.first_party"
+    ],
+    "app_publisher": "google",
+    "authorization_flow": "authorization_code_pkce",
+    "authorization_issuer": "https://accounts.google.com",
+    "client_mode": "preregistered",
+    "profile_id": "google.desktop.drive",
+    "provider_id": "google.workspace.drive",
+    "redirect_uri": "http://127.0.0.1:13310/oauth/google.desktop.drive/callback",
+    "registration_file": "registrations/google-public.json",
+    "resource_origins": [
+      "https://drivemcp.googleapis.com/mcp/v1"
+    ]
+  },
+  {
+    "account_partition": "issuer_account",
+    "allowed_plugin_publishers": [
+      "omega.first_party"
+    ],
+    "app_publisher": "google",
+    "authorization_flow": "authorization_code_pkce",
+    "authorization_issuer": "https://accounts.google.com",
+    "client_mode": "preregistered",
+    "profile_id": "google.desktop.calendar",
+    "provider_id": "google.workspace.calendar",
+    "redirect_uri": "http://127.0.0.1:13310/oauth/google.desktop.calendar/callback",
+    "registration_file": "registrations/google-public.json",
+    "resource_origins": [
+      "https://calendarmcp.googleapis.com/mcp/v1"
+    ]
+  },
+  {
+    "account_partition": "issuer_account",
+    "allowed_plugin_publishers": [
+      "omega.first_party"
+    ],
+    "app_publisher": "google",
+    "authorization_flow": "authorization_code_pkce",
+    "authorization_issuer": "https://accounts.google.com",
+    "client_mode": "preregistered",
+    "profile_id": "google.desktop.gmail",
+    "provider_id": "google.workspace.gmail",
+    "redirect_uri": "http://127.0.0.1:13310/oauth/google.desktop.gmail/callback",
+    "registration_file": "registrations/google-public.json",
+    "resource_origins": [
+      "https://gmailmcp.googleapis.com/mcp/v1"
+    ]
+  },
+  {
+    "account_partition": "issuer_account",
+    "allowed_plugin_publishers": [
+      "omega.first_party"
+    ],
+    "app_publisher": "github",
+    "authorization_flow": "device_code",
+    "authorization_issuer": "https://github.com/login/oauth",
+    "client_mode": "preregistered",
+    "profile_id": "github.desktop",
+    "provider_id": "github.official",
+    "redirect_uri": null,
+    "registration_file": "registrations/github-public.json",
+    "resource_origins": [
+      "https://api.githubcopilot.com/mcp/"
+    ]
+  },
+  {
+    "account_partition": "issuer_account",
+    "allowed_plugin_publishers": [
+      "omega.first_party"
+    ],
+    "app_publisher": "com.notion",
+    "authorization_flow": "authorization_code_pkce",
+    "authorization_issuer": "https://mcp.notion.com",
+    "client_mode": "dynamic_registration",
+    "profile_id": "notion.desktop",
+    "provider_id": "com.notion.mcp",
+    "redirect_uri": "https://plugins.omega2ai.com/oauth/notion.desktop/callback",
+    "registration": {
+      "client_name": "Omega",
+      "grant_types": [
+        "authorization_code",
+        "refresh_token"
+      ],
+      "redirect_uris": [
+        "https://plugins.omega2ai.com/oauth/notion.desktop/callback"
+      ],
+      "response_types": [
+        "code"
+      ],
+      "scope": "default",
+      "software_id": "org.omega2ai.desktop",
+      "token_endpoint_auth_method": "none"
+    },
+    "resource_origins": [
+      "https://mcp.notion.com/mcp"
+    ]
+  },
+  {
+    "account_partition": "issuer_account",
+    "allowed_plugin_publishers": [
+      "omega.first_party"
+    ],
+    "app_publisher": "app.linear",
+    "authorization_flow": "authorization_code_pkce",
+    "authorization_issuer": "https://mcp.linear.app",
+    "client_mode": "dynamic_registration",
+    "profile_id": "linear.desktop",
+    "provider_id": "app.linear.linear",
+    "redirect_uri": "https://plugins.omega2ai.com/oauth/linear.desktop/callback",
+    "registration": {
+      "client_name": "Omega",
+      "grant_types": [
+        "authorization_code",
+        "refresh_token"
+      ],
+      "redirect_uris": [
+        "https://plugins.omega2ai.com/oauth/linear.desktop/callback"
+      ],
+      "response_types": [
+        "code"
+      ],
+      "scope": "read write",
+      "software_id": "org.omega2ai.desktop",
+      "token_endpoint_auth_method": "none"
+    },
+    "resource_origins": [
+      "https://mcp.linear.app/mcp"
+    ]
+  },
+  {
+    "account_partition": "issuer_account",
+    "allowed_plugin_publishers": [
+      "com.atlassian"
+    ],
+    "app_publisher": "com.atlassian",
+    "authorization_flow": "authorization_code_pkce",
+    "authorization_issuer": "https://mcp.atlassian.com",
+    "client_mode": "dynamic_registration",
+    "profile_id": "atlassian.desktop",
+    "provider_id": "com.atlassian.atlassian-mcp-server",
+    "redirect_uri": "https://plugins.omega2ai.com/oauth/atlassian.desktop/callback",
+    "registration": {
+      "client_name": "Omega",
+      "grant_types": [
+        "authorization_code",
+        "refresh_token"
+      ],
+      "redirect_uris": [
+        "https://plugins.omega2ai.com/oauth/atlassian.desktop/callback"
+      ],
+      "response_types": [
+        "code"
+      ],
+      "scope": "",
+      "software_id": "org.omega2ai.desktop",
+      "token_endpoint_auth_method": "none"
+    },
+    "resource_origins": [
+      "https://mcp.atlassian.com/v1/mcp"
+    ]
+  },
+  {
+    "account_partition": "issuer_account",
+    "allowed_plugin_publishers": [
+      "omega.first_party"
+    ],
+    "app_publisher": "com.zapier",
+    "authorization_flow": "authorization_code_pkce",
+    "authorization_issuer": "https://mcp.zapier.com",
+    "client_mode": "dynamic_registration",
+    "profile_id": "zapier.desktop",
+    "provider_id": "com.zapier.mcp",
+    "redirect_uri": "https://plugins.omega2ai.com/oauth/zapier.desktop/callback",
+    "registration": {
+      "client_name": "Omega",
+      "grant_types": [
+        "authorization_code",
+        "refresh_token"
+      ],
+      "redirect_uris": [
+        "https://plugins.omega2ai.com/oauth/zapier.desktop/callback"
+      ],
+      "response_types": [
+        "code"
+      ],
+      "scope": "openid profile email",
+      "software_id": "org.omega2ai.desktop",
+      "token_endpoint_auth_method": "none"
+    },
+    "resource_origins": [
+      "https://mcp.zapier.com/api/v1/connect"
+    ]
+  },
+  {
+    "account_partition": "issuer_account",
+    "allowed_plugin_publishers": [
+      "omega.first_party"
+    ],
+    "app_publisher": "com.vercel",
+    "authorization_flow": "authorization_code_pkce",
+    "authorization_issuer": "https://vercel.com",
+    "client_mode": "dynamic_registration",
+    "profile_id": "vercel.desktop",
+    "provider_id": "com.vercel.vercel-mcp",
+    "redirect_uri": "https://plugins.omega2ai.com/oauth/vercel.desktop/callback",
+    "registration": {
+      "client_name": "Omega",
+      "grant_types": [
+        "authorization_code",
+        "refresh_token"
+      ],
+      "redirect_uris": [
+        "https://plugins.omega2ai.com/oauth/vercel.desktop/callback"
+      ],
+      "response_types": [
+        "code"
+      ],
+      "scope": "",
+      "software_id": "org.omega2ai.desktop",
+      "token_endpoint_auth_method": "none"
+    },
+    "resource_identifier": "https://mcp.vercel.com/",
+    "resource_origins": [
+      "https://mcp.vercel.com"
+    ]
+  },
+  {
+    "account_partition": "issuer_account",
+    "allowed_plugin_publishers": [
+      "omega.first_party"
+    ],
+    "app_publisher": "com.supabase",
+    "authorization_flow": "authorization_code_pkce",
+    "authorization_issuer": "https://api.supabase.com",
+    "client_mode": "dynamic_registration",
+    "profile_id": "supabase.desktop",
+    "provider_id": "com.supabase.mcp",
+    "redirect_uri": "https://plugins.omega2ai.com/oauth/supabase.desktop/callback",
+    "registration": {
+      "client_name": "Omega",
+      "grant_types": [
+        "authorization_code",
+        "refresh_token"
+      ],
+      "redirect_uris": [
+        "https://plugins.omega2ai.com/oauth/supabase.desktop/callback"
+      ],
+      "response_types": [
+        "code"
+      ],
+      "scope": "analytics:read database:read edge_functions:read environment:read projects:read storage:read",
+      "software_id": "org.omega2ai.desktop",
+      "token_endpoint_auth_method": "none"
+    },
+    "resource_origins": [
+      "https://mcp.supabase.com/mcp"
+    ]
+  },
+  {
+    "account_partition": "issuer_account",
+    "allowed_plugin_publishers": [
+      "omega.first_party"
+    ],
+    "app_publisher": "co.huggingface",
+    "authorization_flow": "authorization_code_pkce",
+    "authorization_issuer": "https://huggingface.co",
+    "client_mode": "dynamic_registration",
+    "profile_id": "huggingface.desktop",
+    "provider_id": "co.huggingface.hf-mcp-server",
+    "redirect_uri": "https://plugins.omega2ai.com/oauth/huggingface.desktop/callback",
+    "registration": {
+      "client_name": "Omega",
+      "grant_types": [
+        "authorization_code",
+        "refresh_token"
+      ],
+      "redirect_uris": [
+        "https://plugins.omega2ai.com/oauth/huggingface.desktop/callback"
+      ],
+      "response_types": [
+        "code"
+      ],
+      "scope": "read-repos inference-api",
+      "software_id": "org.omega2ai.desktop",
+      "token_endpoint_auth_method": "none"
+    },
+    "resource_origins": [
+      "https://huggingface.co/mcp"
+    ]
+  },
+  {
+    "account_partition": "issuer_account",
+    "allowed_plugin_publishers": [
+      "io.github.upstash"
+    ],
+    "app_publisher": "io.github.upstash",
+    "authorization_flow": "authorization_code_pkce",
+    "authorization_issuer": "https://clerk.context7.com",
+    "client_mode": "dynamic_registration",
+    "profile_id": "context7.desktop",
+    "provider_id": "io.github.upstash.context7",
+    "redirect_uri": "https://plugins.omega2ai.com/oauth/context7.desktop/callback",
+    "registration": {
+      "client_name": "Omega",
+      "grant_types": [
+        "authorization_code",
+        "refresh_token"
+      ],
+      "redirect_uris": [
+        "https://plugins.omega2ai.com/oauth/context7.desktop/callback"
+      ],
+      "response_types": [
+        "code"
+      ],
+      "scope": "",
+      "software_id": "org.omega2ai.desktop",
+      "token_endpoint_auth_method": "none"
+    },
+    "resource_origins": [
+      "https://mcp.context7.com/mcp"
+    ]
+  },
+  {
+    "account_partition": "issuer_account",
+    "allowed_plugin_publishers": [
+      "omega.first_party"
+    ],
+    "app_publisher": "com.stripe",
+    "authorization_flow": "authorization_code_pkce",
+    "authorization_issuer": "https://access.stripe.com/mcp",
+    "client_mode": "dynamic_registration",
+    "profile_id": "stripe.desktop",
+    "provider_id": "com.stripe.mcp",
+    "redirect_uri": "https://plugins.omega2ai.com/oauth/stripe.desktop/callback",
+    "registration": {
+      "client_name": "Omega",
+      "grant_types": [
+        "authorization_code",
+        "refresh_token"
+      ],
+      "redirect_uris": [
+        "https://plugins.omega2ai.com/oauth/stripe.desktop/callback"
+      ],
+      "response_types": [
+        "code"
+      ],
+      "scope": "mcp",
+      "software_id": "org.omega2ai.desktop",
+      "token_endpoint_auth_method": "none"
+    },
+    "resource_origins": [
+      "https://mcp.stripe.com"
+    ]
+  },
+  {
+    "account_partition": "issuer_account",
+    "allowed_plugin_publishers": [
+      "omega.first_party"
+    ],
+    "app_publisher": "com.paypal.mcp",
+    "authorization_flow": "authorization_code_pkce",
+    "authorization_issuer": "https://mcp.paypal.com",
+    "client_mode": "dynamic_registration",
+    "profile_id": "paypal.desktop",
+    "provider_id": "com.paypal.mcp.mcp",
+    "redirect_uri": "https://plugins.omega2ai.com/oauth/paypal.desktop/callback",
+    "registration": {
+      "client_name": "Omega",
+      "grant_types": [
+        "authorization_code",
+        "refresh_token"
+      ],
+      "redirect_uris": [
+        "https://plugins.omega2ai.com/oauth/paypal.desktop/callback"
+      ],
+      "response_types": [
+        "code"
+      ],
+      "scope": "openid",
+      "software_id": "org.omega2ai.desktop",
+      "token_endpoint_auth_method": "none"
+    },
+    "resource_origins": [
+      "https://mcp.paypal.com/mcp"
+    ]
+  },
+  {
+    "account_partition": "issuer_account",
+    "allowed_plugin_publishers": [
+      "omega.first_party"
+    ],
+    "app_publisher": "com.figma.mcp",
+    "authorization_flow": "authorization_code_pkce",
+    "authorization_issuer": "https://api.figma.com",
+    "client_mode": "dynamic_registration",
+    "profile_id": "figma.desktop",
+    "provider_id": "com.figma.mcp.mcp",
+    "redirect_uri": "https://plugins.omega2ai.com/oauth/figma.desktop/callback",
+    "registration": {
+      "client_name": "Omega",
+      "grant_types": [
+        "authorization_code",
+        "refresh_token"
+      ],
+      "redirect_uris": [
+        "https://plugins.omega2ai.com/oauth/figma.desktop/callback"
+      ],
+      "response_types": [
+        "code"
+      ],
+      "scope": "",
+      "software_id": "org.omega2ai.desktop",
+      "token_endpoint_auth_method": "none"
+    },
+    "resource_origins": [
+      "https://mcp.figma.com/mcp"
+    ]
+  },
+  {
+    "account_partition": "issuer_account",
+    "allowed_plugin_publishers": [
+      "omega.first_party"
+    ],
+    "app_publisher": "com.webflow",
+    "authorization_flow": "authorization_code_pkce",
+    "authorization_issuer": "https://mcp.webflow.com",
+    "client_mode": "dynamic_registration",
+    "profile_id": "webflow.desktop",
+    "provider_id": "com.webflow.mcp",
+    "redirect_uri": "https://plugins.omega2ai.com/oauth/webflow.desktop/callback",
+    "registration": {
+      "client_name": "Omega",
+      "grant_types": [
+        "authorization_code",
+        "refresh_token"
+      ],
+      "redirect_uris": [
+        "https://plugins.omega2ai.com/oauth/webflow.desktop/callback"
+      ],
+      "response_types": [
+        "code"
+      ],
+      "scope": "sites:read",
+      "software_id": "org.omega2ai.desktop",
+      "token_endpoint_auth_method": "none"
+    },
+    "resource_origins": [
+      "https://mcp.webflow.com/mcp"
+    ]
+  },
+  {
+    "account_partition": "issuer_account",
+    "allowed_plugin_publishers": [
+      "omega.first_party"
+    ],
+    "app_publisher": "com.wix",
+    "authorization_flow": "authorization_code_pkce",
+    "authorization_issuer": "https://mcp.wix.com",
+    "client_mode": "dynamic_registration",
+    "profile_id": "wix.desktop",
+    "provider_id": "com.wix.mcp",
+    "redirect_uri": "https://plugins.omega2ai.com/oauth/wix.desktop/callback",
+    "registration": {
+      "client_name": "Omega",
+      "grant_types": [
+        "authorization_code",
+        "refresh_token"
+      ],
+      "redirect_uris": [
+        "https://plugins.omega2ai.com/oauth/wix.desktop/callback"
+      ],
+      "response_types": [
+        "code"
+      ],
+      "scope": "offline_access",
+      "software_id": "org.omega2ai.desktop",
+      "token_endpoint_auth_method": "none"
+    },
+    "resource_origins": [
+      "https://mcp.wix.com/mcp"
+    ]
+  },
+  {
+    "account_partition": "issuer_account",
+    "allowed_plugin_publishers": [
+      "com.gitlab"
+    ],
+    "app_publisher": "com.gitlab",
+    "authorization_flow": "authorization_code_pkce",
+    "authorization_issuer": "https://gitlab.com",
+    "client_mode": "dynamic_registration",
+    "profile_id": "gitlab.desktop",
+    "provider_id": "com.gitlab.mcp",
+    "redirect_uri": "https://plugins.omega2ai.com/oauth/gitlab.desktop/callback",
+    "registration": {
+      "client_name": "Omega",
+      "grant_types": [
+        "authorization_code",
+        "refresh_token"
+      ],
+      "redirect_uris": [
+        "https://plugins.omega2ai.com/oauth/gitlab.desktop/callback"
+      ],
+      "response_types": [
+        "code"
+      ],
+      "scope": "",
+      "software_id": "org.omega2ai.desktop",
+      "token_endpoint_auth_method": "none"
+    },
+    "resource_origins": [
+      "https://gitlab.com/api/v4/mcp"
+    ]
+  },
+  {
+    "account_partition": "issuer_account",
+    "allowed_plugin_publishers": [
+      "io.github.mapbox"
+    ],
+    "app_publisher": "io.github.mapbox",
+    "authorization_flow": "authorization_code_pkce",
+    "authorization_issuer": "https://mcp.mapbox.com",
+    "client_mode": "dynamic_registration",
+    "profile_id": "mapbox.desktop",
+    "provider_id": "io.github.mapbox.mcp-server",
+    "redirect_uri": "https://plugins.omega2ai.com/oauth/mapbox.desktop/callback",
+    "registration": {
+      "client_name": "Omega",
+      "grant_types": [
+        "authorization_code",
+        "refresh_token"
+      ],
+      "redirect_uris": [
+        "https://plugins.omega2ai.com/oauth/mapbox.desktop/callback"
+      ],
+      "response_types": [
+        "code"
+      ],
+      "scope": "",
+      "software_id": "org.omega2ai.desktop",
+      "token_endpoint_auth_method": "none"
+    },
+    "resource_origins": [
+      "https://mcp.mapbox.com/mcp"
+    ]
+  },
+  {
+    "account_partition": "issuer_account",
+    "allowed_plugin_publishers": [
+      "io.github.algolia"
+    ],
+    "app_publisher": "io.github.algolia",
+    "authorization_flow": "authorization_code_pkce",
+    "authorization_issuer": "https://dashboard.algolia.com",
+    "client_mode": "dynamic_registration",
+    "profile_id": "algolia.desktop",
+    "provider_id": "io.github.algolia.algolia-productivity",
+    "redirect_uri": "https://plugins.omega2ai.com/oauth/algolia.desktop/callback",
+    "registration": {
+      "client_name": "Omega",
+      "grant_types": [
+        "authorization_code",
+        "refresh_token"
+      ],
+      "redirect_uris": [
+        "https://plugins.omega2ai.com/oauth/algolia.desktop/callback"
+      ],
+      "response_types": [
+        "code"
+      ],
+      "scope": "",
+      "software_id": "org.omega2ai.desktop",
+      "token_endpoint_auth_method": "none"
+    },
+    "resource_origins": [
+      "https://mcp.algolia.com/mcp"
+    ]
+  },
+  {
+    "account_partition": "issuer_account",
+    "allowed_plugin_publishers": [
+      "com.postman"
+    ],
+    "app_publisher": "com.postman",
+    "authorization_flow": "authorization_code_pkce",
+    "authorization_issuer": "https://mcp.postman.com",
+    "client_mode": "dynamic_registration",
+    "profile_id": "postman.desktop",
+    "provider_id": "com.postman.postman-mcp-server",
+    "redirect_uri": "https://plugins.omega2ai.com/oauth/postman.desktop/callback",
+    "registration": {
+      "client_name": "Omega",
+      "grant_types": [
+        "authorization_code",
+        "refresh_token"
+      ],
+      "redirect_uris": [
+        "https://plugins.omega2ai.com/oauth/postman.desktop/callback"
+      ],
+      "response_types": [
+        "code"
+      ],
+      "scope": "",
+      "software_id": "org.omega2ai.desktop",
+      "token_endpoint_auth_method": "none"
+    },
+    "resource_origins": [
+      "https://mcp.eu.postman.com/minimal"
+    ]
+  },
+  {
+    "account_partition": "issuer_account",
+    "allowed_plugin_publishers": [
+      "com.intercom"
+    ],
+    "app_publisher": "com.intercom",
+    "authorization_flow": "authorization_code_pkce",
+    "authorization_issuer": "https://mcp.intercom.com",
+    "client_mode": "dynamic_registration",
+    "profile_id": "intercom.desktop",
+    "provider_id": "com.intercom.mcp",
+    "redirect_uri": "https://plugins.omega2ai.com/oauth/intercom.desktop/callback",
+    "registration": {
+      "client_name": "Omega",
+      "grant_types": [
+        "authorization_code",
+        "refresh_token"
+      ],
+      "redirect_uris": [
+        "https://plugins.omega2ai.com/oauth/intercom.desktop/callback"
+      ],
+      "response_types": [
+        "code"
+      ],
+      "scope": "",
+      "software_id": "org.omega2ai.desktop",
+      "token_endpoint_auth_method": "none"
+    },
+    "resource_origins": [
+      "https://mcp.intercom.com/mcp"
+    ]
+  },
+  {
+    "account_partition": "issuer_account",
+    "allowed_plugin_publishers": [
+      "omega.first_party"
+    ],
+    "app_publisher": "dev.sentry",
+    "authorization_flow": "authorization_code_pkce",
+    "authorization_issuer": "https://mcp.sentry.dev",
+    "client_mode": "dynamic_registration",
+    "profile_id": "sentry.desktop",
+    "provider_id": "dev.sentry.mcp",
+    "redirect_uri": "https://plugins.omega2ai.com/oauth/sentry.desktop/callback",
+    "registration": {
+      "client_name": "Omega",
+      "grant_types": [
+        "authorization_code",
+        "refresh_token"
+      ],
+      "redirect_uris": [
+        "https://plugins.omega2ai.com/oauth/sentry.desktop/callback"
+      ],
+      "response_types": [
+        "code"
+      ],
+      "scope": "org:read project:write team:write event:write",
+      "software_id": "org.omega2ai.desktop",
+      "token_endpoint_auth_method": "none"
+    },
+    "resource_origins": [
+      "https://mcp.sentry.dev/mcp"
+    ]
+  },
+  {
+    "account_partition": "issuer_account",
+    "allowed_plugin_publishers": [
+      "omega.first_party"
+    ],
+    "app_publisher": "com.cloudflare",
+    "authorization_flow": "authorization_code_pkce",
+    "authorization_issuer": "https://mcp.cloudflare.com",
+    "client_mode": "dynamic_registration",
+    "profile_id": "cloudflare.desktop",
+    "provider_id": "com.cloudflare.mcp",
+    "redirect_uri": "https://plugins.omega2ai.com/oauth/cloudflare.desktop/callback",
+    "registration": {
+      "client_name": "Omega",
+      "grant_types": [
+        "authorization_code",
+        "refresh_token"
+      ],
+      "redirect_uris": [
+        "https://plugins.omega2ai.com/oauth/cloudflare.desktop/callback"
+      ],
+      "response_types": [
+        "code"
+      ],
+      "scope": "account:read",
+      "software_id": "org.omega2ai.desktop",
+      "token_endpoint_auth_method": "none"
+    },
+    "resource_origins": [
+      "https://mcp.cloudflare.com/mcp"
+    ]
+  },
+  {
+    "account_partition": "issuer_account",
+    "allowed_plugin_publishers": [
+      "omega.first_party"
+    ],
+    "app_publisher": "tech.neon",
+    "authorization_flow": "authorization_code_pkce",
+    "authorization_issuer": "https://mcp.neon.tech",
+    "client_mode": "dynamic_registration",
+    "profile_id": "neon.desktop",
+    "provider_id": "tech.neon.mcp",
+    "redirect_uri": "https://plugins.omega2ai.com/oauth/neon.desktop/callback",
+    "registration": {
+      "client_name": "Omega",
+      "grant_types": [
+        "authorization_code",
+        "refresh_token"
+      ],
+      "redirect_uris": [
+        "https://plugins.omega2ai.com/oauth/neon.desktop/callback"
+      ],
+      "response_types": [
+        "code"
+      ],
+      "scope": "read write",
+      "software_id": "org.omega2ai.desktop",
+      "token_endpoint_auth_method": "none"
+    },
+    "resource_origins": [
+      "https://mcp.neon.tech/mcp"
+    ]
+  },
+  {
+    "account_partition": "issuer_account",
+    "allowed_plugin_publishers": [
+      "omega.first_party"
+    ],
+    "app_publisher": "com.netlify",
+    "authorization_flow": "authorization_code_pkce",
+    "authorization_issuer": "https://netlify-mcp.netlify.app/",
+    "client_mode": "dynamic_registration",
+    "profile_id": "netlify.desktop",
+    "provider_id": "com.netlify.mcp",
+    "redirect_uri": "https://plugins.omega2ai.com/oauth/netlify.desktop/callback",
+    "registration": {
+      "client_name": "Omega",
+      "grant_types": [
+        "authorization_code",
+        "refresh_token"
+      ],
+      "redirect_uris": [
+        "https://plugins.omega2ai.com/oauth/netlify.desktop/callback"
+      ],
+      "response_types": [
+        "code"
+      ],
+      "scope": "read write offline_access",
+      "software_id": "org.omega2ai.desktop",
+      "token_endpoint_auth_method": "none"
+    },
+    "resource_origins": [
+      "https://netlify-mcp.netlify.app/mcp"
+    ]
+  },
+  {
+    "account_partition": "issuer_account",
+    "allowed_plugin_publishers": [
+      "omega.first_party"
+    ],
+    "app_publisher": "com.canva",
+    "authorization_flow": "authorization_code_pkce",
+    "authorization_issuer": "https://mcp.canva.com",
+    "client_mode": "dynamic_registration",
+    "profile_id": "canva.desktop",
+    "provider_id": "com.canva.mcp",
+    "redirect_uri": "https://plugins.omega2ai.com/oauth/canva.desktop/callback",
+    "registration": {
+      "client_name": "Omega",
+      "grant_types": [
+        "authorization_code",
+        "refresh_token"
+      ],
+      "redirect_uris": [
+        "https://plugins.omega2ai.com/oauth/canva.desktop/callback"
+      ],
+      "response_types": [
+        "code"
+      ],
+      "scope": "",
+      "software_id": "org.omega2ai.desktop",
+      "token_endpoint_auth_method": "none"
+    },
+    "resource_origins": [
+      "https://mcp.canva.com/mcp"
+    ]
+  },
+  {
+    "account_partition": "issuer_account",
+    "allowed_plugin_publishers": [
+      "omega.first_party"
+    ],
+    "app_publisher": "io.github.miroapp",
+    "authorization_flow": "authorization_code_pkce",
+    "authorization_issuer": "https://mcp.miro.com/",
+    "client_mode": "dynamic_registration",
+    "profile_id": "miro.desktop",
+    "provider_id": "io.github.miroapp.mcp-server",
+    "redirect_uri": "https://plugins.omega2ai.com/oauth/miro.desktop/callback",
+    "registration": {
+      "client_name": "Omega",
+      "grant_types": [
+        "authorization_code",
+        "refresh_token"
+      ],
+      "redirect_uris": [
+        "https://plugins.omega2ai.com/oauth/miro.desktop/callback"
+      ],
+      "response_types": [
+        "code"
+      ],
+      "scope": "boards:read boards:write",
+      "software_id": "org.omega2ai.desktop",
+      "token_endpoint_auth_method": "none"
+    },
+    "resource_identifier": "https://mcp.miro.com/",
+    "resource_origins": [
+      "https://mcp.miro.com"
+    ]
+  },
+  {
+    "account_partition": "issuer_account",
+    "allowed_plugin_publishers": [
+      "omega.first_party"
+    ],
+    "app_publisher": "com.squareup",
+    "authorization_flow": "authorization_code_pkce",
+    "authorization_issuer": "https://mcp.squareup.com",
+    "client_mode": "dynamic_registration",
+    "profile_id": "square.desktop",
+    "provider_id": "com.squareup.mcp",
+    "redirect_uri": "https://plugins.omega2ai.com/oauth/square.desktop/callback",
+    "registration": {
+      "client_name": "Omega",
+      "grant_types": [
+        "authorization_code",
+        "refresh_token"
+      ],
+      "redirect_uris": [
+        "https://plugins.omega2ai.com/oauth/square.desktop/callback"
+      ],
+      "response_types": [
+        "code"
+      ],
+      "scope": "",
+      "software_id": "org.omega2ai.desktop",
+      "token_endpoint_auth_method": "none"
+    },
+    "resource_origins": [
+      "https://mcp.squareup.com/sse"
+    ]
+  },
+  {
+    "account_partition": "issuer_account",
+    "allowed_plugin_publishers": [
+      "omega.first_party"
+    ],
+    "app_publisher": "com.slack",
+    "authorization_flow": "authorization_code_pkce",
+    "authorization_issuer": "https://mcp.slack.com",
+    "client_mode": "hosted_bridge",
+    "profile_id": "slack.desktop",
+    "provider_id": "com.slack.mcp",
+    "redirect_uri": "https://plugins.omega2ai.com/oauth/slack.desktop/callback",
+    "registration_file": "registrations/slack-public.json",
+    "resource_identifier": "https://mcp.slack.com",
+    "resource_origins": [
+      "https://mcp.slack.com/mcp"
+    ]
+  }
+]

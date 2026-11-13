@@ -1,0 +1,33 @@
+# JSON Schema (YAML) — mandatory per-episode Omega configuration
+# Runtime contracts are defined in omega_loop/episode/types.py.
+
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "omega://schema/omega/v2"
+title: OmegaConfig
+
+definitions:
+  OmegaConfig:
+    type: object
+    required: [omega]
+    additionalProperties: false
+    properties:
+      omega:
+        type: object
+        required: [reason]
+        additionalProperties: false
+        properties:
+          reason:
+            type: object
+            required: [max_tokens, temperature, top_p, stop, timeout_s]
+            additionalProperties: false
+            properties:
+              max_tokens: { type: integer, minimum: 1 }
+              temperature: { type: number, minimum: 0, maximum: 2 }
+              top_p: { type: number, exclusiveMinimum: 0, maximum: 1 }
+              stop:
+                type: array
+                minItems: 1
+                items: { type: string, minLength: 1 }
+              timeout_s: { type: number, exclusiveMinimum: 0 }
+              chat_reflection_max_tokens: { type: integer, minimum: 1 }
+              chat_reflection_timeout_s: { type: number, exclusiveMinimum: 0 }

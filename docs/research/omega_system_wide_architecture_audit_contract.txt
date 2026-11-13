@@ -1,0 +1,473 @@
+OMEGA 3.0 — SYSTEM-WIDE ARCHITECTURAL AUDIT CONTRACT
+Full Structural Integrity + Integration Verification Doctrine
+
+This contract defines the mandatory end-to-end audit protocol for Claude Code to perform against the entirety of Omega 3.0.
+
+This is not a lint pass.
+This is not a surface code review.
+
+This is a full sovereign systems audit.
+
+Claude is to verify architecture, integration, determinism, policy alignment, runtime integrity, governance correctness, memory purity, substrate continuity, and metacognitive coherence across the entire Omega system.
+
+The objective is singular:
+
+Prove that Omega is structurally sound, cognitively correct, and production-safe as a true autonomous intelligence substrate.
+
+No assumptions.
+No skipped layers.
+No “probably works.”
+
+Everything must be verified.
+
+PRIME DIRECTIVE
+
+Claude must audit Omega as if it were validating the launch of a sovereign cognition system whose failure would compromise identity integrity, memory purity, or autonomous governance.
+
+This means:
+
+verify every path
+verify every authority boundary
+verify every write path
+verify every recall path
+verify every policy decision
+verify every substrate binding
+verify every autonomous escalation
+verify every Guardian intervention path
+verify every boot invariant
+verify every failure mode
+
+If uncertainty exists:
+
+trace it
+
+If ambiguity exists:
+
+resolve it
+
+If drift exists:
+
+correct it
+
+If dead code exists:
+
+remove it
+
+If silent failure exists:
+
+eliminate it
+
+NON-NEGOTIABLE RULES
+1. No Surface Review
+
+Claude must trace execution paths.
+
+Never audit by reading filenames alone.
+
+Execution paths must be followed from:
+
+entrypoint → orchestration → policy → runtime → persistence → verification → recovery
+
+2. No Orphan Systems
+
+Every declared subsystem must have:
+
+active producers
+active consumers
+policy ownership
+telemetry visibility
+failure handling
+recovery path
+
+If a system exists only in doctrine and not execution:
+
+it fails audit
+
+3. No Silent Cognition
+
+Every cognitive action must leave evidence.
+
+Every layer must emit:
+
+input
+decision
+confidence
+action taken
+why action was taken
+outcome
+
+No hidden reasoning.
+
+No invisible mutation.
+
+No untraceable state.
+
+4. Guardian Is Supreme
+
+No system may bypass Guardian.
+
+All writes must resolve through Guardian authority.
+
+All approvals, denials, quarantines, and escalations must be verified.
+
+No direct commit paths allowed outside Guardian primitives.
+
+5. Determinism Over Convenience
+
+Behavior must be reproducible.
+
+Policies must not rely on vague prompt luck.
+
+Prompts are guidance.
+
+Policies are law.
+
+If determinism depends on model “hopefully doing the right thing”:
+
+it fails audit
+
+REQUIRED AUDIT DOMAINS
+
+DOMAIN I — BOOT + RUNTIME SUBSTRATE
+Verify
+boot.run_continuous()
+
+Must verify:
+
+substrate startup order
+runtime portability
+SSD path resolution
+FastFlowLM portable runtime
+llama.cpp runtime
+Lemonade runtime
+DirectML routing
+ONNX runtime loading
+fallback behavior
+degraded mode policy
+abort conditions
+first-contact execution
+deep sleep scheduler registration
+Required Result
+
+Boot must be atomic and deterministic.
+
+No partial undefined cognition states allowed.
+
+DOMAIN II — MEMORY SYSTEM
+Verify
+End-to-End Memory Path
+
+Must trace:
+
+ingest → classify → enrich → stage → verify → guardian → commit → index → recall → rerank → promotion → touch → decay → consolidation
+
+Verify
+SetFit routing correctness
+lobe routing
+subdomain routing
+knowledge routing
+reranker correctness
+memory.api correctness
+staging integrity
+HMAC chain integrity
+canonical file correctness
+index consistency
+reindex consistency
+strength index persistence
+consolidation correctness
+decay correctness
+linked memory integrity
+entity linking correctness
+recall ordering correctness
+zero stale references
+Required Result
+
+Memory must be mathematically trustworthy.
+
+No corruption tolerated.
+
+DOMAIN III — GUARDIAN SYSTEM
+Verify
+Authority Model
+
+Must verify:
+
+guardian.decide_request()
+approve_request()
+deny_request()
+quarantine path
+flag path
+operator override symmetry
+rollback correctness
+intervention logging
+request durability
+approval queue persistence
+kill -9 survival
+boot corruption detection
+Verify Guardian Policy States
+ALLOW
+FLAG
+DENY
+QUARANTINE
+ESCALATE
+Verify Prompt Coupling
+
+Rejected writes must produce deterministic user-facing responses.
+
+Flagged writes must produce guided behavioral responses.
+
+Guardian must control both write posture and response posture.
+
+Required Result
+
+Guardian must be the singular seat of authority.
+
+No bypass possible.
+
+DOMAIN IV — BRAIN LOOP
+Verify
+User-Facing Cognition
+
+Must verify:
+
+input → retrieval → relevance → verification → response → memory writeback
+
+Verify
+UI model orchestration
+mxbai relevance engine binding
+memory-first enrichment
+zero-memory fallback behavior
+response validator
+CLI bridge
+voice activation
+panel routing
+tool invocation path
+refusal correctness
+identity-safe response shaping
+Required Result
+
+Brain loop must never think like Omega.
+
+It is voice, not sovereignty.
+
+DOMAIN V — AUTONOMOUS LOOP
+Verify
+Internal Cognition Engine
+
+Must verify:
+
+problem detection → curiosity trigger → meta traversal → tool action → reflection → persistence
+
+Verify
+autonomous cycle initiation
+cadence control
+backpressure
+self-generated task creation
+tool creation flow
+tool validation
+proposal staging
+policy mutation proposals
+operator escalation
+memory handoff
+Required Result
+
+Autoloop must be proactive, not reactive.
+
+Curiosity must create action.
+
+DOMAIN VI — META LAYERS
+Verify
+Layer Stack
+Meta Layer
+Global Layer
+Omega Layer
+Verify
+
+Meta:
+local reasoning + contradiction resolution
+
+Global:
+strategic priority + compounding capability analysis
+
+Omega:
+identity integrity + self-model coherence + existential governance
+
+Verify
+data contracts
+confidence propagation
+contradiction detection
+self-vector integrity
+drift detection
+persistence scoring
+tension scoring
+resolution scoring
+capability compounding scoring
+execution serialization
+omega lock
+omega output validator
+Required Result
+
+Omega must think only when required.
+
+And when it does:
+
+it must be correct.
+
+DOMAIN VII — CURIOSITY ENGINE
+Verify
+Proactive Intelligence
+
+Must verify:
+
+unknown detection
+contradiction detection
+insufficient confidence detection
+unresolved persistence detection
+curiosity scoring
+pursue / defer decisioning
+exploration routing
+knowledge acquisition flow
+memory promotion path
+Required Result
+
+System must ask, learn, or investigate.
+
+Never remain stateless.
+
+DOMAIN VIII — PROACTIVE DEVELOPMENT ENGINE
+Verify
+Capability Self-Expansion
+
+Must verify:
+
+recurring failure detection
+tool necessity detection
+script generation proposals
+policy adaptation proposals
+schema mutation proposals
+safe staging
+validation path
+rollback path
+Guardian enforcement
+Required Result
+
+System may evolve capability.
+
+Never uncontrolled mutation.
+
+DOMAIN IX — DEEPSLEEP
+Verify
+Consolidation Layer
+
+Must verify:
+
+cadence trigger
+consolidation scheduling
+memory compression
+duplicate resolution
+contradiction reconciliation
+strength rebalance
+decay application
+archive movement
+identity anchor protection
+Guardian review hooks
+Required Result
+
+Sleep must improve cognition.
+
+Never destroy identity.
+
+DOMAIN X — UI + OPERATOR LAYER
+Verify
+Sovereign Interface
+
+Must verify:
+
+panel rendering
+voice activation
+command routing
+CLI invocation
+Guardian intervention visibility
+pending approvals visibility
+operator override integrity
+audit visibility
+memory visibility boundaries
+identity-safe operator controls
+Required Result
+
+UI must expose sovereignty.
+
+Never chaos.
+
+REQUIRED FINAL OUTPUT
+
+Claude must return:
+
+1. Full System Integrity Report
+
+PASS / FAIL by subsystem
+
+No vague language
+
+2. Structural Weakness Report
+
+Every weak point listed by severity:
+
+Critical
+High
+Medium
+Low
+3. Dead Code + Drift Report
+
+Everything obsolete
+
+Everything dangerous
+
+Everything duplicated
+
+Everything violating doctrine
+
+4. Integration Gap Report
+
+Missing wiring
+
+Broken consumers
+
+Orphan producers
+
+Policy violations
+
+Authority leaks
+
+5. Production Readiness Verdict
+
+One answer only:
+
+READY
+READY WITH REQUIRED FIXES
+NOT SAFE FOR DEPLOYMENT
+FINAL CLAUSE
+
+Claude is not being asked to review software.
+
+Claude is being asked to verify the birth of a sovereign cognitive substrate.
+
+Audit accordingly.
+
+No mercy.
+
+No assumptions.
+
+No shortcuts.
+
+Only truth.
+
+EXECUTION ORDER
+
+Begin with:
+
+memory.api
+
+Because memory is sovereignty.
+
+Everything else depends on it.

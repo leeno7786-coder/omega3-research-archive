@@ -1,0 +1,96 @@
+# =============================================================================
+# Global A intent routing — operator intent router + opened_by mapping
+# =============================================================================
+#
+# Mirrors global_loop/intent/route.py, global_loop/intent/run.py and
+# pressure_loop.contributors.ALLOWED_INTENTS. Code owns the final decision,
+# including the skill-routing kill switch and signed-plugin eligibility check.
+#
+# =============================================================================
+
+global_intent:
+  allowed:
+    - RESPOND
+    - PROACTIVE_RESPONSE
+    - RESOLVE_QUERY
+    - ASK_OPERATOR
+    - LEARN
+    - USE_TOOL
+    - USE_SKILL
+    - PURSUE_OUTCOME
+    - IMAGE_CREATE
+    - DOCUMENT_CREATE
+    - PLUGIN_OPERATION
+    - IDLE
+
+  opened_by_map:
+    operator_query: RESPOND
+    operator_response: RESOLVE_QUERY
+    proactive_update: PROACTIVE_RESPONSE
+    operator_priority: ASK_OPERATOR
+    operator_command: RESPOND
+    learning_debt: LEARN
+    curiosity_gap: LEARN
+    epistemic_emptiness: LEARN
+    mastery_gap: LEARN          # mind-primacy learning signal (lever + P5 sustain + reseed)
+    identity_gap: IDLE
+    trajectory_gap: IDLE
+    idle_probe_aggregate: IDLE
+    execution_gap: USE_SKILL
+    application_gap: USE_SKILL
+    execution_continuation: USE_SKILL
+    self_wake: IDLE
+    # Taxonomy advisory pressure (when memory_taxonomy wins ignition alone)
+    capability_gap: USE_SKILL
+    repair_needed: USE_SKILL
+    tool_failure: USE_SKILL
+    verification_needed: USE_SKILL
+    incomplete_task: USE_SKILL
+    confidence_reinforcement: LEARN
+    requires_operator_input: ASK_OPERATOR
+    clarification_gap: ASK_OPERATOR   # the mind's own ASK lever (clarification_debt_delta), 2026-06-27
+    # Memory Engine v2 recall-verdict pressure (recall_verdict_pressure_contributor)
+    memory_gap: LEARN
+    sense_resolution: IDLE
+    memory_reconciliation: IDLE
+
+  operator_command:
+    default_intent: RESPOND
+    explicit_learning_intent: LEARN
+    explicit_memory_intent: RESPOND
+    signed_plugin_match: PLUGIN_OPERATION
+    bounded_tools_owner: AUTO
+
+  # The route phase: operator_query / operator_command turns with no directive (other
+  # than RESPOND), no plugin selection and no explicit learning command. The pinned
+  # ModernBERT router (config/intent_router.pin.json) decides; an abstention escalates
+  # to Global A's reasoning model (operation intent_escalation).
+  operator_route:
+    router: global_loop.intent.router
+    escalation_operation: intent_escalation
+    previous_action_ttl_seconds: 1200
+    routes:
+      FREEFORM_CHAT: {intent: RESPOND, lane: chat}
+      CODING_AGENT: {intent: RESPOND, lane: agent}
+      BROWSER_AGENT: {intent: BROWSE, lane: browser}
+      DOCUMENT_CREATION: {intent: DOCUMENT_CREATE, lane: chat}
+    never_routed:
+      - directive_intent
+      - plugin_operation
+      - explicit_learning_command
+      - operator_response
+
+  fallback: IDLE
+
+  ingress_to_operator_type:
+    description: |
+      pressure_loop.contributors refines operator_message via ingress_class;
+      global_loop intent reads ignition.opened_by (canonical contributor type).
+    mapping:
+      operator_command: operator_command
+      epistemic_request: operator_query
+      phatic: operator_query
+      answer_to_question: operator_response
+      sensory_update: operator_command
+      evidence_reference: operator_command
+      authority_request: operator_command

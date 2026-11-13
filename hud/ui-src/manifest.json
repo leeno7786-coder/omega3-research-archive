@@ -1,0 +1,334 @@
+{
+  "version": 1,
+  "description": "Modular HUD source — bundle to hud/omega_interface.html",
+  "shell_file": "shell.html",
+  "inject_marker_start": "// HUD_UI_SRC:INJECT_PANELS_START",
+  "inject_marker_end": "// HUD_UI_SRC:INJECT_PANELS_END",
+  "register_inject_marker_start": "// HUD_UI_SRC:INJECT_REGISTER_START",
+  "register_inject_marker_end": "// HUD_UI_SRC:INJECT_REGISTER_END",
+  "core_inject_marker_start": "// HUD_UI_SRC:INJECT_CORE_START",
+  "core_inject_marker_end": "// HUD_UI_SRC:INJECT_CORE_END",
+  "core_inject_indent": 6,
+  "boot_inject_marker_start": "// HUD_UI_SRC:INJECT_BOOT_START",
+  "boot_inject_marker_end": "// HUD_UI_SRC:INJECT_BOOT_END",
+  "boot_inject_indent": 4,
+  "telemetry_inject_marker_start": "// HUD_UI_SRC:INJECT_TELEMETRY_START",
+  "telemetry_inject_marker_end": "// HUD_UI_SRC:INJECT_TELEMETRY_END",
+  "telemetry_inject_indent": 4,
+  "chat_feed_inject_marker_start": "// HUD_UI_SRC:INJECT_CHAT_FEED_START",
+  "chat_feed_inject_marker_end": "// HUD_UI_SRC:INJECT_CHAT_FEED_END",
+  "chat_feed_inject_indent": 4,
+  "chat_wiring_inject_marker_start": "// HUD_UI_SRC:INJECT_CHAT_WIRING_START",
+  "chat_wiring_inject_marker_end": "// HUD_UI_SRC:INJECT_CHAT_WIRING_END",
+  "chat_wiring_inject_indent": 6,
+  "canvas_live_inject_marker_start": "// HUD_UI_SRC:INJECT_CANVAS_LIVE_START",
+  "canvas_live_inject_marker_end": "// HUD_UI_SRC:INJECT_CANVAS_LIVE_END",
+  "canvas_live_inject_indent": 4,
+  "live_chrome_inject_marker_start": "// HUD_UI_SRC:INJECT_LIVE_CHROME_START",
+  "live_chrome_inject_marker_end": "// HUD_UI_SRC:INJECT_LIVE_CHROME_END",
+  "live_chrome_inject_indent": 4,
+  "live_composer_inject_marker_start": "// HUD_UI_SRC:INJECT_LIVE_COMPOSER_START",
+  "live_composer_inject_marker_end": "// HUD_UI_SRC:INJECT_LIVE_COMPOSER_END",
+  "live_composer_inject_indent": 4,
+  "live_sse_inject_marker_start": "// HUD_UI_SRC:INJECT_LIVE_SSE_START",
+  "live_sse_inject_marker_end": "// HUD_UI_SRC:INJECT_LIVE_SSE_END",
+  "live_sse_inject_indent": 0,
+  "live_atmos_inject_marker_start": "// HUD_UI_SRC:INJECT_LIVE_ATMOS_START",
+  "live_atmos_inject_marker_end": "// HUD_UI_SRC:INJECT_LIVE_ATMOS_END",
+  "live_atmos_inject_indent": 6,
+  "live_vision_inject_marker_start": "// HUD_UI_SRC:INJECT_LIVE_VISION_START",
+  "live_vision_inject_marker_end": "// HUD_UI_SRC:INJECT_LIVE_VISION_END",
+  "live_vision_inject_indent": 6,
+  "voice_runtime_inject_marker_start": "// HUD_UI_SRC:INJECT_VOICE_RUNTIME_START",
+  "voice_runtime_inject_marker_end": "// HUD_UI_SRC:INJECT_VOICE_RUNTIME_END",
+  "voice_runtime_inject_indent": 4,
+  "vision_runtime_inject_marker_start": "// HUD_UI_SRC:INJECT_VISION_RUNTIME_START",
+  "vision_runtime_inject_marker_end": "// HUD_UI_SRC:INJECT_VISION_RUNTIME_END",
+  "vision_runtime_inject_indent": 4,
+  "canvas_panels_inject_marker_start": "// HUD_UI_SRC:INJECT_CANVAS_PANELS_START",
+  "canvas_panels_inject_marker_end": "// HUD_UI_SRC:INJECT_CANVAS_PANELS_END",
+  "canvas_panels_inject_indent": 4,
+  "vision_facewatch_inject_marker_start": "// HUD_UI_SRC:INJECT_VISION_FACEWATCH_START",
+  "vision_facewatch_inject_marker_end": "// HUD_UI_SRC:INJECT_VISION_FACEWATCH_END",
+  "vision_facewatch_inject_indent": 6,
+  "voice_kokoro_inject_marker_start": "// HUD_UI_SRC:INJECT_VOICE_KOKORO_START",
+  "voice_kokoro_inject_marker_end": "// HUD_UI_SRC:INJECT_VOICE_KOKORO_END",
+  "voice_kokoro_inject_indent": 6,
+  "voice_stt_inject_marker_start": "// HUD_UI_SRC:INJECT_VOICE_STT_START",
+  "voice_stt_inject_marker_end": "// HUD_UI_SRC:INJECT_VOICE_STT_END",
+  "voice_stt_inject_indent": 6,
+  "voice_wake_inject_marker_start": "// HUD_UI_SRC:INJECT_VOICE_WAKE_START",
+  "voice_wake_inject_marker_end": "// HUD_UI_SRC:INJECT_VOICE_WAKE_END",
+  "voice_wake_inject_indent": 6,
+  "omega_ui_inject_marker_start": "// HUD_UI_SRC:INJECT_OMEGA_UI_START",
+  "omega_ui_inject_marker_end": "// HUD_UI_SRC:INJECT_OMEGA_UI_END",
+  "omega_ui_inject_indent": 4,
+  "panel_fx_inject_marker_start": "// HUD_UI_SRC:INJECT_PANEL_FX_START",
+  "panel_fx_inject_marker_end": "// HUD_UI_SRC:INJECT_PANEL_FX_END",
+  "panel_fx_inject_indent": 4,
+  "memory_graph_inject_marker_start": "// HUD_UI_SRC:INJECT_MEMORY_GRAPH_START",
+  "memory_graph_inject_marker_end": "// HUD_UI_SRC:INJECT_MEMORY_GRAPH_END",
+  "memory_graph_inject_indent": 4,
+  "side_drawer_inject_marker_start": "// HUD_UI_SRC:INJECT_SIDE_DRAWER_START",
+  "side_drawer_inject_marker_end": "// HUD_UI_SRC:INJECT_SIDE_DRAWER_END",
+  "side_drawer_inject_indent": 4,
+  "canvas_inject_marker_start": "// HUD_UI_SRC:INJECT_CANVAS_START",
+  "canvas_inject_marker_end": "// HUD_UI_SRC:INJECT_CANVAS_END",
+  "core": [
+    {
+      "id": "mermaid-lite",
+      "file": "core/mermaid-lite.js"
+    },
+    {
+      "id": "boot",
+      "file": "core/boot.js",
+      "inject": "boot"
+    },
+    {
+      "id": "chat-renderer",
+      "file": "core/chat-renderer.js"
+    },
+    {
+      "id": "speech-text",
+      "file": "core/speech-text.js"
+    },
+    {
+      "id": "telemetry",
+      "file": "core/telemetry.js",
+      "inject": "telemetry"
+    },
+    {
+      "id": "chat-feed",
+      "file": "core/chat-feed.js",
+      "inject": "chat_feed"
+    },
+    {
+      "id": "plugin-api",
+      "file": "core/plugin-api.js",
+      "inject": "chat_feed"
+    },
+    {
+      "id": "plugin-store",
+      "file": "core/plugin-store.js",
+      "inject": "chat_feed"
+    },
+    {
+      "id": "plugin-setup",
+      "file": "core/plugin-setup.js",
+      "inject": "chat_feed"
+    },
+    {
+      "id": "plugin-permissions",
+      "file": "core/plugin-permissions.js",
+      "inject": "chat_feed"
+    },
+    {
+      "id": "plugin-views",
+      "file": "core/plugin-views.js",
+      "inject": "chat_feed"
+    },
+    {
+      "id": "live-chrome",
+      "file": "core/live-wiring.js",
+      "inject": "live_chrome",
+      "section": "chrome"
+    },
+    {
+      "id": "canvas-live",
+      "file": "core/canvas-live.js",
+      "inject": "canvas_live"
+    },
+    {
+      "id": "poll-status",
+      "file": "core/poll-status.js"
+    },
+    {
+      "id": "poll-telemetry",
+      "file": "core/poll-telemetry.js"
+    },
+    {
+      "id": "poll-v2",
+      "file": "core/poll-v2.js"
+    },
+    {
+      "id": "poll-pipelines",
+      "file": "core/poll-pipelines.js"
+    },
+    {
+      "id": "polling",
+      "file": "core/polling.js"
+    },
+    {
+      "id": "chat-wiring",
+      "file": "core/chat-wiring.js",
+      "inject": "chat_wiring"
+    },
+    {
+      "id": "plugin-composer",
+      "file": "core/plugin-composer.js",
+      "inject": "chat_wiring"
+    },
+    {
+      "id": "live-composer",
+      "file": "core/live-wiring.js",
+      "inject": "live_composer",
+      "section": "composer"
+    },
+    {
+      "id": "live-sse",
+      "file": "core/live-wiring.js",
+      "inject": "live_sse",
+      "section": "sse"
+    },
+    {
+      "id": "live-atmos",
+      "file": "core/live-wiring.js",
+      "inject": "live_atmos",
+      "section": "atmos"
+    },
+    {
+      "id": "live-vision",
+      "file": "core/live-wiring.js",
+      "inject": "live_vision",
+      "section": "vision"
+    },
+    {
+      "id": "voice-runtime",
+      "file": "core/voice-runtime.js",
+      "inject": "voice_runtime",
+      "section": "voice"
+    },
+    {
+      "id": "vision-runtime",
+      "file": "core/vision-runtime.js",
+      "inject": "vision_runtime",
+      "section": "vision"
+    },
+    {
+      "id": "voice-kokoro",
+      "file": "core/voice-runtime.js",
+      "inject": "voice_kokoro",
+      "section": "kokoro"
+    },
+    {
+      "id": "voice-stt",
+      "file": "core/voice-runtime.js",
+      "inject": "voice_stt",
+      "section": "stt"
+    },
+    {
+      "id": "voice-live",
+      "file": "core/voice-live.js",
+      "inject": "voice_stt"
+    },
+    {
+      "id": "voice-wake",
+      "file": "core/voice-runtime.js",
+      "inject": "voice_wake",
+      "section": "wake"
+    },
+    {
+      "id": "vision-facewatch",
+      "file": "core/vision-runtime.js",
+      "inject": "vision_facewatch",
+      "section": "facewatch"
+    },
+    {
+      "id": "canvas-panels",
+      "file": "core/canvas-panels.js",
+      "inject": "canvas_panels"
+    },
+    {
+      "id": "omega-ui",
+      "file": "core/omega-ui.js",
+      "inject": "omega_ui"
+    },
+    {
+      "id": "panel-fx",
+      "file": "core/panel-fx.js",
+      "inject": "panel_fx"
+    },
+    {
+      "id": "memory-graph",
+      "file": "core/memory-graph.js",
+      "inject": "memory_graph"
+    },
+    {
+      "id": "side-drawer",
+      "file": "core/side-drawer.js",
+      "inject": "side_drawer"
+    }
+  ],
+  "canvas": [
+    {
+      "id": "canvas",
+      "file": "core/canvas.js"
+    },
+    {
+      "id": "renderers-dashboards",
+      "file": "core/renderers-dashboards.js"
+    },
+    {
+      "id": "canvas-heroes",
+      "file": "core/canvas-heroes.js"
+    }
+  ],
+  "pending_core": [],
+  "panels": [
+    {
+      "id": "help",
+      "file": "panels/help.js",
+      "title": "help<em>.</em>",
+      "cmd": "omega, help"
+    },
+    {
+      "id": "proactive_pinboard",
+      "file": "panels/system_messages.js",
+      "title": "",
+      "cmd": ""
+    },
+    {
+      "id": "settings_theme",
+      "file": "panels/settings-theme.js",
+      "title": "",
+      "cmd": ""
+    },
+    {
+      "id": "settings_markup",
+      "file": "panels/settings-markup.js",
+      "title": "",
+      "cmd": ""
+    },
+    {
+      "id": "settings_proactive_history",
+      "file": "panels/settings-proactive-history.js",
+      "title": "",
+      "cmd": ""
+    },
+    {
+      "id": "settings_plugins",
+      "file": "panels/settings-plugins.js",
+      "title": "",
+      "cmd": ""
+    },
+    {
+      "id": "settings_wire",
+      "file": "panels/settings-wire.js",
+      "title": "",
+      "cmd": ""
+    },
+    {
+      "id": "settings",
+      "file": "panels/settings.js",
+      "title": "settings<em>.</em>",
+      "cmd": "omega, open settings"
+    },
+    {
+      "id": "pipelines_panel",
+      "file": "panels/pipelines.js",
+      "title": "pipelines<em>.</em>",
+      "cmd": "omega, open pipelines"
+    }
+  ],
+  "pending_panels": []
+}

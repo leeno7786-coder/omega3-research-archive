@@ -1,0 +1,46 @@
+# =============================================================================
+# Tool registry — routing metadata (runtime sockets in config/runtime.yaml)
+# =============================================================================
+#
+# Authority: pressure_loop.policy (tool_registry, meta capability map)
+# Model-backed tools: socket endpoint/method/capability from runtime.yaml
+#
+# =============================================================================
+
+tools:
+  web_fetch: {}
+  file_reader: {}
+  desktop_tool: {}
+  ocr_tool: {}
+
+  vision_reasoning_tool:
+    runtime: true
+    capabilities:
+      - image_understanding
+      - video_understanding
+      - scene_analysis
+      - object_localization
+      - spatial_reasoning
+      - temporal_reasoning
+      - robotics_planning
+
+  image_tool:
+    runtime: true
+    capabilities:
+      - image_generation
+
+  document_tool:
+    runtime: false
+    capabilities:
+      - document_generation
+
+  face_tool:
+    runtime: true
+    capabilities:
+      - detect_faces
+      - identify_faces
+      - face_similarity
+      - age_estimation
+      - gender_estimation
+      - landmark_detection
+      - head_pose_estimation

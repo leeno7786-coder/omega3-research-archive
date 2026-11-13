@@ -1,0 +1,116 @@
+{
+  "servers": [
+    {
+      "server": {
+        "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+        "name": "io.github.example/weather",
+        "title": "Weather",
+        "description": "Weather forecasts and severe weather alerts.",
+        "version": "1.4.0",
+        "websiteUrl": "https://weather.example.com/docs",
+        "repository": {
+          "url": "https://github.com/example/weather",
+          "source": "github",
+          "id": "d4b0f9e2-1c7a-4f3b-9f2c-6b1a2c3d4e5f"
+        },
+        "packages": [
+          {
+            "registryType": "npm",
+            "registryBaseUrl": "https://registry.npmjs.org",
+            "identifier": "@example/weather-mcp",
+            "version": "1.4.0",
+            "runtimeHint": "npx",
+            "transport": {"type": "stdio"},
+            "environmentVariables": [
+              {
+                "name": "WEATHER_API_KEY",
+                "description": "API key for the weather service",
+                "isRequired": true,
+                "isSecret": true
+              },
+              {
+                "name": "WEATHER_UNITS",
+                "description": "Temperature units",
+                "default": "celsius"
+              }
+            ]
+          }
+        ],
+        "remotes": [
+          {
+            "type": "streamable-http",
+            "url": "https://mcp.weather.example.com/mcp",
+            "headers": [
+              {
+                "name": "X-Api-Key",
+                "description": "API key for the hosted endpoint",
+                "isRequired": true,
+                "isSecret": true
+              }
+            ]
+          }
+        ],
+        "_meta": {
+          "io.modelcontextprotocol.registry/publisher-provided": {
+            "tool": "ci-publisher",
+            "version": "3.2.1"
+          }
+        }
+      },
+      "_meta": {
+        "io.modelcontextprotocol.registry/official": {
+          "status": "active",
+          "publishedAt": "2026-08-01T10:30:00Z",
+          "updatedAt": "2026-08-01T10:30:00Z",
+          "isLatest": true
+        }
+      }
+    },
+    {
+      "server": {
+        "name": "com.example.analytics/reports",
+        "title": "ACME Analytics",
+        "description": "Business reporting over a hosted MCP endpoint.",
+        "version": "2.0.0",
+        "remotes": [
+          {"type": "sse", "url": "https://analytics.example.com/sse"}
+        ]
+      },
+      "_meta": {
+        "io.modelcontextprotocol.registry/official": {
+          "status": "active",
+          "publishedAt": "2026-07-14T08:00:00Z",
+          "isLatest": true
+        }
+      }
+    },
+    {
+      "server": {
+        "name": "io.github.example/weather",
+        "description": "A superseded weather release that is no longer current.",
+        "version": "0.9.0",
+        "packages": [
+          {
+            "registryType": "pypi",
+            "registryBaseUrl": "https://pypi.org",
+            "identifier": "weather-mcp-server",
+            "version": "0.9.0",
+            "runtimeHint": "uvx",
+            "transport": {"type": "stdio"}
+          }
+        ]
+      },
+      "_meta": {
+        "io.modelcontextprotocol.registry/official": {
+          "status": "deprecated",
+          "publishedAt": "2026-02-01T00:00:00Z",
+          "isLatest": false
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "count": 3,
+    "nextCursor": "io.github.example/weather:0.9.0"
+  }
+}

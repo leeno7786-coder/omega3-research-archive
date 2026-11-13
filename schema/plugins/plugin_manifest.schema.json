@@ -1,0 +1,911 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Structural signed plugin manifest shape. Cross-object capability, app, schedule, and entry-point invariants are enforced by plugin_platform.contracts.",
+  "$ref": "#/$defs/manifest",
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._+-]*(?![\\s\\S])"
+    },
+    "extensionName": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._+-]*/[A-Za-z0-9][A-Za-z0-9._+-]*(?![\\s\\S])"
+    },
+    "semver": {
+      "type": "string",
+      "pattern": "^(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)\\.(?:0|[1-9][0-9]*)(?:-(?:0|[1-9][0-9]*|[0-9A-Za-z-]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9A-Za-z-]*[A-Za-z-][0-9A-Za-z-]*))*)?(?:\\+[0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*)?(?![\\s\\S])"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}(?![\\s\\S])"
+    },
+    "path": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!\\s)(?!.*\\s(?![\\s\\S]))(?!.*:)(?!/)(?!.*\\\\)(?!.*(?:^|/)\\.\\.?(?:/|(?![\\s\\S])))(?!.*(?:^|/)(?:[Cc][Oo][Nn]|[Pp][Rr][Nn]|[Aa][Uu][Xx]|[Nn][Uu][Ll]|[Cc][Oo][Mm][1-9]|[Ll][Pp][Tt][1-9])(?:\\.[^/]*)?(?:/|(?![\\s\\S])))[^\\u0000-\\u001f\\u007f]+(?![\\s\\S])"
+    },
+    "stableString": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!\\s)(?!.*\\s(?![\\s\\S]))[^\\u0000-\\u001f\\u007f]+(?![\\s\\S])"
+    },
+    "httpsOrigin": {
+      "type": "string",
+      "pattern": "^https://[a-z0-9](?:[a-z0-9-]*[a-z0-9])?(?:\\.[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)*(?::(?!(?:443)(?![0-9]))(?:[1-9][0-9]{0,3}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5]))?(?:/(?!\\.{1,2}(?:/|$))[A-Za-z0-9._~-]+(?:/(?!\\.{1,2}(?:/|$))[A-Za-z0-9._~-]+)*/?)?(?![\\s\\S])"
+    },
+    "httpsIssuer": {
+      "type": "string",
+      "pattern": "^https://[a-z0-9](?:[a-z0-9-]*[a-z0-9])?(?:\\.[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)*(?::(?!(?:443)(?![0-9]))(?:[1-9][0-9]{0,3}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5]))?(?:/(?=[A-Za-z0-9._~-]*[A-Za-z0-9_~-])[A-Za-z0-9._~-]+)*/?(?![\\s\\S])"
+    },
+    "capability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "name",
+        "schema_sha256",
+        "version"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "tool",
+            "prompt",
+            "resource",
+            "extension"
+          ]
+        },
+        "name": {
+          "type": "string"
+        },
+        "schema_sha256": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/sha256"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "version": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/semver"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "extension"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "name": {
+                "$ref": "#/$defs/extensionName"
+              }
+            }
+          },
+          "else": {
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "resource"
+                }
+              },
+              "required": [
+                "kind"
+              ]
+            },
+            "then": {
+              "properties": {
+                "name": {
+                  "allOf": [
+                    {
+                      "$ref": "#/$defs/capabilityLabel"
+                    },
+                    {
+                      "not": {
+                        "const": "io.modelcontextprotocol/tasks"
+                      }
+                    }
+                  ]
+                },
+                "version": {
+                  "type": "null"
+                }
+              }
+            },
+            "else": {
+              "properties": {
+                "name": {
+                  "$ref": "#/$defs/identifier"
+                },
+                "version": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "extension"
+              },
+              "name": {
+                "const": "io.modelcontextprotocol/tasks"
+              }
+            },
+            "required": [
+              "kind",
+              "name"
+            ]
+          },
+          "then": {
+            "properties": {
+              "version": {
+                "type": "null"
+              }
+            }
+          },
+          "else": {
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "extension"
+                }
+              },
+              "required": [
+                "kind"
+              ]
+            },
+            "then": {
+              "properties": {
+                "version": {
+                  "$ref": "#/$defs/semver"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "secretField": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "field_id",
+        "label",
+        "secret",
+        "required"
+      ],
+      "properties": {
+        "field_id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "label": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/stableString"
+            },
+            {
+              "maxLength": 160
+            }
+          ]
+        },
+        "secret": {
+          "type": "boolean"
+        },
+        "required": {
+          "type": "boolean"
+        }
+      }
+    },
+    "authentication": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "scopes",
+        "secret_fields"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "none",
+            "oauth_authorization_code_pkce",
+            "oauth_device_code",
+            "oauth_client_metadata_document",
+            "api_key",
+            "bearer_token",
+            "basic",
+            "declared_secret_fields"
+          ]
+        },
+        "scopes": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/stableString"
+          }
+        },
+        "secret_fields": {
+          "type": "array",
+          "uniqueItems": true,
+          "x-omega-uniqueBy": "field_id",
+          "items": {
+            "$ref": "#/$defs/secretField"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "oauth_authorization_code_pkce",
+                  "oauth_device_code",
+                  "oauth_client_metadata_document"
+                ]
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "properties": {
+              "scopes": {
+                "minItems": 1
+              },
+              "secret_fields": {
+                "maxItems": 0
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "scopes": {
+                "maxItems": 0
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "none"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "properties": {
+              "secret_fields": {
+                "maxItems": 0
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "api_key"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "properties": {
+              "secret_fields": {
+                "minItems": 1,
+                "maxItems": 1,
+                "prefixItems": [
+                  {
+                    "properties": {
+                      "field_id": {
+                        "const": "api_key"
+                      },
+                      "secret": {
+                        "const": true
+                      },
+                      "required": {
+                        "const": true
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "bearer_token"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "properties": {
+              "secret_fields": {
+                "minItems": 1,
+                "maxItems": 1,
+                "prefixItems": [
+                  {
+                    "properties": {
+                      "field_id": {
+                        "const": "token"
+                      },
+                      "secret": {
+                        "const": true
+                      },
+                      "required": {
+                        "const": true
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "basic"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "properties": {
+              "secret_fields": {
+                "minItems": 2,
+                "maxItems": 2,
+                "prefixItems": [
+                  {
+                    "properties": {
+                      "field_id": {
+                        "const": "username"
+                      },
+                      "secret": {
+                        "const": false
+                      },
+                      "required": {
+                        "const": true
+                      }
+                    }
+                  },
+                  {
+                    "properties": {
+                      "field_id": {
+                        "const": "password"
+                      },
+                      "secret": {
+                        "const": true
+                      },
+                      "required": {
+                        "const": true
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "declared_secret_fields"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "properties": {
+              "secret_fields": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "app": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "app_id",
+        "publisher_id",
+        "deployment",
+        "provider_id",
+        "protocol_version",
+        "transports",
+        "remote_origin",
+        "authorization_issuer",
+        "authentication",
+        "capabilities"
+      ],
+      "properties": {
+        "app_id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "publisher_id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "deployment": {
+          "enum": [
+            "local",
+            "remote"
+          ]
+        },
+        "provider_id": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/identifier"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "protocol_version": {
+          "const": "2026-07-28"
+        },
+        "transports": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "stdio",
+              "streamable_http"
+            ]
+          }
+        },
+        "remote_origin": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/httpsOrigin"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "authorization_issuer": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/httpsIssuer"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "authentication": {
+          "$ref": "#/$defs/authentication"
+        },
+        "capabilities": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/capability"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "deployment": {
+                "const": "local"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "remote_origin": {
+                "type": "null"
+              },
+              "authorization_issuer": {
+                "type": "null"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "remote_origin": {
+                "$ref": "#/$defs/httpsOrigin"
+              },
+              "authorization_issuer": {
+                "$ref": "#/$defs/httpsIssuer"
+              },
+              "transports": {
+                "contains": {
+                  "const": "streamable_http"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "asset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "kind",
+        "media_type",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/path"
+        },
+        "kind": {
+          "enum": [
+            "skill",
+            "workflow",
+            "icon",
+            "capability_authority"
+          ]
+        },
+        "media_type": {
+          "enum": [
+            "text/markdown",
+            "application/json",
+            "image/png"
+          ]
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "skill"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "media_type": {
+                "const": "text/markdown"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "workflow"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "media_type": {
+                "const": "application/json"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "capability_authority"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "media_type": {
+                "const": "application/json"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "icon"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "media_type": {
+                "const": "image/png"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "entryPoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entry_point_id",
+        "title",
+        "skill_path",
+        "required_app_ids"
+      ],
+      "properties": {
+        "entry_point_id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "title": {
+          "$ref": "#/$defs/stableString"
+        },
+        "skill_path": {
+          "$ref": "#/$defs/path"
+        },
+        "required_app_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/identifier"
+          }
+        }
+      }
+    },
+    "proactiveEventRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "event_class",
+        "presentation",
+        "acknowledgement_required"
+      ],
+      "properties": {
+        "event_class": {
+          "enum": [
+            "task_progress",
+            "task_terminal"
+          ]
+        },
+        "presentation": {
+          "const": "proactive_panel"
+        },
+        "acknowledgement_required": {
+          "type": "boolean"
+        }
+      }
+    },
+    "enterpriseRole": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "role_id",
+        "entry_point_ids"
+      ],
+      "properties": {
+        "role_id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "entry_point_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/identifier"
+          }
+        }
+      }
+    },
+    "manifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "manifest_version",
+        "plugin_id",
+        "publisher_id",
+        "plugin_version",
+        "minimum_omega_version",
+        "kind",
+        "title",
+        "description",
+        "assets",
+        "entry_points",
+        "starter_requests",
+        "required_apps",
+        "optional_apps",
+        "schedule_template_paths",
+        "proactive_event_rules",
+        "enterprise_roles",
+        "signing_key_id",
+        "signature"
+      ],
+      "properties": {
+        "manifest_version": {
+          "const": 2
+        },
+        "plugin_id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "publisher_id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "plugin_version": {
+          "$ref": "#/$defs/semver"
+        },
+        "minimum_omega_version": {
+          "$ref": "#/$defs/semver"
+        },
+        "kind": {
+          "enum": [
+            "skill_only",
+            "mcp_backed",
+            "composite"
+          ]
+        },
+        "title": {
+          "$ref": "#/$defs/stableString"
+        },
+        "description": {
+          "$ref": "#/$defs/stableString"
+        },
+        "assets": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/asset"
+          }
+        },
+        "entry_points": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/entryPoint"
+          }
+        },
+        "starter_requests": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/stableString"
+          }
+        },
+        "required_apps": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/app"
+          }
+        },
+        "optional_apps": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/app"
+          }
+        },
+        "schedule_template_paths": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/path"
+          }
+        },
+        "proactive_event_rules": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/proactiveEventRule"
+          }
+        },
+        "enterprise_roles": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/enterpriseRole"
+          }
+        },
+        "signing_key_id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "signature": {
+          "$ref": "#/$defs/stableString"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "skill_only"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "required_apps": {
+                "maxItems": 0
+              },
+              "optional_apps": {
+                "maxItems": 0
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "mcp_backed"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "required_apps": {
+                "minItems": 1,
+                "maxItems": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "composite"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "required_apps": {
+                "minItems": 2
+              }
+            }
+          }
+        }
+      ]
+    },
+    "capabilityLabel": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120,
+      "pattern": "^(?!\\s)(?!(?:.|\n)*\\s(?![\\s\\S]))(?:(?![\u0000-\u001f\u007f])(?:.|\n))+(?![\\s\\S])"
+    }
+  }
+}

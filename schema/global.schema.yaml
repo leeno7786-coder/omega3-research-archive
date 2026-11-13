@@ -1,0 +1,209 @@
+# JSON Schema (YAML) - global_loop canonical types
+# Authority: global_loop/loop.py, global_loop/assemble, global_loop/package
+
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "omega://schema/global/v1"
+title: GlobalLoopTypes
+description: |
+  Deterministic Global A and Global B contracts. Global A emits an
+  IntentDecision. Global B emits an outcome pack without a goal or goal_state.
+
+definitions:
+  unit_scalar:
+    type: number
+    minimum: 0.0
+    maximum: 1.0
+
+  allowed_intent:
+    type: string
+    enum:
+      - RESPOND
+      - PROACTIVE_RESPONSE
+      - RESOLVE_QUERY
+      - ASK_OPERATOR
+      - LEARN
+      - USE_TOOL
+      - USE_SKILL
+      - PURSUE_OUTCOME
+      - IMAGE_CREATE
+      - DOCUMENT_CREATE
+      - PLUGIN_OPERATION
+      - IDLE
+
+  IntentDecision:
+    type: object
+    additionalProperties: false
+    required: [episode_id, intent, confidence, reason]
+    properties:
+      episode_id: { type: string, format: uuid }
+      intent: { $ref: "#/definitions/allowed_intent" }
+      confidence: { $ref: "#/definitions/unit_scalar" }
+      reason: { type: string }
+
+  # Persisted pre-v2 records may still be read at the assemble boundary. This
+  # is a compatibility-shaped input, not a live producer or output contract.
+  ActionGoal:
+    type: object
+    additionalProperties: false
+    required: [episode_id, intent, confidence, reason]
+    properties:
+      episode_id: { type: string, format: uuid }
+      intent: { $ref: "#/definitions/allowed_intent" }
+      target: { type: [string, "null"], maxLength: 120 }
+      confidence: { $ref: "#/definitions/unit_scalar" }
+      reason: { type: string }
+
+  EpisodeGlobalActionGoalSlot:
+    description: Compatibility input alias for source_action_goal.
+    type: object
+    required: [episode_id, intent, confidence, reason]
+    properties:
+      episode_id: { type: string }
+      intent: { $ref: "#/definitions/allowed_intent" }
+      target: { type: [string, "null"] }
+      confidence: { $ref: "#/definitions/unit_scalar" }
+      reason: { type: string }
+
+  outcome_status:
+    type: string
+    enum: [completed, degraded, failed, skipped, invalid, pending_input, idle]
+
+  meta_disposition:
+    type: string
+    enum: [completed, degraded, failed, skipped, invalid, idle]
+
+  followup_type:
+    type: string
+    enum: [needs_clarification, needs_retry, none]
+
+  GlobalBInput:
+    type: object
+    additionalProperties: false
+    required:
+      - episode_id
+      - pressure
+      - source_action_goal
+      - execution_pack
+      - auto_outcome
+      - meta_reflection
+      - trajectory_snapshot
+    properties:
+      episode_id: { type: string }
+      pressure: { type: object }
+      source_action_goal: { $ref: "#/definitions/EpisodeGlobalActionGoalSlot" }
+      execution_pack: { type: object, additionalProperties: true }
+      auto_outcome: { type: object, additionalProperties: true }
+      meta_reflection: { type: object, additionalProperties: true }
+      trajectory_snapshot: { type: object }
+
+  FollowupSuggestion:
+    type: object
+    additionalProperties: false
+    required: [type, reason, suggested_intent]
+    properties:
+      type: { $ref: "#/definitions/followup_type" }
+      reason: { type: string }
+      suggested_intent:
+        oneOf:
+          - { $ref: "#/definitions/allowed_intent" }
+          - { type: "null" }
+
+  GlobalOutcomePack:
+    type: object
+    additionalProperties: false
+    required: [episode_id, outcome, observations, artifacts, followups, consistency]
+    properties:
+      episode_id: { type: string }
+      outcome:
+        type: object
+        required:
+          - intent
+          - trajectory_alignment
+          - divergence_score
+          - execution_outcome
+          - status
+          - grounded
+          - grounding_basis
+          - summary
+        properties:
+          intent: { $ref: "#/definitions/allowed_intent" }
+          trajectory_alignment: { type: string }
+          divergence_score: { type: number }
+          execution_outcome: { type: object }
+          status: { $ref: "#/definitions/outcome_status" }
+          grounded: { type: boolean }
+          grounding_basis: { type: array, items: { type: string } }
+          summary: { type: string }
+          failure_kind: { type: [string, "null"] }
+          failure_reason: { type: [string, "null"] }
+      observations:
+        type: object
+        properties:
+          response_text_present: { type: boolean }
+          tool_result_present: { type: boolean }
+          image_artifact_present: { type: boolean }
+          document_artifact_present: { type: boolean }
+          plugin_evidence_present: { type: boolean }
+          plugin_permission_pending: { type: boolean }
+          plugin_failure_present: { type: boolean }
+          memory_used: { type: boolean }
+          warnings: { type: array, items: { type: string } }
+      artifacts:
+        type: object
+        properties:
+          response_text: {}
+          tool_result_summary: {}
+          tool_result: {}
+          image_artifact: {}
+          document_artifact: {}
+          plugin_execution: {}
+          plugin_plan: {}
+          plugin_step_results: {}
+          plugin_permission_request: {}
+          plugin_failure: {}
+          plugin_screen_receipts: {}
+      followups:
+        type: array
+        items: { $ref: "#/definitions/FollowupSuggestion" }
+      consistency: { type: object, additionalProperties: true }
+      temporal: { type: [object, "null"] }
+      learning_state: { type: [object, "null"] }
+      chemical_state: { type: [object, "null"] }
+      # WO-06: Meta B's and AUTO's outcome evidence as Observations, and the exact
+      # cross-lane mail admitted to this episode's Omega fold.
+      phase_evidence: { type: [object, "null"] }
+      cross_lane_mail: { type: [object, "null"] }
+
+  EpisodeIgnitionRef:
+    description: Re-export; canonical schema is pressure.schema.yaml.
+    type: object
+    required: [episode_id, aggregate_pressure, opened_by, dominant_contributor, contributors]
+
+  GlobalConfig:
+    type: object
+    required: [global]
+    properties:
+      global:
+        type: object
+        properties:
+          enabled: { type: boolean }
+          models: { type: string }
+          global_a:
+            type: object
+            properties:
+              module: { type: string }
+              phases: { type: array, items: { type: string } }
+              episode_write: { type: object }
+              ignition: { type: object }
+          intents:
+            type: object
+            properties:
+              authority: { type: string }
+              note: { type: string }
+          intent_decision:
+            type: object
+            properties:
+              confidence_source: { type: string }
+              confidence_fallback: { type: string }
+              confidence_clamp: { type: array, items: { type: number } }
+              reason_template: { type: string }

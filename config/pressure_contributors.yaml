@@ -1,0 +1,122 @@
+# =============================================================================
+# Pressure contributors — per-reader tunables
+# =============================================================================
+#
+# Mirrors the default registry in pressure_loop.pressure_field. The live registry
+# is code-owned; this file records its contributor identities and provenance for
+# schema/governance review.
+#
+# =============================================================================
+
+pressure_contributors:
+  enabled: true
+
+  field_to_canonical_type:
+    curiosity_gap: curiosity_gap
+    operator_intent: operator_command
+    operator_message: operator_query
+    epistemic_emptiness: epistemic_emptiness
+    idle_probe_aggregate: idle_probe_aggregate
+    learning_debt: learning_debt
+    neuromod_spike: neuromod_spike
+    execution_gap: execution_gap
+    operator_priority: operator_priority
+
+  contributors:
+    curiosity_gap:
+      active: true
+      source: autonomous
+      reader: read_curiosity_gap
+      shared_state_keys:
+        - last_curiosity_cycle
+      notes: Max of open curiosity_store tension and LAST_CURIOSITY_CYCLE.pressure
+
+    operator_intent:
+      active: true
+      source: operator
+      reader: read_operator_intent
+      shared_state_keys:
+        - last_operator_directive
+      notes: TTL-aware via core.operator_pressure.read_operator_directive
+
+    operator_message:
+      active: true
+      source: operator
+      reader: read_operator_message
+      shared_state_keys: []
+      notes: The durable operator queue is the sole ingress gate; pressure does not mirror it into SharedState.
+
+    epistemic_emptiness:
+      active: true
+      source: autonomous
+      reader: read_epistemic_emptiness
+      data_source: memory.strength_index.items_snapshot
+      full_baseline_record_count: 100
+      refractory:
+        threshold_ticks: 1
+        window_ticks: 20
+      max_weight: 1.0
+
+    idle_probe_aggregate:
+      active: true
+      source: autonomous
+      reader: read_idle_probe_aggregate
+      data_source: core.symphony_probes.run_idle_probe_aggregate
+      notes: Sum of idle probe weights; detail in contributor_details
+
+    learning_debt:
+      active: true
+      source: autonomous
+      reader: read_learning_debt
+      envelope: episode.learning_state
+      tiers:
+        empty_substrate: 0.40
+        early_domains_lte: 3
+        early_weight: 0.25
+        growing_domains_lte: 10
+        growing_weight: 0.10
+        baseline_weight: 0.05
+      penalties:
+        stale_mastery: 0.15
+        low_confidence_recall: 0.10
+      hard_cap: 0.50
+
+    neuromod_spike:
+      active: false
+      source: autonomous
+      reader: read_neuromod_spike
+      notes: Registry-only; excluded from slice-1 gather
+
+    execution_gap:
+      active: true
+      source: omega
+      reader: read_execution_gap
+      notes: Learned-but-unapplied work; routes to USE_SKILL when an objective exists.
+
+    operator_priority:
+      active: true
+      source: omega
+      reader: read_operator_priority
+      notes: Mind-authored ask pressure; routes to ASK_OPERATOR.
+
+  # Registry readers kept in pressure_field.py for audit/evaluate_pressure only.
+  # Do NOT re-add these to slice-1 gather or this contributors block.
+  retired_contributors:
+    evidence_terminal:
+      reader: read_evidence_terminal
+      reason: outlet path only
+    tool_creation_need:
+      reader: read_tool_creation_need
+      reason: pre-v2 tool-creation pressure; gather removed
+    guardian:
+      reader: read_guardian
+      reason: stub returns 0.0; gather removed
+
+  operator_ingress_classes:
+    operator_command: operator_command
+    epistemic_request: operator_query
+    phatic: operator_query
+    answer_to_question: operator_response
+    sensory_update: operator_command
+    evidence_reference: operator_command
+    authority_request: operator_command

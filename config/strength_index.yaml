@@ -1,0 +1,10 @@
+# Strength-index recency windows.
+# The score and trigger formulas are code-owned; these windows are the only
+# live configuration surface consumed by core.strength_index_config.
+
+strength_index:
+  recency:
+    write_window_hours: 6.0
+    recall_window_hours: 2.0
+    hot_age_hours: 1.0
+    cold_age_hours: 72.0

@@ -1,0 +1,26 @@
+# Reflection window — operational policy (behavioral contract)
+# Code: pressure_loop/reflection_window.py, pressure_loop/episode.py
+
+version: 1
+
+enabled: true
+
+role:
+  description: |
+    EpisodeStore-owned rolling window of episode bodies for windowed Omega
+    reflection. Locks at window_size; archive on Omega completion or boot reconcile.
+
+lifecycle:
+  open_on_first_append: true
+  lock_when_full: true
+  archive_on_omega_complete: true
+
+failure_mode:
+  load: failure_soft_null
+  save: durable_fsync
+  reconcile: archive_and_clear
+
+alignment:
+  config: config/reflection_window.yaml
+  schema: schema/reflection_window.schema.yaml
+  omega_policy: policy/omega.policy.yaml
