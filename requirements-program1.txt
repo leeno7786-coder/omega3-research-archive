@@ -20,6 +20,6 @@
 # though pip's reverse-dependency report is empty. This is not a SetFit
 # compatibility pin: SetFit classifiers and their shim are retired; the pin
 # protects the retained Ettin snapshot-loading contract.
-torch==2.7.1
-transformers==4.57.3
+torch==2.13.0
+transformers==5.10.1
 safetensors>=0.5,<1
